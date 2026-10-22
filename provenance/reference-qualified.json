@@ -17,7 +17,7 @@
       "sha256": "aea5e0202577678b72ab195aa66138a7cdcb8408b4a36a7b3740b6edc2253745"
     },
     {
-      "path": "results/reference-6sc5nylu/reference.dict",
+      "path": "results/reference-hnkq5hai/reference.dict",
       "size": 35723,
       "sha256": "2652d39ad9f50603bf5f4d0fe43b51bbeff4fa1661f8cb80ea5d77a3bb96e2ef"
     }
@@ -222,9 +222,9 @@
   "contigs": 195,
   "reference_bases": 3099922541,
   "native_runs": [
-    "logs/20261022T203621Z-reference-gzip-integrity-JJiYfr",
-    "logs/20261022T203629Z-reference-dictionary-bj0wGd",
-    "logs/20261022T203643Z-reference-random-access-JjBg4H"
+    "logs/20261022T210835Z-reference-gzip-integrity-KWCDJp",
+    "logs/20261022T210852Z-reference-dictionary-ZKNn8m",
+    "logs/20261022T210924Z-reference-random-access-HWlLOg"
   ],
   "qualification": "Full native decode, complete dictionary, indexed contig boundaries"
 }

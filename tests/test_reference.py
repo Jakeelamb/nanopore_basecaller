@@ -303,6 +303,33 @@ class ReferencePreparationTests(unittest.TestCase):
         self.assertEqual(list((self.root / "logs").glob("*-reference-index-parity-*")), [])
         self.assertFalse((self.root / "software/bin/dorado").exists())
 
+    def test_rejects_other_build_headers_in_retained_parity_input(self):
+        config = json.loads((PROJECT_ROOT / "config/stock-benchmark.json").read_text())
+        (self.root / "config/stock-benchmark.json").write_text(json.dumps(config))
+        model = Path(config["models"]["hac"]).name
+        sam = self.root / "other-build.sam"
+        bam = self.root / "other-build.bam"
+        dorado = self.root / "software/bin/dorado"
+        dorado.write_text(f"#!{sys.executable}\nimport sys\nfrom pathlib import Path\nsys.stdout.buffer.write(Path({str(bam)!r}).read_bytes())\n")
+        dorado.chmod(0o755)
+        for version in ("2.1.2", "2.1.2+0000000", "2.1.20+8b8fc5d"):
+            with self.subTest(version=version):
+                sam.write_text(f"@HD\tVN:1.6\n@PG\tID:basecaller\tPN:dorado\tVN:{version}\n"
+                               f"@RG\tID:fixture\tDS:basecall_model={model}\n"
+                               "synthetic-query\t4\t*\t0\t0\t*\t*\t0\t0\tACGT\t*\tRG:Z:fixture\n")
+                self.native(SAMTOOLS, "view", "-b", "-o", bam, sam)
+                recorded = self.native(self.root / "scripts/record-command.sh", "other-build-input",
+                                       dorado, "basecaller", self.root / config["models"]["hac"],
+                                       "unused-signal-fixture")
+                producer = Path(recorded.stdout.strip())
+
+                result = self.prepare("--parity-bam", producer / "stdout")
+
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Dorado 2.1.2+8b8fc5d stock model evidence", result.stderr)
+                self.assertFalse((self.root / "provenance/index-qualified.json").exists())
+                self.assertEqual(list((self.root / "logs").glob("*-reference-index-parity-*")), [])
+
     def test_rejects_failed_native_producer_as_parity_input(self):
         recorded = subprocess.run(
             [str(self.root / "scripts/record-command.sh"), "failed-samtools-input",

@@ -1,4 +1,5 @@
 import importlib.util
+import csv
 import json
 import os
 from pathlib import Path
@@ -19,12 +20,43 @@ b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 MODEL = 'dna_r10.4.1_e8.2_400bps_hac@v6.0.0'
 A, B, C, D = [str(UUID(int=n)) for n in range(1, 5)]
+BATCH_FALLBACK = ('[2026-10-22 15:06:44.119] [info] Failed to find optimal batch size for cuda:0. '
+                  'Consider generating a benchmark with --run-batchsize-benchmarks, or loading an existing '
+                  'benchmark with --batchsize-benchmarks-file')
+
+
+class NativeLogTests(unittest.TestCase):
+    def test_known_info_batch_fallback_is_separate_from_loader_diagnostics(self):
+        effective = '[2026-10-22 15:07:00.107] [debug] cuda:0 using chunk size 12288, batch size 576'
+        log = BATCH_FALLBACK + '\n' + effective + '\n'
+        diagnostics = b.native_log_diagnostics(log)
+        self.assertEqual(diagnostics['native_loader_error_lines'], [])
+        self.assertEqual(diagnostics['batch_selection_diagnostics'], [BATCH_FALLBACK])
+        self.assertEqual(diagnostics['batch_selection_status'], 'precomputed_benchmark_unavailable')
+        self.assertEqual(diagnostics['effective_batch_chunk_log_lines'], [BATCH_FALLBACK, effective])
+
+    def test_error_severity_other_failures_skips_and_changed_fallback_remain_unresolved(self):
+        lines = [BATCH_FALLBACK.replace('[info]', '[error]'),
+                 '[2026-10-22 15:06:44.119] [error] Failed to load POD5 input',
+                 '[2026-10-22 15:06:44.119] [warning] Skipping unreadable input',
+                 '[2026-10-22 15:06:44.119] [info] Failed to load read',
+                 BATCH_FALLBACK + ' Additional failure',
+                 BATCH_FALLBACK.replace('optimal batch size', 'requested batch size')]
+        diagnostics = b.native_log_diagnostics('\n'.join([BATCH_FALLBACK] + lines))
+        self.assertEqual(diagnostics['native_loader_error_lines'], lines)
+        self.assertEqual(diagnostics['batch_selection_diagnostics'], [BATCH_FALLBACK])
+        for line in lines:
+            with self.subTest(line=line):
+                diagnostics = b.native_log_diagnostics(line)
+                self.assertEqual(diagnostics['native_loader_error_lines'], [line])
+                self.assertEqual(diagnostics['batch_selection_diagnostics'], [])
+                self.assertEqual(diagnostics['batch_selection_status'], 'no_known_fallback_diagnostic')
 
 
 def header(reference=False):
     return ('@HD\tVN:1.6\tSO:unknown\n' + ('@SQ\tSN:chr1\tLN:200\n' if reference else '') +
             f'@RG\tID:run_model\tDS:runid=run basecall_model={MODEL}\n' +
-            '@PG\tID:basecaller\tPN:dorado\tVN:2.1.2\tCL:fixture-adapter-test\n')
+            '@PG\tID:basecaller\tPN:dorado\tVN:2.1.2+8b8fc5d\tCL:fixture-adapter-test\n')
 
 
 def record(name=A, seq='AACGTACGTA', qual='ABCDEFGHIJ', flag=4, pos=0, cigar='*', extra='', parent=None):
@@ -72,9 +104,43 @@ class NativeBamTests(unittest.TestCase):
                            (header() + record() * 2, 'Duplicate primary'),
                            (header(), 'No emitted'),
                            (header().replace(MODEL, 'wrong') + record(), 'Wrong model'),
-                           (header().replace('VN:2.1.2', 'VN:2.0.0') + record(), 'Dorado version')]:
+                           (header().replace('VN:2.1.2+8b8fc5d', 'VN:2.0.0') + record(), 'Dorado version')]:
             with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
                 self.parse(sam)
+
+    def test_exact_stock_build_header_identity(self):
+        for version in ('2.1.2', '2.1.2+0000000', '2.1.20+8b8fc5d', '2.1.2+8b8fc5d-dirty'):
+            with self.subTest(version=version), self.assertRaisesRegex(ValueError, 'Dorado version'):
+                self.parse(header().replace('VN:2.1.2+8b8fc5d', 'VN:' + version) + record())
+        self.assertEqual(self.parse(header() + record())['metrics']['children'], 1)
+
+    @unittest.skipUnless(os.environ.get('NANOPORE_NATIVE_BAM'), 'Set NANOPORE_NATIVE_BAM for retained native GPU evidence')
+    def test_retained_native_stock_bam_build_identity(self):
+        bam = Path(os.environ['NANOPORE_NATIVE_BAM']).resolve()
+        self.assertEqual((bam.parent / 'exit-status.txt').read_text().strip(), '0')
+        decoded = self.root / 'native-stock.sam'
+        with decoded.open('wb') as out:
+            subprocess.run(['samtools', 'view', '-h', str(bam)], stdout=out, stderr=subprocess.PIPE, check=True)
+        members = set((PROJECT / 'data/splits/smoke.txt').read_text().splitlines())
+        with (PROJECT / 'data/splits/read-inventory.tsv').open() as handle:
+            inventory = {row['read_id']: int(row['num_samples']) for row in csv.DictReader(handle, delimiter='\t') if row['read_id'] in members}
+        parsed = b.parse_sam(decoded, MODEL, inventory)
+        self.assertEqual(parsed['metrics']['represented_parents'], 32)
+        self.assertTrue(parsed['complete_processing'])
+        native_log = (bam.parent / 'stderr').read_text()
+        self.assertIn(BATCH_FALLBACK, native_log)
+        diagnostics = b.native_log_diagnostics(native_log)
+        self.assertEqual(diagnostics['native_loader_error_lines'], [])
+        self.assertEqual(diagnostics['batch_selection_diagnostics'], [BATCH_FALLBACK])
+        self.assertEqual(diagnostics['batch_selection_status'], 'precomputed_benchmark_unavailable')
+        self.assertIn('[2026-10-22 15:07:00.107] [debug] cuda:0 using chunk size 12288, batch size 576',
+                      diagnostics['effective_batch_chunk_log_lines'])
+        original = decoded.read_text()
+        self.assertIn('\tPN:dorado\tVN:2.1.2+8b8fc5d\t', original)
+        for version in ('2.1.2', '2.1.2+0000000'):
+            decoded.write_text(original.replace('VN:2.1.2+8b8fc5d', 'VN:' + version))
+            with self.subTest(version=version), self.assertRaisesRegex(ValueError, 'Dorado version'):
+                b.parse_sam(decoded, MODEL, inventory)
 
     def test_synthetic_split_tag_structure_and_overlap_controls(self):
         split = record(C, parent=A) + record(D, parent=A).replace('sp:i:0', 'sp:i:500')
@@ -271,7 +337,7 @@ class ReceiptTests(unittest.TestCase):
                 sam.write_text((header(aligned) + record(flag=0, pos=1, cigar='10=', extra='\tNM:i:0\tMD:Z:10') if aligned else header() + record()).replace(MODEL, Path(model).name))
                 subprocess.run(['samtools', 'view', '-b', '-o', str(sam.with_suffix('.bam')), str(sam)], capture_output=True, check=True)
         dorado = self.root / config['dorado']
-        dorado.write_text(f"#!{sys.executable}\nimport sys,subprocess\nfrom pathlib import Path\nr=Path({str(self.root)!r})\nif sys.argv[1]=='--version': print('Dorado 2.1.2'); raise SystemExit\nif sys.argv[1]=='basecaller': tier='hac' if '_hac@' in sys.argv[2] else 'sup'; kind='base'\nelse: tier='hac' if b'_hac@' in subprocess.check_output(['samtools','view','-H',sys.argv[3]]) else 'sup'; kind='aligned'\nsys.stdout.buffer.write((r/'results'/(tier+'-'+kind+'.bam')).read_bytes())\n")
+        dorado.write_text(f"#!{sys.executable}\nimport sys,subprocess\nfrom pathlib import Path\nr=Path({str(self.root)!r})\nif sys.argv[1]=='--version': print('2.1.2+8b8fc5d'); raise SystemExit\nif sys.argv[1]=='basecaller': tier='hac' if '_hac@' in sys.argv[2] else 'sup'; kind='base'\nelse: tier='hac' if b'_hac@' in subprocess.check_output(['samtools','view','-H',sys.argv[3]]) else 'sup'; kind='aligned'\nsys.stdout.buffer.write((r/'results'/(tier+'-'+kind+'.bam')).read_bytes())\n")
         dorado.chmod(0o755)
         producers = []
         for tier, model in config['models'].items():
@@ -284,13 +350,13 @@ class ReceiptTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         return config
 
-    def prepared_plan(self):
+    def prepared_plan(self, version='2.1.2+8b8fc5d'):
         def output(argv, **kwargs):
             if argv[-2:] == ['rev-parse', 'HEAD']:
                 return b.SOURCE + '\n'
             if 'status' in argv:
                 return ''
-            return 'Dorado 2.1.2' if kwargs.get('text') else b'Dorado 2.1.2'
+            return version if kwargs.get('text') else version.encode()
         with patch.object(b.subprocess, 'check_output', side_effect=output):
             return b.prepare(Path('config/stock-benchmark.json'), self.root / 'results/stock/plan')
 
@@ -310,6 +376,12 @@ class ReceiptTests(unittest.TestCase):
         artifact.write_bytes(artifact.read_bytes() + b'changed')
         with self.assertRaisesRegex(ValueError, 'Changed evidence'):
             b.load_plan(plan_path)
+
+    def test_prepare_rejects_other_stock_binary_builds(self):
+        self.preparation_fixture()
+        for version in ('2.1.2', '2.1.2+0000000', '2.1.20+8b8fc5d', '2.1.2+8b8fc5d-dirty'):
+            with self.subTest(version=version), self.assertRaisesRegex(ValueError, 'Dorado version'):
+                self.prepared_plan(version)
 
     def test_prepare_rejects_short_full_membership_and_wrong_signal_metadata(self):
         self.preparation_fixture()

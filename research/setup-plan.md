@@ -27,10 +27,10 @@ The design rubric is native-interface correctness, observable work and failure a
 - [x] Phase B: Design the workflow.
 - [ ] Phase C: Run the loop.
   - [ ] Install the current stock Dorado release and retain its source and license.
-  - [ ] Acquire bounded public human POD5 files and verify their chemistry and signals.
+  - [x] Acquire bounded public human POD5 files and verify their chemistry and signals. All 20,954 reads decoded; no UUID overlap.
   - [x] Acquire GRCh38 and sample-specific benchmark regions and variants.
   - [x] Pin compatible HAC and SUP models. Both publisher SHA-256 values matched; GPU compatibility is pending.
-  - [ ] Freeze molecule-level split membership before experimental changes.
+  - [x] Freeze molecule-level split membership before experimental changes.
   - [ ] Run a small GPU smoke check on development reads only.
   - [ ] Verify checksums, indexes, environment, and reproduction commands.
 - [ ] Phase D: Keep the audit trail.

@@ -22,6 +22,7 @@ from uuid import UUID, uuid4
 ROOT = Path(__file__).resolve().parents[1]
 ROLES = ('development', 'validation', 'sealed_test')
 SOURCE = '8b8fc5d36a9c0baab262a743cb175b5878e38ca6'
+STOCK_VERSION = '2.1.2+' + SOURCE[:7]
 BIOLOGY = {key: 'NOT VERIFIED' for key in ('biological_base_accuracy', 'biological_quality_calibration',
                                           'variant_aware_accuracy', 'variant_calling_accuracy')}
 
@@ -168,7 +169,7 @@ def parity_evidence(index, config):
             lines = (ROOT / artifact['path']).read_text().splitlines()
             groups = [header_record(line) for line in lines if line.startswith('@RG\t')]
             require(groups and all('basecall_model=' + model in group.get('DS', '').split() for group in groups), 'Parity BAM model mismatch')
-            require(any(line.startswith('@PG\t') and header_record(line).get('PN') == 'dorado' and header_record(line).get('VN') == '2.1.2' for line in lines), 'Parity lacks native Dorado version')
+            require(any(line.startswith('@PG\t') and header_record(line).get('PN') == 'dorado' and header_record(line).get('VN') == STOCK_VERSION for line in lines), 'Parity lacks native Dorado version')
             records = [tuple(line.split('\t')[:11] + sorted(line.split('\t')[11:])) for line in lines if not line.startswith('@')]
             require(records, 'Empty parity native work')
             if artifact != entry['input_decode']:
@@ -277,7 +278,7 @@ def parse_sam(path, model, expected, reference=None, base=None):
             elif not supplemental:
                 metrics['unmapped_children'] += 1
                 metrics['unmapped_called_bases'] += len(seq)
-    require(groups and any(p.get('PN') == 'dorado' and p.get('VN') == '2.1.2' for p in programs), 'Wrong/missing Dorado version')
+    require(groups and any(p.get('PN') == 'dorado' and p.get('VN') == STOCK_VERSION for p in programs), 'Wrong/missing Dorado version')
     require(primary, 'No emitted children')
     if base is not None:
         require(dictionary == reference, 'Wrong complete reference dictionary')
@@ -409,7 +410,7 @@ def prepare(config_path, output):
         tool = Path(config[key]) if '/' in config[key] else Path(shutil.which(config[key]) or config[key])
         config[key] = str((ROOT / tool).resolve())
         pins.append(pin(config[key]))
-    require('2.1.2' in subprocess.check_output([config['dorado'], '--version'], stderr=subprocess.STDOUT, text=True), 'Wrong Dorado version')
+    require(subprocess.check_output([config['dorado'], '--version'], text=True).strip() == STOCK_VERSION, 'Wrong Dorado version')
     library_root = Path(config['dorado']).parent.parent / 'lib'
     pins.extend(pin(p) for p in sorted(library_root.rglob('*')) if p.is_file())
     submodules = subprocess.check_output(['git', '-C', str(source), 'submodule', 'status', '--recursive'], text=True)
@@ -533,6 +534,17 @@ def process_resources(receipt):
     return result
 
 
+def native_log_diagnostics(native_log):
+    lines = native_log.splitlines()
+    fallback = ('Failed to find optimal batch size for cuda:0. Consider generating a benchmark with '
+                '--run-batchsize-benchmarks, or loading an existing benchmark with --batchsize-benchmarks-file')
+    batch_selection = [line for line in lines if re.fullmatch(r'\[[^\]]+\] \[info\] ' + re.escape(fallback), line)]
+    return {'effective_batch_chunk_log_lines': [line for line in lines if re.search('batch|chunk', line, re.I)],
+            'batch_selection_diagnostics': batch_selection,
+            'batch_selection_status': 'precomputed_benchmark_unavailable' if batch_selection else 'no_known_fallback_diagnostic',
+            'native_loader_error_lines': [line for line in lines if line not in batch_selection and re.search(r'error|failed|skipp', line, re.I)]}
+
+
 def run_unit(plan, unit, root, execute=True, retry=None):
     config = plan['config']
     directory = root / 'units' / unit['id']
@@ -593,8 +605,7 @@ def run_unit(plan, unit, root, execute=True, retry=None):
                    'host_max_rss_kib': resources['host_max_rss_kib'], 'gpu_resources': resources['gpu'],
                    'submitted_signal_seconds_per_wall_second': sum(unit['parents'].values()) / 5000 / elapsed,
                    'emitted_bases_per_wall_second': base['metrics']['called_bases'] / elapsed,
-                   'effective_batch_chunk_log_lines': [line for line in native_log.splitlines() if re.search('batch|chunk', line, re.I)],
-                   'native_loader_error_lines': [line for line in native_log.splitlines() if re.search(r'error|failed|skipp', line, re.I)],
+                   **native_log_diagnostics(native_log),
                    'pins': evidence + [pin(parents_file)], 'scientific_endpoints': BIOLOGY}
     observation['complete_work_qualification'] = 'verified' if base['complete_processing'] and not observation['native_loader_error_lines'] else 'unavailable: absent parents or native loader diagnostics'
     write(directory / 'observation.json', observation)

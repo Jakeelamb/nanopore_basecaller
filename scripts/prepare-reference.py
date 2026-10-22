@@ -9,6 +9,8 @@ import shlex
 import subprocess
 import tempfile
 
+STOCK_VERSION = "2.1.2+8b8fc5d"
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--parity-bam", action="append", default=[])
 args = parser.parse_args()
@@ -157,7 +159,7 @@ for bam_name in args.parity_bam:
         if line.startswith(("@PG\t", "@RG\t")):
             tags = dict(field.split(":", 1) for field in line.split("\t")[1:])
             if line.startswith("@PG\t"):
-                native_version |= tags.get("PN") == "dorado" and tags.get("VN") == "2.1.2"
+                native_version |= tags.get("PN") == "dorado" and tags.get("VN") == STOCK_VERSION
             else:
                 input_models.update(field.split("=", 1)[1] for field in tags.get("DS", "").split()
                                     if field.startswith("basecall_model="))
@@ -167,7 +169,7 @@ for bam_name in args.parity_bam:
               json.loads((root / "config/stock-benchmark.json").read_text())["models"].items()}
     tiers = [tier for tier, model in models.items() if input_models == {model}]
     if not native_version or not input_records or len(tiers) != 1:
-        raise ValueError("Parity input lacks nonempty native Dorado 2.1.2 stock model evidence")
+        raise ValueError("Parity input lacks nonempty native Dorado 2.1.2+8b8fc5d stock model evidence")
     tier = tiers[0]
     if Path(command[2]).name != models[tier]:
         raise ValueError("Parity input model differs from retained native command")

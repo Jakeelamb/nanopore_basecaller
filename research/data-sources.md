@@ -30,7 +30,15 @@ The [HG002 PAW70337 final summary](https://ont-open-data.s3.amazonaws.com/giab_2
 
 The [pinned Dorado v0.8.2 model table](https://github.com/nanoporetech/dorado/blob/v0.8.2/README.md#available-basecalling-models) identifies v5.0.0 R10.4.1 E8.2 400bps models as 5 kHz. Model compatibility alone is weaker than raw metadata: after download require every selected POD5 run-info entry to report sample_rate=5000 and the expected flow cell, kit and acquisition. Record its internal sample identifier separately from the published donor assignment. Do not resample 4 kHz signal into this cohort. The report JSON for each selected flow cell directly reports `sample_rate=5000` in all four acquisition entries; exact source URLs and JSON pointers are retained in [report-sample-rate-evidence.json](../provenance/report-sample-rate-evidence.json). Final summaries are also retained under `provenance/`.
 
-The first downloaded human object was inspected with POD5 0.3.49: HG002/PAW70337 contains 2,608 records and the raw run-info sample identifier is `ONLL08362`. Its first decoded read has 270,103 electrical samples at 5 kHz, the expected flow cell and kit, and finite positive physical-current scaling. The donor label HG002 comes from ONT's published sample/flowcell mapping; it is not the literal POD5 sample-id field or an independently genotyped identity check. The retained observation is `logs/20261022T203033Z-first-human-metadata-HovCx1`. Full-object signal decoding and the final three-object census remain separate gates.
+Every acquired read was subsequently decoded with POD5 0.3.49. All 20,954 reads have nonempty signals, matching sample counts, 5 kHz run metadata, the expected flowcell and LSK114 kit, and finite physical-current calibration with positive scale. No read UUID overlaps the three groups. Frozen membership hashes and full metadata summaries are in `provenance/signal-inventory.json`; raw read-level metadata and membership lists stay in `data/splits/`. The execution receipt is `logs/20261022T205930Z-complete-human-signal-inventory-hVM6Sz`.
+
+| Role | Reads | Electrical samples | Internal POD5 sample ID | Observed read-start range, seconds into acquisition |
+|---|---:|---:|---|---|
+| Development | 2,608 | 641,769,607 | ONLL08362 | 31,931.3184 to 32,178.2158 |
+| Validation | 2,027 | 553,650,293 | ONLL08364 | 4,838.5176 to 34,944.0874 |
+| Test control | 16,319 | 2,554,852,800 | hg005 | 181,924.5594 to 188,159.2176 |
+
+The total is 3,750,272,700 electrical samples. These observed ranges and unequal read counts confirm that the shards cover different acquisition periods and distributions; they do not establish random sampling. Donor labels come from ONT's published sample/flowcell mapping, rather than the literal internal sample-ID strings or an independently genotyped identity check.
 
 ## Reference and truth
 

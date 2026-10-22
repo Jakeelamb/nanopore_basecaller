@@ -6,6 +6,22 @@ Run these commands from `/home/jake/Projects/nanopore_basecaller`. Use the pinne
 
 Finish acquisition, asset verification, native signal inspection, model extraction, and full-reference qualification before creating a plan. The coordinator also supplies a qualified minimap2 index and genuine FASTA versus MMI parity receipts for both tiers. See [the accepted design](benchmark-design.md).
 
+After `scripts/bootstrap.sh`, create the two genuine development warmups and qualify the reference/index handoff. These warmups are separate from the five measured repetitions:
+
+```sh
+set -euo pipefail
+parity_hac_run=$(scripts/record-command.sh parity-hac software/bin/dorado basecaller \
+  models/dna_r10.4.1_e8.2_400bps_hac@v6.0.0 \
+  data/raw/HG002/PAW70337/PAW70337_66b2eea5_de8117b1_33.pod5 \
+  --read-ids data/splits/smoke.txt --device cuda:0 --batchsize 0 --min-qscore 0 --trim all -v)
+parity_sup_run=$(scripts/record-command.sh parity-sup software/bin/dorado basecaller \
+  models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0 \
+  data/raw/HG002/PAW70337/PAW70337_66b2eea5_de8117b1_33.pod5 \
+  --read-ids data/splits/smoke.txt --device cuda:0 --batchsize 0 --min-qscore 0 --trim all -v)
+uv run --locked scripts/prepare-reference.py \
+  --parity-bam "$parity_hac_run/stdout" --parity-bam "$parity_sup_run/stdout"
+```
+
 `config/stock-benchmark.json` names the installed executables, exact models, full reference, qualified index, and genuine source split fixture. Keep batch size zero and stock chunk settings fixed. The runner uses 16 Dorado aligner threads and three additional samtools sort threads, with 256 MiB per sort thread.
 
 Each reference receipt contains `status: "verified"`, a complete `dictionary`, and nonempty `pins` entries with `path`, `size`, and `sha256`. Pin paths are repository-relative or absolute. The runner resolves relative paths against the repository root.
@@ -35,6 +51,8 @@ uv run --locked python scripts/benchmark.py qualify-native results/stock/stock-2
 ```
 
 `qualify-native` reuses retained producers. It requires multiple genuine split children with native `pi` and `sp` tags. It derives mutation controls from the actual native BAMs, encodes them with samtools, and rejects foreign parents, duplicate primaries, wrong models, invalid split intervals, removed split identity, truncated BAMs, wrong reference dictionaries, and inconsistent NM. Removing a represented parent changes its absence ledger. An empty result fails verification.
+
+The installed stock build is exactly `2.1.2+8b8fc5d`. The verifier checks that full CLI/BAM version, including the source hash. The known informational message about an unavailable optimal batch-size benchmark is retained as batch-selection diagnostics. Other failure, error, and skip messages remain unresolved loader diagnostics. Stock batch size zero uses its fallback on this host; no optimized batch profile or model-tier winner is claimed.
 
 If the installed model does not split the source fixture, qualification fails. Retain that result and establish a compatible native fixture or model before full execution. A synthetic tag test does not close this gate.
 
