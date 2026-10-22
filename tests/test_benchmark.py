@@ -69,6 +69,7 @@ def record(name=A, seq='AACGTACGTA', qual='ABCDEFGHIJ', flag=4, pos=0, cigar='*'
 @unittest.skipUnless(shutil.which('samtools'), 'samtools required for native fixtures')
 class NativeBamTests(unittest.TestCase):
     def setUp(self):
+        (PROJECT / 'logs').mkdir(exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
