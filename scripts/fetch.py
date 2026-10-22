@@ -94,7 +94,8 @@ def fetch(bounds):
     condition = ["--header", f"If-Match: \"{asset['etag']}\""] if asset.get("etag") else []
     subprocess.run([
         "curl", "--fail", "--silent", "--show-error", "--location", "--retry", "5", "--retry-all-errors",
-        "--connect-timeout", "30", "--max-time", "3600", "--range", f"{start + offset}-{end}",
+        "--connect-timeout", "30", "--max-time", "3600", "--speed-limit", "1024",
+        "--speed-time", "60", "--range", f"{start + offset}-{end}",
         "--dump-header", str(response_headers), "--output", str(remainder), *condition, asset["url"],
     ], check=True)
     if response_range(response_headers) != (start + offset, end, size) or remainder.stat().st_size != end - start + 1 - offset:
