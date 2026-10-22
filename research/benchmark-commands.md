@@ -90,11 +90,32 @@ The example retries only a failed development HAC alignment. Its successful base
 
 Inspect `units/UNIT/STAGE/ATTEMPT/start.json` and `finish.json` for commands, exit status, monotonic clocks, recorder location, and pins. The recorder directory retains raw stdout, stderr, UTC clocks, and native resource timing. Each stage also retains a GPU CSV, sampler stderr, and sampler exit status. The GPU projection accepts the native CSV values with units and counts unavailable samples for each field. Unsupported GPU fields remain unavailable. Native batch and chunk log lines remain in the observation.
 
+Render the retained 2026-10-22 snapshot without native execution:
+
+```sh
+uv run --locked scripts/summarize-benchmark.py results/stock/stock-20261022 \
+  --output research/stock-baseline-results.md \
+  --power-observation provenance/verification/stock-power-snapshots-20261022T222833Z.json
+```
+
+The exporter displays retained results and checks report/plan identity. It does not requalify artifacts. Use the maintained runner's `report` action for current input and observation pin validation. The power observation records initial and final host snapshots only. Their observed change prevents a fixed-power performance claim; no timing result was replaced after that finding.
+
 ## Check the runner locally
 
 ```sh
 scripts/record-command.sh benchmark-tests uv run --locked python -m unittest discover -s tests -p test_benchmark.py -v
 ```
+
+The complete local check on the retained 2026-10-22 artifacts enables both genuine-data tests. The native BAM path below is the recorded HAC warmup in this workspace:
+
+```sh
+scripts/record-command.sh all-local-contracts env PYTHONPATH=tests \
+  NANOPORE_NATIVE_BAM=logs/20261022T210643Z-manual-dev32-hac-sxfbo5/stdout \
+  NANOPORE_CALMD_PLAN=results/stock/stock-20261022/plan.json \
+  uv run --locked python -m unittest discover -s tests -v
+```
+
+Without those environment variables, the two genuine-data tests are explicitly skipped. Small native fixtures still run in CPU CI. The full validation artifact also exercises the [coordinate-confirmed MD ambiguity check](calmd-discrepancy.md), with native faidx evidence and rejection controls. The original failed observation remains separate from native command failures.
 
 Local tests use real POD5 Writer files, ZIP extraction, bgzip, samtools-produced BAMs, native calmd, and a live GPU CSV query. Preparation tests execute the maintained reference producer and minimap2 on a tiny reference. Those parity-contract tests use an explicit substitute for the unavailable Dorado executable. They do not qualify genuine Dorado output. They exercise parent accounting, absence, strand normalization, CIGAR arithmetic, corruption, model and reference identity, summary joins, immutable reuse, failed attempts, and process interruption. Their constructed SAM headers and split tags test the adapter. Genuine Dorado production and split behavior require the native qualification commands above.
 

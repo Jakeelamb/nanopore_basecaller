@@ -9,14 +9,14 @@ The user subsequently authorized complete stock processing and verification benc
 - [x] Architect. Ground.
 - [x] Architect. Sketch.
 - [x] Architect. Agree. Skip interactive checkpoint because this reversible work is authorized.
-- [x] Architect. Implement. Independent review found seven corrections; correction and native acceptance remain pending.
-- [ ] Architect. Scrap. Only needed if runtime evidence rejects the design.
+- [x] Architect. Implement. Independent review found seven corrections; local corrections and genuine native acceptance passed.
+- [x] Architect. Scrap. Skip; native contract corrections fit the accepted design.
 - [x] Arena. Frame.
 - [x] Arena. Fan out.
 - [x] Arena. Cross-judge. Independent same-family agents were available.
 - [x] Arena. Pick.
 - [x] Arena. Graft.
-- [ ] Arena. Verify.
+- [x] Arena. Verify. Genuine native smoke, split, parity, and rejection controls passed before measured execution.
 
 The design rubric is native-interface correctness, observable work and failure accounting, clear scientific limits, restartable evidence, and minimal maintained code. Prefer existing native analysis tools over a new biological scoring implementation when both satisfy the rubric. Available native agents provide independent same-family review, not cross-family review.
 
@@ -25,16 +25,17 @@ The design rubric is native-interface correctness, observable work and failure a
 - [x] Read the Principles section of Poteto Mode.
 - [x] Phase A: Frame.
 - [x] Phase B: Design the workflow.
-- [ ] Phase C: Run the loop.
-  - [ ] Install the current stock Dorado release and retain its source and license.
+- [x] Phase C: Run the loop.
+  - [x] Install the current stock Dorado release and retain its source and license.
   - [x] Acquire bounded public human POD5 files and verify their chemistry and signals. All 20,954 reads decoded; no UUID overlap.
   - [x] Acquire GRCh38 and sample-specific benchmark regions and variants.
-  - [x] Pin compatible HAC and SUP models. Both publisher SHA-256 values matched; GPU compatibility is pending.
+  - [x] Pin compatible HAC and SUP models. Both publisher SHA-256 values matched; both tiers produced verified native GPU output.
   - [x] Freeze molecule-level split membership before experimental changes.
-  - [ ] Run a small GPU smoke check on development reads only.
-  - [ ] Verify checksums, indexes, environment, and reproduction commands.
-- [ ] Phase D: Keep the audit trail.
-- [ ] Phase E: Verify and hand back.
+  - [x] Run a small GPU smoke check on development reads only.
+  - [x] Verify checksums, indexes, environment, and reproduction commands.
+  - [x] Complete six full stock jobs and ten interleaved development timing jobs. All 19 planned observations, including smoke and split fixtures, pass the current verifier. HAC has 17 absent HG005 parents; SUP represents every input parent.
+- [x] Phase D: Keep the audit trail.
+- [x] Phase E: Verify and hand back. Independent final artifact audit passed. Biological endpoints and comparative performance remain unqualified; see `stock-baseline-review.md` and `stock-baseline-results.md`.
 
 ## Scope and acceptance
 

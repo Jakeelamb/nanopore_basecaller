@@ -208,11 +208,12 @@ def parse_sam(path, model, expected, reference=None, base=None):
             name, flag, contig, pos, mapq, cigar = fields[:6]
             UUID(name)
             flag, pos, mapq = int(flag), int(pos), int(mapq)
-            tags = {}
+            tags, tag_types = {}, {}
             for field in fields[11:]:
                 key, kind, value = field.split(':', 2)
                 require(key not in tags, 'Duplicate auxiliary tag')
                 tags[key] = value
+                tag_types[key] = kind
             root = tags.get('pi', name)
             require(root in expected, f'Foreign parent: {root}')
             require(tags.get('RG') in groups, 'Unknown read group')
@@ -235,7 +236,7 @@ def parse_sam(path, model, expected, reference=None, base=None):
                 if base is not None:
                     require((normalized, normalized_q) == (base[name]['seq'], base[name]['qual']), 'Strand-normalized sequence/quality changed')
                     require(all(tags.get(key) == base[name]['tags'].get(key) for key in ('pi', 'sp', 'ns', 'ts', 'RG')), 'Aligned native signal tags changed')
-                primary[name] = {'parent': root, 'seq': normalized, 'qual': normalized_q, 'tags': tags,
+                primary[name] = {'parent': root, 'seq': normalized, 'qual': normalized_q, 'tags': tags, 'tag_types': tag_types,
                                  'alignment': fields[:9], 'cigar': cigar}
                 roots[root].append(name)
                 metrics['called_bases'] += len(seq)
@@ -295,6 +296,89 @@ def parse_sam(path, model, expected, reference=None, base=None):
             'reference_disagreement_proxy': {'aggregate': metrics['disagreement_columns'] / metrics['alignment_columns'] if fractions else None,
                                             'mean_child': statistics.mean(fractions) if fractions else None},
             'scientific_endpoints': BIOLOGY}
+
+
+def verify_calmd(before, after, fetch_reference):
+    require(set(before) == set(after), 'Native calmd changed primary membership')
+    exceptions = []
+    for child in sorted(before):
+        old, new = before[child], after[child]
+        require({k: v for k, v in old.items() if k != 'tags'} == {k: v for k, v in new.items() if k != 'tags'}, 'Native calmd changed primary fields or tag types')
+        require({k: v for k, v in old['tags'].items() if k != 'MD'} == {k: v for k, v in new['tags'].items() if k != 'MD'}, 'Native calmd changed primary tags or NM')
+        if old['tags'].get('MD') == new['tags'].get('MD'):
+            continue
+        old_md, new_md = old['tags'].get('MD', ''), new['tags'].get('MD', '')
+        pattern = r'[0-9]+(?:(?:[A-Z]|\^[A-Z]+)[0-9]+)*'
+        require(re.fullmatch(pattern, old_md) and re.fullmatch(pattern, new_md), 'Native calmd changed MD structure')
+        old_tokens, new_tokens = [re.findall(r'[0-9]+|\^[A-Z]+|[A-Z]', md) for md in (old_md, new_md)]
+        require(len(old_tokens) == len(new_tokens), 'Native calmd changed MD structure')
+        segments, md_length, ref_pos, query_pos = [], 0, int(old['alignment'][3]), 1
+        for number, op in re.findall(r'([1-9][0-9]*)([MIDNSHP=X])', old['cigar']):
+            length = int(number)
+            if op in '=XD':
+                segments.append((md_length, md_length + length, ref_pos, query_pos, op))
+                md_length += length
+            if op in '=XDN':
+                ref_pos += length
+            if op in '=XIS':
+                query_pos += length
+        offset, segment_index = 0, 0
+
+        def advance(length, required_op):
+            nonlocal offset, segment_index
+            while length:
+                while segment_index < len(segments) and offset == segments[segment_index][1]:
+                    segment_index += 1
+                require(segment_index < len(segments), 'MD exceeds CIGAR')
+                start, end, ref_start, query_start, op = segments[segment_index]
+                require(op == required_op, 'MD disagrees with EQX CIGAR')
+                amount = min(length, end - offset)
+                offset += amount
+                length -= amount
+
+        for old_token, new_token in zip(old_tokens, new_tokens):
+            if old_token.isdigit():
+                require(old_token == new_token, 'Native calmd changed MD match runs')
+                advance(int(old_token), '=')
+                continue
+            deletion = old_token.startswith('^')
+            require(deletion == new_token.startswith('^') and len(old_token) == len(new_token) and not new_token.isdigit(), 'Native calmd changed MD deletion structure')
+            for native_base, corrected_base in zip(old_token[1:] if deletion else old_token, new_token[1:] if deletion else new_token):
+                if native_base != corrected_base:
+                    require(native_base == 'N' and corrected_base in 'RYSWKMBDHV', 'Native calmd changed canonical MD base')
+                    while segment_index < len(segments) and offset == segments[segment_index][1]:
+                        segment_index += 1
+                    require(segment_index < len(segments), 'MD exceeds CIGAR')
+                    start, end, ref_start, query_start, op = segments[segment_index]
+                    exceptions.append({'child': child, 'contig': old['alignment'][2],
+                                       'reference_position_1based': ref_start + offset - start,
+                                       'query_position_1based': None if deletion else query_start + offset - start,
+                                       'cigar_operation': op, 'native_md_base': native_base, 'calmd_md_base': corrected_base})
+                advance(1, 'D' if deletion else 'X')
+        require(offset == md_length, 'MD does not cover CIGAR')
+    if exceptions:
+        regions = sorted({f"{item['contig']}:{item['reference_position_1based']}-{item['reference_position_1based']}" for item in exceptions})
+        fasta, current, order = {}, None, []
+        with Path(fetch_reference(regions)).open() as handle:
+            for line in handle:
+                line = line.rstrip('\n')
+                if line.startswith('>'):
+                    current = line[1:]
+                    require(current not in fasta, 'Duplicate faidx reference coordinate')
+                    fasta[current] = ''
+                    order.append(current)
+                else:
+                    require(current is not None, 'Malformed faidx reference output')
+                    fasta[current] += line
+        require(order == regions, 'Wrong faidx reference coordinates')
+        for item in exceptions:
+            region = f"{item['contig']}:{item['reference_position_1based']}-{item['reference_position_1based']}"
+            require(fasta[region] == item['calmd_md_base'], 'MD ambiguity differs from pinned reference')
+            item['reference_base'] = fasta[region]
+    return {'status': 'verified', 'primary_records_checked': len(before), 'exact_md_agreement': not exceptions,
+            'all_other_primary_fields_equal': True, 'md_reference_ambiguity_records': len({item['child'] for item in exceptions}),
+            'md_reference_ambiguity_bases': len(exceptions), 'md_reference_ambiguity_exceptions': exceptions,
+            'reference_check_stage': 'calmd-reference-iupac' if exceptions else None}
 
 
 def verify_summary(path, parsed, aligned=False):
@@ -588,7 +672,8 @@ def run_unit(plan, unit, root, execute=True, retry=None):
     corrected, _ = command('calmd', [s, 'calmd', '-b', sorted_bam, ROOT / config['reference']])
     corrected_sam, _ = command('calmd-decode', [s, 'view', '-h', corrected])
     native = parse_sam(corrected_sam, model, unit['parents'], plan['dictionary'], base['children'])
-    require(mapping['children'] == native['children'], 'Native calmd changed primary NM/MD or alignment')
+    calmd_verification = verify_calmd(mapping['children'], native['children'],
+                                    lambda regions: command('calmd-reference-iupac', [s, 'faidx', ROOT / config['reference'], *regions])[0])
     parents_file = directory / 'parents.tsv'
     parents_file.parent.mkdir(parents=True, exist_ok=True)
     with parents_file.open('w') as handle:
@@ -601,7 +686,8 @@ def run_unit(plan, unit, root, execute=True, retry=None):
     require(elapsed is not None and elapsed > 0, 'Native wall clock unavailable/below measurement resolution')
     native_log = (Path(producer['recorder']) / 'stderr').read_text()
     observation = {'status': 'verified', 'completed_ns': time.time_ns(), 'verifier_sha256': digest(verifier), 'unit': unit['id'], 'plan': plan['sha256'], 'basecall': {k: v for k, v in base.items() if k != 'children'},
-                   'mapping': {k: v for k, v in mapping.items() if k != 'children'}, 'basecall_process_wall_seconds': elapsed, 'recorder_elapsed_seconds': producer['elapsed_ns'] / 1e9,
+                   'mapping': {k: v for k, v in mapping.items() if k != 'children'}, 'calmd_verification': calmd_verification,
+                   'basecall_process_wall_seconds': elapsed, 'recorder_elapsed_seconds': producer['elapsed_ns'] / 1e9,
                    'host_max_rss_kib': resources['host_max_rss_kib'], 'gpu_resources': resources['gpu'],
                    'submitted_signal_seconds_per_wall_second': sum(unit['parents'].values()) / 5000 / elapsed,
                    'emitted_bases_per_wall_second': base['metrics']['called_bases'] / elapsed,
@@ -693,14 +779,15 @@ def report(plan, root):
     for unit in plan['units']:
         directory = root / 'units' / unit['id']
         path = directory / 'observation.json'
+        failures = [{**read(p), 'path': str(p), 'pin': pin(p)} for p in sorted(directory.glob('observation-failure-*.json'))]
         state = 'not_run'
         if path.exists():
             observation = read(path)
             try:
                 require(observation['plan'] == plan['sha256'], 'Wrong observation plan')
                 require(observation.get('verifier_sha256') == digest(__file__) and observation.get('completed_ns') is not None, 'Current successful verifier observation required')
-                failures = [read(p).get('completed_ns', int(p.stem.rsplit('-', 1)[1])) for p in directory.glob('observation-failure-*.json')]
-                require(not failures or max(failures) < observation['completed_ns'], 'Newer observation verification failed')
+                failure_times = [item.get('completed_ns', int(Path(item['path']).stem.rsplit('-', 1)[1])) for item in failures]
+                require(not failure_times or max(failure_times) < observation['completed_ns'], 'Newer observation verification failed')
                 check_pins(observation['pins'])
                 for finish in directory.glob('*/*/finish.json'):
                     receipt = read(finish)
@@ -725,7 +812,7 @@ def report(plan, root):
             if attempts:
                 stages[stage_dir.name] = {**attempts[-1], 'attempts': attempts}
         rows.append({'unit': unit['id'], 'scope': unit['scope'], 'tier': unit['tier'], 'status': state, 'stages': stages,
-                     'observation': observation if path.exists() else None})
+                     'observation': observation if path.exists() else None, 'observation_failures': failures})
     timing = {}
     for tier in ('hac', 'sup'):
         selected = [row for row in rows if row['scope'] == 'timing' and row['tier'] == tier]

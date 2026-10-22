@@ -1,6 +1,6 @@
 # Human nanopore basecaller experiment
 
-This workspace prepares a reproducible human raw-signal pilot and an unchanged Oxford Nanopore Dorado control. The current phase acquires and verifies inputs, then runs stock basecalling and alignment. Candidate training and improvement experiments come later.
+This workspace contains a pinned human raw-signal pilot and an unchanged Oxford Nanopore Dorado control. Stock basecalling and alignment have completed on every acquired file with both model tiers. Candidate training and improvement experiments come later.
 
 The public repository is [Jakeelamb/nanopore_basecaller](https://github.com/Jakeelamb/nanopore_basecaller). Changes use feature branches and pull requests. `main` requires a pull request and the `cpu-contracts` check. See [the contribution instructions](CONTRIBUTING.md).
 
@@ -8,7 +8,7 @@ The public repository is [Jakeelamb/nanopore_basecaller](https://github.com/Jake
 
 | Input | Pinned choice |
 |---|---|
-| Stock basecaller | Dorado 2.1.2, official Linux x64 binary and matching source |
+| Stock basecaller | Dorado `2.1.2+8b8fc5d`, official Linux x64 binary and matching source |
 | Models | R10.4.1 E8.2 400bps HAC v6.0.0 and SUP v5.2.0 |
 | Development | HG002, flowcell PAW70337, raw POD5 shard 33 |
 | Validation | HG002, independent flowcell PAW71238, raw POD5 shard 10 |
@@ -52,11 +52,15 @@ uv run --locked python -m unittest discover -s tests -v
 
 Read [the protocol](research/protocol.md) before changing a basecaller. Read [the accepted benchmark design](research/benchmark-design.md) for the stock run and its completion predicates. [Data selection evidence](research/data-sources.md) records sample provenance, selection bias, licensing, and vendor-training uncertainty. [The setup plan](research/setup-plan.md) tracks the authorized phases. `decisions.tsv` is the append-only decision trail.
 
+[Stock baseline results](research/stock-baseline-results.md) report the current execution snapshot, native process clocks, input/output accounting, rejection controls, and scientific limits. Reproduce the workflow with [the benchmark commands](research/benchmark-commands.md). The [MD discrepancy investigation](research/calmd-discrepancy.md) records an observed stock reference-annotation limitation and the verification amendment made after the original check rejected it.
+
+The completed cohort has 20,954 input parents and 3,750,272,700 electrical samples. SUP represents every input parent. HAC represents 20,937 parents, leaving 17 HG005 UUIDs absent from output. Their ledgers and unresolved causes remain explicit. Six full jobs, ten timing jobs, two smoke jobs, and one genuine split fixture have verified observations. The local contract suite passed 58 tests with zero skips; native qualification passed 21 controls.
+
 Raw POD5, reference files, and model archives stay separate from derived outputs. `data/splits/` contains frozen UUID membership and a deterministic development timing subset. `results/stock/` is reserved for stock observations. Every native command records UTC start and end, exit status, resource timing, stdout, and stderr through `scripts/record-command.sh`. Failed attempts remain evidence. Reporting errors are repaired from retained outputs rather than triggering another GPU run.
 
 Large inputs, software distributions, model weights, generated results, and raw local receipts are excluded from Git. Public verification summaries identify their local receipt paths and exact commands. GitHub's CPU workflow checks acquisition, real POD5 decoding, and native BAM contracts. Full-reference integration and GPU qualification run locally and retain separate evidence.
 
-The user authorized stock processing of all acquired files, including HG005. That opens the test control, so this is not a fully blinded study. Future candidate selection must use development and validation. The planned runtime baseline has five interleaved development repetitions per tier plus one full run per file and tier. No speedup or accuracy improvement is established by setup alone.
+The user authorized stock processing of all acquired files, including HG005. That opens the test control, so this is not a fully blinded study. Future candidate selection must use development and validation. Runtime observations include five interleaved development repetitions per tier plus one full run per file and tier. The host power source changed between setup and completion, with no recorded transition time. Clocks remain descriptive under uncontrolled power conditions. A future speedup test needs a fresh matched control on fixed external power. Biological accuracy and improvement remain unqualified.
 
 ## Attribution
 

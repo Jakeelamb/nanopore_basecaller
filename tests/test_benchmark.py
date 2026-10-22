@@ -200,6 +200,103 @@ class NativeBamTests(unittest.TestCase):
         after = b.parse_sam(fixed, MODEL, self.expected, {'chr1': 200}, base)
         self.assertNotEqual(before['children'], after['children'])
         self.assertEqual(after['children'][A]['tags']['MD'], '10')
+        with self.assertRaisesRegex(ValueError, 'MD structure'):
+            b.verify_calmd(before['children'], after['children'], lambda regions: self.fail('Invalid MD reached faidx'))
+
+    def ambiguity_fixture(self, deletion=False):
+        reference = self.root / 'ambiguity.fa'
+        reference.write_text('>chr1\nAY' + 'A' * 7 + 'W' + 'A' * 190 + '\n')
+        sequence = 'A' * (9 if deletion else 10)
+        base = self.parse(header() + record(seq=sequence, qual='I' * len(sequence)))['children']
+        cigar, md, nm = ('1=1D7=1X', '1^N7N0', 2) if deletion else ('1=1X7=1X', '1N7N0', 2)
+        sam, bam = self.native(header(True) + record(seq=sequence, qual='I' * len(sequence), flag=0, pos=1,
+                                                    cigar=cigar, extra=f'\tNM:i:{nm}\tMD:Z:{md}'))
+        corrected = self.root / 'ambiguity-calmd.sam'
+        with corrected.open('wb') as out:
+            subprocess.run(['samtools', 'calmd', str(bam), str(reference)], stdout=out, stderr=subprocess.PIPE, check=True)
+        before = b.parse_sam(sam, MODEL, self.expected, {'chr1': 200}, base)['children']
+        after = b.parse_sam(corrected, MODEL, self.expected, {'chr1': 200}, base)['children']
+        return reference, before, after
+
+    def reference_fetcher(self, reference, stage_root=None, execute=True):
+        def fetch(regions):
+            receipt = b.stage(stage_root or self.root / 'evidence', 'calmd-reference-iupac',
+                              ['samtools', 'faidx', str(reference), *regions], {'reference': b.pin(reference)}, execute=execute)
+            return receipt['stdout']
+        return fetch
+
+    def test_calmd_iupac_requires_native_coordinate_evidence_and_reuses_it(self):
+        reference, before, after = self.ambiguity_fixture()
+        result = b.verify_calmd(before, after, self.reference_fetcher(reference))
+        self.assertFalse(result['exact_md_agreement'])
+        self.assertTrue(result['all_other_primary_fields_equal'])
+        self.assertEqual(result['md_reference_ambiguity_records'], 1)
+        self.assertEqual(result['md_reference_ambiguity_bases'], 2)
+        self.assertEqual([(v['reference_position_1based'], v['query_position_1based'], v['cigar_operation'], v['reference_base'])
+                          for v in result['md_reference_ambiguity_exceptions']], [(2, 2, 'X', 'Y'), (10, 10, 'X', 'W')])
+        self.assertEqual(b.verify_calmd(before, after, self.reference_fetcher(reference, execute=False)), result)
+        self.assertEqual(len(list((self.root / 'evidence/calmd-reference-iupac').glob('*/start.json'))), 1)
+        with self.assertRaisesRegex(ValueError, 'Missing retained stage'):
+            b.verify_calmd(before, after, self.reference_fetcher(reference, self.root / 'missing', execute=False))
+        exact = b.verify_calmd(after, after, lambda regions: self.fail('Exact MD invoked faidx'))
+        self.assertTrue(exact['exact_md_agreement'])
+        self.assertEqual(exact['md_reference_ambiguity_exceptions'], [])
+
+    def test_calmd_iupac_deletion_preserves_structure_and_coordinates(self):
+        reference, before, after = self.ambiguity_fixture(deletion=True)
+        result = b.verify_calmd(before, after, self.reference_fetcher(reference))
+        self.assertEqual([(v['reference_position_1based'], v['query_position_1based'], v['cigar_operation'], v['reference_base'])
+                          for v in result['md_reference_ambiguity_exceptions']], [(2, None, 'D', 'Y'), (10, 9, 'X', 'W')])
+
+    def test_calmd_iupac_rejects_canonical_counts_deletions_nm_and_other_fields(self):
+        reference, before, after = self.ambiguity_fixture()
+        changes = [('tags', 'MD', '1A7W0'), ('tags', 'MD', '2Y6W0'), ('tags', 'MD', '1^Y7W0'),
+                   ('tags', 'NM', '3'), ('tags', 'qs', '21'), ('seq', None, 'C' + 'A' * 9),
+                   ('qual', None, 'J' + 'I' * 9), ('alignment', 4, '59'), ('tag_types', 'NM', 'Z')]
+        for field, key, value in changes:
+            changed = json.loads(json.dumps(after))
+            if key is None:
+                changed[A][field] = value
+            else:
+                changed[A][field][key] = value
+            with self.subTest(field=field, key=key, value=value), self.assertRaises(ValueError):
+                b.verify_calmd(before, changed, lambda regions: self.fail('Invalid change reached faidx'))
+        wrong = self.root / 'wrong.fa'
+        wrong.write_text('>chr1\n' + 'A' * 200 + '\n')
+        subprocess.run(['samtools', 'faidx', str(wrong)], check=True, capture_output=True)
+        with self.assertRaisesRegex(ValueError, 'differs from pinned reference'):
+            b.verify_calmd(before, after, self.reference_fetcher(wrong))
+        with self.assertRaisesRegex(ValueError, 'Wrong faidx reference coordinates'):
+            b.verify_calmd(before, after, lambda regions: reference)
+
+    @unittest.skipUnless(os.environ.get('NANOPORE_CALMD_PLAN'), 'Set NANOPORE_CALMD_PLAN for retained validation ambiguity evidence')
+    def test_retained_validation_calmd_iupac_and_native_reference(self):
+        plan_path = Path(os.environ['NANOPORE_CALMD_PLAN']).resolve()
+        plan = b.read(plan_path)
+        unit = next(value for value in plan['units'] if value['id'] == 'full-validation-hac')
+        directory = plan_path.parent / 'units' / unit['id']
+        decoded = {}
+        for stage in ('base-decode', 'aligned-decode', 'calmd-decode'):
+            receipt = b.read(sorted((directory / stage).glob('*/finish.json'))[-1])
+            self.assertEqual(receipt['status'], 'finished')
+            b.check_pins(receipt['pins'])
+            decoded[stage] = receipt['stdout']
+        base = b.parse_sam(decoded['base-decode'], MODEL, unit['parents'])['children']
+        before = b.parse_sam(decoded['aligned-decode'], MODEL, unit['parents'], plan['dictionary'], base)['children']
+        after = b.parse_sam(decoded['calmd-decode'], MODEL, unit['parents'], plan['dictionary'], base)['children']
+        reference = PROJECT / plan['config']['reference']
+        self.assertTrue(any(Path(value['path']).resolve() == reference.resolve() and value['sha256'] == b.digest(reference)
+                            for value in plan['pins']))
+        result = b.verify_calmd(before, after, self.reference_fetcher(reference))
+        self.assertEqual(result['primary_records_checked'], 2039)
+        self.assertEqual(result['md_reference_ambiguity_records'], 2)
+        self.assertEqual(result['md_reference_ambiguity_bases'], 7)
+        self.assertFalse(result['exact_md_agreement'])
+        self.assertEqual([(v['contig'], v['reference_position_1based'], v['reference_base']) for v in result['md_reference_ambiguity_exceptions']],
+                         [('chr2', 233142970, 'Y'), ('chr2', 233143703, 'W'), ('chr2', 233143709, 'Y'),
+                          ('chr2', 233143729, 'Y'), ('chr2', 233144847, 'K'), ('chr2', 233145086, 'W'), ('chr12', 122093260, 'Y')])
+        receipt = b.read(next((self.root / 'evidence/calmd-reference-iupac').glob('*/finish.json')))
+        print('Retained validation faidx recorder:', receipt['recorder'])
 
     def test_native_truncation_and_interior_corruption(self):
         _, bam = self.native(header() + record())
@@ -260,11 +357,19 @@ class ReceiptTests(unittest.TestCase):
         observation['verifier_sha256'] = b.digest(b.__file__)
         b.write(unit / 'observation.json', observation)
         self.assertEqual(b.report(plan, self.root)['timing']['hac']['successful'], 1)
-        b.write(unit / 'observation-failure-2.json', {'status': 'observation_failed', 'completed_ns': 2, 'verifier_sha256': b.digest(b.__file__)})
-        self.assertEqual(b.report(plan, self.root)['timing']['hac']['successful'], 0)
+        failure = {'status': 'observation_failed', 'completed_ns': 2, 'utc': '2026-10-22T21:43:59+00:00',
+                   'error': 'Native calmd changed primary NM/MD or alignment', 'verifier_sha256': b.digest(b.__file__)}
+        b.write(unit / 'observation-failure-2.json', failure)
+        result = b.report(plan, self.root)
+        self.assertEqual(result['timing']['hac']['successful'], 0)
+        self.assertEqual(result['units'][0]['observation_failures'], [{**failure, 'path': str(unit / 'observation-failure-2.json'),
+                                                                     'pin': b.pin(unit / 'observation-failure-2.json')}])
+        self.assertEqual(result['native_process_attempt_counts'], {'total': 0})
         observation['completed_ns'] = 3
         b.write(unit / 'observation.json', observation)
-        self.assertEqual(b.report(plan, self.root)['timing']['hac']['successful'], 1)
+        result = b.report(plan, self.root)
+        self.assertEqual(result['timing']['hac']['successful'], 1)
+        self.assertEqual(len(result['units'][0]['observation_failures']), 1)
 
     def test_retry_reports_all_executed_attempts_and_process_resources(self):
         marker = self.root / 'marker'

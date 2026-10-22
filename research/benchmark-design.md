@@ -33,3 +33,9 @@ Before full GPU execution, accept a genuine native producer fixture and reject t
 Retain all ten planned timing observations and all six full cohort outputs. Show successful and failed counts, median and range, input and output counts, sampled GPU resources, host RSS, and contention limits. Do not silently replace failures or publish a model speedup ranking. Every native and projected endpoint has its own verified or unavailable status.
 
 GRCh38 disagreement is a reference-agreement proxy. Biological base accuracy, biological quality calibration, variant-aware confident-region accuracy, and variant calling accuracy remain NOT VERIFIED. GIAB VCF and BED inputs do not establish those endpoints by themselves. The user has authorized stock processing of HG005, but candidate selection remains confined to development and validation.
+
+## Observed verification amendment
+
+The full validation HAC run triggered an exact MD comparison failure on 2026-10-22. An independent investigation found seven stock `N` symbols where the original reference contains `Y`, `W`, or `K`. All other record fields and tags, including NM, were identical. The pinned minimap2 index reduces the reference alphabet to `ACGTN`. Samtools calmd retains the original reference symbols. See [the complete investigation](calmd-discrepancy.md).
+
+The corrected verifier permits only an unchanged MD structure with stock `N` versus a non-ACGT IUPAC symbol confirmed at the exact native faidx reference coordinate. Every other primary field and tag must remain identical. Observations record each exception and explicitly report false exact MD agreement. The original failure and original verifier remain retained. This amendment changes observation of existing stock artifacts; it does not change native basecalls, alignment, NM, or the reference disagreement endpoint.
