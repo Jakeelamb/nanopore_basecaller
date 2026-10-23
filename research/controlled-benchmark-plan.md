@@ -7,9 +7,9 @@ The user requested a thorough, reusable timing and accuracy baseline on 2026-10-
 - [x] Read the Principles section of Poteto Mode.
 - [x] Phase A: Frame.
 - [x] Phase B: Design the workflow.
-- [ ] Phase C: Run the loop.
-- [ ] Phase D: Keep the audit trail.
-- [ ] Phase E: Verify and hand back.
+- [x] Phase C: Run the loop.
+- [x] Phase D: Keep the audit trail.
+- [x] Phase E: Verify and hand back.
 
 Accuracy design uses Architect Ground, Sketch, Agree, Implement, and Scrap. Agree proceeds without a human checkpoint for this authorized work. The arena stages are Frame, Fan out, Cross-judge, Pick, Graft, and Verify. Two independent native Sol designs and one independent reviewer will establish the accuracy contract before expensive execution. This is same-family review.
 
@@ -68,3 +68,9 @@ The first complete strict truth pass at scorer `d1b42b4e1a54cd74936956e7f13183e9
 Version 1.1 narrows the domain by the fixed, independently reviewed rule in `config/accuracy-v1.1.json`: for every star REF span, remove all intersected original merged confident intervals and the closest strictly left and right original intervals. In a gap this removes its two neighbors. Select from the original set once, union/deduplicate globally, and never expand recursively. Apply before either 100/500 bp erosion. Retain star-anchor padding and all concrete/original/equivalent masks. Other symbolic/breakend alleles still fail. Publish star counts, removed interval IDs/bases, and ordered losses. This trusts GIAB homozygous-reference assertions only in the retained domain; it does not reconstruct missing deletion extents. The first two stars remove original neighboring intervals totaling 12,232 bases before other operations.
 
 The strict failed native attempt remains under the original analysis directory. The amended analysis has a fresh directory and shares unchanged native input producers read-only. All four amended truth domains require fresh qualification. The endpoint name explicitly includes exclusion of unsupported-star confidence neighborhoods. The [VCF specification](https://github.com/samtools/hts-specs/blob/master/VCFv4.3.tex) defines `*` as an allele missing because of an overlapping deletion; it supplies no upstream extent itself. GIAB's release documentation also explains that its VCF contains variants outside confident regions to support boundary comparisons.
+
+## Completion record
+
+The controlled rerun completed on 2026-10-23 UTC. All 19 stock observations, 12 full accuracy pairs and 20 timing accuracy pairs passed the bounded acceptance gates. Both 100/500 bp domains and every parent-bootstrap interval were retained; an independent arithmetic replay reproduced all intervals. See [the final results](controlled-baseline-results.md) and [acceptance review](controlled-baseline-review.md) for exact identities, commands, tests and limits.
+
+The full HG005 SUP clock remains descriptive because of the disclosed owned CPU incident. All ten primary timing windows start after its conservative confirmed stop bound. The host remained shared. Required core GPU samples start after cooldown; optional counters have a broader observer window. These scope statements correct report projections without changing measured producers or analysis policy. No candidate improvement or Dorado source-build qualification follows from this completed stock baseline.

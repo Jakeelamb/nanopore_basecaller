@@ -4,6 +4,7 @@ import argparse
 from collections import Counter
 import csv
 from datetime import datetime
+from functools import lru_cache
 import hashlib
 import json
 import math
@@ -69,11 +70,20 @@ def unique(items, key, label):
     return result
 
 
+@lru_cache(maxsize=32768)
+def resolved_path(path):
+    return str(Path(path).resolve())
+
+
+def normalized_pin(pin):
+    # Older reference/index manifests use project-relative paths; byte identity
+    # is independent of that spelling. Cache resolution once per distinct path.
+    return {**pin, 'path': resolved_path(str(ROOT / pin['path']))}
+
+
 def pin_for(pins, path):
-    # Native pin() already stores absolute resolved paths. Resolve the lookup
-    # once; resolving every manifest entry made joins needlessly quadratic.
-    target = str(Path(path).resolve())
-    found = [p for p in pins if p['path'] == target]
+    target = resolved_path(str(ROOT / path))
+    found = [value for p in pins if (value := normalized_pin(p))['path'] == target]
     require(found and all(p == found[0] for p in found), f'Missing/conflicting bound pin: {path}')
     return found[0]
 
@@ -273,8 +283,9 @@ class Reader:
         self.checked = set()
 
     def retain(self, pins):
-        for pin in pins:
-            path = str(Path(pin['path']).resolve())
+        for original in pins:
+            pin = normalized_pin(original)
+            path = pin['path']
             require(re.fullmatch('[0-9a-f]{64}', pin['sha256']) and isinstance(pin['size'], int) and pin['size'] >= 0, f'Malformed pin: {path}')
             old = self.pins.get(path)
             require(old is None or old == pin, f'Conflicting artifact pins: {path}')
@@ -609,7 +620,8 @@ def telemetry(stage, reader):
     """Small observer CSVs only; never read a BAM, signal, reference, or sequence ledger."""
     receipt = reader.read(stage['receipt'])
     paths = {Path(p['path']).name: Path(p['path']) for p in receipt.get('pins', [])}
-    result = {'scope': 'device-wide observer interval; not isolated native process/kernel',
+    result = {'scope': 'required synchronous device-wide prelaunch/during/postnative sample window after GPU cooldown; not isolated native process/kernel',
+              'optional_telemetry_scope': 'broader observer interval; optional probes/samplers begin before cooldown and end after native process',
               'peaks': stage['resources']['gpu'], 'sample_means': {}, 'host': {}}
     if 'gpu.csv' in paths:
         with paths['gpu.csv'].open() as handle:
@@ -652,7 +664,10 @@ def evidence_bundle(bundle, planned, units, attempts, reader):
                 scores = [r['score'] for r in bundle['accuracy']['timing']['units'] if r['tier'] == tier and r['padding'] == padding]
                 variations[f'{tier}-{padding}'] = {key: summary([s[key] for s in scores]) for key in ('aggregate_accuracy', 'alignment_columns', 'children', 'represented_parents', 'positive_denominator_parents')}
     history = analysis_history(bundle['truth']['amendment'], reader)
+    exporter_source = file_pin(__file__)
+    reader.retain([exporter_source])
     return {'schema': 1, 'status': 'complete-controlled-baseline', 'plan': bundle['plan']['sha256'],
+            'exporter_source': exporter_source,
             'inputs': bundle['inputs']['identity'], 'endpoint': bundle['truth']['amendment']['endpoint'],
             'artifact_validation': 'all retained pins rehashed' if reader.verify_pins else 'identities, exact JSON joins, sizes and small-file pins checked; large pins retained, not rehashed',
             'timing': timing, 'native_stages': stages, 'basecall_observer_telemetry': gpu,
@@ -765,7 +780,7 @@ def render(bundle, evidence, planned, units, stock, accuracy, evidence_path, out
     paragraph('Endpoint: **' + evidence['endpoint'] + '**. Conditional on publisher donor labels and accepted primary autosomal mappings (MAPQ 30–254). Variants, known reference errors, non-ACGT truth and fixed unsupported-star confidence neighborhoods are excluded. Unknown reference errors and mapping errors remain possible. This is neither whole-read diploid accuracy nor variant calling; vendor training exclusion is unknown. HG005 is reported as a stock control and selects no candidate.')
     paragraph('Accuracy is M/(M+X+I+D), where X is substitution, I inserted bases and D deleted bases. Query exposure is M+X+I; reference exposure is M+X+D. Insertions need both flanks in one eligible interval; deletions count eligible reference positions. Split children combine by original parent. Aggregate and mean-parent rates differ. The 95% parent bootstrap intervals use 2,000 fixed-seed replicates and quantify within-pilot technical resampling only; genomic dependence, duplex relationships, flowcell and population variation, truth and donor uncertainty are not covered.')
     paragraph('## Repeated process timing')
-    paragraph('Five fresh processes per tier use all 2,608 development parents and 641,769,607 electrical samples each. Filesystem inputs/models/reference/index were explicitly warmed outside timing. ACAD external power and balanced laptop profile were sampled continuously; the observed power ceiling is 100 W. Stock DVFS, fan control and clocks remain dynamic. Three one-second idle GPU observations at ≤40 C and ≤5% utilization gate each start outside the native clock. The repeated timing phase was scheduled without other CPU-heavy work; disclosed full-cohort incidents appear below. This is process throughput, including startup, loading, input/output and shutdown, with no isolated-kernel or model-winner claim.')
+    paragraph('Five fresh processes per tier use all 2,608 development parents and 641,769,607 electrical samples each. Filesystem inputs/models/reference/index were explicitly warmed outside timing. ACAD external power and balanced laptop profile were sampled continuously; the observed power ceiling is 100 W. Stock DVFS, fan control and clocks remain dynamic. Three one-second idle GPU observations at ≤40 C and ≤5% utilization gate each start outside the native clock. Our benchmark team paused other owned CPU-heavy work during repeated timings. The host remained shared, and background CPU contention was not excluded; sampled CPU/load evidence remains available. The disclosed owned check during the full HG005 SUP observation appears below. This is process throughput, including startup, loading, input/output and shutdown, with no isolated-kernel or model-winner claim.')
     rows = []
     for tier in TIERS:
         t = evidence['timing'][tier]
@@ -782,7 +797,7 @@ def render(bundle, evidence, planned, units, stock, accuracy, evidence_path, out
     paragraph('The 13 core stages are always required. `calmd-reference-iupac` is an additional native samtools faidx stage only when the verifier records a coordinate-confirmed reference ambiguity; it remains subject to the same measurement and receipt requirements.')
     end_detail()
     detail('GPU and host observations, limiter evidence and batch choices')
-    paragraph('GPU peaks and arithmetic sample means cover the device-wide observer interval, including setup and GPU cooldown before native launch. They are not instantaneous maxima or isolated process allocations. One-second sampling and a 2.5 s maximum gap cannot resolve subsecond events. Thermal/power counter deltas cover the retained before/after observer boundaries, including cooldown; they must not be divided by native wall time to estimate a native throttle fraction. Counter activity supports limiter observations but supplies no kernel-profiler evidence or causal bottleneck diagnosis. CPU load snapshots and full thermal/power samples remain in the evidence/receipts. Observer elapsed is closer to the wait-and-measure workflow; native wall is the separate process boundary.')
+    paragraph('GPU core peaks and arithmetic sample means cover the required synchronous device-wide samples before native launch, during the process and after exit. This required sample window starts after GPU cooldown and includes prelaunch/postexit sampling overhead. These values are not instantaneous maxima or isolated process allocations. One-second sampling and a 2.5 s maximum gap cannot resolve subsecond events. Optional thermal/power probes, samplers and snapshots span a broader observer interval beginning before cooldown. Their counter deltas include that broader interval and must not be divided by native wall time to estimate a native throttle fraction. Counter activity supports limiter observations but supplies no kernel-profiler evidence or causal bottleneck diagnosis. CPU load snapshots and full thermal/power samples remain in the evidence/receipts. Total observer elapsed includes setup and cooldown; native wall is the separate process boundary.')
     table(['Unit', 'GPU peak MiB', 'Peak/mean W', 'Peak/mean utilization %', 'Peak/mean SM MHz', 'Peak C', 'Samples', 'Batch selection'], [(name, item['peaks'].get('peak_memory_mib'), f"{fmt(item['peaks'].get('peak_power_watts'))}/{fmt(item['sample_means'].get('power.draw [W]'))}", f"{fmt(item['peaks'].get('peak_utilization_percent'))}/{fmt(item['sample_means'].get('utilization.gpu [%]'))}", f"{fmt(item['peaks'].get('peak_sm_clock_mhz'))}/{fmt(item['sample_means'].get('clocks.current.sm [MHz]'))}", item['peaks'].get('peak_temperature_celsius'), item.get('gpu_sample_count'), units[name]['observation']['batch_selection_status']) for tier in TIERS for name, item in evidence['basecall_observer_telemetry'][tier].items()])
     counters = []
     for tier in TIERS:

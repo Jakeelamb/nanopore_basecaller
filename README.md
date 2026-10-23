@@ -15,11 +15,11 @@ The public repository is [Jakeelamb/nanopore_basecaller](https://github.com/Jake
 | Test control | HG005, flowcell PAW87816, raw POD5 shard 52 |
 | Raw signals | 3,209,530,648 bytes, native 5 kHz, LSK114 |
 | Alignment reference | Full GRCh38 no-ALT analysis set from GIAB, including publisher FAI and GZI |
-| Future variant benchmarks | Sample-specific GIAB v4.2.1 GRCh38 VCF, tabix index, and confident-region BED |
+| Accuracy truth | Sample-specific GIAB v4.2.1 GRCh38 VCF, tabix index, and matching confident-region BED |
 
 `config/assets.json` is the acquisition manifest. It contains exact URLs, expected sizes, source-object ETags, intended roles, and publisher checksums where supplied. The frozen local hash lock is created only after acquisition passes. Partial downloads are not accepted inputs.
 
-These are size-selected pilot shards, not random whole-genome samples. HG002 and HG005 may have appeared in vendor training. GRCh38 disagreement includes natural human variation and alignment error. The stock benchmark therefore reports reference agreement as a proxy. Biological base accuracy and variant-calling accuracy require separate qualification.
+These are size-selected pilot shards, not random whole-genome samples. HG002 and HG005 may have appeared in vendor training. Accuracy is measured only in GIAB-supported reference-identical intervals outside fixed variant, reference-error and unsupported-star confidence neighborhoods. It is conditional on publisher donor labels and accepted primary mappings. Whole-read diploid accuracy, variant calling and population generalization remain unsupported.
 
 The stock run uses the official native Dorado executable. Its matching C++ source and recursive submodules are present locally for future changes. The native index producer was built from pinned source; rebuilding Dorado itself is a separate, currently unqualified step.
 
@@ -52,15 +52,34 @@ uv run --locked python -m unittest discover -s tests -v
 
 Read [the protocol](research/protocol.md) before changing a basecaller. Read [the accepted benchmark design](research/benchmark-design.md) for the stock run and its completion predicates. [Data selection evidence](research/data-sources.md) records sample provenance, selection bias, licensing, and vendor-training uncertainty. [The setup plan](research/setup-plan.md) tracks the authorized phases. `decisions.tsv` is the append-only decision trail.
 
-[Stock baseline results](research/stock-baseline-results.md) report the current execution snapshot, native process clocks, input/output accounting, rejection controls, and scientific limits. Reproduce the workflow with [the benchmark commands](research/benchmark-commands.md). The [MD discrepancy investigation](research/calmd-discrepancy.md) records an observed stock reference-annotation limitation and the verification amendment made after the original check rejected it.
+[Controlled baseline results](research/controlled-baseline-results.md) report the repeated timings, bounded accuracy, technical confidence intervals, quality reliability, length/context strata, homopolymer projections, input/output accounting, controls and retained failures. Read [the frozen method](research/controlled-benchmark-plan.md), [reproduction commands](research/controlled-commands.md), and [independent audit](research/controlled-baseline-review.md). The [original stock results](research/stock-baseline-results.md) remain unchanged historical evidence from the earlier run with uncontrolled power. The [MD discrepancy investigation](research/calmd-discrepancy.md) records a stock reference-annotation limitation and its narrowly verified exception.
 
-The completed cohort has 20,954 input parents and 3,750,272,700 electrical samples. SUP represents every input parent. HAC represents 20,937 parents, leaving 17 HG005 UUIDs absent from output. Their ledgers and unresolved causes remain explicit. Six full jobs, ten timing jobs, two smoke jobs, and one genuine split fixture have verified observations. The local contract suite passed 58 tests with zero skips; native qualification passed 21 controls.
+The completed cohort has 20,954 input parents and 3,750,272,700 electrical samples. SUP represents every input parent. HAC represents 20,937 parents, leaving 17 HG005 UUIDs absent from output. Their ledgers and unresolved causes remain explicit. The new series contains six full jobs, ten timing jobs, two smoke jobs and one genuine split fixture. Native qualification includes 21 controls. Accuracy uses both predeclared 100 bp and 500 bp exclusion/erosion domains; parent bootstrap intervals describe within-pilot technical resampling, not population uncertainty.
 
-Raw POD5, reference files, and model archives stay separate from derived outputs. `data/splits/` contains frozen UUID membership and a deterministic development timing subset. `results/stock/` is reserved for stock observations. Every native command records UTC start and end, exit status, resource timing, stdout, and stderr through `scripts/record-command.sh`. Failed attempts remain evidence. Reporting errors are repaired from retained outputs rather than triggering another GPU run.
+On the RTX 5070 Laptop GPU with a recorded 100 W power ceiling and balanced profile, all five timing processes per tier represent all 2,608 development parents and 641,769,607 signal samples:
+
+| Stock tier | Native basecall median | Five-run range |
+|---|---|---|
+| HAC | 35.40 s | 34.93–35.63 s |
+| SUP | 173.36 s | 173.04–174.33 s |
+
+These are fresh-process clocks with warmed filesystem inputs, including stock batch selection and output. Cooldown and observer overhead have separate clocks. Other hardware, thermals, batch settings or workloads require new measurements.
+
+Primary 100 bp domain accuracy, conditional on the truth and mapping policy above:
+
+| Cohort | HAC | SUP |
+|---|---|---|
+| HG002 development | 98.64% | 98.96% |
+| HG002 validation | 98.60% | 98.83% |
+| HG005 stock control | 98.11% | 98.48% |
+
+The full report includes both domains, their scored exposure, technical confidence intervals and losses. These percentages do not describe every emitted base or absent read.
+
+Raw POD5, reference files, and model archives stay separate from derived outputs. `data/splits/` contains frozen UUID membership and the original smaller timing subset. Controlled timings use all 2,608 development parents in five fresh processes per model, in the frozen interleaved order. `results/stock/` and `results/accuracy/` hold separate native observations and scoring artifacts. Every native command records UTC start and end, exit status, resource timing, stdout, and stderr through `scripts/record-command.sh`. Failed attempts remain evidence. Reporting errors are repaired from retained outputs rather than triggering another GPU run.
 
 Large inputs, software distributions, model weights, generated results, and raw local receipts are excluded from Git. Public verification summaries identify their local receipt paths and exact commands. GitHub's CPU workflow checks acquisition, real POD5 decoding, and native BAM contracts. Full-reference integration and GPU qualification run locally and retain separate evidence.
 
-The user authorized stock processing of all acquired files, including HG005. That opens the test control, so this is not a fully blinded study. Future candidate selection must use development and validation. Runtime observations include five interleaved development repetitions per tier plus one full run per file and tier. The host power source changed between setup and completion, with no recorded transition time. Clocks remain descriptive under uncontrolled power conditions. A future speedup test needs a fresh matched control on fixed external power. Biological accuracy and improvement remain unqualified.
+The user authorized stock processing of all acquired files, including HG005. That opens the test control, so this is not a fully blinded study. Future candidate selection must use development and validation. The controlled rerun requires connected external power, the balanced profile, a cool idle GPU start and continuous host/GPU evidence. Laptop clocks and fans remain stock, and the host is shared. One full HG005 SUP clock is explicitly descriptive because an owned CPU check overlapped it; the [measurement note](provenance/verification/controlled-measurement-notes-20261023.json) preserves the missing receipt and timing uncertainty. All ten primary timing windows must follow its confirmed stop bound. No candidate improvement or model winner is claimed; future speedup claims require fresh matched controls.
 
 ## Attribution
 

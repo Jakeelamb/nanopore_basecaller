@@ -338,6 +338,8 @@ class ControlledReportTests(unittest.TestCase):
         self.assertIn('D has no emitted Q', text)
         self.assertIn('80.000000–95.000000', text)
         self.assertIn('[Machine-readable evidence](../provenance/verification/evidence.json)', text)
+        self.assertIn('background CPU contention was not excluded', text)
+        self.assertEqual(evidence['exporter_source'], r.file_pin(r.__file__))
 
 
 class RawReceiptTests(unittest.TestCase):
@@ -404,6 +406,10 @@ class RawReceiptTests(unittest.TestCase):
 
     def test_complete_raw_receipt_and_measurement_accepts(self):
         self.check()
+        observed = r.telemetry({'receipt': str(self.stage / 'finish.json'), 'resources': {'gpu': {}}}, r.Reader())
+        self.assertIn('after GPU cooldown', observed['scope'])
+        self.assertIn('before cooldown', observed['optional_telemetry_scope'])
+        self.assertEqual(observed['sample_means']['power.draw [W]'], 60.)
 
     def test_raw_nonzero_exit_cannot_be_projected_as_success(self):
         (self.recorder / 'exit-status.txt').write_text('1\n')
@@ -493,6 +499,17 @@ class RawReceiptTests(unittest.TestCase):
         observation = {'pins': [r.file_pin(self.stage / 'finish.json')]}
         with self.assertRaisesRegex(ValueError, 'Missing/conflicting bound pin'):
             r.bound_stage(observation, self.stage.parent.parent, 'basecall', r.Reader())
+
+    def test_relative_and_absolute_pins_share_one_byte_identity(self):
+        absolute = r.file_pin(self.recorder / 'stdout')
+        relative = {**absolute, 'path': str((self.recorder / 'stdout').relative_to(self.root))}
+        reader = r.Reader(True)
+        reader.retain([absolute, relative])
+        self.assertEqual(len(reader.pins), 1)
+        self.assertEqual(r.pin_for([relative, absolute], absolute['path']), absolute)
+        changed = {**relative, 'sha256': 'f' * 64}
+        with self.assertRaisesRegex(ValueError, 'Conflicting artifact pins'):
+            reader.retain([changed])
 
     def test_iupac_native_faidx_bases_must_match_coordinates(self):
         output = self.root / 'iupac.fa'

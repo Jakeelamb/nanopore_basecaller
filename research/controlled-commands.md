@@ -74,3 +74,19 @@ The score action binds the exact decoder receipt and SAM pinned by the current v
 Use `accuracy.py verify` with the same arguments to check retained scoring artifacts without executing a missing Rust stage. Use `verify-truth` to check retained truth artifacts. Changed source or executable pins require a deliberately new analysis revision. A report projection repair should reuse successful producers when their actual inputs and computation remain unchanged.
 
 Final scientific acceptance requires exactly six full cohort/model outputs times both truth domains, positive eligible exposure for each, five complete-work timing observations per model, qualified native measurement evidence, and current source identities. Passing execution with an empty accuracy denominator does not qualify accuracy. Whole-read diploid accuracy, downstream variant calling and population conclusions remain outside this pilot.
+
+Export the completed package after measurements and scoring finish:
+
+```sh
+uv run --locked scripts/summarize-controlled.py \
+  --stock results/stock/NEW-SERIES \
+  --accuracy results/accuracy/NEW-ANALYSIS \
+  --inputs results/accuracy/NEW-INPUTS/inputs.json \
+  --output research/NEW-REPORT.md \
+  --evidence provenance/verification/NEW-EVIDENCE.json \
+  --verify-pins
+```
+
+The exporter rejects incomplete units, invalid controls, inconsistent raw receipts, changed pins, missing truth domains, zero accuracy exposure and mismatched parent ledgers. Full pin verification streams large local artifacts; keep it outside measured work. The report links its public evidence JSON relatively, while raw receipt paths identify ignored local files.
+
+The current `controlled-20261022` series requires its canonical [measurement note](../provenance/verification/controlled-measurement-notes-20261023.json). It records an owned CPU check during the full HG005 SUP basecall, with no retained raw execution receipt. That full-cohort clock remains descriptive; no counterfactual accuracy invariance is claimed. The exporter requires all ten primary timing observer windows to begin after the conservative confirmed stop bound. An empty or different notes override cannot hide the event. Preserve the successful native producer and its actual outputs.
