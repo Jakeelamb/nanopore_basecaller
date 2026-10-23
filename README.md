@@ -21,7 +21,7 @@ The public repository is [Jakeelamb/nanopore_basecaller](https://github.com/Jake
 
 These are size-selected pilot shards, not random whole-genome samples. HG002 and HG005 may have appeared in vendor training. Accuracy is measured only in GIAB-supported reference-identical intervals outside fixed variant, reference-error and unsupported-star confidence neighborhoods. It is conditional on publisher donor labels and accepted primary mappings. Whole-read diploid accuracy, variant calling and population generalization remain unsupported.
 
-The stock run uses the official native Dorado executable. Its matching C++ source and recursive submodules are present locally for future changes. The native index producer was built from pinned source; rebuilding Dorado itself is a separate, currently unqualified step.
+The stock run uses the official native Dorado executable. Its matching C++ source and recursive submodules are present locally for future changes. An isolated unchanged-input Release build now passes compilation and selected CPU contracts. [Build evidence](research/source-build-notes.md) distinguishes its CUDA 13 dependency stack from the official CUDA 12 distribution; native GPU and accuracy qualification have separate gates.
 
 ## Reproduce acquisition
 
@@ -51,6 +51,10 @@ uv run --locked python -m unittest discover -s tests -v
 ## Evidence and experiment rules
 
 Read [the protocol](research/protocol.md) before changing a basecaller. Read [the accepted benchmark design](research/benchmark-design.md) for the stock run and its completion predicates. [Data selection evidence](research/data-sources.md) records sample provenance, selection bias, licensing, and vendor-training uncertainty. [The setup plan](research/setup-plan.md) tracks the authorized phases. `decisions.tsv` is the append-only decision trail.
+
+[The source trace](research/dorado-code-path.md) follows current calibration, chunking, both neural architectures, decoding, splitting, trimming, filtering, and output accounting. [The prospective experiment](research/prospective-experiment.md) defines paired accuracy, speed, yield, selection, uncertainty, and external confirmation requirements. Register a concrete hypothesis and endpoint before candidate development; freeze the full registration before validation. No candidate is registered by that document.
+
+[Source qualification](research/source-qualification-results.md) separates the unchanged-input build, native source runtime, exact vendor equivalence, fixed-domain accuracy, parent yield, and comparative performance. [CUDA diagnostics](research/source-runtime-diagnostics.md) preserve successful kernel-path traces and the failed OS-runtime tracing attempt. CPU CI exercises the source adapter's contracts; GPU and biological claims require the distinct local receipts.
 
 [Controlled baseline results](research/controlled-baseline-results.md) report the repeated timings, bounded accuracy, technical confidence intervals, quality reliability, length/context strata, homopolymer projections, input/output accounting, controls and retained failures. Read [the frozen method](research/controlled-benchmark-plan.md), [reproduction commands](research/controlled-commands.md), and [independent audit](research/controlled-baseline-review.md). The [original stock results](research/stock-baseline-results.md) remain unchanged historical evidence from the earlier run with uncontrolled power. The [MD discrepancy investigation](research/calmd-discrepancy.md) records a stock reference-annotation limitation and its narrowly verified exception.
 

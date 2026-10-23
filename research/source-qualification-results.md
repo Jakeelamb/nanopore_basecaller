@@ -1,0 +1,47 @@
+# Unchanged source qualification
+
+Native qualification is in progress. This document separates build acceptance, native runtime support, exact vendor equivalence, bounded accuracy, yield, and comparative performance. It introduces no candidate algorithm.
+
+## Accepted build and trace
+
+The [build manifest](../provenance/source-build-20261023.json) identifies unchanged upstream input commit `8b8fc5d36a9c0baab262a743cb175b5878e38ca6`, 22 recursive submodules, and ten declared upstream build patches. The Release executable reports `2.1.2+8b8fc5d`. Its SHA-256 is `2da85ebceb6e0bc9bbba00d982f92bbb83bbe1e7d0c498a56f35309b8883957e`.
+
+The full 582-task build, incremental rerun, help/version checks, 29-library ELF closure, and 55 selected upstream CPU cases pass. The other 555 main-binary cases were not run. GCC 16 failed on an upstream missing include; isolated GCC 15 passed without authored source fixes or compiler bypass flags. [Build notes](source-build-notes.md) preserve the toolchain choice and failures. The current artifact is qualified against its recorded dependency/compiler file manifests. The build lever does not independently verify every reused extraction/cache setting, and a clean-machine rebuild has not been established.
+
+This CUDA 13 source stack uses prebuilt Koi, Torch, and FlashAttention dependencies. It differs from the vendor CUDA 12 distribution. Compiling public Dorado does not rebuild or expose the opaque kernels. [The source trace](dorado-code-path.md) identifies these boundaries and the active calibration, chunking, decoding, splitting, trimming, filtering, and writer path for both model tiers.
+
+[Separate diagnostics](source-runtime-diagnostics.md) verify ordinary HAC and CUDA/NVTX-only HAC/SUP smoke outputs, each representing all 32 requested parents. They establish observed FLSTM and tiled transformer/FP8 kernel families on this GPU. An OS-runtime profiling crash and corrected observation remain recorded. No diagnostic duration supplies a benchmark timing or hardware bottleneck claim.
+
+## Native qualification contract
+
+`scripts/qualify-source.py` calls the frozen native runner and Rust accuracy coordinator unchanged. Its two plans keep fresh official smoke and source outputs separate. The source arm contains two 32-parent development smoke units, one genuine split fixture, and four full HG002 development/validation units. HG005 is not executed or used for selection.
+
+Before GPU execution, genuine retained official smoke and split outputs must pass native comparator positives and reject sequence, quality, child identity, split-offset, removed-record, version, decoder-pin, and foreign-parent controls. A new unchanged-scorer smoke handoff must reproduce the accepted deterministic scores/tables. Fresh source/official native corruption qualification finishes before scoring pins their observations. Source-owned FASTA-versus-index parity must pass separately for both tiers.
+
+Exact comparison retains every mandatory SAM field and typed auxiliary tag. It ignores only record order, auxiliary-tag order, and independently validated header provenance. Basecalls, aligned records, parent ledgers, accuracy metrics, and native score tables receive separate equal/different results. A mismatch is a completed failed equivalence test. It does not become equality through a post hoc tolerance. Native contract failures remain execution/observation failures.
+
+Full admission requires 39 GiB free, including the 30 GiB reserve. The four source units are followed by eight scores across the already qualified 100 bp and 500 bp domains. The original masks, references, stock observations, and scorer remain unchanged. Accepted observations are audited without calling functions that rewrite their bytes.
+
+## Results
+
+Pending the source qualification receipts. Comparative performance is not run: historical official full outputs supply semantic controls, while a speed ratio requires fresh paired repeated arms. New source process clocks are descriptive only.
+
+## Reproduce and audit
+
+```sh
+scripts/build-dorado-source.sh
+scripts/record-command.sh source-qualification-smoke uv run --locked python scripts/qualify-source.py \
+  --build provenance/source-build-20261023.json --output results/source-qualification/20261023 --through smoke
+scripts/record-command.sh source-qualification-full uv run --locked python scripts/qualify-source.py \
+  --build provenance/source-build-20261023.json --output results/source-qualification/20261023 --through full
+scripts/record-command.sh source-qualification-audit uv run --locked python scripts/qualify-source.py \
+  --output results/source-qualification/20261023 --verify-only
+```
+
+The CLI returns 0 for exact equivalence, 1 for a retained difference, and 2 for an incomplete/invalid operation. Inspect the separate gate fields. It acquires the canonical host lock and fails before execution if another experiment owns it. Preserve that attempt and wait for the lock. The full outputs and all failed attempts remain outside Git.
+
+Native `UNIT:STAGE` retry and fresh accuracy-attempt retry are exposed by the CLI. Failed adapter-owned comparison, source-FASTA, or corruption-control stages need explicit retained-stage repair; the CLI does not provide a generic retry for them. Repair a successful producer's projection from its retained outputs. Do not repeat a GPU producer merely to repair an observation.
+
+## Research scope
+
+The [prospective protocol](prospective-experiment.md) defines hypotheses, paired accuracy/time/yield, full-process timing blocks, exposure guards, uncertainty, multiplicity, and external confirmation. It remains unarmed until a specific intervention and its margins are registered. Paired common-support accuracy and the separate outer end-to-end endpoint require additional qualified implementation before their confirmatory claims. Two HG002 flowcells and size-selected shards cannot establish generalization across human donors. No paper-level biological claim follows from CI, compilation, or this engineering qualification alone.
