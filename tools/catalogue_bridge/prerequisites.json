@@ -1,0 +1,320 @@
+{
+  "schema": "catalogue-bridge-prerequisites/1",
+  "origin_worktree": "/home/jake/Projects/nanopore_basecaller-reference",
+  "origin_head": "d37c8d64b0705b105fe575d11346db39f5db2a85",
+  "retrieval_base": "6a40e6e5ae79019d8ab43f236deb2792c92a3e7e",
+  "files": [
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/Cargo.lock",
+        "size": 5208,
+        "sha256": "f28f82f96965fa22402fd62bfd54c156056f61d395eb083118c5072c77841246"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/Cargo.lock",
+        "size": 5208,
+        "sha256": "f28f82f96965fa22402fd62bfd54c156056f61d395eb083118c5072c77841246"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/Cargo.toml",
+        "size": 217,
+        "sha256": "dbdbcec6e911b6e42284207edf67f35e15de6eca2f0ff0cf220ccc9e8071faf8"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/Cargo.toml",
+        "size": 217,
+        "sha256": "dbdbcec6e911b6e42284207edf67f35e15de6eca2f0ff0cf220ccc9e8071faf8"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/README.md",
+        "size": 5044,
+        "sha256": "e7b2bb2e00c4b21be9fb6e576858e34a416dee020858911140559bb4b02d10db"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/README.md",
+        "size": 5044,
+        "sha256": "e7b2bb2e00c4b21be9fb6e576858e34a416dee020858911140559bb4b02d10db"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/crf.rs",
+        "size": 4878,
+        "sha256": "3171343d81477d4d967e300466e9ba3e3d770164f34438dcedd0867ca5ea8a99"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/crf.rs",
+        "size": 4878,
+        "sha256": "3171343d81477d4d967e300466e9ba3e3d770164f34438dcedd0867ca5ea8a99"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/decoder.rs",
+        "size": 8940,
+        "sha256": "ab6daee29f7b4ffffa8ebed4a5277c4c3ea267ab0d1e9a0bd4d5cf53e4d4c81a"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/decoder.rs",
+        "size": 8940,
+        "sha256": "ab6daee29f7b4ffffa8ebed4a5277c4c3ea267ab0d1e9a0bd4d5cf53e4d4c81a"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/graph.rs",
+        "size": 4668,
+        "sha256": "585a8440c0bfec3e9952e9390b0475e64d2a16a7adcf9e6d1138f4b2bf494fbd"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/graph.rs",
+        "size": 4668,
+        "sha256": "585a8440c0bfec3e9952e9390b0475e64d2a16a7adcf9e6d1138f4b2bf494fbd"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/lib.rs",
+        "size": 94,
+        "sha256": "01bf459e95fc425843ee508124caa5b1ec32699d10564ccb20a2202a1861b9ed"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/lib.rs",
+        "size": 94,
+        "sha256": "01bf459e95fc425843ee508124caa5b1ec32699d10564ccb20a2202a1861b9ed"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/main.rs",
+        "size": 2174,
+        "sha256": "dbf32a4cebe5ca9a2b00886b8c6a001ba67112b90afa5cff0687f9e0c40e6699"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/main.rs",
+        "size": 2174,
+        "sha256": "dbf32a4cebe5ca9a2b00886b8c6a001ba67112b90afa5cff0687f9e0c40e6699"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/native.rs",
+        "size": 13387,
+        "sha256": "561016dec3ca0a144d88e41b398956e12b81210e99c9b4c7d0510a4dfb475685"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/native.rs",
+        "size": 13387,
+        "sha256": "561016dec3ca0a144d88e41b398956e12b81210e99c9b4c7d0510a4dfb475685"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/planner.rs",
+        "size": 10475,
+        "sha256": "cda5b9455de66039719880f0e1ecf89459b57f27fa10b5eb57f0807c1e5264d6"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/planner.rs",
+        "size": 10475,
+        "sha256": "cda5b9455de66039719880f0e1ecf89459b57f27fa10b5eb57f0807c1e5264d6"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/scores.rs",
+        "size": 3626,
+        "sha256": "2122831be9c1fad80e953268cf2138909665f703b697b5f803604b9450f0fa2e"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/src/scores.rs",
+        "size": 3626,
+        "sha256": "2122831be9c1fad80e953268cf2138909665f703b697b5f803604b9450f0fa2e"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/tests/contracts.rs",
+        "size": 21526,
+        "sha256": "11aa819b9135cb9a7bc36e92143858aa004f8aa99c5631f8653ce309f9ea98a8"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_prior/tests/contracts.rs",
+        "size": 21526,
+        "sha256": "11aa819b9135cb9a7bc36e92143858aa004f8aa99c5631f8653ce309f9ea98a8"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/Cargo.lock",
+        "size": 5094,
+        "sha256": "55a7a86d1008e380f0477d736857684a81da37b1072ca5fd70933ef8dcd81e2e"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/Cargo.lock",
+        "size": 5094,
+        "sha256": "55a7a86d1008e380f0477d736857684a81da37b1072ca5fd70933ef8dcd81e2e"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/Cargo.toml",
+        "size": 230,
+        "sha256": "37e500a1cd471c3a35822026cd2972244b46ffa580cc7ea817787e5903db20ad"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/Cargo.toml",
+        "size": 230,
+        "sha256": "37e500a1cd471c3a35822026cd2972244b46ffa580cc7ea817787e5903db20ad"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/README.md",
+        "size": 8102,
+        "sha256": "0c9511171943f303595ed694f0b51633e6ac81b60f0bb3963c213c895e34976f"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/README.md",
+        "size": 8102,
+        "sha256": "0c9511171943f303595ed694f0b51633e6ac81b60f0bb3963c213c895e34976f"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/src/decision.rs",
+        "size": 7740,
+        "sha256": "d5cc63afef0c37bf8c80b068816d93f486c36d82df9a9658e069b1360786bfeb"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/src/decision.rs",
+        "size": 7740,
+        "sha256": "d5cc63afef0c37bf8c80b068816d93f486c36d82df9a9658e069b1360786bfeb"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/src/input.rs",
+        "size": 16717,
+        "sha256": "fc9e637587a4f7a5a913298ea0ac57baf3f034681752244d569b7ff2bdf8973d"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/src/input.rs",
+        "size": 16717,
+        "sha256": "fc9e637587a4f7a5a913298ea0ac57baf3f034681752244d569b7ff2bdf8973d"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/src/lib.rs",
+        "size": 16855,
+        "sha256": "2ba0f22be0787f1e883f51fe90c4a1e213e8b3dd61b19e91270868e2d49edc34"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/src/lib.rs",
+        "size": 16855,
+        "sha256": "2ba0f22be0787f1e883f51fe90c4a1e213e8b3dd61b19e91270868e2d49edc34"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/src/main.rs",
+        "size": 1574,
+        "sha256": "f57bd9cf8f29ddf1f99cc4fda1ed17999d7a7e4b58ba254019aa147aa94cbc36"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/src/main.rs",
+        "size": 1574,
+        "sha256": "f57bd9cf8f29ddf1f99cc4fda1ed17999d7a7e4b58ba254019aa147aa94cbc36"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/src/tests.rs",
+        "size": 16584,
+        "sha256": "8941deed60738329299bed511ffda2398a5445fc4e271eca0d7d0986f4f6756e"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/src/tests.rs",
+        "size": 16584,
+        "sha256": "8941deed60738329299bed511ffda2398a5445fc4e271eca0d7d0986f4f6756e"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_frontier/tests/cli.rs",
+        "size": 3972,
+        "sha256": "59a2ebd01b9b9305522cdf35a4f68adfb13c623c69e85a28c5a6e895132c2d11"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/graph_frontier/tests/cli.rs",
+        "size": 3972,
+        "sha256": "59a2ebd01b9b9305522cdf35a4f68adfb13c623c69e85a28c5a6e895132c2d11"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/accuracy/Cargo.lock",
+        "size": 2868,
+        "sha256": "449569fa256d55e7c6cded24f44b628e9f937657e9556b93de416d7814d53a77"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/accuracy/Cargo.lock",
+        "size": 2868,
+        "sha256": "449569fa256d55e7c6cded24f44b628e9f937657e9556b93de416d7814d53a77"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/accuracy/Cargo.toml",
+        "size": 164,
+        "sha256": "f67be70d4f56382bc779dc74124ea1365e11cf7259186c52a2c72399130c6d0e"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/accuracy/Cargo.toml",
+        "size": 164,
+        "sha256": "f67be70d4f56382bc779dc74124ea1365e11cf7259186c52a2c72399130c6d0e"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/accuracy/src/lib.rs",
+        "size": 53482,
+        "sha256": "5ce19f5cca86e3c28706c1d6c1e643e722053cddee58860fa88ff836f4b96ef3"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/accuracy/src/lib.rs",
+        "size": 53482,
+        "sha256": "5ce19f5cca86e3c28706c1d6c1e643e722053cddee58860fa88ff836f4b96ef3"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/accuracy/src/main.rs",
+        "size": 3483,
+        "sha256": "23a4416ddc7bf9a69a057d6a7666439e62131f9ef398f080b438bb325741edba"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/accuracy/src/main.rs",
+        "size": 3483,
+        "sha256": "23a4416ddc7bf9a69a057d6a7666439e62131f9ef398f080b438bb325741edba"
+      }
+    },
+    {
+      "origin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/tools/accuracy/tests/contracts.rs",
+        "size": 15876,
+        "sha256": "b26495376ad1e2f3c0eef692f329217fd46056d1e75fd9438affc9c7be89f46d"
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/accuracy/tests/contracts.rs",
+        "size": 15876,
+        "sha256": "b26495376ad1e2f3c0eef692f329217fd46056d1e75fd9438affc9c7be89f46d"
+      }
+    }
+  ]
+}

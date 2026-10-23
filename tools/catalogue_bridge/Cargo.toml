@@ -1,0 +1,12 @@
+[package]
+name = "catalogue-bridge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+sha2 = "0.10"
+graph-prior = { path = "../graph_prior" }
+graph-frontier = { path = "../graph_frontier" }

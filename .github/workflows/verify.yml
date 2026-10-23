@@ -1,0 +1,51 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
+        with:
+          version: "0.13.0"
+      - name: Install native BAM tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends samtools
+      - name: Install locked Python environment
+        run: uv sync --locked
+      - name: Verify acquisition and POD5 contracts
+        run: |
+          uv run --locked python -m unittest discover -s tests -p test_acquisition.py -v
+          uv run --locked python -m unittest discover -s tests -p test_signals.py -v
+      - name: Verify native BAM contracts
+        env:
+          PYTHONPATH: tests
+        run: uv run --locked python -m unittest test_benchmark.NativeBamTests -v
+      - name: Verify controlled measurement and accuracy receipts
+        env:
+          PYTHONPATH: tests
+        run: |
+          uv run --locked python -m unittest test_benchmark.ControlledMeasurementTests -v
+          uv run --locked python -m unittest test_accuracy -v
+          uv run --locked python -m unittest test_controlled_report -v
+          uv run --locked python -m unittest test_source_qualification -v
+      - name: Verify Rust truth and exact-column accuracy contracts
+        run: |
+          rustup toolchain install 1.96.0 --profile minimal
+          cargo +1.96.0 test --locked --manifest-path tools/accuracy/Cargo.toml
+      - name: Verify compound-catalogue admission CPU contracts
+        env:
+          PYTHONPATH: tests
+        run: |
+          cargo +1.96.0 test --locked --manifest-path tools/catalogue_bridge/Cargo.toml
+          uv run --locked python -m unittest test_catalogue_bridge.BridgeReceiptTests -v

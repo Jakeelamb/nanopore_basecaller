@@ -1,0 +1,23 @@
+HTTP/2 200 
+content-type: application/x-tar
+content-length: 3466666099
+accept-ranges: bytes
+server: AmazonS3
+last-modified: Wed, 26 Aug 2026 13:25:29 GMT
+x-amz-version-id: pKmeFURCHbvVPwWQh_s8r7qDU8yItoi8
+x-amz-server-side-encryption: AES256
+date: Thu, 22 Oct 2026 00:21:38 GMT
+etag: "caad040be31e0c4b0e0703fd9a0f8080-414"
+x-cache: Hit from cloudfront
+via: 1.1 2ebd0458660e3c8cd4cf870cb2e0da48.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: RxLB34asS01Ppg4Dq-e5s0aVDesyayPXdNixHW8RqNM73Rq4eFymMg==
+age: 69380
+x-xss-protection: 1
+x-frame-options: DENY
+referrer-policy: same-origin
+content-security-policy: default-src 'self' nanoporetech.com *.nanoporetech.com metrichor.com *.metrichor.com oxfordnanoportal.com *.oxfordnanoportal.com
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000
+vary: Origin
+

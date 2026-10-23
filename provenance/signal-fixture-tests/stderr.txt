@@ -1,0 +1,9 @@
+test_decodes_real_signals_and_freezes_disjoint_membership (test_signals.SignalInspectionTests.test_decodes_real_signals_and_freezes_disjoint_membership) ... ok
+test_rejects_changed_frozen_membership_without_overwriting_evidence (test_signals.SignalInspectionTests.test_rejects_changed_frozen_membership_without_overwriting_evidence) ... ok
+test_rejects_duplicate_uuid_across_partitions (test_signals.SignalInspectionTests.test_rejects_duplicate_uuid_across_partitions) ... ok
+test_rejects_sample_rate_other_than_5khz (test_signals.SignalInspectionTests.test_rejects_sample_rate_other_than_5khz) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.029s
+
+OK
