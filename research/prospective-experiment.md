@@ -32,6 +32,8 @@ For a dual-improvement hypothesis, the default decision is superiority on both r
 
 Use the qualified source build as the unchanged control. Put candidate code and outputs in separate paths. Keep weights, toolchain, dependencies, CLI options, signal IDs, reference, mapper executable, mapping flags, and scorer fixed except for the declared intervention. Compare a candidate to a freshly built control with the same stack. The official CUDA 12 distribution and the unchanged CUDA 13 source build are distinct controls. A dependency change is a separate treatment.
 
+The current source qualifier deliberately accepts only the unchanged ordinary-version build. A future source candidate with a different or dirty version needs an explicitly version-aware native validator and a qualified scorer handoff that identifies its actual verifier. Qualify that extension on genuine control/candidate records and meaningful rejection controls before validation. Preserve the frozen stock path. Do not rewrite program headers, change the frozen version global, or claim the old verifier produced a new observation.
+
 The current source-qualification runner uses each arm's own aligner to qualify that executable. Future basecaller research must use one pinned mapper for both arms. Otherwise a mapping change can masquerade as a basecalling gain. Register filter, trim, and alignment changes as such. Model training requires its own split and training-data custody, including a fresh external test set.
 
 ## Measure accuracy and exposure together

@@ -8,7 +8,7 @@ This run qualifies the unchanged Dorado source and prepares prospective accuracy
 - [x] Phase A: Frame.
 - [x] Phase B: Design the workflow.
 - [ ] Phase C: Run the loop.
-- [ ] Phase D: Keep the audit trail.
+- [x] Phase D: Keep the audit trail.
 - [ ] Phase E: Verify and hand back.
 
 ## Completion predicate
@@ -49,3 +49,9 @@ The official Dorado distribution, model trees, reference, masks, source checkout
 The selected adapter design uses the exact ordinary emitted version and calls the frozen native runner and scorer unchanged. A version-aware fork was considered and rejected as unnecessary for this build. Source and fresh-official smoke plans have separate owners. Source index compatibility gets new two-tier FASTA/index evidence. Smoke corruption controls finish before scoring; accepted observations are then audited without rewriting them. Full admission requires 39 GiB actually free, including the 30 GiB reserve. Historical official full outputs support exact semantic comparisons, not a contemporary speed ratio. The prospective candidate experiment is defined in [the experiment protocol](prospective-experiment.md).
 
 `decisions.tsv` remains the canonical decision trail. A failed build, runtime check, equivalence comparison or projection remains evidence. Publication-level biological claims require a prospectively reserved external cohort and an analysis suited to donor/flowcell replication; this pilot alone cannot supply those claims.
+
+## Waiting checkpoint
+
+The build, source trace, adapter CPU contracts, runtime diagnostics, and full smoke qualification pass their scoped checks. Full development/validation remains incomplete. A successful development HAC GPU basecall is retained exactly once. Its downstream reference check was first interrupted by profile drift, then completed natively but rejected by the measurement gate for foreign GPU activity. The temporary profile hold was released, and the host is balanced. The user requested waiting for the other experiments to finish before continuing native work.
+
+The next action is the held resume command in [the qualification report](source-qualification-results.md). It reuses the successful basecall and retries only the unqualified CPU reference check, then proceeds through remaining declared units and domains. Do not mark Phase C or E complete until full native/scoring/comparison evidence, independent artifact audit, and zero-producer resume proof exist. PR 1 remains unmerged.
