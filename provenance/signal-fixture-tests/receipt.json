@@ -1,0 +1,24 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_signals.py",
+    "-v"
+  ],
+  "cwd": "/home/jake/Projects/nanopore_basecaller",
+  "start": "2026-10-22T19:49:51.835487+00:00",
+  "end": "2026-10-22T19:49:54.251438+00:00",
+  "exit_status": 0,
+  "pod5_version": "0.3.49",
+  "test_sha256": "953a0d775f36e286a42f38c8b9472968574d81a37ea75a6440509c438b9f3965",
+  "script_sha256": "79688409265fea05d3a56bbe908528d43f1ec8615fbfe42d7583963e5a4c4959"
+}

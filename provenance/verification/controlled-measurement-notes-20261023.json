@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "plan": "1c995eba5d6454a6ef8a8fc6dcd767fd9e9aead811389da38f3906ddaf6815e0",
+  "notes": [
+    {
+      "unit": "full-sealed_test-sup",
+      "stage": "basecall",
+      "kind": "owned_cpu_interference",
+      "status": "descriptive_with_owned_cpu_interference",
+      "start_utc": "2026-10-23T00:23:00Z",
+      "end_utc": "2026-10-23T00:33:00Z",
+      "worker_terminated_before_utc": "2026-10-23T00:33:00Z",
+      "time_precision": "approximate",
+      "pid": 672880,
+      "command": ["uv", "run", "python", "-"],
+      "reason": "An ad hoc report warmup-join check performed a quadratic path-resolution loop. Its owner observed about 43 seconds at one CPU core and terminated it. The owner also reported a subsequent 49-test report-fixture run taking 17.9 seconds wall and a later one-second-capped attempt, with CPU time unrecorded. The interval conservatively covers the reported approximate 00:23-00:25 metadata window and all disclosed fixture work before the coordinator's 00:33:00 confirmation of the owner's execution freeze; it does not assert continuous load throughout that interval. The command is the owner's reported form; exact stdin was not retained. Treat this full-cohort native clock as descriptive. Preserve the actual produced reads and accuracy analysis, with no counterfactual claim about unaffected numerical accuracy.",
+      "evidence_paths": [],
+      "terminal_session": 40719,
+      "raw_execution_receipt": null,
+      "receipt_limit": "The report check was not launched through record-command.sh; no retained stdout/stderr or exact start/end CPU receipt is available.",
+      "coordinator_check_utc": "2026-10-23T00:29:32Z",
+      "all_report_execution_frozen_before_utc": "2026-10-23T00:33:00Z",
+      "coordinator_observation": "PID 672880 absent; HG005 SUP still running at 98 percent GPU utilization; no timing-unit directories existed. All nontrivial report checks and tests were stopped until GPU measurements finish.",
+      "primary_timing_acceptance": "Require every one of the ten primary timing native windows to start after the confirmed stop bound and to satisfy the declared controls. Verify this against final receipts. Do not silently discard or repeat the affected full-cohort producer."
+    }
+  ]
+}
