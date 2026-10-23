@@ -85,6 +85,14 @@ Large inputs, software distributions, model weights, generated results, and raw 
 
 The user authorized stock processing of all acquired files, including HG005. That opens the test control, so this is not a fully blinded study. Future candidate selection must use development and validation. The controlled rerun requires connected external power, the balanced profile, a cool idle GPU start and continuous host/GPU evidence. Laptop clocks and fans remain stock, and the host is shared. One full HG005 SUP clock is explicitly descriptive because an owned CPU check overlapped it; the [measurement note](provenance/verification/controlled-measurement-notes-20261023.json) preserves the missing receipt and timing uncertainty. All ten primary timing windows must follow its confirmed stop bound. No candidate improvement or model winner is claimed; future speedup claims require fresh matched controls.
 
+## Reference-assisted research
+
+Reference and pangenome assistance is the current priority. The [compound-catalogue bridge](research/compound-frontier-bridge.md) admits retained hypotheses with genuine producer custody and complete-parent checks. Its [independent engineering review](research/compound-frontier-bridge-review.md) states the qualified scope. The unchanged stock controls remain authoritative. Candidate accuracy, variant retention, yield and end-to-end speed require separate development experiments and reserved confirmation.
+
+The next distinct method is a [flank-conditioned graph compatibility prior](research/flank-conditioned-prior-design.md) with explicit private-allele challenges. A [prospective confirmation design](research/retrieval-confirmation-design.md) and [frozen HG001 sampling manifest](config/retrieval-confirmation-hg001-v1.json) define an outcome-blind acquisition option. No acquisition or confirmation result is implied. The [design review](research/retrieval-design-review.md) qualifies source and metadata checks only. The [priority run](research/retrieval-priority-run.md) records ownership and holds.
+
+CPU CI also lists the bridge's Rust contracts and hermetic receipt tests. Genuine retained-producer controls, native emission, biological scoring and GPU measurements require their distinct local receipts.
+
 ## Attribution
 
 Raw human signals are from [Oxford Nanopore's GIAB 2025.01 release](https://epi2me.nanoporetech.com/giab-2025.01/), accessed 2026-10-22. The [AWS registry](https://registry.opendata.aws/ont-open-data/) lists CC BY-NC 4.0. The vendor software license is retained in `provenance/Dorado-LICENCE.txt` and the source checkout. Reference and benchmark provenance are retained from [NIST GIAB](https://www.nist.gov/programs-projects/genome-bottle).

@@ -43,3 +43,9 @@ jobs:
         run: |
           rustup toolchain install 1.96.0 --profile minimal
           cargo +1.96.0 test --locked --manifest-path tools/accuracy/Cargo.toml
+      - name: Verify compound-catalogue admission CPU contracts
+        env:
+          PYTHONPATH: tests
+        run: |
+          cargo +1.96.0 test --locked --manifest-path tools/catalogue_bridge/Cargo.toml
+          uv run --locked python -m unittest test_catalogue_bridge.BridgeReceiptTests -v
