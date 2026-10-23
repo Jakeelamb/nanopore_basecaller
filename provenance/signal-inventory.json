@@ -1,0 +1,71 @@
+[
+  {
+    "id": "hg002-development",
+    "role": "development",
+    "sample": "HG002",
+    "flowcell": "PAW70337",
+    "reads": 2608,
+    "signal_samples": 641769607,
+    "sample_rate": 5000,
+    "signal_seconds": 128353.9214,
+    "read_seconds_min": 0.6076,
+    "read_seconds_median": 46.689,
+    "read_seconds_max": 455.5956,
+    "start_seconds_min": 31931.3184,
+    "start_seconds_max": 32178.2158,
+    "channels": 1013,
+    "acquisition_ids": [
+      "de8117b1abf27d6d4ac91526772636b9a5ca7fde"
+    ],
+    "pod5_sample_ids": [
+      "ONLL08362"
+    ],
+    "membership_sha256": "b809632eb09feb6074789754a4d9dddc3121937f926e2790f8129fd2482a7fdf"
+  },
+  {
+    "id": "hg002-validation",
+    "role": "validation",
+    "sample": "HG002",
+    "flowcell": "PAW71238",
+    "reads": 2027,
+    "signal_samples": 553650293,
+    "sample_rate": 5000,
+    "signal_seconds": 110730.0586,
+    "read_seconds_min": 0.5456,
+    "read_seconds_median": 53.4556,
+    "read_seconds_max": 269.4284,
+    "start_seconds_min": 4838.5176,
+    "start_seconds_max": 34944.0874,
+    "channels": 1308,
+    "acquisition_ids": [
+      "11d77535b149da7c6f7153939924a9fe29559cc7"
+    ],
+    "pod5_sample_ids": [
+      "ONLL08364"
+    ],
+    "membership_sha256": "9fd091ec82a876738bdbe3d3f0f55c755979d999912c81a1d547e16be2b93beb"
+  },
+  {
+    "id": "hg005-sealed-test",
+    "role": "sealed_test",
+    "sample": "HG005",
+    "flowcell": "PAW87816",
+    "reads": 16319,
+    "signal_samples": 2554852800,
+    "sample_rate": 5000,
+    "signal_seconds": 510970.56,
+    "read_seconds_min": 0.2024,
+    "read_seconds_median": 16.2962,
+    "read_seconds_max": 1739.4078,
+    "start_seconds_min": 181924.5594,
+    "start_seconds_max": 188159.2176,
+    "channels": 534,
+    "acquisition_ids": [
+      "cb358aebdab3a85a68a2180f8cfcf5dae3cd451c"
+    ],
+    "pod5_sample_ids": [
+      "hg005"
+    ],
+    "membership_sha256": "f358c8ea0e8a5daa54d8c28b69dbf4cf90288a9db2d296c3520b50d4927b01c3"
+  }
+]

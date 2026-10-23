@@ -1,0 +1,154 @@
+{
+  "archive": {
+    "path": "/home/jake/Projects/nanopore_basecaller/software/bcftools-1.24.tar.bz2",
+    "sha256": "8caddc22610ee2851666047c859bb91da0c1e32d0c2ec553db6f153ad130e46f",
+    "size": 8272861
+  },
+  "binary": {
+    "path": "/home/jake/Projects/nanopore_basecaller/software/bcftools-1.24/bcftools",
+    "sha256": "fb031a14a245197bb0d9a1dd062eb26cba984df5d09b1e7003b0b9d78f24bf1e",
+    "size": 10315824
+  },
+  "builder": {
+    "path": "/home/jake/Projects/nanopore_basecaller/scripts/build-accuracy-tools.sh",
+    "sha256": "db8a75e893da329b639ad26f101ce37ef7fea58de6e6ac8c16b0bd121d088514",
+    "size": 1018
+  },
+  "native_runs": [
+    "logs/20261022T231915Z-bcftools-source-download-osQUCI",
+    "logs/20261022T231941Z-bcftools-source-build-Nc7FyT",
+    "logs/20261022T232134Z-bcftools-version-eQaBT4"
+  ],
+  "pins": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/command.sh",
+      "sha256": "67fc7594ce3d9f4c126ae0473b15f69f4d7b4a0073fe21a0ccc56f14d42e5296",
+      "size": 136
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/cwd.txt",
+      "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4",
+      "size": 40
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/end.txt",
+      "sha256": "9cea8488e8abcc2b91ff5b8589aef52698fca66d44b987407c55b936c4f534d6",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/exit-status.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size": 2
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/start.txt",
+      "sha256": "c1559bbfcb3b04cebf6b975a1c357cdae5e01764e27bec7d91314eed629ff5b7",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/stderr",
+      "sha256": "4f2ff834b689b354b8ffb4d365aa87b4d41a3f5356476409075b31b5534bca48",
+      "size": 938
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231915Z-bcftools-source-download-osQUCI/time.txt",
+      "sha256": "aa7e930034fe257c047465bca4968d2089c81ac6395db16e0f56eda26bacba0a",
+      "size": 856
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/command.sh",
+      "sha256": "ff7fb6e26f2c3b1f4477b22190eaa2c607cb0779b7af67f88d7584dba372c8ad",
+      "size": 460
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/cwd.txt",
+      "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4",
+      "size": 40
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/end.txt",
+      "sha256": "8f817e0a21b942f75a46d465f3577e678ff03c19bb7a00c803e8d97ec954a979",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/exit-status.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size": 2
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/start.txt",
+      "sha256": "8b9d3980069b7d0d04308807d4e2a97e08523e7beefc6bd37dadc03370db971d",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/stderr",
+      "sha256": "a095ff62e6c302995742bbbec37916e4df0b5141250e2113ba3befa16ff3cf0f",
+      "size": 3118
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/stdout",
+      "sha256": "c3bd07d6dbe138894d0dea97d078be99bf482b5be5ab355078cf18f348a5bcfa",
+      "size": 22657
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T231941Z-bcftools-source-build-Nc7FyT/time.txt",
+      "sha256": "d9d46e407c8942eedbfef82eb1efcef072d66be36e35cfafa76487ac521c309d",
+      "size": 1147
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/command.sh",
+      "sha256": "b0e55225264823975fee56f1751b0a443c2b190f98af6da57004c17042d8d53b",
+      "size": 33
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/cwd.txt",
+      "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4",
+      "size": 40
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/end.txt",
+      "sha256": "8f81504fcd04f9a1abb63c045a55c4de25fcb6a96913b28f9d89b4205e832897",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/exit-status.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size": 2
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/start.txt",
+      "sha256": "8f81504fcd04f9a1abb63c045a55c4de25fcb6a96913b28f9d89b4205e832897",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/stdout",
+      "sha256": "186356cd887f7d9a6473bb7edf7a69b699e295383a51bf6a89e3c61a737774fc",
+      "size": 230
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232134Z-bcftools-version-eQaBT4/time.txt",
+      "sha256": "411199e06625f86482ef1db8ead773efd0c7ba8000bcc3ebb7c7f95d262cb473",
+      "size": 744
+    }
+  ],
+  "release_asset": {
+    "browser_download_url": "https://github.com/samtools/bcftools/releases/download/1.24/bcftools-1.24.tar.bz2",
+    "digest": "sha256:8caddc22610ee2851666047c859bb91da0c1e32d0c2ec553db6f153ad130e46f",
+    "name": "bcftools-1.24.tar.bz2",
+    "size": 8272861
+  },
+  "release_published_at": "2026-07-09T15:03:48Z",
+  "release_url": "https://github.com/samtools/bcftools/releases/tag/1.24",
+  "scope": "Unpatched native REF validation; not an accuracy scorer",
+  "tool": "bcftools 1.24 / bundled htslib 1.24"
+}

@@ -1,0 +1,1669 @@
+{
+  "schema": "prospective-raw-acquisition/1",
+  "created_utc": "2026-10-23T16:01:50.429256+00:00",
+  "status": "proposed_reserved_not_acquired",
+  "approval_required_from": "coordinator after fresh independent review",
+  "sample": "HG001",
+  "sample_aliases": [
+    "HG001",
+    "NA12878",
+    "GM12878"
+  ],
+  "chemistry": "R10.4.1 E8.2 400bps",
+  "sample_rate_hz_publisher_reports": 5000,
+  "seed": "retrieval-confirmation/HG001/v1/2026-10-23",
+  "selection_rule": {
+    "eligible": "All POD5 objects from complete HG001 listing, 73 per flowcell. No size filter.",
+    "rank": "SHA256 of UTF-8(seed + newline + complete S3 object key), ascending hexadecimal, key breaks ties.",
+    "select": "One rank-1 object per flowcell, 2 objects total.",
+    "read_inclusion": "Every raw simplex parent in each selected object, regardless of length, quality, mapping or call outcome. Group known duplex partners for uncertainty. No outcome-driven replacement.",
+    "scope": "Two ranked file clusters from one donor and one acquisition day. No whole-flowcell, population, unseen-by-vendor-training, or whole-genome variant-calling claim.",
+    "randomization_limit": "Seed fixed by protocol, not a public random beacon. Selection is reproducible and outcome-independent, conditional on the published frame."
+  },
+  "source_listings": [
+    {
+      "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01%2Fflowcells%2FHG001%2F&max-keys=1000",
+      "local_path": "logs/retrieval-confirmation/HG001-listing.xml",
+      "sha256": "f7683d696a2add82734ca83349da75aae995666d22290dadd1fe248f962dcf82",
+      "checked_utc": "2026-10-23T15:53:22.348920+00:00",
+      "is_truncated": false
+    }
+  ],
+  "selected": [
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 1,
+      "rank_sha256": "02d933835ce5a42196f6c2537f9de4fa10afbcf3f828f700c76c28279a9b3919",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_69.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_69.pod5",
+      "bytes": 2507317056,
+      "etag": "\"6ea70250a5cb5793b3bf2e30b15e3e7d-299\"",
+      "last_modified": "2025-01-14T16:31:30.000Z",
+      "head_checked_utc": "2026-10-23T16:01:49.699154+00:00",
+      "head_status": 200
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 1,
+      "rank_sha256": "04a2e01ae82a8483bdaf96fd269a3223c64b15073878ab87996b30d6bbe21fd8",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_30.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_30.pod5",
+      "bytes": 25462675784,
+      "etag": "\"722d4024d0bf660649f6359dbfc54607-3036\"",
+      "last_modified": "2025-01-14T18:32:32.000Z",
+      "head_checked_utc": "2026-10-23T16:01:50.428630+00:00",
+      "head_status": 200
+    }
+  ],
+  "raw_bytes": 27969992840,
+  "raw_gib": 26.0490857437253,
+  "full_frame_ranks": [
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 1,
+      "rank_sha256": "02d933835ce5a42196f6c2537f9de4fa10afbcf3f828f700c76c28279a9b3919",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_69.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_69.pod5",
+      "bytes": 2507317056,
+      "etag": "\"6ea70250a5cb5793b3bf2e30b15e3e7d-299\"",
+      "last_modified": "2025-01-14T16:31:30.000Z",
+      "head_checked_utc": "2026-10-23T16:01:49.699154+00:00",
+      "head_status": 200
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 2,
+      "rank_sha256": "02de0f9dd30b94483ecd3d81048fa5c930032b9a190a00deb5f256865edd85aa",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_48.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_48.pod5",
+      "bytes": 10358548568,
+      "etag": "\"f5e2c757ca544efda01797be2c0a5447-1235\"",
+      "last_modified": "2025-01-14T16:00:42.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 3,
+      "rank_sha256": "0483c3e9a27bcd05e4c113f3e3897501bb3d6238914550c1024bc309e47b3048",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_16.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_16.pod5",
+      "bytes": 19407049528,
+      "etag": "\"3999d0c08815c4ca7de869bc5f164287-2314\"",
+      "last_modified": "2025-01-14T13:48:22.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 4,
+      "rank_sha256": "070f80b6adef66dffd51c1b370190d9c362574d759b2351c66a6e9d3e208ea1c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_62.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_62.pod5",
+      "bytes": 3516667816,
+      "etag": "\"859dc400cfa545dc284c77514d3c4c88-420\"",
+      "last_modified": "2025-01-14T16:25:28.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 5,
+      "rank_sha256": "0e313945531a73a5afa2497376497723d2727bb1e06cebd38558dc45969a37a8",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_36.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_36.pod5",
+      "bytes": 16800859368,
+      "etag": "\"5e5981a4c6ba094c0bd078a4ba7d772b-2003\"",
+      "last_modified": "2025-01-14T15:18:57.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 6,
+      "rank_sha256": "17d55695123f2f1cfc9233e31af0a041f22bb4d3362de1ee02b648e4d93eaa2f",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_3.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_3.pod5",
+      "bytes": 32427589616,
+      "etag": "\"a15bbd7b14068fde959ad24140edd53d-3866\"",
+      "last_modified": "2025-01-14T14:46:14.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 7,
+      "rank_sha256": "1d68668dc45b4117f7220769e4d3486ceb4a4178f5a926c88f0cc4912e895656",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_21.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_21.pod5",
+      "bytes": 15532929728,
+      "etag": "\"db29815d62548c7ca1900d78dd62af50-1852\"",
+      "last_modified": "2025-01-14T14:09:57.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 8,
+      "rank_sha256": "1d87a9960f1b52a4e1ed8593c136df2b9a754f903a90491fbf9f8a493a24facd",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_67.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_67.pod5",
+      "bytes": 2571728808,
+      "etag": "\"6f4a60ffc0a6b34255e845659627300a-307\"",
+      "last_modified": "2025-01-14T16:30:28.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 9,
+      "rank_sha256": "1e88581cabe40f0cfadc3bce4967e115801306a2a013a23d6fe25d5416e93582",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_55.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_55.pod5",
+      "bytes": 5962506344,
+      "etag": "\"06a051b62b1869562b6b88554622151d-711\"",
+      "last_modified": "2025-01-14T16:15:26.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 10,
+      "rank_sha256": "23abb324a20f1d800e14c779bc02ba982467ae4859dc27ec64753b4334010ff0",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_70.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_70.pod5",
+      "bytes": 2968865824,
+      "etag": "\"5734cef187165ba30475070f98ca452f-354\"",
+      "last_modified": "2025-01-14T16:32:55.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 11,
+      "rank_sha256": "29295143385018cbd22a0e63598b12bf76831a0f31998019d8695cebd98c9c8f",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_52.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_52.pod5",
+      "bytes": 7771112768,
+      "etag": "\"c3bdb4475cbdfd5dc0593bd787670ace-927\"",
+      "last_modified": "2025-01-14T16:10:20.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 12,
+      "rank_sha256": "2b83d31331e8aa2ba409f54fdd65966ae5641b96d6536366022947fea82b8f55",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_50.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_50.pod5",
+      "bytes": 8724801912,
+      "etag": "\"4dfa908fd4cf4c1b2867a45e13d87533-1041\"",
+      "last_modified": "2025-01-14T16:02:10.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 13,
+      "rank_sha256": "2f76e048edb5f1dc73c2036d5748189495421479b162bfb4a8b7395b6b752206",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_2.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_2.pod5",
+      "bytes": 33931488440,
+      "etag": "\"e83c41c4de4ebb4a11aa91a8da539b38-4045\"",
+      "last_modified": "2025-01-14T14:05:46.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 14,
+      "rank_sha256": "3882200dd2b3302da9ac9856639230a706e564d3240e6a14b4c53a73cb21941c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_30.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_30.pod5",
+      "bytes": 21536993856,
+      "etag": "\"60a2603586a1334475e3e5135262bcd4-2568\"",
+      "last_modified": "2025-01-14T14:52:15.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 15,
+      "rank_sha256": "39e8748d3732243f8c79d0b04fd0f20c3be89ee2038956ef51cfaa9addf287d5",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_29.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_29.pod5",
+      "bytes": 23131287512,
+      "etag": "\"44d1678ef56dcac3900716169fc575ed-2758\"",
+      "last_modified": "2025-01-14T14:43:59.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 16,
+      "rank_sha256": "3f6dc80e278165d4cbbff7697c530b17de7471c609e5cb52530c695099ed33a9",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_8.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_8.pod5",
+      "bytes": 29120147256,
+      "etag": "\"a783d477dd009158b5db4d862d8df56a-3472\"",
+      "last_modified": "2025-01-14T16:34:33.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 17,
+      "rank_sha256": "49e73e810af69ddd55c30dac9396891c8cb474cf4c409806b3bcc4c7e74269fb",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_20.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_20.pod5",
+      "bytes": 14987332400,
+      "etag": "\"a0e43bc45a1ebdeb5545fd9210780f31-1787\"",
+      "last_modified": "2025-01-14T14:06:45.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 18,
+      "rank_sha256": "50b1de7bd4b6d59249af0f551f85d3f3c1267ee497018214bea2904b5099e645",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_19.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_19.pod5",
+      "bytes": 15610920760,
+      "etag": "\"fe9f82f0fe4df2da547242ff1feaa660-1861\"",
+      "last_modified": "2025-01-14T14:03:34.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 19,
+      "rank_sha256": "51d4559a4d592e28b09dc57b3effb75362caceeb60431edb4f1494ee1cac65ef",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_34.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_34.pod5",
+      "bytes": 19016617112,
+      "etag": "\"cad33e26b06a2d60dbb35defd366de67-2267\"",
+      "last_modified": "2025-01-14T15:12:30.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 20,
+      "rank_sha256": "5ac53401225cdedf4d03c1590140c4fe2030b597952092e1cbd3459126e8fb48",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_37.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_37.pod5",
+      "bytes": 16902223104,
+      "etag": "\"921a132873db76d9a48dff2c5479ab14-2015\"",
+      "last_modified": "2025-01-14T15:21:59.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 21,
+      "rank_sha256": "5b583418dfcf7dfd6e57741816f3d09819980ea0374818c91135c0c82a922581",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_10.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_10.pod5",
+      "bytes": 25391294648,
+      "etag": "\"3597ad7e3331c5fd268c648c72b80cbf-3027\"",
+      "last_modified": "2025-01-14T13:21:52.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 22,
+      "rank_sha256": "5d6e5da2624e7a221b5d815d077aa96ba88e3f0d8bfb6e7945f822fdcef96f96",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_12.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_12.pod5",
+      "bytes": 22379963704,
+      "etag": "\"b72047dd43a105df31f1ab98967a7197-2668\"",
+      "last_modified": "2025-01-14T13:21:53.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 23,
+      "rank_sha256": "5f6143a3b0c804692ec3c08a48744d7e55560ebbd9357650d290a7569349a9e0",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_13.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_13.pod5",
+      "bytes": 23985245496,
+      "etag": "\"9e18c4675a34b6f23d49521bf8d9ed44-2860\"",
+      "last_modified": "2025-01-14T13:43:03.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 24,
+      "rank_sha256": "61bc9c3e8ed490dd020d237b5babcc65f85718d87ac51aba4bb0802b9ed8bafc",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_56.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_56.pod5",
+      "bytes": 6310943728,
+      "etag": "\"bbce2d57cf38f7b07cddf8fbf9819f22-753\"",
+      "last_modified": "2025-01-14T16:16:36.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 25,
+      "rank_sha256": "6206539565eeff07f8edec189655012df63a4e7ca65bb61bc59c82017fbe1b62",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_7.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_7.pod5",
+      "bytes": 27511883008,
+      "etag": "\"905b4774b6bcf3bed1f342fec5615011-3280\"",
+      "last_modified": "2025-01-14T16:32:52.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 26,
+      "rank_sha256": "707f28a8da15fbab54aff769a24239a7594ab9b358a2bdec2f557b2479e354b0",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_46.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_46.pod5",
+      "bytes": 11392625488,
+      "etag": "\"c3a308d71845cb021f44518ef7df7b17-1359\"",
+      "last_modified": "2025-01-14T15:51:01.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 27,
+      "rank_sha256": "7137ce584da781698affe251191ace067b9ad3dd535651f3449ff8a6cd4e3e36",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_17.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_17.pod5",
+      "bytes": 18098618344,
+      "etag": "\"85092b2658300e72b9d4098f703de291-2158\"",
+      "last_modified": "2025-01-14T13:52:44.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 28,
+      "rank_sha256": "71ee258d7166f5aa50126848690e58704f65d2a56d5b7060b83c73a75da5a1cd",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_54.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_54.pod5",
+      "bytes": 6218258664,
+      "etag": "\"3b98ae0ff5fee46a70c9daff0a5fe88c-742\"",
+      "last_modified": "2025-01-14T16:10:43.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 29,
+      "rank_sha256": "794ae265ee462424f3a394801d493b9411d52297daca9ee98b54ac6c3f047af9",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_39.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_39.pod5",
+      "bytes": 15376067552,
+      "etag": "\"8f8f072905213fcdd515a13a6f03c82c-1833\"",
+      "last_modified": "2025-01-14T15:30:27.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 30,
+      "rank_sha256": "79c94acc42eb5d628073ba4ff2bc102997d2255d8bbff8551527022e04a9c158",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_18.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_18.pod5",
+      "bytes": 18416497824,
+      "etag": "\"236a4144f6fc20c50110894529b2124a-2196\"",
+      "last_modified": "2025-01-14T14:03:28.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 31,
+      "rank_sha256": "7e77b147e40e978b588d8574f8ce471241c8f301950f140ded30b591c28050cb",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_38.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_38.pod5",
+      "bytes": 16134185696,
+      "etag": "\"6542d3f60cf843ca72b65d882c2d5846-1924\"",
+      "last_modified": "2025-01-14T15:23:33.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 32,
+      "rank_sha256": "7e8edeffbf0d0db8b9adb11e7923c3723101704d753d7ee3ffa6cd42c64865f7",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_32.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_32.pod5",
+      "bytes": 21097183072,
+      "etag": "\"ffe336d3b438ee13ec0c420189d2fb39-2515\"",
+      "last_modified": "2025-01-14T15:01:59.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 33,
+      "rank_sha256": "7f2ea31405570e871f22e4c9cfa92197316f30abc4f5a5e3d0ae54bd264be41c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_68.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_68.pod5",
+      "bytes": 2444861120,
+      "etag": "\"3ad430b661a30cd0fcb54220afe629c4-292\"",
+      "last_modified": "2025-01-14T16:31:27.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 34,
+      "rank_sha256": "803fd3e98ef32cbd7b237bb8bfaee48ae7f48ec443b466f19e98df68250c3fa7",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_22.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_22.pod5",
+      "bytes": 12397753128,
+      "etag": "\"f02805272b4816f6c607e4f131533cb2-1478\"",
+      "last_modified": "2025-01-14T14:18:32.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 35,
+      "rank_sha256": "8098c76d7370458f59143ef46b9435bda5f1e13ebb151d47020fd72cd13b6eb6",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_44.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_44.pod5",
+      "bytes": 12335703728,
+      "etag": "\"81c6150be8fd167aa29ba097f80546a5-1471\"",
+      "last_modified": "2025-01-14T15:49:16.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 36,
+      "rank_sha256": "80add12e092894d8b49379347d0db1f7e0648487e332d587a9297384cd4be399",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_57.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_57.pod5",
+      "bytes": 5896068864,
+      "etag": "\"56abe764adc019af3cbd2db9f138f4d0-703\"",
+      "last_modified": "2025-01-14T16:17:38.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 37,
+      "rank_sha256": "80af4b457d6b1ad2e394de1b1f21f218fa90bf65f55c43c22289afcdb3049d05",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_14.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_14.pod5",
+      "bytes": 20914681744,
+      "etag": "\"5665c5b2be1f3226cabdb99dfa335352-2494\"",
+      "last_modified": "2025-01-14T13:43:53.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 38,
+      "rank_sha256": "837676a9a347ebe931051f9248da4b3bebf3d4d9be1d8a33d5898cd8847a11f6",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_72.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_72.pod5",
+      "bytes": 766197304,
+      "etag": "\"e7b3956e9b618b4c9a9a056ec5791b3d-92\"",
+      "last_modified": "2025-01-14T16:33:50.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 39,
+      "rank_sha256": "87cbaa4ccf250f020b3886f041eb225f4f27136dfcc94ac898afd953367ed1db",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_43.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_43.pod5",
+      "bytes": 14240766400,
+      "etag": "\"38acfae965074dfaae10e5345944a8fa-1698\"",
+      "last_modified": "2025-01-14T15:44:55.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 40,
+      "rank_sha256": "886e9d351802721bfac9f097e4e232b323e1993ba2ae32044f841d0cbda9b27c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_60.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_60.pod5",
+      "bytes": 4258038240,
+      "etag": "\"72d531e0ad2e05c1dcfdef0df044a57e-508\"",
+      "last_modified": "2025-01-14T16:23:21.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 41,
+      "rank_sha256": "893089bb3d037be0ac32ec6b8388d38c38dca5775268dafdd572824cfd8e63d2",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_51.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_51.pod5",
+      "bytes": 7980262480,
+      "etag": "\"f635810dc30777351b5cd434354e474c-952\"",
+      "last_modified": "2025-01-14T16:07:55.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 42,
+      "rank_sha256": "893c8ca4ce90e1a0b43764d17a55a1b93415b01db4e1f8c4a1754f3cb6472f9a",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_15.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_15.pod5",
+      "bytes": 18736687016,
+      "etag": "\"ce925ece0fd82d3e0ccb429da5190be0-2234\"",
+      "last_modified": "2025-01-14T13:45:51.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 43,
+      "rank_sha256": "913180b6b85603930a4e05e9814415773ce58fe17dfd48d0ca8c4f9204363c1c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_61.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_61.pod5",
+      "bytes": 4014934808,
+      "etag": "\"8332276a286dcdf44226121fc17290e8-479\"",
+      "last_modified": "2025-01-14T16:23:22.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 44,
+      "rank_sha256": "921583bcc4b67e326c227ed30cee2a6ff9837c9d925821ae3111d98956b87270",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_5.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_5.pod5",
+      "bytes": 31323617344,
+      "etag": "\"c87cba71cdbb1bc73c35bb78d7600e4c-3735\"",
+      "last_modified": "2025-01-14T16:01:44.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 45,
+      "rank_sha256": "94c78051733403c2355b4e8a057736c54dad65c9c8d51ea359fe5d9e582e94e6",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_28.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_28.pod5",
+      "bytes": 22335002208,
+      "etag": "\"26c1e3354fd6e845fd0fdd95cc029c01-2663\"",
+      "last_modified": "2025-01-14T14:41:03.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 46,
+      "rank_sha256": "9561cd4ac6a90613441f25e2281b90e34fa1ecac60143a541989e21045ab29ce",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_0.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_0.pod5",
+      "bytes": 30963338440,
+      "etag": "\"a1988ef67d233cd6d28e08b73ccbc38e-3692\"",
+      "last_modified": "2025-01-14T13:21:20.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 47,
+      "rank_sha256": "9839b76e27b7ee9980d40f2434528b57fe72f215efa5eb60ecf8c51d51aa2901",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_33.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_33.pod5",
+      "bytes": 18965117432,
+      "etag": "\"716fb8977020853461afc26b60be0ab1-2261\"",
+      "last_modified": "2025-01-14T15:05:42.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 48,
+      "rank_sha256": "983b7e863e358dd8c405a1048e0d53ac236a8b7a3dd63d1acfd27084b1d6d9fb",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_9.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_9.pod5",
+      "bytes": 26220345752,
+      "etag": "\"e3143e12b41bb13b9ab20ed60e49c4d1-3126\"",
+      "last_modified": "2025-01-14T16:35:41.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 49,
+      "rank_sha256": "98c99b7ed8cf1119d6b795b006f8d49f7d47bc77207e9a3bb6fb8316d3600b58",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_6.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_6.pod5",
+      "bytes": 28736416064,
+      "etag": "\"2ccb90962809bad3531dfc78b0b04110-3426\"",
+      "last_modified": "2025-01-14T16:22:43.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 50,
+      "rank_sha256": "9ec9fdf4faf2775e5c139fa42e6f982f0cb85b06373cf6248ba53b13f382644d",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_49.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_49.pod5",
+      "bytes": 9606168816,
+      "etag": "\"fc66eda7c18106b233c53ec54aff0a44-1146\"",
+      "last_modified": "2025-01-14T16:01:38.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 51,
+      "rank_sha256": "a0d3cce5f80d9ed2393b6182a41efe29b93a0ddfc2fcc0234b0a2c60431b75d5",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_31.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_31.pod5",
+      "bytes": 20643709200,
+      "etag": "\"957444e7a633724924c90ea2fb75b3ff-2461\"",
+      "last_modified": "2025-01-14T14:59:27.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 52,
+      "rank_sha256": "a1a4bc1db644b67de49ce2ad162129954beb22a94c53a7eb4ae4fe54f8f10ee8",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_64.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_64.pod5",
+      "bytes": 3267984744,
+      "etag": "\"00938b582c4af94ce044d640a05fbf09-390\"",
+      "last_modified": "2025-01-14T16:27:24.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 53,
+      "rank_sha256": "a51345fccb5a156b5c3bb10f43079017b1988d69f162750940a1e4f8f6046b62",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_35.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_35.pod5",
+      "bytes": 17473755048,
+      "etag": "\"8bbb4e3f742389b226aad8f5d4581699-2084\"",
+      "last_modified": "2025-01-14T15:16:45.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 54,
+      "rank_sha256": "a7607f1645ee6583ee208728106c5a3b272b46e96dc86aeeabba898b09e3a807",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_23.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_23.pod5",
+      "bytes": 21169081264,
+      "etag": "\"f57d9affc2bd7dbeff191f05dd2ecf64-2524\"",
+      "last_modified": "2025-01-14T14:21:03.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 55,
+      "rank_sha256": "ab7343010d2fb6a63777ea0c0bcb51cce816ab6d50070cf909862fbad10e11c5",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_71.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_71.pod5",
+      "bytes": 2229054872,
+      "etag": "\"44efbf793e26ff1223a491cddddfb7ef-266\"",
+      "last_modified": "2025-01-14T16:33:41.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 56,
+      "rank_sha256": "af257ab42c9a563e3613a5ce33ceb48a58e7dab079ef97430c46cf509e3b35f0",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_47.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_47.pod5",
+      "bytes": 10369266064,
+      "etag": "\"c068bb6ffe6766ab242f5431c53038fb-1237\"",
+      "last_modified": "2025-01-14T15:58:06.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 57,
+      "rank_sha256": "b8b0cfc37542e489bc1dc63b05db30cd76a308e1a0fca73e3fb2f9522399b98d",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_41.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_41.pod5",
+      "bytes": 13868229696,
+      "etag": "\"dccb471021fc16354ff6faa34d8e1596-1654\"",
+      "last_modified": "2025-01-14T15:37:47.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 58,
+      "rank_sha256": "c74ede403bb79c0781938db4dd9e5052cc55359283cad837be9eefb253c7e474",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_65.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_65.pod5",
+      "bytes": 2949110080,
+      "etag": "\"9b21666f25cd1c585b8c35e0febcea45-352\"",
+      "last_modified": "2025-01-14T16:28:44.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 59,
+      "rank_sha256": "ca7a9c8fdc17022b6cae4e0734a4f8e011320957014f15dff40e370a217b1b1c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_26.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_26.pod5",
+      "bytes": 23524236600,
+      "etag": "\"d7495bc9ecbed7278f5460c8e1368129-2805\"",
+      "last_modified": "2025-01-14T14:30:09.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 60,
+      "rank_sha256": "cbbfad6ef11e38b28443613a1357f362a96debffd10e7fc737bd550e63e3f3e5",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_63.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_63.pod5",
+      "bytes": 3154399920,
+      "etag": "\"3a6cdf5b9a70851658e4a83f0a143a05-377\"",
+      "last_modified": "2025-01-14T16:27:15.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 61,
+      "rank_sha256": "cc0944a2b1a6e6d967f2785990c09fa83e2d9e18f96a71a619cae3cdd95a65ef",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_53.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_53.pod5",
+      "bytes": 8341058824,
+      "etag": "\"be24a535c2721985a0ff90ddf85582c9-995\"",
+      "last_modified": "2025-01-14T16:10:30.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 62,
+      "rank_sha256": "d007caedd69bbe032d4d10608ecf973a1acc9c55d3e014627a6ba6c05f4d1f4e",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_1.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_1.pod5",
+      "bytes": 32707751288,
+      "etag": "\"a6215385152d277204eff98d38a2ed75-3900\"",
+      "last_modified": "2025-01-14T13:21:52.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 63,
+      "rank_sha256": "e250342a5b3786829ae18fa72bfd9b305a25111dd53839e0b7ad583ce4e83507",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_11.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_11.pod5",
+      "bytes": 23114738424,
+      "etag": "\"13012aa731c29a16253710377a6b4fc3-2756\"",
+      "last_modified": "2025-01-14T13:21:53.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 64,
+      "rank_sha256": "e25291dcf7190adf952185bcc142265288e6f112120af4beab3c4c2facbae613",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_40.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_40.pod5",
+      "bytes": 15465495872,
+      "etag": "\"2670cdc2e255304655e743616e5cb6d0-1844\"",
+      "last_modified": "2025-01-14T15:34:46.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 65,
+      "rank_sha256": "e7670925210eb908ea34e577371c814e42e64ba6d4ee1b4f6516cf0fa745133d",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_25.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_25.pod5",
+      "bytes": 22769392584,
+      "etag": "\"c051d8704eaaf278589ebdae9d7bf087-2715\"",
+      "last_modified": "2025-01-14T14:24:44.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 66,
+      "rank_sha256": "e7987780ac82bfdbbc37b1ca19bde11f0d728b7ea2435cc321f5e35f1be3def6",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_58.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_58.pod5",
+      "bytes": 4958174896,
+      "etag": "\"659012eeb0f9e8a0ddfef5fe9f886623-592\"",
+      "last_modified": "2025-01-14T16:18:26.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 67,
+      "rank_sha256": "e7dfadb79748ba65ee52dfaddd59a357de10c5fce584d76c4d7da83542387fbb",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_45.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_45.pod5",
+      "bytes": 11771149088,
+      "etag": "\"a86f847da14cb6ba2ab5b99ce964c471-1404\"",
+      "last_modified": "2025-01-14T15:50:51.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 68,
+      "rank_sha256": "ea0b2fab0eac9887509f4e20bc4bcb6ee534ccfaa3f2eaedd23fc9fb747d46e5",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_27.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_27.pod5",
+      "bytes": 23029318840,
+      "etag": "\"96826ec838e964ff03d6e51361e9e9a2-2746\"",
+      "last_modified": "2025-01-14T14:37:54.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 69,
+      "rank_sha256": "f3589a7fa16e8c93f3ca0410c19468faf24cd4f783110dd217fd3c059f9d3808",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_66.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_66.pod5",
+      "bytes": 2930263160,
+      "etag": "\"0ca39d924ff1b308d37bf3947b9e64d7-350\"",
+      "last_modified": "2025-01-14T16:30:12.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 70,
+      "rank_sha256": "f7fa7809b99f631f50ef5591c42f8290f2b460fbc01e75eaf1dda3cb6fa8087c",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_59.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_59.pod5",
+      "bytes": 4420273376,
+      "etag": "\"5481e34f6378b6e9540bec9fc342424c-527\"",
+      "last_modified": "2025-01-14T16:21:17.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 71,
+      "rank_sha256": "fade2d0358bbe179fa58a223bc0907635365587baca04eab39ffe37d082072a3",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_4.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_4.pod5",
+      "bytes": 30783750096,
+      "etag": "\"1761c834da94c3a88e7b9341d9f680e5-3670\"",
+      "last_modified": "2025-01-14T15:33:22.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 72,
+      "rank_sha256": "fe38515734c702214490725e164d4869fb11b7dfb5c3e74ab2418e0357b7d3d5",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_42.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_42.pod5",
+      "bytes": 13132526664,
+      "etag": "\"24db162704e424a49e213bf46515ddcf-1566\"",
+      "last_modified": "2025-01-14T15:38:41.000Z"
+    },
+    {
+      "flowcell": "PAW79146",
+      "rank_ordinal": 73,
+      "rank_sha256": "ff941e2debddeb7c16641299ce18f4c1c4d7758afa60bd8a250668f87d0d1538",
+      "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_24.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_24.pod5",
+      "bytes": 24314481416,
+      "etag": "\"3f172da54fa2808dd133ae9aeaceda87-2899\"",
+      "last_modified": "2025-01-14T14:21:06.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 1,
+      "rank_sha256": "04a2e01ae82a8483bdaf96fd269a3223c64b15073878ab87996b30d6bbe21fd8",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_30.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_30.pod5",
+      "bytes": 25462675784,
+      "etag": "\"722d4024d0bf660649f6359dbfc54607-3036\"",
+      "last_modified": "2025-01-14T18:32:32.000Z",
+      "head_checked_utc": "2026-10-23T16:01:50.428630+00:00",
+      "head_status": 200
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 2,
+      "rank_sha256": "07a19b9f095be82e6bfc9d9de6d86f4cb6b2a04753f9860d24379e9882d04572",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_1.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_1.pod5",
+      "bytes": 34282176592,
+      "etag": "\"63fdbf142804c6771de7222bc6149fcd-4087\"",
+      "last_modified": "2025-01-14T16:49:26.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 3,
+      "rank_sha256": "08ddcfc86169c8205cc983c75c0b6b153b558adf55bb2c3f3f0c12bef17fc3ec",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_57.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_57.pod5",
+      "bytes": 7168630880,
+      "etag": "\"a7c3bc020b8a300a5c4203179aeaf908-855\"",
+      "last_modified": "2025-01-14T20:14:46.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 4,
+      "rank_sha256": "15660dd15707bdeedae790886ad8e527a7c10aa6b25169672f92554dbb5c21db",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_56.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_56.pod5",
+      "bytes": 8193944312,
+      "etag": "\"96232fa40a1bee97be889f3970185222-977\"",
+      "last_modified": "2025-01-14T20:11:43.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 5,
+      "rank_sha256": "1c9ea9181bae62f37b9e5f90bb98050d4acc200e8229008c93473f78122e47f2",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_38.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_38.pod5",
+      "bytes": 19597053736,
+      "etag": "\"8ad6d363641b8d79cb92b981c22f7ddf-2337\"",
+      "last_modified": "2025-01-14T19:12:47.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 6,
+      "rank_sha256": "220a6e47fb67267ed6511d7e46d23d748f3a550c6b42e90741f5122ed193a346",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_55.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_55.pod5",
+      "bytes": 8045221976,
+      "etag": "\"4fa1e4bc13c4dcd923a9066196f2ef7e-960\"",
+      "last_modified": "2025-01-14T20:11:39.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 7,
+      "rank_sha256": "243a3211df76ddf2af3754f2db295067705293ffd2f86664589506834727f25f",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_33.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_33.pod5",
+      "bytes": 23048615408,
+      "etag": "\"57e3b1410660510828c119fda53c0fcf-2748\"",
+      "last_modified": "2025-01-14T18:51:26.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 8,
+      "rank_sha256": "27061dc90a9d1255bc83746fc38415b57ad9e1cabcd50ed9195cec98d399a69f",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_23.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_23.pod5",
+      "bytes": 25289179280,
+      "etag": "\"58f71868edb267cbbef1c8e1de05ae8d-3015\"",
+      "last_modified": "2025-01-14T17:59:53.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 9,
+      "rank_sha256": "27d22ace64ef69d6067ceae7c52ea40950d7b02e47eeb8284dafcd4cbcf45c2b",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_53.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_53.pod5",
+      "bytes": 9756374296,
+      "etag": "\"af6cf1f237015acb5b46ef555ffb68ab-1164\"",
+      "last_modified": "2025-01-14T20:05:33.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 10,
+      "rank_sha256": "38bf9522d547a1bf7356d3f132ae62112f6acb7b20c10f6e4a5c11c430f04a0b",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_51.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_51.pod5",
+      "bytes": 11396972784,
+      "etag": "\"bfb84f727035a2a16a432ab2e2c096c2-1359\"",
+      "last_modified": "2025-01-14T20:00:52.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 11,
+      "rank_sha256": "39186da7f3907e2fdeb1fe0c890df5a4b3389f4e03d6db46d2771ca93c7e59f5",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_17.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_17.pod5",
+      "bytes": 20819735816,
+      "etag": "\"2c2f03a3d9ba2ce0a83fa311ae5784b4-2482\"",
+      "last_modified": "2025-01-14T17:25:01.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 12,
+      "rank_sha256": "3c1322c8efc12a46f442f751f5f4419d69ca6ef74d5a4c9d2762e8ae5835f3b3",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_37.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_37.pod5",
+      "bytes": 20415075080,
+      "etag": "\"927780c8132b0ae04f60abc78f970bfd-2434\"",
+      "last_modified": "2025-01-14T19:09:36.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 13,
+      "rank_sha256": "3d2d1ca5951d71957797935e9892eeadf9faca98d3f4d2af5711a142ec65076f",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_48.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_48.pod5",
+      "bytes": 13565049104,
+      "etag": "\"3568749a9285eda823f557f1e8ac11bb-1618\"",
+      "last_modified": "2025-01-14T19:49:18.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 14,
+      "rank_sha256": "46f5242927fc968f5eae9a825df06515180476024e6e7de8aff06491e0785f57",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_39.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_39.pod5",
+      "bytes": 18613184392,
+      "etag": "\"4b7002acd298403c0d4ef6840b666f47-2219\"",
+      "last_modified": "2025-01-14T19:16:56.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 15,
+      "rank_sha256": "49aaba61ecb40d115b6a9d2af61b470265504a402593dcf8deb4f496fb715ce3",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_2.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_2.pod5",
+      "bytes": 35553236344,
+      "etag": "\"639496ee6694f71b87b6c6b8eec08004-4239\"",
+      "last_modified": "2025-01-14T17:44:08.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 16,
+      "rank_sha256": "4b88cbd207b2e92b7f98a56a581cfbccb4f89543b7b14292e39136380c7fa018",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_69.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_69.pod5",
+      "bytes": 2785751272,
+      "etag": "\"5d4fbd7af5a9eb9fddda38c6ac929918-333\"",
+      "last_modified": "2025-01-14T20:33:53.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 17,
+      "rank_sha256": "4eccb4d113258edde58fc16ca975331355d1efbb6247269b70aee923a6246ef1",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_62.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_62.pod5",
+      "bytes": 5021256584,
+      "etag": "\"1607286b98c99bb4b959b90a739a8e2e-599\"",
+      "last_modified": "2025-01-14T20:25:34.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 18,
+      "rank_sha256": "51c6ed59db650e59b9fe1217744af4f43eb20873af5de720d96bd361df4593e4",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_31.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_31.pod5",
+      "bytes": 24221233504,
+      "etag": "\"89f204697c071defade25d6af953c49e-2888\"",
+      "last_modified": "2025-01-14T18:41:36.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 19,
+      "rank_sha256": "5494e27ac0866ba7af0dc2dbeca962af1d5aeae474b8d7e4437939476297fcb9",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_27.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_27.pod5",
+      "bytes": 26559887288,
+      "etag": "\"fc8c0bb964f6d4495e301b3505fc3a53-3167\"",
+      "last_modified": "2025-01-14T18:17:01.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 20,
+      "rank_sha256": "565d6935f029ef7f52c2d6561e4b1b2e8255388fbf319803491b33204f5bf5fa",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_12.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_12.pod5",
+      "bytes": 25654427464,
+      "etag": "\"2200d2b053202ca042bbe8d214f61b12-3059\"",
+      "last_modified": "2025-01-14T17:01:01.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 21,
+      "rank_sha256": "5789efb6b4eb35722074cde9e1d30425eab5851e2ce35d288f4d5c03e0a820ee",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_50.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_50.pod5",
+      "bytes": 11151751040,
+      "etag": "\"7793a5f73b5f265f9a2382f748dbed72-1330\"",
+      "last_modified": "2025-01-14T19:58:45.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 22,
+      "rank_sha256": "5cd38a8980ba255d451bf2161564841702e4a871f5e7c076d312c98be1cc86bd",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_25.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_25.pod5",
+      "bytes": 26674823256,
+      "etag": "\"7eb2524bd4dab12154a8ae40c4a32512-3180\"",
+      "last_modified": "2025-01-14T18:02:13.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 23,
+      "rank_sha256": "5f47db321644711509ad6bec756a2478205dae0598d5be9973ce4c7a1b6b13d2",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_49.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_49.pod5",
+      "bytes": 11612980224,
+      "etag": "\"2052c91337911552e18f721702b95803-1385\"",
+      "last_modified": "2025-01-14T19:54:31.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 24,
+      "rank_sha256": "5ffb47bc56d7ef287fed25a8d828c97279b029c6b08bb5029e544a478bfb2b87",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_6.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_6.pod5",
+      "bytes": 30873590888,
+      "etag": "\"159f25eaf344057ac7d6159dea109618-3681\"",
+      "last_modified": "2025-01-14T20:19:35.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 25,
+      "rank_sha256": "6233c27a1a14097f6be06bb3327c03854ff7d2b1d74b18b4c9f0e8405ad70a81",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_29.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_29.pod5",
+      "bytes": 26716487960,
+      "etag": "\"6668c59b5cba8dd3a5b4475612c6a52c-3185\"",
+      "last_modified": "2025-01-14T18:27:00.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 26,
+      "rank_sha256": "6a4de05958096a0d2c814ad390eb6337878d28cdc058ae68ab8bb4f25b210e28",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_18.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_18.pod5",
+      "bytes": 22153845984,
+      "etag": "\"0bcee4a7ee4efe30d87229b94f3002ef-2641\"",
+      "last_modified": "2025-01-14T17:33:52.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 27,
+      "rank_sha256": "6b279c4d7efe68cf27da650bd1ad6f82289a8601cfaa7032c03c4bb9fab90404",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_7.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_7.pod5",
+      "bytes": 30196996144,
+      "etag": "\"022761d8302d21de655733c64d089dc6-3600\"",
+      "last_modified": "2025-01-14T20:33:57.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 28,
+      "rank_sha256": "6f652fcacffb72267e549cdfa2fc32e8433cf490c3d27d4bfac0de527e098fbb",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_58.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_58.pod5",
+      "bytes": 6474919800,
+      "etag": "\"f740ea6be23a34e04e9d6b7c8d514a76-772\"",
+      "last_modified": "2025-01-14T20:17:17.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 29,
+      "rank_sha256": "779137223f462f1d09653b482fccbfc35faba682b82557b2f4868b16c24755e9",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_61.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_61.pod5",
+      "bytes": 5257035248,
+      "etag": "\"2ad8068cd0581ce4a2c5fc9d666098da-627\"",
+      "last_modified": "2025-01-14T20:23:30.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 30,
+      "rank_sha256": "79a4f908c4402e5f9e70cca8d7b2b3b3407374c69c0cfe10c0cf56fe57ae8457",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_52.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_52.pod5",
+      "bytes": 10270426944,
+      "etag": "\"b7891d589a6c2de7ae297a9e881c4712-1225\"",
+      "last_modified": "2025-01-14T20:01:59.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 31,
+      "rank_sha256": "7cbb7d12b64cbef4e77429405ea422918a45ef49f2da98f7b5dde210f3b44c7d",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_72.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_72.pod5",
+      "bytes": 605869136,
+      "etag": "\"f247a3d96d7677b65812def5279dadfb-73\"",
+      "last_modified": "2025-01-14T20:36:34.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 32,
+      "rank_sha256": "89c0550966fba7aeede47251714dda7bfbd94088c31ae746d7191004163a6f1e",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_36.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_36.pod5",
+      "bytes": 20520010624,
+      "etag": "\"6098ef59042569ec327a68db1ab139cb-2447\"",
+      "last_modified": "2025-01-14T19:03:42.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 33,
+      "rank_sha256": "89f1ae56bedc94765fe07ce866fcfabce84bec9cb34b9978b21384f90d2b08c0",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_42.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_42.pod5",
+      "bytes": 15589973272,
+      "etag": "\"411009ffee594b42beac638f27e5433f-1859\"",
+      "last_modified": "2025-01-14T19:31:18.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 34,
+      "rank_sha256": "8c2e096d1da0a753a82b80a3c46873494946ddb4c7a40f38a022fdc4b6cba4c2",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_68.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_68.pod5",
+      "bytes": 3374147432,
+      "etag": "\"33829804a3c4ec079438a23519ce065f-403\"",
+      "last_modified": "2025-01-14T20:32:19.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 35,
+      "rank_sha256": "8e762787ef176b3cd2684820e2ed75054bf1eb3cbe821f88eb152637a00c0fd3",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_70.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_70.pod5",
+      "bytes": 3029384632,
+      "etag": "\"244113830ff7886329691f2bcfb07370-362\"",
+      "last_modified": "2025-01-14T20:34:32.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 36,
+      "rank_sha256": "92d1f2967d30ce0a26cd318e0fc434053315bd13ee4ce2c77afb64538244ed13",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_4.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_4.pod5",
+      "bytes": 32955274696,
+      "etag": "\"505e2068a504fdd37d006879744b8aa1-3929\"",
+      "last_modified": "2025-01-14T19:18:08.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 37,
+      "rank_sha256": "95a0a25abc3b4a595653a28d086251f6276a711431a614b78411f8a54a64e2a9",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_10.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_10.pod5",
+      "bytes": 28717023976,
+      "etag": "\"2d9587c10a31b591ab14869223b8403b-3424\"",
+      "last_modified": "2025-01-14T16:58:09.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 38,
+      "rank_sha256": "981c3fd54b4efe334b4f63785ccba4c0d77372dd5400b66e770d08c9defe61d9",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_3.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_3.pod5",
+      "bytes": 33807613720,
+      "etag": "\"2215d9a2e03c769e7d3ca2e77c2590ad-4031\"",
+      "last_modified": "2025-01-14T18:27:04.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 39,
+      "rank_sha256": "9dd547d8beb545b6df5aed309963a65cedd9f24779f4a257dcbed39b4fbd05d1",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_0.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_0.pod5",
+      "bytes": 33050796112,
+      "etag": "\"9284686de08b8d4dd6671c8716587f57-3940\"",
+      "last_modified": "2025-01-14T16:37:59.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 40,
+      "rank_sha256": "a36085ec11cd7813238df18ea0913934ecc9d5a3ec4cf21bee3414e8784ebd8b",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_45.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_45.pod5",
+      "bytes": 14334689400,
+      "etag": "\"66392d4f20a818f934fcf7a11da75777-1709\"",
+      "last_modified": "2025-01-14T19:44:30.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 41,
+      "rank_sha256": "a7ad76bb8c1b54ede9712ee48dc08226b8279b8be08a63a90fa98ffda7284c94",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_40.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_40.pod5",
+      "bytes": 19428140624,
+      "etag": "\"76ca505eff2ce74a7f0308414f541c5c-2317\"",
+      "last_modified": "2025-01-14T19:22:57.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 42,
+      "rank_sha256": "b5e2a2c8a32b00e398e2fa17cdcbb9a7fe940a52393d66782d7450eef2178ad8",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_26.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_26.pod5",
+      "bytes": 27081782520,
+      "etag": "\"67ff89e286087616a477f5fef9821f46-3229\"",
+      "last_modified": "2025-01-14T18:07:19.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 43,
+      "rank_sha256": "b6b0ffaa7420fa21cd928f4a494628440528f8be35ca14d6b9366da9613b7214",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_71.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_71.pod5",
+      "bytes": 2273674216,
+      "etag": "\"9ed734237f8f31b18b9196cdfcef72a1-272\"",
+      "last_modified": "2025-01-14T20:35:35.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 44,
+      "rank_sha256": "b8a21a337729eb960c62e8fe67b8a6c9427f0d5354886837b70a894932e2cae5",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_67.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_67.pod5",
+      "bytes": 3695437656,
+      "etag": "\"e67bd445edfab2eeeb54a41ee158d7a5-441\"",
+      "last_modified": "2025-01-14T20:30:59.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 45,
+      "rank_sha256": "ba27c69c6b662a1d0aacaf6368c5b2d41b6b86cc29431509ee06d7527cc0f653",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_35.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_35.pod5",
+      "bytes": 21638041976,
+      "etag": "\"de2113df6adfa325ec31d7f402c399a6-2580\"",
+      "last_modified": "2025-01-14T18:57:57.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 46,
+      "rank_sha256": "bb359af60e25c9e61e818eec80173d771fc20114c49298e4c31901c8d537c17d",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_46.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_46.pod5",
+      "bytes": 13988440376,
+      "etag": "\"c2b4ab2636e6e984692aa4551f844265-1668\"",
+      "last_modified": "2025-01-14T19:45:41.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 47,
+      "rank_sha256": "bb6f8b0bdba612275c53965cc81d3683675eb2a3ab98779883d016c9be31cdd3",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_21.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_21.pod5",
+      "bytes": 19411587392,
+      "etag": "\"b841fd111c24a46b62d719703570735e-2315\"",
+      "last_modified": "2025-01-14T17:44:31.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 48,
+      "rank_sha256": "bd28d4ecc210e0acdcab2537bc04034070b72073f1a02bfe12fe37cb2860e6c9",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_41.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_41.pod5",
+      "bytes": 16919671416,
+      "etag": "\"7ca2c796f69c085e7d351184ce9d3e06-2017\"",
+      "last_modified": "2025-01-14T19:28:47.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 49,
+      "rank_sha256": "bd5c80c2329462fbf61d609442efec67a727910801356b8d660b1af5f76f1b6c",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_32.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_32.pod5",
+      "bytes": 24383659504,
+      "etag": "\"cc0ef5e7cbb6ea1f3bce7ae08255a4b5-2907\"",
+      "last_modified": "2025-01-14T18:47:13.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 50,
+      "rank_sha256": "c0da36e4746ddaf12e9184787cc2d0d2f6e51c0c0ee15d4710be9d29166f51fc",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_5.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_5.pod5",
+      "bytes": 33906674256,
+      "etag": "\"44cbf6a840c221b0172a97b0d12db547-4042\"",
+      "last_modified": "2025-01-14T19:58:00.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 51,
+      "rank_sha256": "c18dbdd7d9bb4a447a31516a2c82274443f6297fc638565092948fadcaf65654",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_22.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_22.pod5",
+      "bytes": 14215410232,
+      "etag": "\"08316522453e5a8d99122547ad075911-1695\"",
+      "last_modified": "2025-01-14T17:54:11.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 52,
+      "rank_sha256": "c5c3da53bc3b01f231805d3d07f24f58076320b73f62a970b51a8ce3a9647bf1",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_13.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_13.pod5",
+      "bytes": 27457322984,
+      "etag": "\"6cc76de23b63126e6079dd45ca7916dc-3274\"",
+      "last_modified": "2025-01-14T17:08:27.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 53,
+      "rank_sha256": "c93a4381413b3c15b1dffc1202424615fd7320ca898b4a722092444b1427e14a",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_11.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_11.pod5",
+      "bytes": 26381073456,
+      "etag": "\"a45c7f872d428c9c2d22c7f0d4976a79-3145\"",
+      "last_modified": "2025-01-14T16:59:31.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 54,
+      "rank_sha256": "cae4082ce7f62c9382588db23b239a634828756ee47498b58f37d5e436a95f44",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_47.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_47.pod5",
+      "bytes": 12911755488,
+      "etag": "\"d638d48770bf02d092da9998b21a0ee0-1540\"",
+      "last_modified": "2025-01-14T19:48:44.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 55,
+      "rank_sha256": "ce1d244345c2ebaa95a36a2646c470bb396f20a3db24dbf9dcebcd8178cbb36c",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_34.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_34.pod5",
+      "bytes": 22694190592,
+      "etag": "\"f79a062bfb0e3b906c67dd9daa923bcf-2706\"",
+      "last_modified": "2025-01-14T18:55:47.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 56,
+      "rank_sha256": "d143d2df63c32300aa3cc56ad8c65993b1dc717aea036648259ee37cde386101",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_20.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_20.pod5",
+      "bytes": 17989949712,
+      "etag": "\"1e6b416dc35f9a5dd0b2373a07d41521-2145\"",
+      "last_modified": "2025-01-14T17:44:30.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 57,
+      "rank_sha256": "d249f82e45a163e2bd89f4238d4d8da797aeae5605d7e757e409bcac91416c07",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_65.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_65.pod5",
+      "bytes": 3648764336,
+      "etag": "\"d50c9b041d280422cd56925e5c9b98ac-435\"",
+      "last_modified": "2025-01-14T20:30:21.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 58,
+      "rank_sha256": "d571fe8f96be05700bb1da8261f09ff3e760b23646d175d27338e4b32f4430f5",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_24.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_24.pod5",
+      "bytes": 28081264920,
+      "etag": "\"069d0d79a8ea73bc8cbe8dcc1f50d3a1-3348\"",
+      "last_modified": "2025-01-14T18:00:53.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 59,
+      "rank_sha256": "d61c42307f600bed4b61b904f54931dfc7a079f423e3dd5453a138ad12c31607",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_15.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_15.pod5",
+      "bytes": 22117726008,
+      "etag": "\"68e72748d7d18cc258f1413f07cdc462-2637\"",
+      "last_modified": "2025-01-14T17:24:10.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 60,
+      "rank_sha256": "d676082dbe0bb5bf9b65d93d35e0ea1cb1ff577ab7ae3bc7904df3738662c15d",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_8.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_8.pod5",
+      "bytes": 31887331536,
+      "etag": "\"3edfd769843ab56c400eccc900b89d11-3802\"",
+      "last_modified": "2025-01-14T20:37:11.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 61,
+      "rank_sha256": "d860b09b906d709cab6aedd2d66f7913f2e747965363974ab00ea65dd2f38b90",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_9.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_9.pod5",
+      "bytes": 29415111568,
+      "etag": "\"1d8304aa24a480ce3f1c8a8960c842e5-3507\"",
+      "last_modified": "2025-01-14T20:37:27.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 62,
+      "rank_sha256": "d930f4022a36e466233702d9ba5467445580ed41e645bbbf4f353e1bb766e834",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_60.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_60.pod5",
+      "bytes": 5685015856,
+      "etag": "\"a9966a3ccc74005482f639e0db9ea020-678\"",
+      "last_modified": "2025-01-14T20:21:36.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 63,
+      "rank_sha256": "d952dbe7ae65de89359e2df7b264ae0f0c1cb078a363449855a57e09dc0d903c",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_44.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_44.pod5",
+      "bytes": 14537399000,
+      "etag": "\"037ce017cfc38fc5498e8d7597e0a8c8-1733\"",
+      "last_modified": "2025-01-14T19:40:56.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 64,
+      "rank_sha256": "dcde4fc43c0463b5f0a50f1dcde6390e03a70312f2d05502e1f9470ee2295471",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_66.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_66.pod5",
+      "bytes": 3711505584,
+      "etag": "\"3b68d8f2f19bcc17d6e024242c7656ca-443\"",
+      "last_modified": "2025-01-14T20:30:22.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 65,
+      "rank_sha256": "df910cace3a7b679c5e32fc896ef18789c40cb78a43e8e2f7a43500174141bb6",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_63.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_63.pod5",
+      "bytes": 4052952992,
+      "etag": "\"29f44e19d7138a548ab7dab515dfce8d-484\"",
+      "last_modified": "2025-01-14T20:27:05.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 66,
+      "rank_sha256": "e2647daf080a300f8416c68acad9c022a760b09aa6ff8b74962c7f182bff60c5",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_64.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_64.pod5",
+      "bytes": 3864925352,
+      "etag": "\"13395cda45c705a948944f92e4a4c553-461\"",
+      "last_modified": "2025-01-14T20:28:33.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 67,
+      "rank_sha256": "e4bd65bfe08c867c18cc161974cc111f9b33a7fbcfcb00dafa5b92b8eb2d52fb",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_14.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_14.pod5",
+      "bytes": 23660791000,
+      "etag": "\"fac85b20271ec8c388bbfae41ae63093-2821\"",
+      "last_modified": "2025-01-14T17:21:10.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 68,
+      "rank_sha256": "e502b9a02e814d5b1837a2495fe7f8a949e8573026fa0a0358f6b1334d3e73b2",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_16.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_16.pod5",
+      "bytes": 21275691416,
+      "etag": "\"852bf66cf694f3cd9b2d4ed6f899fc27-2537\"",
+      "last_modified": "2025-01-14T17:24:52.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 69,
+      "rank_sha256": "e57605f737616ff533f9bfc61faab315521b64f5494aa600458ed8f0d90323a6",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_59.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_59.pod5",
+      "bytes": 6338769536,
+      "etag": "\"b50f96e6ebd8fa359d7b512e17b0abee-756\"",
+      "last_modified": "2025-01-14T20:19:24.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 70,
+      "rank_sha256": "eb256667238b98027c2c52cf28ad0879a86c244ee515b1095d72606f11b466bf",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_54.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_54.pod5",
+      "bytes": 8496089576,
+      "etag": "\"e3fa6dd077cebee0b6dcd31460957fd0-1013\"",
+      "last_modified": "2025-01-14T20:09:22.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 71,
+      "rank_sha256": "f1f9a89e167889fecc716c75c8e28c1809e516168ab90ab26b7dca3111faf9f5",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_43.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_43.pod5",
+      "bytes": 16125743960,
+      "etag": "\"d9c8fdaf74c7c1256096d2cab1861422-1923\"",
+      "last_modified": "2025-01-14T19:34:24.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 72,
+      "rank_sha256": "fbd16bc357b1a7b26e109aeec03bb94c5a3bcc9ac90426f6553515a033b367d5",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_28.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_28.pod5",
+      "bytes": 26017978376,
+      "etag": "\"8abb114816eabb3567a31d892944f0be-3102\"",
+      "last_modified": "2025-01-14T18:23:23.000Z"
+    },
+    {
+      "flowcell": "PAW81754",
+      "rank_ordinal": 73,
+      "rank_sha256": "fc3b89db642031491cbc9a6f1f8c3e2024091811bf4a205a7d520ad2c014343b",
+      "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_19.pod5",
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_19.pod5",
+      "bytes": 18313379880,
+      "etag": "\"e30122768979ccb57c762bb1997ef2e2-2184\"",
+      "last_modified": "2025-01-14T17:43:12.000Z"
+    }
+  ],
+  "limits": {
+    "no_raw_download_performed": true,
+    "minimum_free_disk_after_all_outputs_gib": 30,
+    "reported_free_disk_snapshot_gib": 317,
+    "snapshot_is_not_reservation": true,
+    "output_tensor_index_receipt_budget_required": true,
+    "candidate_and_analysis_freeze_before_outcomes": true,
+    "project_prior_exposure_audit_required": true,
+    "donor_alias_and_haplotype_exclusion_required": true,
+    "native_sample_metadata_and_integrity_unverified": true,
+    "genotype_identity_not_established": true,
+    "near_edit_private_allele_support_unverified": true,
+    "no_confirmation_truth_records_or_outcomes_read": true
+  },
+  "separate_expansion": {
+    "status": "predeclared_option_not_acquired_not_required_for_initial_two_files",
+    "manifest_path": "logs/retrieval-confirmation/HG001-full-frame-prospective-selection.json",
+    "rule": "Minimum same hash within file-index strata 0-17,18-35,36-53,54-72 in each flowcell. Nominal hour strata need internal read-time verification.",
+    "raw_bytes": 134316381872,
+    "raw_gib": 125.09187857806683,
+    "selected": [
+      {
+        "flowcell": "PAW79146",
+        "file_index_stratum": [
+          0,
+          17
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_16.pod5",
+          "bytes": 19407049528,
+          "etag": "\"3999d0c08815c4ca7de869bc5f164287-2314\"",
+          "last_modified": "2025-01-14T13:48:22.000Z",
+          "rank": "0483c3e9a27bcd05e4c113f3e3897501bb3d6238914550c1024bc309e47b3048",
+          "file_index": 16
+        }
+      },
+      {
+        "flowcell": "PAW79146",
+        "file_index_stratum": [
+          18,
+          35
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_21.pod5",
+          "bytes": 15532929728,
+          "etag": "\"db29815d62548c7ca1900d78dd62af50-1852\"",
+          "last_modified": "2025-01-14T14:09:57.000Z",
+          "rank": "1d68668dc45b4117f7220769e4d3486ceb4a4178f5a926c88f0cc4912e895656",
+          "file_index": 21
+        }
+      },
+      {
+        "flowcell": "PAW79146",
+        "file_index_stratum": [
+          36,
+          53
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_48.pod5",
+          "bytes": 10358548568,
+          "etag": "\"f5e2c757ca544efda01797be2c0a5447-1235\"",
+          "last_modified": "2025-01-14T16:00:42.000Z",
+          "rank": "02de0f9dd30b94483ecd3d81048fa5c930032b9a190a00deb5f256865edd85aa",
+          "file_index": 48
+        }
+      },
+      {
+        "flowcell": "PAW79146",
+        "file_index_stratum": [
+          54,
+          72
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW79146/pod5/PAW79146_c6420e1f_4af91fd6_69.pod5",
+          "bytes": 2507317056,
+          "etag": "\"6ea70250a5cb5793b3bf2e30b15e3e7d-299\"",
+          "last_modified": "2025-01-14T16:31:30.000Z",
+          "rank": "02d933835ce5a42196f6c2537f9de4fa10afbcf3f828f700c76c28279a9b3919",
+          "file_index": 69
+        }
+      },
+      {
+        "flowcell": "PAW81754",
+        "file_index_stratum": [
+          0,
+          17
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_1.pod5",
+          "bytes": 34282176592,
+          "etag": "\"63fdbf142804c6771de7222bc6149fcd-4087\"",
+          "last_modified": "2025-01-14T16:49:26.000Z",
+          "rank": "07a19b9f095be82e6bfc9d9de6d86f4cb6b2a04753f9860d24379e9882d04572",
+          "file_index": 1
+        }
+      },
+      {
+        "flowcell": "PAW81754",
+        "file_index_stratum": [
+          18,
+          35
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_30.pod5",
+          "bytes": 25462675784,
+          "etag": "\"722d4024d0bf660649f6359dbfc54607-3036\"",
+          "last_modified": "2025-01-14T18:32:32.000Z",
+          "rank": "04a2e01ae82a8483bdaf96fd269a3223c64b15073878ab87996b30d6bbe21fd8",
+          "file_index": 30
+        }
+      },
+      {
+        "flowcell": "PAW81754",
+        "file_index_stratum": [
+          36,
+          53
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_38.pod5",
+          "bytes": 19597053736,
+          "etag": "\"8ad6d363641b8d79cb92b981c22f7ddf-2337\"",
+          "last_modified": "2025-01-14T19:12:47.000Z",
+          "rank": "1c9ea9181bae62f37b9e5f90bb98050d4acc200e8229008c93473f78122e47f2",
+          "file_index": 38
+        }
+      },
+      {
+        "flowcell": "PAW81754",
+        "file_index_stratum": [
+          54,
+          72
+        ],
+        "selected": {
+          "key": "giab_2025.01/flowcells/HG001/PAW81754/pod5/PAW81754_150d2e3f_062ac2e7_57.pod5",
+          "bytes": 7168630880,
+          "etag": "\"a7c3bc020b8a300a5c4203179aeaf908-855\"",
+          "last_modified": "2025-01-14T20:14:46.000Z",
+          "rank": "08ddcfc86169c8205cc983c75c0b6b153b558adf55bb2c3f3f0c12bef17fc3ec",
+          "file_index": 57
+        }
+      }
+    ]
+  }
+}
