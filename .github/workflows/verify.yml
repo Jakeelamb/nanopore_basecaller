@@ -31,3 +31,14 @@ jobs:
         env:
           PYTHONPATH: tests
         run: uv run --locked python -m unittest test_benchmark.NativeBamTests -v
+      - name: Verify controlled measurement and accuracy receipts
+        env:
+          PYTHONPATH: tests
+        run: |
+          uv run --locked python -m unittest test_benchmark.ControlledMeasurementTests -v
+          uv run --locked python -m unittest test_accuracy -v
+          uv run --locked python -m unittest test_controlled_report -v
+      - name: Verify Rust truth and exact-column accuracy contracts
+        run: |
+          rustup toolchain install 1.96.0 --profile minimal
+          cargo +1.96.0 test --locked --manifest-path tools/accuracy/Cargo.toml

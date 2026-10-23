@@ -324,7 +324,7 @@ class NativeBamTests(unittest.TestCase):
             b.verify_summary(summary, parsed)
 
 
-class ReceiptTests(unittest.TestCase):
+class ReceiptFixture(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='benchmark-tests-', dir=PROJECT / 'results')
         self.addCleanup(self.tmp.cleanup)
@@ -339,6 +339,233 @@ class ReceiptTests(unittest.TestCase):
         self.sampler_patch.start()
         self.addCleanup(self.sampler_patch.stop)
 
+class ControlledMeasurementTests(ReceiptFixture):
+    def setUp(self):
+        super().setUp()
+        self.original_core_sampler = b.core_gpu_sample
+        core = patch.object(b, 'core_gpu_sample', side_effect=self.valid_gpu)
+        core.start()
+        self.addCleanup(core.stop)
+
+    def valid_gpu(self):
+        return {'utc': b.utc(), 'monotonic_ns': b.time.monotonic_ns(), 'completed_monotonic_ns': b.time.monotonic_ns(),
+                'exit': 0, 'stderr': '', 'stdout': 'timestamp, index, utilization.gpu [%], memory.used [MiB], power.draw [W], temperature.gpu, clocks.current.sm [MHz]\n2026/10/22 10:00:00, 0, 0 %, 5 MiB, 6.4 W, 32, 187 MHz\n'}
+
+    def controlled_policy(self):
+        return {**b.CONTROLLED_POLICY, 'cpu_affinity': sorted(os.sched_getaffinity(0))}
+
+    def valid_host(self, policy, owned_pgid=None):
+        return {'utc': b.utc(), 'monotonic_ns': b.time.monotonic_ns(), 'errors': [],
+                'ac_online': '1', 'platform_profile': 'balanced', 'cpu_affinity': policy['cpu_affinity'],
+                'owned_cpu_affinities': {}, 'foreign_gpu_compute_pids': [], 'loadavg': '0 0 0', 'proc_stat': 'cpu 1 2 3 4'}
+
+    def snapshot_fixture(self, attempt, phase):
+        b.write(attempt / f'gpu-state-{phase}.json', {'exit': 0, 'stdout': 'fixture state', 'utc': b.utc()})
+
+    def test_controlled_tiny_process_has_boundaries_and_verified_reuse(self):
+        policy = self.controlled_policy()
+        argv = [sys.executable, '-c', "print('measured child')"]
+        with patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture):
+            receipt = b.stage(self.root / 'attempts', 'producer', argv, {}, measurement=policy)
+        self.assertTrue(receipt['measurement_qualified'])
+        samples = [json.loads(line) for line in Path(next(p['path'] for p in receipt['pins'] if Path(p['path']).name == 'host.jsonl')).read_text().splitlines()]
+        self.assertEqual([sample['phase'] for sample in samples], ['before', 'after'])
+        with patch.object(b, 'host_sample', side_effect=AssertionError('Verification sampled the current host')), patch.object(b.subprocess, 'Popen', side_effect=AssertionError('Verification launched a process')):
+            self.assertEqual(b.stage(self.root / 'attempts', 'producer', argv, {}, measurement=policy, execute=False), receipt)
+        host = next(Path(p['path']) for p in receipt['pins'] if Path(p['path']).name == 'host.jsonl')
+        host.unlink()
+        with self.assertRaisesRegex((ValueError, OSError), 'No such file|Changed evidence'):
+            b.stage(self.root / 'attempts', 'producer', argv, {}, measurement=policy, execute=False)
+
+    def test_unsupported_optional_gpu_field_does_not_abort_native_work(self):
+        tool = self.root / 'scripts/nvidia-smi'
+        tool.write_text(f'''#!{sys.executable}
+import sys,time
+query = next((arg.split('=', 1)[1] for arg in sys.argv if arg.startswith('--query-gpu=')), '')
+if 'clocks_event_reasons.sw_thermal_slowdown' in query:
+    print('unsupported alias', file=sys.stderr)
+    raise SystemExit(2)
+if '-q' in sys.argv:
+    print('Enforced Power Limit : 100.00 W')
+elif query:
+    fields = query.split(',')
+    names = {{'memory.used':'memory.used [MiB]', 'utilization.gpu':'utilization.gpu [%]', 'power.draw':'power.draw [W]', 'clocks.sm':'clocks.current.sm [MHz]'}}
+    print(', '.join(names.get(field, field) for field in fields), flush=True)
+    print(', '.join('100' if 'counter' in field or 'power.limit' in field else '0' for field in fields), flush=True)
+    if '-l' in sys.argv:
+        time.sleep(30)
+''')
+        tool.chmod(0o755)
+        with patch.dict(os.environ, {'PATH': str(tool.parent) + os.pathsep + os.environ['PATH']}), patch.object(b.shutil, 'which', return_value=str(tool)), patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'core_gpu_sample', side_effect=self.original_core_sampler):
+            receipt = b.stage(self.root / 'optional', 'producer', [sys.executable, '-c', "print('native success')"], {}, measurement=self.controlled_policy())
+        self.assertTrue(receipt['measurement_qualified'])
+        unsupported = next(Path(p['path']) for p in receipt['pins'] if Path(p['path']).name == 'clocks_event_reasons.sw_thermal_slowdown-support.json')
+        self.assertEqual(b.read(unsupported)['exit'], 2)
+        telemetry = b.process_resources(receipt)['gpu']['optional_telemetry']
+        self.assertEqual(telemetry['clocks_event_reasons_counters.sw_power_cap']['delta'], 0)
+        self.assertEqual(telemetry['enforced.power.limit']['raw_samples'][0], '100')
+
+    def test_required_ac_profile_and_missing_telemetry_reject_before_launch(self):
+        for field, value in [('ac_online', '0'), ('platform_profile', 'performance'), ('ac_online', None), ('loadavg', None), ('foreign_gpu_compute_pids', [123])]:
+            with self.subTest(field=field, value=value):
+                def invalid(policy, owned_pgid=None):
+                    return {**self.valid_host(policy), field: value}
+                marker = self.root / ('launched-' + field + str(value))
+                argv = [sys.executable, '-c', f'from pathlib import Path; Path({str(marker)!r}).touch()']
+                directory = self.root / ('reject-' + field + str(value))
+                with patch.object(b, 'host_sample', side_effect=invalid), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), self.assertRaisesRegex(ValueError, 'interrupted'):
+                    b.stage(directory, 'producer', argv, {}, measurement=self.controlled_policy())
+                receipt = b.read(next((directory / 'producer').glob('*/finish.json')))
+                self.assertFalse(marker.exists())
+                self.assertFalse(receipt['measurement_qualified'])
+                self.assertIsNone(receipt['exit'])
+                self.assertIn(field if field != 'loadavg' else 'telemetry', receipt['failure'])
+
+    def test_post_guard_change_and_during_change_retain_failed_attempt(self):
+        for field, after in [('ac_online', '0'), ('platform_profile', 'performance')]:
+            for duration in (0, 5):
+                with self.subTest(field=field, duration=duration):
+                    count = 0
+                    def changed(policy, owned_pgid=None):
+                        nonlocal count
+                        count += 1
+                        sample = self.valid_host(policy)
+                        if count > 1:
+                            sample[field] = after
+                        return sample
+                    directory = self.root / f'changed-{field}-{duration}'
+                    argv = [sys.executable, '-c', f'import time; print("started", flush=True); time.sleep({duration})']
+                    with patch.object(b, 'host_sample', side_effect=changed), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), self.assertRaisesRegex(ValueError, 'command_failed|interrupted'):
+                        b.stage(directory, 'producer', argv, {}, measurement=self.controlled_policy())
+                    receipt_path = next((directory / 'producer').glob('*/finish.json'))
+                    receipt = b.read(receipt_path)
+                    self.assertFalse(receipt['measurement_qualified'])
+                    self.assertIn(field, receipt['failure'])
+                    self.assertIsNotNone(receipt['native_launch_monotonic_ns'])
+                    self.assertLess(receipt['elapsed_ns'] / 1e9, 4)
+                    before = b.pin(receipt_path)
+                    with self.assertRaisesRegex(ValueError, 'explicit --retry'):
+                        b.stage(directory, 'producer', argv, {}, measurement=self.controlled_policy(), execute=False)
+                    self.assertEqual(b.pin(receipt_path), before)
+
+    def test_cooldown_is_retained_before_native_launch(self):
+        policy = self.controlled_policy()
+        with patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), patch.object(b, 'gpu_idle_sample', side_effect=lambda policy: {'idle': True, 'monotonic_ns': b.time.monotonic_ns()}):
+            receipt = b.stage(self.root / 'cool', 'producer', [sys.executable, '-c', "print('cooled')"], {}, measurement=policy, gpu_start=True)
+        preflight = next(Path(p['path']) for p in receipt['pins'] if Path(p['path']).name == 'preflight.jsonl')
+        idle = [json.loads(line)['gpu'] for line in preflight.read_text().splitlines() if 'gpu' in json.loads(line)]
+        self.assertEqual(len(idle), 3)
+        self.assertTrue(all(sample['monotonic_ns'] < receipt['native_launch_monotonic_ns'] for sample in idle))
+        self.assertGreater(receipt['native_launch_monotonic_ns'] - receipt['monotonic_ns'], 1.9e9)
+        self.assertLess(b.process_resources(receipt)['native_wall_seconds'], 1)
+
+    def test_retained_sample_gap_or_missing_boundary_cannot_qualify(self):
+        policy = self.controlled_policy()
+        directory = self.root / 'manual'
+        directory.mkdir()
+        host = directory / 'host.jsonl'
+        before = {**self.valid_host(policy), 'phase': 'before', 'gpu_core': self.valid_gpu()}
+        after = {**self.valid_host(policy), 'phase': 'after', 'gpu_core': self.valid_gpu(), 'monotonic_ns': before['monotonic_ns'] + 4_000_000_000}
+        for samples, message in [([before], 'before/after'), ([before, after], 'continuous')]:
+            host.write_text(''.join(json.dumps(sample) + '\n' for sample in samples))
+            with self.assertRaisesRegex(ValueError, message):
+                b.measurement_evidence({'measurement_policy': policy, 'measurement_qualified': True, 'pins': [b.pin(host)]}, policy)
+
+    def test_core_gpu_failed_empty_or_nonnumeric_query_prevents_launch(self):
+        invalid = [{'exit': 42}, {'stdout': ''}]
+        for field, _, _ in b.GPU_CORE_FIELDS:
+            row = self.valid_gpu()['stdout']
+            columns = row.splitlines()[0].split(', ')
+            cells = row.splitlines()[1].split(', ')
+            for value in ('[N/A]', 'nan', 'inf', '', '9' * 400):
+                altered = cells.copy()
+                altered[columns.index(field)] = value
+                invalid.append({'stdout': row.splitlines()[0] + '\n' + ', '.join(altered) + '\n'})
+        for index, changes in enumerate(invalid):
+            with self.subTest(changes=changes):
+                directory = self.root / f'core-invalid-{index}'
+                marker = directory / 'native-launched'
+                with patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), patch.object(b, 'core_gpu_sample', side_effect=lambda: {**self.valid_gpu(), **changes}), self.assertRaisesRegex(ValueError, 'interrupted'):
+                    b.stage(directory, 'producer', [sys.executable, '-c', f'from pathlib import Path; Path({str(marker)!r}).touch()'], {}, measurement=self.controlled_policy())
+                receipt = b.read(next((directory / 'producer').glob('*/finish.json')))
+                self.assertFalse(marker.exists())
+                self.assertFalse(receipt['measurement_qualified'])
+                samples = next(Path(item['path']) for item in receipt['pins'] if Path(item['path']).name == 'host.jsonl')
+                self.assertEqual(json.loads(samples.read_text().splitlines()[0])['gpu_core']['exit'], changes.get('exit', 0))
+
+    def test_real_core_query_exit42_or_empty_output_rejects_before_native(self):
+        tool = self.root / 'scripts/nvidia-smi'
+        for status in (42, 0):
+            with self.subTest(query_exit=status):
+                tool.write_text(f'#!/bin/sh\nexit {status}\n')
+                tool.chmod(0o755)
+                directory = self.root / f'real-core-query-{status}'
+                marker = directory / 'native-launched'
+                with patch.dict(os.environ, {'PATH': str(tool.parent) + os.pathsep + os.environ['PATH']}), patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), patch.object(b, 'core_gpu_sample', side_effect=self.original_core_sampler), self.assertRaisesRegex(ValueError, 'interrupted'):
+                    b.stage(directory, 'producer', [sys.executable, '-c', f'from pathlib import Path; Path({str(marker)!r}).touch()'], {}, measurement=self.controlled_policy())
+                receipt = b.read(next((directory / 'producer').glob('*/finish.json')))
+                self.assertFalse(marker.exists())
+                self.assertFalse(receipt['measurement_qualified'])
+                host = next(Path(item['path']) for item in receipt['pins'] if Path(item['path']).name == 'host.jsonl')
+                query = json.loads(host.read_text().splitlines()[0])['gpu_core']
+                self.assertEqual(query['exit'], status)
+                self.assertEqual(query['stdout'], '')
+
+    def test_core_gpu_query_death_during_or_after_native_rejects_attempt(self):
+        for duration in (0, 5):
+            with self.subTest(duration=duration):
+                calls = 0
+                def failed_query():
+                    nonlocal calls
+                    calls += 1
+                    return {**self.valid_gpu(), **({'exit': 42, 'stdout': '', 'stderr': 'query died'} if calls > 1 else {})}
+                directory = self.root / f'core-dead-{duration}'
+                with patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), patch.object(b, 'core_gpu_sample', side_effect=failed_query), self.assertRaisesRegex(ValueError, 'interrupted|command_failed'):
+                    b.stage(directory, 'producer', [sys.executable, '-c', f'import time; time.sleep({duration})'], {}, measurement=self.controlled_policy())
+                receipt = b.read(next((directory / 'producer').glob('*/finish.json')))
+                self.assertFalse(receipt['measurement_qualified'])
+                self.assertIn('core GPU query failed', receipt['failure'])
+                self.assertLess(receipt['elapsed_ns'] / 1e9, 4)
+                if duration == 0:
+                    self.assertEqual(receipt['exit'], 0)
+
+    def test_retained_core_gpu_gap_missing_csv_or_boundary_cannot_qualify(self):
+        policy = self.controlled_policy()
+        with patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture):
+            receipt = b.stage(self.root / 'retained-core', 'producer', [sys.executable, '-c', "print('native')"], {}, measurement=policy)
+        b.measurement_evidence(receipt, policy)
+        host = next(Path(item['path']) for item in receipt['pins'] if Path(item['path']).name == 'host.jsonl')
+        samples = [json.loads(line) for line in host.read_text().splitlines()]
+        originals = host.read_text()
+        samples[-1]['gpu_core']['monotonic_ns'] += 4_000_000_000
+        samples[-1]['gpu_core']['completed_monotonic_ns'] += 4_000_000_000
+        host.write_text(''.join(json.dumps(sample) + '\n' for sample in samples))
+        with patch.object(b, 'core_gpu_sample', side_effect=AssertionError('Verification queried GPU')), self.assertRaisesRegex(ValueError, 'continuous core GPU'):
+            b.measurement_evidence(receipt, policy)
+        host.write_text(originals)
+        with self.assertRaisesRegex(ValueError, 'bracket'):
+            b.measurement_evidence({**receipt, 'native_end_monotonic_ns': receipt['native_launch_monotonic_ns'] - 1}, policy)
+        gpu = next(Path(item['path']) for item in receipt['pins'] if Path(item['path']).name == 'gpu.csv')
+        gpu.write_text('')
+        with self.assertRaisesRegex(ValueError, 'core GPU CSV'):
+            b.measurement_evidence(receipt, policy)
+
+    def test_controlled_interrupt_retains_unqualified_evidence(self):
+        original_sleep = b.time.sleep
+        interrupted = False
+        def interrupt_once(delay):
+            nonlocal interrupted
+            if not interrupted:
+                interrupted = True
+                raise KeyboardInterrupt
+            original_sleep(delay)
+        with patch.object(b, 'host_sample', side_effect=self.valid_host), patch.object(b, 'gpu_snapshot', side_effect=self.snapshot_fixture), patch.object(b.time, 'sleep', side_effect=interrupt_once), self.assertRaisesRegex(ValueError, 'interrupted|command_failed'):
+            b.stage(self.root / 'interrupt', 'producer', [sys.executable, '-c', 'import time; time.sleep(30)'], {}, measurement=self.controlled_policy())
+        receipt = b.read(next((self.root / 'interrupt/producer').glob('*/finish.json')))
+        self.assertFalse(receipt['measurement_qualified'])
+        self.assertIn('KeyboardInterrupt', receipt['failure'])
+
+class ReceiptTests(ReceiptFixture):
     def test_relative_producer_pin_accepts_current_bytes_rejects_change(self):
         artifact = self.root / 'reference.fa'
         artifact.write_text('>chr1\nACGT\n')
@@ -482,6 +709,22 @@ class ReceiptTests(unittest.TestCase):
         artifact.write_bytes(artifact.read_bytes() + b'changed')
         with self.assertRaisesRegex(ValueError, 'Changed evidence'):
             b.load_plan(plan_path)
+
+    def test_full_development_timing_preserves_subsets_and_19_units(self):
+        config = self.preparation_fixture()
+        benchmark = self.root / 'data/splits/benchmark.txt'
+        subset_pin = b.pin(benchmark)
+        config.update(timing_workload='full-development', measurement_policy=b.CONTROLLED_POLICY)
+        b.write(self.root / 'config/stock-benchmark.json', config)
+        plan = b.load_plan(self.prepared_plan())
+        development = next(unit for unit in plan['units'] if unit['id'] == 'full-development-hac')
+        self.assertEqual(len(plan['units']), 19)
+        for unit in [unit for unit in plan['units'] if unit['scope'] == 'timing']:
+            self.assertEqual(unit['ids'], str(self.root / 'data/splits/development.txt'))
+            self.assertEqual(unit['parents'], development['parents'])
+        self.assertEqual(b.pin(benchmark), subset_pin)
+        self.assertEqual(plan['environment']['cache'], 'warmed-filesystem')
+        self.assertEqual(plan['config']['measurement_policy'], b.CONTROLLED_POLICY)
 
     def test_prepare_rejects_other_stock_binary_builds(self):
         self.preparation_fixture()

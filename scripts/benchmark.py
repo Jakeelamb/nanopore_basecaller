@@ -2,6 +2,7 @@
 import argparse
 import collections
 import csv
+from contextlib import ExitStack
 import fcntl
 import hashlib
 import json
@@ -25,6 +26,20 @@ SOURCE = '8b8fc5d36a9c0baab262a743cb175b5878e38ca6'
 STOCK_VERSION = '2.1.2+' + SOURCE[:7]
 BIOLOGY = {key: 'NOT VERIFIED' for key in ('biological_base_accuracy', 'biological_quality_calibration',
                                           'variant_aware_accuracy', 'variant_calling_accuracy')}
+CONTROLLED_POLICY = {
+    'cache_policy': 'warmed-filesystem',
+    'ac_online': {'path': '/sys/class/power_supply/ACAD/online', 'required': '1'},
+    'platform_profile': {'path': '/sys/firmware/acpi/platform_profile', 'required': 'balanced'},
+    'cpu_affinity': 'frozen-plan', 'foreign_gpu_compute': 'reject',
+    'sample_interval_seconds': 1, 'max_sample_gap_seconds': 2.5,
+    'required_gpu_fields': ['utilization.gpu', 'memory.used', 'power.draw', 'temperature.gpu', 'clocks.sm'],
+    'cooldown': {'max_temperature_celsius': 40, 'max_utilization_percent': 5,
+                 'consecutive_samples': 3, 'interval_seconds': 1, 'timeout_seconds': 600},
+}
+GPU_CORE_QUERY = 'timestamp,index,utilization.gpu,memory.used,power.draw,temperature.gpu,clocks.sm'
+GPU_CORE_FIELDS = [('memory.used [MiB]', 'peak_memory_mib', 'MiB'), ('utilization.gpu [%]', 'peak_utilization_percent', '%'),
+                   ('power.draw [W]', 'peak_power_watts', 'W'), ('temperature.gpu', 'peak_temperature_celsius', ''),
+                   ('clocks.current.sm [MHz]', 'peak_sm_clock_mhz', 'MHz')]
 
 
 def require(condition, message):
@@ -403,11 +418,196 @@ def verify_summary(path, parsed, aligned=False):
                 require(int(row[key]) == value, f'Native summary count mismatch: {key}')
 
 
-def stage(root, name, argv, context, retry=False, execute=True, reserve=0):
+def host_sample(policy, owned_pgid=None):
+    """Read required controls without changing host state; failed reads remain evidence."""
+    sample = {'utc': utc(), 'monotonic_ns': time.monotonic_ns(), 'errors': []}
+    paths = {'ac_online': policy['ac_online']['path'],
+             'platform_profile': policy['platform_profile']['path'],
+             'loadavg': '/proc/loadavg', 'proc_stat': '/proc/stat'}
+    for field, path in paths.items():
+        try:
+            sample[field] = Path(path).read_text().strip()
+        except OSError as exc:
+            sample[field] = None
+            sample['errors'].append(f'{path}: {exc}')
+    sample['power_supplies'] = {}
+    for path in Path('/sys/class/power_supply').glob('*/online'):
+        try:
+            sample['power_supplies'][str(path)] = path.read_text().strip()
+        except OSError as exc:
+            sample['errors'].append(f'{path}: {exc}')
+    sample['cpu_affinity'] = sorted(os.sched_getaffinity(0))
+    sample['owned_cpu_affinities'] = {}
+    if owned_pgid is not None:
+        for path in Path('/proc').iterdir():
+            if path.name.isdecimal():
+                try:
+                    pid = int(path.name)
+                    if os.getpgid(pid) == owned_pgid:
+                        sample['owned_cpu_affinities'][path.name] = sorted(os.sched_getaffinity(pid))
+                except ProcessLookupError:
+                    pass
+                except OSError as exc:
+                    sample['errors'].append(f'affinity {path.name}: {exc}')
+    try:
+        result = subprocess.run(['nvidia-smi', '--query-compute-apps=pid,process_name', '--format=csv,noheader'], capture_output=True, text=True, timeout=10)
+        sample['gpu_compute_query'] = {'exit': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr}
+        require(result.returncode == 0, 'GPU compute query failed')
+        foreign = []
+        for row in csv.reader(result.stdout.splitlines(), skipinitialspace=True):
+            if not row:
+                continue
+            pid = int(row[0])
+            try:
+                owned = owned_pgid is not None and os.getpgid(pid) == owned_pgid
+            except ProcessLookupError:
+                owned = False
+            if not owned:
+                foreign.append(pid)
+        sample['foreign_gpu_compute_pids'] = foreign
+    except (OSError, ValueError, subprocess.SubprocessError) as exc:
+        sample['foreign_gpu_compute_pids'] = None
+        sample['errors'].append(str(exc))
+    return sample
+
+
+def control_errors(sample, policy):
+    errors = list(sample.get('errors', []))
+    for field, expected in [('ac_online', policy['ac_online']['required']), ('platform_profile', policy['platform_profile']['required']),
+                            ('cpu_affinity', policy['cpu_affinity']), ('foreign_gpu_compute_pids', [])]:
+        if sample.get(field) != expected:
+            errors.append(f'{field}: required {expected!r}, observed {sample.get(field)!r}')
+    if any(value != policy['cpu_affinity'] for value in sample.get('owned_cpu_affinities', {}).values()):
+        errors.append('Owned process CPU affinity changed')
+    if not sample.get('utc') or not isinstance(sample.get('monotonic_ns'), int) or not sample.get('loadavg') or not sample.get('proc_stat'):
+        errors.append('Missing required host telemetry')
+    return errors
+
+
+def append_sample(path, sample):
+    with Path(path).open('a') as handle:
+        handle.write(json.dumps(sample, sort_keys=True) + '\n')
+        handle.flush()
+
+
+def core_gpu_sample():
+    sample = {'utc': utc(), 'monotonic_ns': time.monotonic_ns(),
+              'argv': ['nvidia-smi', '--query-gpu=' + GPU_CORE_QUERY, '--format=csv']}
+    try:
+        result = subprocess.run(sample['argv'], capture_output=True, text=True, timeout=10)
+        sample.update(exit=result.returncode, stdout=result.stdout, stderr=result.stderr)
+    except (OSError, subprocess.SubprocessError) as exc:
+        sample.update(exit=None, stdout='', stderr=str(exc))
+    sample['completed_monotonic_ns'] = time.monotonic_ns()
+    return sample
+
+
+def core_gpu_rows(sample):
+    require(isinstance(sample, dict) and sample.get('exit') == 0, 'Required core GPU query failed/missing')
+    require(sample.get('utc') and isinstance(sample.get('monotonic_ns'), int)
+            and isinstance(sample.get('completed_monotonic_ns'), int)
+            and sample['completed_monotonic_ns'] >= sample['monotonic_ns'], 'Missing core GPU sample clock')
+    rows = list(csv.DictReader(sample.get('stdout', '').splitlines(), skipinitialspace=True))
+    require(rows and len({row.get('index') for row in rows}) == len(rows) and any(row.get('index') == '0' for row in rows), 'Empty/missing required GPU rows')
+    for row in rows:
+        require(row.get('timestamp'), 'Missing GPU row timestamp')
+        for field, _, unit in GPU_CORE_FIELDS:
+            value = row.get(field, '')
+            match = re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)\s*' + ('(?:' + re.escape(unit) + ')?' if unit else ''), value.strip()) if isinstance(value, str) else None
+            require(match is not None and math.isfinite(float(match[1])), 'Missing/nonnumeric core GPU field: ' + field)
+    return rows
+
+
+def retained_measurement_samples(samples, policy, launch_ns, end_ns):
+    require(len(samples) >= 2 and samples[0]['phase'] == 'before' and samples[-1]['phase'] == 'after', 'Missing before/after measurement samples')
+    require(all(not control_errors(sample, policy) for sample in samples), 'Invalid retained measurement sample')
+    for sample in samples:
+        core_gpu_rows(sample.get('gpu_core'))
+        require(sample['gpu_core']['completed_monotonic_ns'] - sample['gpu_core']['monotonic_ns'] <= policy['max_sample_gap_seconds'] * 1e9, 'Core GPU query exceeded sampling bound')
+    require(all(right['monotonic_ns'] >= left['monotonic_ns'] for left, right in zip(samples, samples[1:])), 'Out of order measurement samples')
+    require(all(right['monotonic_ns'] - left['monotonic_ns'] <= policy['max_sample_gap_seconds'] * 1e9 for left, right in zip(samples, samples[1:])), 'Missing continuous measurement samples')
+    gpu = [sample['gpu_core'] for sample in samples]
+    require(all(right['monotonic_ns'] - left['monotonic_ns'] <= policy['max_sample_gap_seconds'] * 1e9 for left, right in zip(gpu, gpu[1:])), 'Missing continuous core GPU samples')
+    require(isinstance(launch_ns, int) and isinstance(end_ns, int) and samples[0]['monotonic_ns'] <= gpu[0]['completed_monotonic_ns'] <= launch_ns <= end_ns <= samples[-1]['monotonic_ns'] <= gpu[-1]['monotonic_ns'], 'Measurement samples do not bracket native process')
+
+
+def gpu_idle_sample(policy):
+    result = subprocess.run(['nvidia-smi', '--query-gpu=index,temperature.gpu,utilization.gpu', '--format=csv,noheader,nounits'], capture_output=True, text=True, timeout=10)
+    sample = {'utc': utc(), 'monotonic_ns': time.monotonic_ns(), 'exit': result.returncode,
+              'stdout': result.stdout, 'stderr': result.stderr}
+    try:
+        rows = list(csv.reader(result.stdout.splitlines()))
+        sample['idle'] = result.returncode == 0 and bool(rows) and all(float(row[1]) <= policy['cooldown']['max_temperature_celsius'] and float(row[2]) <= policy['cooldown']['max_utilization_percent'] for row in rows)
+    except (ValueError, IndexError):
+        sample['idle'] = False
+    return sample
+
+
+def cooldown(attempt, policy):
+    deadline, consecutive = time.monotonic() + policy['cooldown']['timeout_seconds'], 0
+    print(json.dumps({'measurement_preflight': str(attempt), 'state': 'cooldown', 'utc': utc()}), flush=True)
+    while True:
+        sample = host_sample(policy)
+        errors = control_errors(sample, policy)
+        append_sample(attempt / 'preflight.jsonl', {'host': sample, 'errors': errors})
+        require(not errors, 'Measurement preflight controls: ' + '; '.join(errors))
+        idle = gpu_idle_sample(policy)
+        append_sample(attempt / 'preflight.jsonl', {'gpu': idle})
+        consecutive = consecutive + 1 if idle['idle'] else 0
+        if consecutive >= policy['cooldown']['consecutive_samples']:
+            print(json.dumps({'measurement_preflight': str(attempt), 'state': 'ready', 'utc': utc()}), flush=True)
+            return
+        require(time.monotonic() < deadline, 'GPU cooldown timed out (requires <=40 C, <=5% utilization for three samples)')
+        time.sleep(policy['cooldown']['interval_seconds'])
+
+
+GPU_OPTIONAL_FIELDS = ('enforced.power.limit', 'clocks_event_reasons.active', 'clocks_event_reasons.sw_power_cap',
+                       'clocks_event_reasons.sw_thermal_slowdown', 'clocks_event_reasons.hw_thermal_slowdown',
+                       'clocks_event_reasons.hw_power_brake_slowdown', 'clocks_event_reasons_counters.sw_power_cap',
+                       'clocks_event_reasons_counters.sw_thermal_slowdown', 'clocks_event_reasons_counters.hw_thermal_slowdown',
+                       'clocks_event_reasons_counters.hw_power_brake_slowdown')
+
+
+def gpu_snapshot(attempt, phase):
+    result = subprocess.run(['nvidia-smi', '-q'], capture_output=True, text=True, timeout=10)
+    write(attempt / f'gpu-state-{phase}.json', {'utc': utc(), 'monotonic_ns': time.monotonic_ns(),
+          'argv': ['nvidia-smi', '-q'], 'exit': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr})
+    require(result.returncode == 0, 'Required GPU state snapshot unavailable')
+
+
+def measurement_evidence(receipt, policy):
+    """Recheck retained samples as well as pins; verification never generates them."""
+    require(receipt.get('measurement_policy') == policy, 'Missing/changed measurement policy evidence')
+    require(receipt.get('measurement_qualified') is True, 'Measurement not qualified')
+    path = next((Path(p['path']) for p in receipt['pins'] if Path(p['path']).name == 'host.jsonl'), None)
+    require(path is not None and path.is_file(), 'Missing retained measurement samples')
+    samples = [json.loads(line) for line in path.read_text().splitlines()]
+    retained_measurement_samples(samples, policy, receipt.get('native_launch_monotonic_ns'), receipt.get('native_end_monotonic_ns'))
+    pinned = {Path(p['path']).name: Path(p['path']) for p in receipt['pins']}
+    gpu_csv = pinned.get('gpu.csv')
+    require(gpu_csv is not None and gpu_csv.is_file(), 'Missing required core GPU CSV')
+    with gpu_csv.open() as handle:
+        csv_rows = list(csv.DictReader(handle, skipinitialspace=True))
+    require(csv_rows == [row for sample in samples for row in core_gpu_rows(sample['gpu_core'])], 'Missing/changed core GPU CSV samples')
+    for phase in ('before', 'after'):
+        snapshot = pinned.get(f'gpu-state-{phase}.json')
+        require(snapshot is not None and read(snapshot)['exit'] == 0, 'Missing required GPU state snapshot')
+    if receipt.get('gpu_start'):
+        preflight = pinned.get('preflight.jsonl')
+        require(preflight is not None, 'Missing GPU cooldown evidence')
+        readings = [json.loads(line) for line in preflight.read_text().splitlines()]
+        idle = [sample['gpu'] for sample in readings if 'gpu' in sample]
+        require(len(idle) >= 3 and all(sample.get('idle') is True for sample in idle[-3:]), 'Missing qualified cooldown evidence')
+
+
+def stage(root, name, argv, context, retry=False, execute=True, reserve=0, measurement=None, gpu_start=False):
     directory = Path(root) / name
     directory.mkdir(parents=True, exist_ok=True)
     attempts = sorted(directory.glob('*/start.json'))
-    key = identity({'argv': argv, 'context': context})
+    key_data = {'argv': argv, 'context': context}
+    if measurement is not None:
+        key_data.update(measurement=measurement, gpu_start=gpu_start)
+    key = identity(key_data)
     if attempts:
         last = attempts[-1].parent
         require(read(last / 'start.json')['key'] == key, f'Changed stage identity: {name}')
@@ -415,6 +615,8 @@ def stage(root, name, argv, context, retry=False, execute=True, reserve=0):
             receipt = read(last / 'finish.json')
             if receipt['status'] == 'finished':
                 check_pins(receipt['pins'])
+                if measurement is not None:
+                    measurement_evidence(receipt, measurement)
                 return receipt
         require(retry, f'Failed/interrupted stage {name}; explicit --retry UNIT:STAGE required')
     require(execute, f'Missing retained stage: {name}')
@@ -424,40 +626,121 @@ def stage(root, name, argv, context, retry=False, execute=True, reserve=0):
     start = {'key': key, 'argv': argv, 'context': context, 'utc': utc(),
              'monotonic_ns': time.monotonic_ns(), 'recorder_label': label, 'explicit_env': {'LC_ALL': 'C'}, 'status': 'running'}
     write(attempt / 'start.json', start)
-    sampler = None
-    with (attempt / 'gpu.csv').open('w') as gpu, (attempt / 'gpu.stderr').open('w') as gpuerr:
-        if shutil.which('nvidia-smi'):
-            sampler = subprocess.Popen(['nvidia-smi', '--query-gpu=timestamp,index,utilization.gpu,memory.used,power.draw,temperature.gpu,clocks.sm', '--format=csv', '-l', '1'], stdout=gpu, stderr=gpuerr)
-        with (attempt / 'launcher.stdout').open('w') as out, (attempt / 'launcher.stderr').open('w') as err:
+    if measurement is not None:
+        start.update(measurement_policy=measurement, gpu_start=gpu_start)
+        write(attempt / 'start.json', start)
+    samplers, optional_queries, process, failure, qualified = [], [], None, None, False
+    def sample_host(phase):
+        sample = host_sample(measurement, process.pid if process is not None else None)
+        sample['phase'] = phase
+        sample['control_errors'] = control_errors(sample, measurement)
+        sample['gpu_core'] = core_gpu_sample()
+        try:
+            rows = core_gpu_rows(sample['gpu_core'])
+            require(sample['gpu_core']['completed_monotonic_ns'] - sample['gpu_core']['monotonic_ns'] <= measurement['max_sample_gap_seconds'] * 1e9, 'Core GPU query exceeded sampling bound')
+            with (attempt / 'gpu.csv').open('a') as gpu:
+                writer = csv.DictWriter(gpu, fieldnames=rows[0].keys())
+                if gpu.tell() == 0:
+                    writer.writeheader()
+                writer.writerows(rows)
+        except ValueError as exc:
+            sample['control_errors'].append(str(exc))
+        append_sample(attempt / 'host.jsonl', sample)
+        require(not sample['control_errors'], 'Measurement controls: ' + '; '.join(sample['control_errors']))
+    with ExitStack() as handles:
+        try:
+            if measurement is not None:
+                gpu_snapshot(attempt, 'before')
+            if shutil.which('nvidia-smi'):
+                if measurement is None:
+                    samplers.append(subprocess.Popen(['nvidia-smi', '--query-gpu=' + GPU_CORE_QUERY, '--format=csv', '-l', '1'], stdout=handles.enter_context((attempt / 'gpu.csv').open('w')), stderr=handles.enter_context((attempt / 'gpu.stderr').open('w'))))
+                if measurement is not None:
+                    for field in GPU_OPTIONAL_FIELDS:
+                        query = ['nvidia-smi', '--query-gpu=timestamp,index,' + field, '--format=csv']
+                        try:
+                            probe = subprocess.run(query, capture_output=True, text=True, timeout=10)
+                        except (OSError, subprocess.SubprocessError) as exc:
+                            write(attempt / (field + '-support.json'), {'argv': query, 'exit': None, 'error': str(exc)})
+                            continue
+                        write(attempt / (field + '-support.json'), {'argv': query, 'exit': probe.returncode, 'stdout': probe.stdout, 'stderr': probe.stderr})
+                        if probe.returncode == 0:
+                            optional_queries.append((field, query))
+                            try:
+                                samplers.append(subprocess.Popen([*query, '-l', '1'], stdout=handles.enter_context((attempt / (field + '.csv')).open('w')), stderr=handles.enter_context((attempt / (field + '.stderr')).open('w'))))
+                            except OSError as exc:
+                                write(attempt / (field + '-sampler-error.json'), {'error': str(exc)})
+            if measurement is not None:
+                if gpu_start:
+                    cooldown(attempt, measurement)
+                sample_host('before')
+            out = handles.enter_context((attempt / 'launcher.stdout').open('w'))
+            err = handles.enter_context((attempt / 'launcher.stderr').open('w'))
+            start['native_launch_utc'] = utc()
+            start['native_launch_monotonic_ns'] = time.monotonic_ns()
             process = subprocess.Popen([str(ROOT / 'scripts/record-command.sh'), label, *map(str, argv)], cwd=ROOT, stdout=out, stderr=err, start_new_session=True, env={**os.environ, 'LC_ALL': 'C'})
-            failure = None
-            try:
-                while process.poll() is None:
-                    if reserve and shutil.disk_usage(ROOT).free < reserve:
-                        raise RuntimeError('Disk reserve breached')
-                    time.sleep(0.25)
-            except BaseException as exc:
-                failure = str(exc) or type(exc).__name__
-                os.killpg(process.pid, signal.SIGTERM)
+            next_sample = time.monotonic() + (measurement['sample_interval_seconds'] if measurement else 1)
+            while process.poll() is None:
+                if reserve and shutil.disk_usage(ROOT).free < reserve:
+                    raise RuntimeError('Disk reserve breached')
+                if measurement is not None and time.monotonic() >= next_sample:
+                    sample_host('during')
+                    next_sample += measurement['sample_interval_seconds']
+                time.sleep(0.1 if measurement is not None else 0.25)
+            start['native_end_monotonic_ns'] = time.monotonic_ns()
+            start['native_end_utc'] = utc()
+            if measurement is not None:
+                sample_host('after')
+                samples = [json.loads(line) for line in (attempt / 'host.jsonl').read_text().splitlines()]
+                retained_measurement_samples(samples, measurement, start['native_launch_monotonic_ns'], start['native_end_monotonic_ns'])
+                qualified = True
+        except BaseException as exc:
+            failure = str(exc) or type(exc).__name__
+            if process is not None and process.poll() is None:
+                try:
+                    os.killpg(process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
                 try:
                     process.wait(timeout=10)
                 except subprocess.TimeoutExpired:
-                    os.killpg(process.pid, signal.SIGKILL)
+                    try:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
                     process.wait()
-            finally:
-                if sampler is not None:
-                    sampler.terminate()
-                    sampler.wait()
+        finally:
+            if measurement is not None:
+                if not qualified:
+                    try:
+                        sample_host('after')
+                    except Exception as exc:
+                        failure = (failure or '') + '; ' + str(exc)
+                try:
+                    gpu_snapshot(attempt, 'after')
+                except Exception as exc:
+                    failure = (failure or '') + '; ' + str(exc)
+                    qualified = False
+                for field, query in optional_queries:
+                    try:
+                        result = subprocess.run(query, capture_output=True, text=True, timeout=10)
+                        write(attempt / (field + '-after.json'), {'argv': query, 'exit': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr})
+                    except (OSError, subprocess.SubprocessError) as exc:
+                        write(attempt / (field + '-after.json'), {'argv': query, 'exit': None, 'error': str(exc)})
+            for sampler in samplers:
+                sampler.terminate()
+                sampler.wait()
     logs = list((ROOT / 'logs').glob('*-' + label + '-*'))
     recorder = logs[0] if len(logs) == 1 else None
     complete = recorder is not None and all((recorder / item).is_file() for item in ('exit-status.txt', 'start.txt', 'end.txt', 'time.txt', 'stdout', 'stderr', 'command.sh', 'cwd.txt'))
     status = 'finished' if complete and process.returncode == 0 and failure is None else 'command_failed' if complete else 'interrupted'
     receipt = {**start, 'status': status, 'end_utc': utc(), 'elapsed_ns': time.monotonic_ns() - start['monotonic_ns'],
-               'exit': process.returncode, 'failure': failure, 'recorder': str(recorder) if recorder else None,
+               'exit': process.returncode if process is not None else None, 'failure': failure, 'recorder': str(recorder) if recorder else None,
                'stdout': str(recorder / 'stdout') if recorder else None,
-               'sampler_exit': sampler.returncode if sampler is not None else None,
-               'resource_status': 'sampled; inspect raw query fields' if sampler is not None else 'unavailable: nvidia-smi absent',
+               'sampler_exit': samplers[0].returncode if samplers and measurement is None else None,
+               'resource_status': 'required synchronous samples; inspect host.jsonl and gpu.csv' if measurement else 'sampled; inspect raw query fields' if samplers else 'unavailable: nvidia-smi absent',
                'pins': [pin(p) for p in sorted(attempt.iterdir()) if p.is_file()] + ([pin(p) for p in sorted(recorder.iterdir()) if p.is_file()] if recorder else [])}
+    if measurement is not None:
+        receipt['measurement_qualified'] = qualified and failure is None and status == 'finished'
     write(attempt / 'finish.json', receipt)
     require(status == 'finished', f'Native stage {name} {status}; evidence: {attempt}')
     return receipt
@@ -465,6 +748,9 @@ def stage(root, name, argv, context, retry=False, execute=True, reserve=0):
 
 def prepare(config_path, output):
     config = read(ROOT / config_path)
+    require(config.get('timing_workload', 'benchmark-subset') in ('benchmark-subset', 'full-development'), 'Unknown timing workload')
+    if 'measurement_policy' in config:
+        require(config['measurement_policy'] == CONTROLLED_POLICY, 'Unsupported measurement policy')
     require(output.is_relative_to(ROOT / 'results/stock'), 'Stock plans belong under results/stock')
     require(not output.exists(), 'Plan output already exists')
     assets = read(ROOT / 'config/assets.json')
@@ -532,6 +818,9 @@ def prepare(config_path, output):
         ranked = sorted(ids(ROOT / 'data/splits/development.txt'), key=lambda v: hashlib.sha256(('nanopore-pilot-smoke-v1:' + v).encode()).hexdigest())
         require(selected == ranked[:32 if scope == 'smoke' else 256], 'Frozen development subset mismatch')
         pins.append(pin(membership))
+        if scope == 'timing' and config.get('timing_workload') == 'full-development':
+            membership = ROOT / 'data/splits/development.txt'
+            selected = ids(membership)
         for repetition, order in enumerate([('hac', 'sup')] if scope == 'smoke' else [('hac', 'sup'), ('sup', 'hac'), ('hac', 'sup'), ('sup', 'hac'), ('hac', 'sup')], 1):
             for tier in order:
                 units.append({'id': f'{scope}-{repetition}-{tier}', 'scope': scope, 'tier': tier, 'repetition': repetition, 'asset': development, 'ids': str(membership), 'parents': {uid: census['development'][uid] for uid in selected}})
@@ -551,7 +840,7 @@ def prepare(config_path, output):
     gpu_state = subprocess.run(['nvidia-smi', '-q'], capture_output=True, text=True)
     environment = {'gpu_query_exit': gpu_state.returncode, 'gpu_query_stdout': gpu_state.stdout, 'gpu_query_stderr': gpu_state.stderr, 'disk': list(shutil.disk_usage(ROOT)), 'cpu_affinity': sorted(os.sched_getaffinity(0)), 'uname': list(os.uname()), 'cpu': Path('/proc/cpuinfo').read_text(), 'memory': Path('/proc/meminfo').read_text(),
                    'power': {str(p): p.read_text().strip() for p in Path('/sys/class/power_supply').glob('*/online')},
-                   'cache': 'uncontrolled; earlier compatibility/smoke work retained separately', 'environment': {k: os.environ.get(k) for k in ('CUDA_VISIBLE_DEVICES', 'OMP_NUM_THREADS', 'LD_LIBRARY_PATH')}}
+                   'cache': config.get('measurement_policy', {}).get('cache_policy', 'uncontrolled; earlier compatibility/smoke work retained separately'), 'environment': {k: os.environ.get(k) for k in ('CUDA_VISIBLE_DEVICES', 'OMP_NUM_THREADS', 'LD_LIBRARY_PATH')}}
     plan = {'schema': 1, 'scope': 'stock-all-acquired', 'created_utc': utc(), 'config': config, 'pins': pins, 'units': units,
             'dictionary': reference['dictionary'], 'preparation_runs': preparation_runs, 'model_trees': model_trees, 'tool_versions': versions, 'source_submodules': submodules, 'environment': environment, 'scientific_endpoints': BIOLOGY}
     plan['sha256'] = identity(plan)
@@ -586,7 +875,7 @@ def gpu_resources(path):
     with Path(path).open() as handle:
         rows = list(csv.DictReader(handle, skipinitialspace=True))
     result, unavailable = {}, {}
-    for field, label, unit in [('memory.used [MiB]', 'peak_memory_mib', 'MiB'), ('utilization.gpu [%]', 'peak_utilization_percent', '%'), ('power.draw [W]', 'peak_power_watts', 'W'), ('temperature.gpu', 'peak_temperature_celsius', ''), ('clocks.current.sm [MHz]', 'peak_sm_clock_mhz', 'MHz')]:
+    for field, label, unit in GPU_CORE_FIELDS:
         values = []
         for row in rows:
             match = re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)\s*' + '(?:' + re.escape(unit) + ')?', row.get(field, '').strip()) if unit else re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)', row.get(field, '').strip())
@@ -615,6 +904,27 @@ def process_resources(receipt):
         result[label] = float(match[1]) if match else None
     gpu = next((ROOT / item['path'] for item in receipt.get('pins', []) if Path(item['path']).name == 'gpu.csv'), None)
     result['gpu'] = gpu_resources(gpu) if gpu and gpu.exists() else {'status': 'unavailable: no retained sampler'}
+    optional = {}
+    for field in GPU_OPTIONAL_FIELDS:
+        path = next((Path(p['path']) for p in receipt.get('pins', []) if Path(p['path']).name == field + '.csv'), None)
+        if path is not None and path.is_file():
+            with path.open() as handle:
+                rows = list(csv.DictReader(handle, skipinitialspace=True))
+            first = next((Path(p['path']) for p in receipt.get('pins', []) if Path(p['path']).name == field + '-support.json'), None)
+            last = next((Path(p['path']) for p in receipt.get('pins', []) if Path(p['path']).name == field + '-after.json'), None)
+            first_rows = list(csv.DictReader(read(first).get('stdout', '').splitlines(), skipinitialspace=True)) if first else []
+            last_rows = list(csv.DictReader(read(last).get('stdout', '').splitlines(), skipinitialspace=True)) if last else []
+            values = [value.strip() for row in first_rows + rows + last_rows for key, value in row.items() if key and key.startswith(field) and value]
+            item = {'raw_samples': values, 'path': str(path)}
+            if field.startswith('clocks_event_reasons_counters.'):
+                numbers = [float(match[1]) for value in values if (match := re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)(?:\s*us)?', value))]
+                item.update(counter_unit='microseconds', first=numbers[0] if numbers else None, last=numbers[-1] if numbers else None,
+                            delta=numbers[-1] - numbers[0] if len(numbers) >= 2 else None)
+            optional[field] = item
+    if receipt.get('measurement_policy') is not None:
+        result['gpu']['optional_telemetry'] = optional
+        result['measurement_qualified'] = receipt.get('measurement_qualified', False)
+        result['resource_scope'] = 'observer interval; native_wall_seconds is the separate /usr/bin/time process scope'
     return result
 
 
@@ -640,8 +950,15 @@ def run_unit(plan, unit, root, execute=True, retry=None):
     require(digest(verifier) == digest(__file__), 'Changed verifier snapshot')
     evidence = [pin(verifier)]
     reserve = config['reserve_gib'] * 1024**3 if execute else 0
+    measurement = ({**config['measurement_policy'], 'cpu_affinity': plan['environment']['cpu_affinity']}
+                   if 'measurement_policy' in config else None)
+    measurements = []
     def command(name, argv):
-        result = stage(directory, name, list(map(str, argv)), context, retry == unit['id'] + ':' + name, execute, reserve)
+        result = stage(directory, name, list(map(str, argv)), context, retry == unit['id'] + ':' + name, execute, reserve,
+                       measurement=measurement, gpu_start=name == 'basecall')
+        if measurement is not None:
+            measurement_evidence(result, measurement)
+            measurements.append(result['measurement_qualified'])
         evidence.extend(result['pins'])
         evidence.append(pin(sorted((directory / name).glob('*/finish.json'))[-1]))
         return Path(result['stdout']), result
@@ -693,6 +1010,9 @@ def run_unit(plan, unit, root, execute=True, retry=None):
                    'emitted_bases_per_wall_second': base['metrics']['called_bases'] / elapsed,
                    **native_log_diagnostics(native_log),
                    'pins': evidence + [pin(parents_file)], 'scientific_endpoints': BIOLOGY}
+    if measurement is not None:
+        observation['measurement_qualified'] = bool(measurements) and all(measurements)
+        observation['measurement_policy'] = measurement
     observation['complete_work_qualification'] = 'verified' if base['complete_processing'] and not observation['native_loader_error_lines'] else 'unavailable: absent parents or native loader diagnostics'
     write(directory / 'observation.json', observation)
     return observation
@@ -789,10 +1109,23 @@ def report(plan, root):
                 failure_times = [item.get('completed_ns', int(Path(item['path']).stem.rsplit('-', 1)[1])) for item in failures]
                 require(not failure_times or max(failure_times) < observation['completed_ns'], 'Newer observation verification failed')
                 check_pins(observation['pins'])
+                policy = plan.get('config', {}).get('measurement_policy')
+                if policy is not None:
+                    require(observation.get('measurement_qualified') is True, 'Missing measurement qualification')
+                    expected = {**policy, 'cpu_affinity': plan['environment']['cpu_affinity']}
+                    require(observation.get('measurement_policy') == expected, 'Changed observation measurement policy')
                 for finish in directory.glob('*/*/finish.json'):
                     receipt = read(finish)
                     if receipt['status'] == 'finished':
                         check_pins(receipt['pins'])
+                        if policy is not None:
+                            measurement_evidence(receipt, expected)
+                for stage_dir in directory.iterdir():
+                    if stage_dir.is_dir():
+                        latest = sorted(stage_dir.glob('*/start.json'))
+                        if latest:
+                            finish = latest[-1].parent / 'finish.json'
+                            require(finish.exists() and read(finish)['status'] == 'finished', 'Latest native stage attempt failed/interrupted')
                 state = observation['status']
             except (ValueError, OSError) as exc:
                 state = 'evidence_changed: ' + str(exc)
@@ -808,7 +1141,8 @@ def report(plan, root):
                 finish = start.parent / 'finish.json'
                 retained = read(finish) if finish.exists() else {**read(start), 'status': 'interrupted', 'exit': None}
                 attempts.append({'status': retained['status'], 'exit': retained['exit'], 'receipt': str(finish if finish.exists() else start),
-                                 'superseded': index < len(starts) - 1, 'resources': process_resources(retained)})
+                                 'superseded': index < len(starts) - 1, 'resources': process_resources(retained),
+                                 'measurement_qualified': retained.get('measurement_qualified'), 'failure': retained.get('failure')})
             if attempts:
                 stages[stage_dir.name] = {**attempts[-1], 'attempts': attempts}
         rows.append({'unit': unit['id'], 'scope': unit['scope'], 'tier': unit['tier'], 'status': state, 'stages': stages,
@@ -839,7 +1173,8 @@ def report(plan, root):
     attempt_counts = dict(collections.Counter(attempt['status'] for attempt in all_attempts))
     attempt_counts['total'] = len(all_attempts)
     output = {'plan': plan['sha256'], 'units': rows, 'other_native_processes': other_processes, 'native_process_attempt_counts': attempt_counts, 'timing': timing, 'scientific_endpoints': BIOLOGY,
-              'limits': ['Reference disagreement is a conditional mapped-child proxy.', 'Cache state uncontrolled; no model-tier speedup or winner claim.', 'Absent parents have unresolved causes.', 'Split sibling completeness cannot be established by parent membership alone.', 'Sampler fields may be unavailable; inspect raw logs.']}
+              'measurement_policy': plan.get('config', {}).get('measurement_policy'),
+              'limits': ['Reference disagreement is a conditional mapped-child proxy.', 'Cache policy: ' + plan.get('config', {}).get('measurement_policy', {}).get('cache_policy', 'uncontrolled') + '; no model-tier speedup or winner claim.', 'Absent parents have unresolved causes.', 'Split sibling completeness cannot be established by parent membership alone.', 'Sampler fields may be unavailable; inspect raw logs.']}
     write(root / 'report.json', output)
     return output
 
