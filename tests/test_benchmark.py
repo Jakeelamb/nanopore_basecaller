@@ -326,6 +326,7 @@ class NativeBamTests(unittest.TestCase):
 
 class ReceiptFixture(unittest.TestCase):
     def setUp(self):
+        (PROJECT / 'results').mkdir(exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(prefix='benchmark-tests-', dir=PROJECT / 'results')
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
