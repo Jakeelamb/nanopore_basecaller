@@ -7,6 +7,7 @@ from datetime import datetime
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import re
 import shutil
@@ -741,7 +742,7 @@ def percent(numerator, denominator):
     return 100 * numerator / denominator if denominator else None
 
 
-def render(bundle, evidence, planned, units, stock, accuracy, evidence_path):
+def render(bundle, evidence, planned, units, stock, accuracy, evidence_path, output_path):
     lines = ['# Controlled stock baseline', '']
 
     def paragraph(text):
@@ -759,7 +760,8 @@ def render(bundle, evidence, planned, units, stock, accuracy, evidence_path):
         lines.extend(['</details>', ''])
 
     paragraph('**Complete:** 19/19 stock units verified with the current native verifier; six full cohort/model outputs scored in both fixed truth domains. The accuracy wrapper qualifies native execution and exact ledgers. Scientific scope is the bounded endpoint described below.')
-    paragraph(f"Plan `{evidence['plan']}`. Inputs `{evidence['inputs']}`. [Machine-readable evidence]({evidence_path.resolve()}) retains every Q bin, stratum, artifact SHA-256 and native receipt path. Local [stock report]({stock.resolve() / 'report.json'}), [plan]({stock.resolve() / 'plan.json'}), [native qualification]({stock.resolve() / 'qualification.json'}) and [truth qualification]({accuracy.resolve() / 'truth-qualified.json'}). Export validation: {evidence['artifact_validation']}.")
+    evidence_link = os.path.relpath(evidence_path.resolve(), output_path.resolve().parent)
+    paragraph(f"Plan `{evidence['plan']}`. Inputs `{evidence['inputs']}`. [Machine-readable evidence]({evidence_link}) retains every Q bin, stratum, artifact SHA-256 and native receipt path. Local [stock report]({stock.resolve() / 'report.json'}), [plan]({stock.resolve() / 'plan.json'}), [native qualification]({stock.resolve() / 'qualification.json'}) and [truth qualification]({accuracy.resolve() / 'truth-qualified.json'}). Export validation: {evidence['artifact_validation']}.")
     paragraph('Endpoint: **' + evidence['endpoint'] + '**. Conditional on publisher donor labels and accepted primary autosomal mappings (MAPQ 30–254). Variants, known reference errors, non-ACGT truth and fixed unsupported-star confidence neighborhoods are excluded. Unknown reference errors and mapping errors remain possible. This is neither whole-read diploid accuracy nor variant calling; vendor training exclusion is unknown. HG005 is reported as a stock control and selects no candidate.')
     paragraph('Accuracy is M/(M+X+I+D), where X is substitution, I inserted bases and D deleted bases. Query exposure is M+X+I; reference exposure is M+X+D. Insertions need both flanks in one eligible interval; deletions count eligible reference positions. Split children combine by original parent. Aggregate and mean-parent rates differ. The 95% parent bootstrap intervals use 2,000 fixed-seed replicates and quantify within-pilot technical resampling only; genomic dependence, duplex relationships, flowcell and population variation, truth and donor uncertainty are not covered.')
     paragraph('## Repeated process timing')
@@ -874,7 +876,7 @@ def main():
         bundle['measurement_notes'] = load_measurement_notes(args.measurement_notes, args.stock, bundle['plan'], units, reader)
         evidence = evidence_bundle(bundle, planned, units, attempts, reader)
         bundle['_inputs_path'] = args.inputs
-        markdown = render(bundle, evidence, planned, units, args.stock, args.accuracy, args.evidence)
+        markdown = render(bundle, evidence, planned, units, args.stock, args.accuracy, args.evidence, args.output)
     except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError) as exc:
         parser.exit(1, f'Controlled report refused: {exc}\n')
     for path in (args.output, args.evidence):

@@ -328,7 +328,8 @@ class ControlledReportTests(unittest.TestCase):
         with patch.object(r, 'telemetry', return_value={'scope': 'observer', 'peaks': {}, 'sample_means': {}, 'host': {}}):
             evidence = r.evidence_bundle(self.bundle, planned, units, attempts, reader)
         self.bundle['_inputs_path'] = Path('/fixture/inputs.json')
-        text = r.render(self.bundle, evidence, planned, units, Path('/fixture/stock'), Path('/fixture/accuracy'), Path('/fixture/evidence.json'))
+        text = r.render(self.bundle, evidence, planned, units, Path('/fixture/stock'), Path('/fixture/accuracy'),
+                        Path('/fixture/provenance/verification/evidence.json'), Path('/fixture/research/report.md'))
         self.assertIn('19/19', text)
         self.assertIn('10, 10, 10, 10, 10', text)
         self.assertIn('publisher donor labels', text)
@@ -336,6 +337,7 @@ class ControlledReportTests(unittest.TestCase):
         self.assertIn('500 bp is the predeclared sensitivity', text)
         self.assertIn('D has no emitted Q', text)
         self.assertIn('80.000000–95.000000', text)
+        self.assertIn('[Machine-readable evidence](../provenance/verification/evidence.json)', text)
 
 
 class RawReceiptTests(unittest.TestCase):
