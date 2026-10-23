@@ -3,12 +3,17 @@
 import argparse
 from collections import Counter
 import csv
+from datetime import datetime
 import hashlib
 import json
 import math
 from pathlib import Path
 import re
+import shutil
 from statistics import mean, median, stdev
+import subprocess
+
+import benchmark as b
 
 ROOT = Path(__file__).resolve().parents[1]
 TIERS = ('hac', 'sup')
@@ -19,6 +24,8 @@ EXPECTED_IDS = FULL_IDS | TIMING_IDS | {'smoke-1-hac', 'smoke-1-sup', 'split-fix
 STAGES = {'align', 'aligned-decode', 'aligned-quickcheck', 'aligned-summary', 'base-decode',
           'base-quickcheck', 'base-summary', 'basecall', 'calmd', 'calmd-decode', 'flagstat', 'sort', 'stats'}
 SMALL_PIN_LIMIT = 2 * 1024**2
+INCIDENT_PLAN = '1c995eba5d6454a6ef8a8fc6dcd767fd9e9aead811389da38f3906ddaf6815e0'
+INCIDENT_NOTES = 'provenance/verification/controlled-measurement-notes-20261023.json'
 
 
 def require(ok, message):
@@ -62,7 +69,10 @@ def unique(items, key, label):
 
 
 def pin_for(pins, path):
-    found = [p for p in pins if Path(p['path']).resolve() == Path(path).resolve()]
+    # Native pin() already stores absolute resolved paths. Resolve the lookup
+    # once; resolving every manifest entry made joins needlessly quadratic.
+    target = str(Path(path).resolve())
+    found = [p for p in pins if p['path'] == target]
     require(found and all(p == found[0] for p in found), f'Missing/conflicting bound pin: {path}')
     return found[0]
 
@@ -70,6 +80,8 @@ def pin_for(pins, path):
 def validate_score(row, unit, plan, inputs, truth):
     label = f"{row['unit']}/{row['padding']}"
     score, producer = row['score'], row['producer']
+    for key in ('expected_parents', 'represented_parents', 'absent_parents', 'positive_denominator_parents', 'children', 'alignment_columns', 'eligible_query_columns', 'eligible_reference_columns'):
+        count(score[key], f'{label}/{key}')
     require(row['tier'] == unit['tier'] and row['sample'] == unit['asset']['sample'], f'{label}: foreign tier/sample')
     require(producer['status'] == 'finished' and producer['exit'] == 0 and not producer.get('failure'), f'{label}: native scorer failed')
     context = producer['context']
@@ -92,19 +104,37 @@ def validate_score(row, unit, plan, inputs, truth):
     close(score['aggregate_error_fraction'], (c['x'] + c['i'] + c['d']) / columns, label + '/error')
     close(score['aggregate_accuracy'], c['m'] / columns, label + '/accuracy')
     close(score['parent_mean_accuracy'], 1 - score['parent_mean_error_fraction'], label + '/parent mean')
+    for key in ('aggregate_accuracy', 'aggregate_error_fraction', 'parent_mean_accuracy', 'parent_mean_error_fraction'):
+        number(score[key], label + '/' + key)
+        require(score[key] <= 1, f'{label}: rate outside [0,1]')
     require(score['expected_parents'] == len(unit['parents']), f'{label}: input parent count mismatch')
     require(score['represented_parents'] + score['absent_parents'] == score['expected_parents'], f'{label}: parent conservation failed')
     require(0 < score['positive_denominator_parents'] <= score['represented_parents'], f'{label}: no positive parent exposure')
+    for status, n in score['statuses'].items():
+        require(status in {'selected', 'unmapped', 'low_mapq', 'unknown_mapq', 'nonautosomal', 'no_eligible_columns'}, f'{label}: unknown child status')
+        count(n, f'{label}/{status}')
     require(sum(score['statuses'].values()) == score['children'], f'{label}: child status conservation failed')
     losses = score['losses']
+    for key, n in losses.items():
+        count(n, f'{label}/loss/{key}')
     require(losses['query_bases'] == sum(losses[k] for k in ('excluded_query_bases', 'policy_excluded_query_bases', 'soft_clipped', 'unmapped_query_bases')) + score['eligible_query_columns'], f'{label}: called-query loss conservation failed')
     bootstrap = score['bootstrap']
     require(bootstrap['status'] == 'available' and bootstrap['replicates'] == 2000 and bootstrap['scope'] == 'technical_within_flowcell_only', f'{label}: technical bootstrap unavailable')
     require(bootstrap['seed'] == '0x4e414e4f504f5245' and bootstrap['unit'] == 'positive_denominator_source_parent', f'{label}: wrong bootstrap protocol')
     for key in ('aggregate_error_fraction_95_percentile', 'parent_mean_error_fraction_95_percentile'):
         ci = bootstrap[key]
+        for value in ci:
+            number(value, label + '/bootstrap CI')
         require(len(ci) == 2 and 0 <= ci[0] <= ci[1] <= 1, f'{label}: invalid bootstrap interval')
-    for key in ('length_strata', 'native_qscore_strata', 'homopolymer_context'):
+    labels = {'length_strata': {'0-999', '1000-9999', '10000-49999', '50000+'},
+              'native_qscore_strata': {'unavailable', '<10', '10-<20', '20-<30', '30+'},
+              'homopolymer_context': {'1', '2-3', '4-6', '7-10', '11+'}}
+    for key, valid_labels in labels.items():
+        require(set(score[key]) <= valid_labels, f'{label}: unknown {key} bin')
+        for bin_name, bin_ in score[key].items():
+            require(set(bin_) == set(c), f'{label}: incomplete {key} bin')
+            for column, n in bin_.items():
+                count(n, f'{label}/{key}/{bin_name}/{column}')
         for column in c:
             require(sum(bin_[column] for bin_ in score[key].values()) == c[column], f'{label}: {key} count mismatch')
     qbins = score['qscore']
@@ -116,6 +146,12 @@ def validate_score(row, unit, plan, inputs, truth):
         expected = n * 10 ** (-int(q) / 10)
         require(math.isclose(bin_['expected_error_sum'], expected, rel_tol=1e-7, abs_tol=1e-9), f'{label}: Q expectation mismatch')
     hp = score['homopolymer_length_endpoint']
+    count(hp['observations'], label + '/homopolymer observations')
+    require(set(score['homopolymer_length_counts']) <= labels['homopolymer_context'] - {'1'}, f'{label}: unknown homopolymer length bin')
+    for bin_ in score['homopolymer_length_counts'].values():
+        require(set(bin_) == {'correct', 'under', 'over', 'complex'}, f'{label}: incomplete homopolymer outcomes')
+        for n in bin_.values():
+            count(n, label + '/homopolymer count')
     require(sum(sum(bin_.values()) for bin_ in score['homopolymer_length_counts'].values()) == hp['observations'], f'{label}: homopolymer count mismatch')
 
 
@@ -155,6 +191,7 @@ def validate_bundle(bundle, current_verifier, current_sources, amendment):
         require(all(a >= b >= 0 for a, b in zip(ordered, ordered[1:])) and ordered[-1] == diag['eligible_bases'], f'{key}: truth census mismatch')
         require(diag['spanning_removed_union_bases'] == sum(item['end'] - item['start'] for item in diag['spanning_removed_intervals']), f'{key}: star removal census mismatch')
     policy = plan['config']['measurement_policy']
+    require(policy == b.CONTROLLED_POLICY, 'Frozen controlled measurement policy required')
     require(report['measurement_policy'] == policy, 'Report measurement policy mismatch')
     expected_policy = {**policy, 'cpu_affinity': plan['environment']['cpu_affinity']}
     attempts = []
@@ -165,8 +202,14 @@ def validate_bundle(bundle, current_verifier, current_sources, amendment):
         require(obs['unit'] == name and obs['plan'] == plan['sha256'], f'{name}: foreign stock observation')
         require(obs['verifier_sha256'] == current_verifier, f'{name}: current verifier required')
         require(obs['measurement_qualified'] is True and obs['measurement_policy'] == expected_policy, f'{name}: observation measurement unqualified')
-        reference_stage = obs.get('calmd_verification', {}).get('reference_check_stage')
+        calmd = obs['calmd_verification']
+        require(calmd['status'] == 'verified' and calmd['all_other_primary_fields_equal'] is True, f'{name}: calmd verification required')
+        reference_stage = calmd['reference_check_stage']
         require(reference_stage in (None, 'calmd-reference-iupac'), f'{name}: unknown reference check')
+        require(not reference_stage or name in {'full-validation-hac', 'full-validation-sup'}, f'{name}: unexpected IUPAC reference-check unit')
+        if reference_stage is None:
+            require(calmd['exact_md_agreement'] is True and calmd['md_reference_ambiguity_bases'] == calmd['md_reference_ambiguity_records'] == 0
+                    and calmd['md_reference_ambiguity_exceptions'] == [], f'{name}: missing calmd exception check')
         required_stages = STAGES | ({reference_stage} if reference_stage else set())
         require(set(unit['stages']) == required_stages, f'{name}: core 13 native stages and declared reference check required')
         for stage_name, stage in unit['stages'].items():
@@ -239,7 +282,8 @@ class Reader:
                 continue
             require(Path(path).is_file() and Path(path).stat().st_size == pin['size'], f'Artifact missing/size changed: {path}')
             # Default stays metadata-only for large native outputs and raw inputs.
-            if self.verify_pins or pin['size'] <= SMALL_PIN_LIMIT:
+            metadata = Path(path).suffix in ('.json', '.jsonl', '.csv', '.txt') or Path(path).name == 'command.sh'
+            if self.verify_pins or metadata or pin['size'] <= SMALL_PIN_LIMIT:
                 require(file_pin(path) == pin, f'Artifact pin changed: {path}')
             self.checked.add(path)
 
@@ -263,6 +307,13 @@ def load_bundle(stock, accuracy, inputs_path, reader):
     for source in bundle['truth']['sources']:
         require(file_pin(source['path']) == source, f"Current source/tool changed: {source['path']}")
     require(bundle['inputs']['config'] == reader.read(ROOT / 'config/accuracy-v1.json'), 'Accuracy config differs from current pinned v1 protocol')
+    frozen_config = reader.read(ROOT / 'config/controlled-stock-benchmark.json')
+    require(pin_for(plan['pins'], ROOT / 'config/controlled-stock-benchmark.json') == file_pin(ROOT / 'config/controlled-stock-benchmark.json'), 'Controlled config is not bound to plan')
+    normalized_config = {**frozen_config, 'models': {tier: str((ROOT / path).resolve()) for tier, path in frozen_config['models'].items()}}
+    for key in ('dorado', 'samtools'):
+        tool = frozen_config[key]
+        normalized_config[key] = str((ROOT / (Path(tool) if '/' in tool else Path(shutil.which(tool) or tool))).resolve())
+    require(plan['config'] == normalized_config, 'Plan config differs from frozen controlled protocol')
     require(plan['tool_versions']['dorado'].strip() == '2.1.2+8b8fc5d', 'Unchanged stock Dorado version required')
     require(set(plan['config']['models']) == set(plan['model_trees']) == set(TIERS), 'Both stock model trees required')
     for tier, tree in plan['model_trees'].items():
@@ -271,18 +322,25 @@ def load_bundle(stock, accuracy, inputs_path, reader):
         require(sorted(str(p.relative_to(path)) for p in path.rglob('*') if p.is_file()) == tree['files'], f'{tier}: changed model tree membership')
     reference = ROOT / plan['config']['reference']
     require(pin_for(plan['pins'], reference) == pin_for(bundle['inputs']['pins'], reference), 'Stock/accuracy full reference pin mismatch')
+    bundle['warmup'] = validate_warmup(stock, plan, reader)
     for unit in bundle['stock']['units']:
         if unit.get('observation'):
             actual = reader.read(stock / 'units' / unit['unit'] / 'observation.json')
             require(actual == unit['observation'], f"Stock report observation changed: {unit['unit']}")
             reader.retain(actual['pins'])
+        if unit['scope'] in ('full', 'timing'):
+            basecall = reader.read(unit['stages']['basecall']['receipt'])
+            require(datetime.fromisoformat(bundle['warmup']['native']['end_utc']) <= datetime.fromisoformat(basecall['native_launch_utc']), 'Filesystem warmup did not precede measured basecalling')
         unit_root = stock / 'units' / unit['unit']
         actual_stage_names = {p.parent.parent.name for p in unit_root.glob('*/*/start.json')}
         require(actual_stage_names == set(unit['stages']), 'Stock report hides native stage directories')
+        expected_policy = {**plan['config']['measurement_policy'], 'cpu_affinity': plan['environment']['cpu_affinity']}
         for stage_name, stage in unit['stages'].items():
             starts = sorted((unit_root / stage_name).glob('*/start.json'))
             actual_paths = [str(p.parent / ('finish.json' if (p.parent / 'finish.json').exists() else 'start.json')) for p in starts]
             require(actual_paths == [a['receipt'] for a in stage['attempts']], 'Stock report hides/reorders native attempts')
+            bound, _ = bound_stage(unit['observation'], unit_root, stage_name, reader)
+            require(str(bound) == stage['receipt'], 'Current stage differs from observation-bound producer')
             for attempt in stage['attempts']:
                 receipt = reader.read(attempt['receipt'])
                 require(receipt['status'] == attempt['status'] and receipt['exit'] == attempt['exit'], 'Native attempt receipt mismatch')
@@ -290,10 +348,28 @@ def load_bundle(stock, accuracy, inputs_path, reader):
                 require(receipt['context'] == {'plan': plan['sha256'], 'unit': unit['unit']}, 'Foreign stock native context')
                 reader.retain(receipt.get('pins', []))
                 if receipt['status'] == 'finished':
+                    expected_argv = stock_argv(plan, unit, stage_name, reader) if attempt['receipt'] == stage['receipt'] else receipt['argv']
+                    validate_native_receipt(receipt, expected_argv, {'plan': plan['sha256'], 'unit': unit['unit']}, reader,
+                                            Path(attempt['receipt']), expected_policy, stage_name == 'basecall',
+                                            latest=attempt['receipt'] == stage['receipt'])
+                    b.measurement_evidence(receipt, expected_policy)
                     validate_resources(receipt, attempt['resources'])
+                    if stage_name == 'calmd-reference-iupac' and attempt['receipt'] == stage['receipt']:
+                        validate_iupac(unit['observation']['calmd_verification'], Path(receipt['stdout']))
             require(all(stage[k] == stage['attempts'][-1][k] for k in ('receipt', 'status', 'exit', 'resources', 'measurement_qualified', 'failure')), 'Stock latest native stage projection mismatch')
     for domain in bundle['truth']['truth'].values():
         require(reader.read(Path(domain['directory']) / 'truth.json') == domain['diagnostics'], 'Truth diagnostics changed')
+        diag = domain['diagnostics']
+        truth_input = bundle['inputs']['truth'][diag['sample']]
+        spans = reader.read(inputs_path.parent / 'original-spans.json')
+        argv = [bundle['truth']['binary'], 'truth', '--reference', bundle['inputs']['reference'], '--vcf', truth_input['vcf'],
+                '--confident', truth_input['confident'], '--sample', diag['sample'], '--padding', str(diag['padding']),
+                '--output', domain['directory'], '--original-footprints', spans['samples'][diag['sample']]['bed'],
+                '--spanning-policy', bundle['truth']['amendment']['spanning_policy']]
+        for path in bundle['inputs']['exclusions']:
+            argv.extend(['--exclusions', path])
+        validate_native_receipt(domain['producer'], argv, sources, reader)
+    validate_other_processes(stock, plan, bundle['stock']['other_native_processes'], reader)
     for scope in ('full', 'timing'):
         path = accuracy / f"report-{plan['sha256']}-{scope}.json"
         if not path.exists():
@@ -311,11 +387,195 @@ def load_bundle(stock, accuracy, inputs_path, reader):
             starts = list((accuracy / 'score-stages' / plan['sha256'] / row['unit'] / str(row['padding'])).glob('*/finish.json'))
             matches = [p for p in starts if json.loads(p.read_text()).get('key') == producer['key']]
             require(len(matches) == 1 and reader.read(matches[0]) == producer, 'Scorer producer receipt changed/ambiguous')
-            obs = bundle['stock']['units']
-            observation = next(u['observation'] for u in obs if u['unit'] == row['unit'])
+            stock_unit = next(u for u in bundle['stock']['units'] if u['unit'] == row['unit'])
+            observation = stock_unit['observation']
             sam_pin = producer['context']['sam']
-            require(sam_pin == pin_for(observation['pins'], sam_pin['path']), 'Scorer SAM not bound to stock observation')
+            decoder_path, decoder = bound_stage(observation, stock / 'units' / row['unit'], 'aligned-decode', reader)
+            require(str(decoder_path) == stock_unit['stages']['aligned-decode']['receipt'], 'Scorer decoder is not the current observation-bound stage')
+            require(sam_pin == pin_for(decoder['pins'], decoder['stdout']) == pin_for(observation['pins'], decoder['stdout']), 'Scorer SAM not bound to exact aligned decoder')
+            planned = next(u for u in plan['units'] if u['id'] == row['unit'])
+            domain = bundle['truth']['truth'][f"{row['sample']}-{row['padding']}"]
+            argv = [bundle['truth']['binary'], 'score', '--reference', bundle['inputs']['reference'], '--eligible', str(Path(domain['directory']) / 'eligible.bed'),
+                    '--sam', decoder['stdout'], '--parents', planned['ids'], '--output', str(output), '--min-mapq', str(bundle['inputs']['config']['min_mapq'])]
+            context = {'plan': plan['sha256'], 'unit': row['unit'], 'padding': row['padding'],
+                       'truth': pin_for(bundle['truth']['pins'], Path(domain['directory']) / 'eligible.bed'),
+                       'sam': sam_pin, 'parents': pin_for(plan['pins'], planned['ids']), 'sources': bundle['truth']['sources']}
+            validate_native_receipt(producer, argv, context, reader, matches[0])
     return bundle
+
+
+def bound_stage(observation, unit_root, stage, reader):
+    """The accuracy.observation_stage join, using retained SAM pins without rehashing SAM."""
+    paths = [Path(p['path']) for p in observation['pins'] if Path(p['path']).name == 'finish.json'
+             and Path(p['path']).parent.parent == unit_root / stage]
+    require(len(paths) == 1, 'Missing/ambiguous observation-bound decoder receipt')
+    path = paths[0]
+    require(file_pin(path) == pin_for(observation['pins'], path), 'Observation-bound native receipt changed')
+    receipt = reader.read(path)
+    output_pin = pin_for(receipt['pins'], receipt['stdout'])
+    require(output_pin == pin_for(observation['pins'], receipt['stdout']), 'Decoded SAM is not bound to stock observation')
+    reader.retain([output_pin])
+    return path, receipt
+
+
+def validate_warmup(stock, plan, reader):
+    warmup = reader.read(stock / 'filesystem-warmup.json')
+    config = plan['config']
+    paths = {ROOT / config['reference'], ROOT / config['index'], Path(config['dorado']), Path(config['samtools'])}
+    paths.update(ROOT / unit['asset']['path'] for unit in plan['units'])
+    for tree in plan['model_trees'].values():
+        paths.update(Path(tree['path']) / name for name in tree['files'])
+    paths.update(path for path in (Path(config['dorado']).parent.parent / 'lib').rglob('*') if path.is_file())
+    paths.update(ROOT / (config['reference'] + suffix) for suffix in ('.fai', '.gzi'))
+    files = sorted(str(path.resolve()) for path in paths)
+    inputs = [pin_for(plan['pins'], path) for path in files]
+    context = {'plan': plan['sha256'], 'warmup_source': file_pin(ROOT / 'scripts/warm-stock-inputs.py'), 'inputs': inputs,
+               'policy': 'sequential native cat of runtime inputs; stdout discarded; no cache flush'}
+    require(warmup['status'] == 'verified' and warmup['context'] == context, 'Filesystem warmup plan/input/source mismatch')
+    require(warmup['files'] == len(files) and warmup['bytes'] == sum(p['size'] for p in inputs), 'Filesystem warmup census mismatch')
+    reader.retain(warmup['pins'] + inputs + [context['warmup_source']])
+    validate_native_receipt(warmup['native'], ['bash', '-c', 'cat -- "$@" > /dev/null', '--', *files], context, reader)
+    return warmup
+
+
+def validate_other_processes(stock, plan, reported, reader):
+    """Inventory every retained qualification/preparation attempt, including failures."""
+    expected = []
+    for start in sorted((stock / 'controls').glob('*/*/*/start.json')):
+        finish = start.parent / 'finish.json'
+        receipt = reader.read(finish if finish.exists() else start)
+        if finish.exists():
+            validate_native_receipt(receipt, receipt['argv'], receipt['context'], reader, finish, latest=False)
+        else:
+            receipt = {**receipt, 'status': 'interrupted', 'exit': None}
+        expected.append({'kind': 'qualification_control', 'receipt': str(finish if finish.exists() else start),
+                         'status': receipt['status'], 'exit': receipt['exit']})
+    for name in plan['preparation_runs']:
+        run = ROOT / name
+        pins = [pin_for(plan['pins'], run / item) for item in ('command.sh', 'cwd.txt', 'start.txt', 'end.txt', 'exit-status.txt', 'stdout', 'stderr', 'time.txt')]
+        reader.retain(pins)
+        exit_code = int((run / 'exit-status.txt').read_text())
+        require(Path((run / 'cwd.txt').read_text().strip()).resolve() == ROOT.resolve(), 'Preparation raw cwd mismatch')
+        require(datetime.fromisoformat((run / 'start.txt').read_text().strip()) <= datetime.fromisoformat((run / 'end.txt').read_text().strip()), 'Preparation raw UTC clocks out of order')
+        raw_exit = re.search(r'Exit status: ([0-9]+)', (run / 'time.txt').read_text())
+        require(raw_exit is not None and int(raw_exit[1]) == exit_code and (run / 'command.sh').read_text().strip(), 'Preparation raw exit/command unavailable')
+        expected.append({'kind': 'preparation', 'recorder': str(run), 'status': 'finished' if exit_code == 0 else 'command_failed', 'exit': exit_code})
+    projected = [{key: item.get(key) for key in row} for row, item in zip(expected, reported)]
+    require(len(expected) == len(reported) and projected == expected, 'Other native process inventory/status mismatch; retained failures may be hidden')
+
+
+def stock_argv(plan, unit, name, reader):
+    config = plan['config']
+    planned = next(p for p in plan['units'] if p['id'] == unit['unit'])
+    unit_root = Path(unit['stages']['basecall']['receipt']).parent.parent.parent
+
+    def output(stage):
+        path, receipt = bound_stage(unit['observation'], unit_root, stage, reader)
+        require(str(path) == unit['stages'][stage]['receipt'], 'Current stage differs from observation-bound producer')
+        return receipt['stdout']
+
+    d, s = config['dorado'], config['samtools']
+    if name == 'basecall':
+        return list(map(str, [d, 'basecaller', ROOT / config['models'][planned['tier']], ROOT / planned['asset']['path'],
+                            '--read-ids', planned['ids'], '--device', 'cuda:0', '--batchsize', '0', '--min-qscore', '0', '--trim', 'all', '-v']))
+    if name == 'base-quickcheck':
+        return [s, 'quickcheck', '-u', '-v', output('basecall')]
+    if name == 'base-decode':
+        return [s, 'view', '-h', output('basecall')]
+    if name == 'base-summary':
+        return [d, 'summary', output('basecall')]
+    if name == 'align':
+        return [d, 'aligner', str(ROOT / config['index']), output('basecall'), '--threads', '16', '--no-sort', '--mm2-opts', '-x lr:hq -I 16G --eqx -Y']
+    if name == 'sort':
+        return [s, 'sort', '-@', '3', '-m', '256M', '-O', 'BAM', output('align')]
+    if name == 'aligned-quickcheck':
+        return [s, 'quickcheck', '-v', output('sort')]
+    if name == 'aligned-decode':
+        return [s, 'view', '-h', output('sort')]
+    if name == 'aligned-summary':
+        return [d, 'summary', output('sort')]
+    if name == 'flagstat':
+        return [s, 'flagstat', '-O', 'json', output('sort')]
+    if name == 'stats':
+        return [s, 'stats', '-F', '0x900', '-r', str(ROOT / config['reference']), output('sort')]
+    if name == 'calmd':
+        return [s, 'calmd', '-b', output('sort'), str(ROOT / config['reference'])]
+    if name == 'calmd-decode':
+        return [s, 'view', '-h', output('calmd')]
+    require(name == 'calmd-reference-iupac' and unit['unit'] in {'full-validation-hac', 'full-validation-sup'}, 'Unexpected native stage')
+    exceptions = unit['observation']['calmd_verification']['md_reference_ambiguity_exceptions']
+    require(exceptions and all(e['native_md_base'] == 'N' and e['calmd_md_base'] == e['reference_base'] and e['reference_base'] in 'RYSWKMBDHV' for e in exceptions), 'Invalid coordinate-confirmed IUPAC exceptions')
+    regions = sorted({f"{e['contig']}:{e['reference_position_1based']}-{e['reference_position_1based']}" for e in exceptions})
+    return [s, 'faidx', str(ROOT / config['reference']), *regions]
+
+
+def validate_native_receipt(receipt, argv, context, reader, finish=None, policy=None, gpu_start=False, latest=True):
+    """Reconcile raw native producer evidence with the retained stage identity."""
+    require(receipt['argv'] == argv and receipt['context'] == context, 'Native command/context mismatch')
+    data = {'argv': argv, 'context': context}
+    if policy is not None:
+        data.update(measurement=policy, gpu_start=gpu_start)
+        require(receipt.get('measurement_policy') == policy and receipt.get('gpu_start') is gpu_start, 'Native measurement policy/start mismatch')
+    else:
+        require('measurement_policy' not in receipt, 'Unexpected native measurement policy')
+    require(receipt['key'] == identity(data), 'Native stage identity mismatch')
+    require(receipt['explicit_env'] == {'LC_ALL': 'C'}, 'Native recorder locale/environment mismatch')
+    reader.retain(receipt['pins'])
+    starts = [Path(p['path']) for p in receipt['pins'] if Path(p['path']).name == 'start.json']
+    require(len(starts) == 1, 'Unique native start receipt required')
+    start = reader.read(starts[0])
+    require(start['status'] == 'running' and all(receipt.get(k) == value for k, value in start.items() if k != 'status'), 'Native start/finish identity mismatch')
+    if finish is not None:
+        require(Path(finish) == starts[0].parent / 'finish.json', 'Native finish/start attempt mismatch')
+    actual_finish = starts[0].parent / 'finish.json'
+    require(reader.read(actual_finish) == receipt, 'Native producer finish receipt changed')
+    starts_on_disk = sorted(starts[0].parent.parent.glob('*/start.json'))
+    require(not latest or starts_on_disk and starts_on_disk[-1] == starts[0], 'Newer native attempt exists outside accepted producer')
+    recorder = Path(receipt['recorder'])
+    require(receipt['stdout'] == str(recorder / 'stdout'), 'Native stdout/recorder mismatch')
+    for name in ('command.sh', 'cwd.txt', 'start.txt', 'end.txt', 'exit-status.txt', 'stdout', 'stderr', 'time.txt'):
+        pin_for(receipt['pins'], recorder / name)
+    encoded = subprocess.check_output(['bash', '-c', 'printf "%q " "$@"; printf "\\n"', '--', *argv], text=True, env={'LC_ALL': 'C'})
+    require((recorder / 'command.sh').read_text() == encoded, 'Raw native command mismatch')
+    require(Path((recorder / 'cwd.txt').read_text().strip()).resolve() == ROOT.resolve(), 'Raw native cwd mismatch')
+    native_exit = int((recorder / 'exit-status.txt').read_text().strip())
+    require(native_exit == receipt['exit'], 'Raw native exit status mismatch')
+    time_exit = re.search(r'Exit status: ([0-9]+)', (recorder / 'time.txt').read_text())
+    require(time_exit is not None and int(time_exit[1]) == native_exit, 'GNU time/raw native exit status mismatch')
+    if receipt['status'] == 'finished':
+        require(native_exit == 0 and not receipt.get('failure'), 'Successful native producer has failed raw exit')
+    else:
+        require(receipt['status'] == 'command_failed' and (native_exit != 0 or receipt.get('failure')), 'Native failure status mismatch')
+    clocks = [datetime.fromisoformat(receipt[key]).timestamp() for key in ('utc', 'native_launch_utc', 'native_end_utc', 'end_utc')]
+    require(all(a <= b_ for a, b_ in zip(clocks, clocks[1:])), 'Native UTC clocks out of order')
+    raw_start = datetime.fromisoformat((recorder / 'start.txt').read_text().strip()).timestamp()
+    raw_end = datetime.fromisoformat((recorder / 'end.txt').read_text().strip()).timestamp()
+    require(math.floor(clocks[1]) <= raw_start <= raw_end <= clocks[2], 'Raw native UTC clocks outside producer boundary')
+    require(receipt['monotonic_ns'] <= receipt['native_launch_monotonic_ns'] <= receipt['native_end_monotonic_ns'] <= receipt['monotonic_ns'] + receipt['elapsed_ns'], 'Native monotonic clocks out of order')
+
+
+def validate_iupac(verification, output):
+    """Check the retained tiny faidx response, without reading reference or SAM data."""
+    exceptions = verification['md_reference_ambiguity_exceptions']
+    require(verification['status'] == 'verified' and verification['all_other_primary_fields_equal'] is True
+            and verification['exact_md_agreement'] is False, 'IUPAC calmd verification unavailable')
+    require(verification['md_reference_ambiguity_bases'] == len(exceptions)
+            and verification['md_reference_ambiguity_records'] == len({e['child'] for e in exceptions}), 'IUPAC exception census mismatch')
+    expected = {}
+    for e in exceptions:
+        region = f"{e['contig']}:{e['reference_position_1based']}-{e['reference_position_1based']}"
+        require(region not in expected or expected[region] == e['reference_base'], 'Conflicting IUPAC coordinate labels')
+        expected[region] = e['reference_base']
+    actual, region = {}, None
+    for line in output.read_text().splitlines():
+        if line.startswith('>'):
+            region = line[1:]
+            require(region not in actual, 'Duplicate native faidx region')
+            actual[region] = ''
+        else:
+            require(region is not None, 'Native faidx sequence without region')
+            actual[region] += line.strip().upper()
+    require(actual == expected, 'Native faidx IUPAC coordinates/bases mismatch')
 
 
 def validate_resources(receipt, resources):
@@ -333,6 +593,8 @@ def validate_resources(receipt, resources):
         require(match is not None, 'Native GNU time resource unavailable: ' + key)
         close(resources[key], float(match[1]), 'Native ' + key)
     require(resources['measurement_qualified'] == receipt['measurement_qualified'], 'Native resource measurement qualification mismatch')
+    if 'gpu' in resources:
+        require(resources['gpu'] == b.process_resources(receipt)['gpu'], 'Native GPU resource projection mismatch')
 
 
 def summary(values):
@@ -401,6 +663,8 @@ def evidence_bundle(bundle, planned, units, attempts, reader):
             'versions': bundle['plan']['tool_versions'], 'models': bundle['plan']['model_trees'],
             'measurement_policy': bundle['plan']['config']['measurement_policy'],
             'analysis_history': history,
+            'filesystem_warmup': bundle.get('warmup'),
+            'measurement_notes': bundle.get('measurement_notes'),
             'artifact_pins': sorted(reader.pins.values(), key=lambda p: p['path'])}
 
 
@@ -413,6 +677,52 @@ def analysis_history(amendment, reader):
         result['strict_star_attempt'] = {'status': 'command_failed', 'exit': int((directory / 'exit-status.txt').read_text()), 'recorder': str(directory), 'pins': pins}
         require(result['strict_star_attempt']['exit'] != 0, 'Declared strict failed attempt has successful exit')
     return result
+
+
+def validate_measurement_notes(notes, plan, units):
+    require(notes['schema'] == 1 and notes['plan'] == plan['sha256'], 'Measurement notes plan/schema mismatch')
+    if plan['sha256'] == INCIDENT_PLAN:
+        require(any(note.get('unit') == 'full-sealed_test-sup' and note.get('stage') == 'basecall'
+                    and note.get('pid') == 672880 and note.get('status') == 'descriptive_with_owned_cpu_interference'
+                    for note in notes['notes']), 'Known owned CPU incident annotation required')
+    planned = {u['id']: u for u in plan['units']}
+    seen = set()
+    for note in notes['notes']:
+        name, stage = note['unit'], note['stage']
+        require(name in planned and stage in units[name]['stages'], 'Measurement note has foreign unit/stage')
+        require(planned[name]['scope'] != 'timing', 'Primary timing repetition has owned CPU interference')
+        require(note['kind'] == 'owned_cpu_interference' and note['status'] == 'descriptive_with_owned_cpu_interference', 'Unsupported measurement note kind/status')
+        require(note['time_precision'] in ('approximate', 'exact') and isinstance(note['pid'], int) and note['pid'] > 0,
+                'Measurement note precision/PID unavailable')
+        require(note['reason'] and isinstance(note['command'], list) and note['command'] and isinstance(note['evidence_paths'], list), 'Measurement note provenance unavailable')
+        start, end, stopped = (datetime.fromisoformat(note[key]) for key in ('start_utc', 'end_utc', 'worker_terminated_before_utc'))
+        require(all(t.tzinfo is not None for t in (start, end, stopped)) and start <= end <= stopped, 'Measurement note UTC interval invalid')
+        resources = units[name]['stages'][stage]['resources']
+        native_start, native_end = (datetime.fromisoformat(resources[key]) for key in ('start_utc', 'end_utc'))
+        require(start <= native_end and end >= native_start, 'Measurement note does not overlap affected observer interval')
+        signature = (name, stage, note['pid'], note['start_utc'], note['end_utc'])
+        require(signature not in seen, 'Duplicate measurement note')
+        seen.add(signature)
+        for unit in units.values():
+            if unit['scope'] == 'timing':
+                require(datetime.fromisoformat(unit['stages']['basecall']['resources']['start_utc']) > stopped, 'Primary timing starts before confirmed worker termination')
+
+
+def timing_note(evidence, unit, stage='basecall'):
+    return '; '.join(note['status'] for note in (evidence.get('measurement_notes') or {}).get('notes', []) if note['unit'] == unit and note['stage'] == stage) or 'controlled process observation'
+
+
+def load_measurement_notes(path, stock, plan, units, reader):
+    canonical = ROOT / INCIDENT_NOTES if plan['sha256'] == INCIDENT_PLAN else stock / 'measurement-notes.json'
+    if plan['sha256'] == INCIDENT_PLAN:
+        require(canonical.is_file(), 'Canonical known-incident annotation unavailable')
+    if path is None and not canonical.exists():
+        return None
+    notes = reader.read(path or canonical)
+    if canonical.exists():
+        require(notes == reader.read(canonical), 'Measurement note override differs from retained canonical annotations')
+    validate_measurement_notes(notes, plan, units)
+    return notes
 
 
 def fmt(value):
@@ -453,7 +763,7 @@ def render(bundle, evidence, planned, units, stock, accuracy, evidence_path):
     paragraph('Endpoint: **' + evidence['endpoint'] + '**. Conditional on publisher donor labels and accepted primary autosomal mappings (MAPQ 30–254). Variants, known reference errors, non-ACGT truth and fixed unsupported-star confidence neighborhoods are excluded. Unknown reference errors and mapping errors remain possible. This is neither whole-read diploid accuracy nor variant calling; vendor training exclusion is unknown. HG005 is reported as a stock control and selects no candidate.')
     paragraph('Accuracy is M/(M+X+I+D), where X is substitution, I inserted bases and D deleted bases. Query exposure is M+X+I; reference exposure is M+X+D. Insertions need both flanks in one eligible interval; deletions count eligible reference positions. Split children combine by original parent. Aggregate and mean-parent rates differ. The 95% parent bootstrap intervals use 2,000 fixed-seed replicates and quantify within-pilot technical resampling only; genomic dependence, duplex relationships, flowcell and population variation, truth and donor uncertainty are not covered.')
     paragraph('## Repeated process timing')
-    paragraph('Five fresh processes per tier use all 2,608 development parents and 641,769,607 electrical samples each. Filesystem inputs/models/reference/index were explicitly warmed outside timing. ACAD external power and balanced laptop profile were sampled continuously; the observed power ceiling is 100 W. Stock DVFS, fan control and clocks remain dynamic. Three one-second idle GPU observations at ≤40 C and ≤5% utilization gate each start outside the native clock. No other CPU-heavy work was scheduled during measurements. This is process throughput, including startup, loading, input/output and shutdown, with no isolated-kernel or model-winner claim.')
+    paragraph('Five fresh processes per tier use all 2,608 development parents and 641,769,607 electrical samples each. Filesystem inputs/models/reference/index were explicitly warmed outside timing. ACAD external power and balanced laptop profile were sampled continuously; the observed power ceiling is 100 W. Stock DVFS, fan control and clocks remain dynamic. Three one-second idle GPU observations at ≤40 C and ≤5% utilization gate each start outside the native clock. The repeated timing phase was scheduled without other CPU-heavy work; disclosed full-cohort incidents appear below. This is process throughput, including startup, loading, input/output and shutdown, with no isolated-kernel or model-winner claim.')
     rows = []
     for tier in TIERS:
         t = evidence['timing'][tier]
@@ -488,17 +798,23 @@ def render(bundle, evidence, planned, units, stock, accuracy, evidence_path):
     end_detail()
     paragraph('## Full cohort accuracy and exposure')
     paragraph('Full-cohort process clocks are additional single observations per cohort/model, separate from the five repeated development timing estimates.')
-    table(['Full unit', 'Parents submitted', 'Signal samples', 'Native basecall wall s', 'Called bases', 'Represented/absent parents', 'Complete work'], [
+    table(['Full unit', 'Parents submitted', 'Signal samples', 'Native basecall wall s', 'Clock qualification', 'Called bases', 'Represented/absent parents', 'Complete work'], [
         (u['unit'], len(planned[u['unit']]['parents']), sum(planned[u['unit']]['parents'].values()),
-         u['observation']['basecall_process_wall_seconds'], (base := u['observation']['basecall'])['metrics']['called_bases'],
+         u['observation']['basecall_process_wall_seconds'], timing_note(evidence, u['unit']), (base := u['observation']['basecall'])['metrics']['called_bases'],
          f"{base['metrics']['represented_parents']}/{len(base['missing_parents'])}", u['observation']['complete_work_qualification'])
         for u in units.values() if u['scope'] == 'full'])
+    if evidence.get('measurement_notes'):
+        paragraph('Disclosed measurement incidents qualify the affected clock without discarding its observed output or subsequent source-bound accuracy scores. The uncertainty window overlaps the observer interval; this conservative qualification does not reconstruct instantaneous native contention. Required AC/profile/GPU telemetry qualification is separate from CPU isolation. Annotated full-cohort clocks are descriptive; the ten primary timing repetitions must start after confirmed worker termination and carry no such incident.')
+        table(['Unit/stage', 'Status', 'PID', 'UTC window', 'Precision', 'Worker stopped before UTC', 'Reason'], [
+            (note['unit'] + '/' + note['stage'], note['status'], note['pid'], note['start_utc'] + ' to ' + note['end_utc'],
+             note['time_precision'], note['worker_terminated_before_utc'], note['reason']) for note in evidence['measurement_notes']['notes']])
     rows = []
     for row in bundle['accuracy']['full']['units']:
         s, c = row['score'], row['score']['counts']
         lo, hi = s['bootstrap']['aggregate_error_fraction_95_percentile']
-        rows.append((row['unit'], row['padding'], c['m'], c['x'], c['i'], c['d'], s['alignment_columns'], s['eligible_query_columns'], s['eligible_reference_columns'], 100 * s['aggregate_accuracy'], f'{100*(1-hi):.6f}–{100*(1-lo):.6f}', 100 * s['parent_mean_accuracy']))
-    table(['Unit', 'Domain bp', 'M', 'X', 'I', 'D', 'C', 'Query denom', 'Reference denom', 'Accuracy %', '95% technical CI %', 'Mean-parent accuracy %'], rows)
+        mean_lo, mean_hi = s['bootstrap']['parent_mean_error_fraction_95_percentile']
+        rows.append((row['unit'], row['padding'], c['m'], c['x'], c['i'], c['d'], s['alignment_columns'], s['eligible_query_columns'], s['eligible_reference_columns'], 100 * s['aggregate_accuracy'], f'{100*(1-hi):.6f}–{100*(1-lo):.6f}', 100 * s['parent_mean_accuracy'], f'{100*(1-mean_hi):.6f}–{100*(1-mean_lo):.6f}'))
+    table(['Unit', 'Domain bp', 'M', 'X', 'I', 'D', 'C', 'Query denom', 'Reference denom', 'Accuracy %', '95% technical CI %', 'Mean-parent accuracy %', 'Mean-parent 95% technical CI %'], rows)
     paragraph('100 bp is the fixed primary domain; 500 bp is the predeclared sensitivity domain. Both are reported regardless of which looks better. All-called fractions below divide retained eligible query labels by every emitted primary child base, so mapping, clipping and mask losses stay visible. Input absence is a parent count, not an inferred biological error.')
     table(['Unit', 'Domain bp', 'Input/represented/positive parents', 'Children', 'Called bases', 'Scored query/all-called %', 'Absent parents', 'Unmapped bases', 'Soft clips', 'Policy-excluded bases', 'Masked query bases', 'Child statuses'], [(r['unit'], r['padding'], f"{(s:=r['score'])['expected_parents']}/{s['represented_parents']}/{s['positive_denominator_parents']}", s['children'], (loss:=s['losses'])['query_bases'], 100*s['eligible_query_columns']/loss['query_bases'], s['absent_parents'], loss['unmapped_query_bases'], loss['soft_clipped'], loss['policy_excluded_query_bases'], loss['excluded_query_bases'], json.dumps(s['statuses'], sort_keys=True)) for r in bundle['accuracy']['full']['units']])
     detail('Truth census and fixed star removals')
@@ -546,6 +862,7 @@ def main():
     for name in ('stock', 'accuracy', 'inputs', 'output', 'evidence'):
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--verify-pins', action='store_true', help='Rehash every retained artifact; run only outside measurements')
+    parser.add_argument('--measurement-notes', type=Path, help='Plan-bound measurement annotations; the known controlled plan always requires its canonical retained incident manifest')
     args = parser.parse_args()
     reader = Reader(args.verify_pins)
     try:
@@ -554,6 +871,7 @@ def main():
         current = [file_pin(p['path']) for p in bundle['truth']['sources']]
         amendment = reader.read(ROOT / 'config/accuracy-v1.1.json')
         planned, units, attempts = validate_bundle(bundle, verifier, current, amendment)
+        bundle['measurement_notes'] = load_measurement_notes(args.measurement_notes, args.stock, bundle['plan'], units, reader)
         evidence = evidence_bundle(bundle, planned, units, attempts, reader)
         bundle['_inputs_path'] = args.inputs
         markdown = render(bundle, evidence, planned, units, args.stock, args.accuracy, args.evidence)
