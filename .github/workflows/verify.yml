@@ -49,3 +49,18 @@ jobs:
         run: |
           cargo +1.96.0 test --locked --manifest-path tools/catalogue_bridge/Cargo.toml
           uv run --locked python -m unittest test_catalogue_bridge.BridgeReceiptTests -v
+      - name: Verify hypothesis coverage and flank CPU contracts
+        env:
+          PYTHONPATH: tests
+        run: |
+          cargo +1.96.0 test --locked --manifest-path tools/hypothesis_coverage/Cargo.toml
+          cargo +1.96.0 test --locked --manifest-path tools/flank_prior/Cargo.toml
+          cargo +1.96.0 build --release --locked --manifest-path tools/flank_prior/Cargo.toml --target-dir results/flank-prior/build
+          uv run --locked python -m unittest test_flank_prior -v
+      - name: Verify private allele diagnostic CPU contracts
+        env:
+          PYTHONPATH: tests
+        run: |
+          cargo +1.96.0 test --locked --manifest-path tools/private_allele_challenge/Cargo.toml
+          cargo +1.96.0 build --release --locked --manifest-path tools/private_allele_challenge/Cargo.toml --target-dir results/private-allele/target
+          uv run --locked python -m unittest test_private_allele_challenge -v
