@@ -185,6 +185,15 @@ def _units(base, arm):
     return units
 
 
+def _policy(base, current):
+    """Freeze the observed supported profile while preserving every other control."""
+    b.require(base == b.CONTROLLED_POLICY, 'Unsupported qualification measurement policy')
+    b.require(current in ('balanced', 'performance'), f'Unsupported observed platform profile: {current}')
+    policy = copy.deepcopy(base)
+    policy['platform_profile']['required'] = current
+    return policy
+
+
 def _seal(build_path, root):
     _frozen_tools()
     path = root / 'contract.json'
@@ -199,6 +208,10 @@ def _seal(build_path, root):
     b.require(not root.exists() or not any(root.iterdir()), 'New qualification root must be empty')
     base = b.load_plan(BASE)
     b.require(base['sha256'] == BASE_ID, 'Foreign official baseline')
+    profile_path = Path(base['config']['measurement_policy']['platform_profile']['path'])
+    profile = profile_path.read_text().strip()
+    policy = _policy(base['config']['measurement_policy'], profile)
+    profile_observation = {'path': str(profile_path), 'value': profile, 'captured_utc': b.utc()}
     build = _build(build_path, base)
     inputs, truth = a.load_inputs(INPUTS), b.read(TRUTH)
     b.require(inputs['identity'] == INPUT_ID and inputs['config']['padding_and_confidence_erosion_bp'] == [100, 500], 'Changed fixed accuracy domains')
@@ -216,7 +229,9 @@ def _seal(build_path, root):
         plan['environment']['environment'] = {key: os.environ.get(key) for key in ('CUDA_VISIBLE_DEVICES', 'OMP_NUM_THREADS', 'LD_LIBRARY_PATH')}
         plan['environment']['cpu_affinity'] = sorted(os.sched_getaffinity(0))
         plan['environment']['qualification_capture_utc'] = b.utc()
+        plan['environment']['qualification_platform_profile'] = copy.deepcopy(profile_observation)
         plan['config']['headroom_gib'] = 1
+        plan['config']['measurement_policy'] = copy.deepcopy(policy)
         if arm == 'source':
             plan['config']['dorado'] = build['executable']['path']
             plan['tool_versions']['dorado'] = build['version'] + '\n'
@@ -232,6 +247,7 @@ def _seal(build_path, root):
     pins.extend(tools.values())
     contract = {'schema': 1, 'created_utc': b.utc(), 'build': build, 'plans': plans, 'tools': tools,
                 'base': b.pin(BASE), 'inputs': b.pin(INPUTS), 'borrowed_truth': b.pin(TRUTH),
+                'measurement_policy': policy, 'platform_profile_observation': profile_observation,
                 'budget': {'reserve_bytes': RESERVE, 'full_additional_bytes': FULL_BUDGET, 'full_admission_bytes': RESERVE + FULL_BUDGET},
                 'canonical_awk': CANONICAL_AWK, 'comparator': COMPARE_SH, 'pins': pins}
     contract['sha256'] = b.identity(contract)

@@ -132,6 +132,43 @@ class AdmissionTests(unittest.TestCase):
                 q._frozen_tools()
 
 
+class QualificationPolicyTests(unittest.TestCase):
+    def test_supported_profile_is_frozen_without_changing_other_controls(self):
+        for profile in ('balanced', 'performance'):
+            with self.subTest(profile=profile):
+                base = copy.deepcopy(q.b.CONTROLLED_POLICY)
+                before = copy.deepcopy(base)
+                policy = q._policy(base, profile)
+                expected = copy.deepcopy(before)
+                expected['platform_profile']['required'] = profile
+                self.assertEqual(policy, expected)
+                self.assertEqual(base, before)
+                policy['cooldown']['max_temperature_celsius'] = 99
+                self.assertEqual(base, before)
+
+    def test_unexpected_profile_or_changed_control_policy_rejects(self):
+        for profile in ('power-saver', '', 'balanced performance', 'PERFORMANCE'):
+            with self.subTest(profile=profile):
+                with self.assertRaisesRegex(ValueError, 'Unsupported observed platform profile'):
+                    q._policy(q.b.CONTROLLED_POLICY, profile)
+        changed = copy.deepcopy(q.b.CONTROLLED_POLICY)
+        changed['cooldown']['max_temperature_celsius'] = 99
+        with self.assertRaisesRegex(ValueError, 'Unsupported qualification measurement policy'):
+            q._policy(changed, 'performance')
+
+    def test_sealing_rejects_unexpected_profile_before_build_or_producer(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / 'new'
+            base = {'sha256': q.BASE_ID, 'config': {'measurement_policy': copy.deepcopy(q.b.CONTROLLED_POLICY)}}
+            with patch.object(q, '_frozen_tools'), patch.object(q.b, 'load_plan', return_value=base), \
+                    patch.object(Path, 'read_text', return_value='power-saver\n'), \
+                    patch.object(q, '_build', side_effect=AssertionError('build admission reached')), \
+                    patch.object(q, '_native', side_effect=AssertionError('native producer reached')):
+                with self.assertRaisesRegex(ValueError, 'Unsupported observed platform profile'):
+                    q._seal(Path('build.json'), root)
+            self.assertFalse(root.exists())
+
+
 class ImmutableResumeTests(unittest.TestCase):
     def observation(self, root):
         plan, unit = {'sha256': 'plan', 'config': {}}, {'id': 'smoke-1-hac'}

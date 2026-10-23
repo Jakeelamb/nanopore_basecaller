@@ -16,6 +16,8 @@ This CUDA 13 source stack uses prebuilt Koi, Torch, and FlashAttention dependenc
 
 `scripts/qualify-source.py` calls the frozen native runner and Rust accuracy coordinator unchanged. Its two plans keep fresh official smoke and source outputs separate. The source arm contains two 32-parent development smoke units, one genuine split fixture, and four full HG002 development/validation units. HG005 is not executed or used for selection.
 
+The first root, `results/source-qualification/20261023`, passed genuine scorer/comparator handoff but its first fresh native launch was blocked before execution. The host's profile had changed externally from the historical `balanced` policy to `performance`. That root and its failed preflight remain intact. A new root, `results/source-qualification/20261023-performance`, prospectively freezes the observed profile for both fresh arms. The adapter admits only balanced or performance at sealing, then requires that exact profile throughout native work. It changes no host setting or historical stock plan. Native clocks from different policies are not compared as a speed experiment.
+
 Before GPU execution, genuine retained official smoke and split outputs must pass native comparator positives and reject sequence, quality, child identity, split-offset, removed-record, version, decoder-pin, and foreign-parent controls. A new unchanged-scorer smoke handoff must reproduce the accepted deterministic scores/tables. Fresh source/official native corruption qualification finishes before scoring pins their observations. Source-owned FASTA-versus-index parity must pass separately for both tiers.
 
 Exact comparison retains every mandatory SAM field and typed auxiliary tag. It ignores only record order, auxiliary-tag order, and independently validated header provenance. Basecalls, aligned records, parent ledgers, accuracy metrics, and native score tables receive separate equal/different results. A mismatch is a completed failed equivalence test. It does not become equality through a post hoc tolerance. Native contract failures remain execution/observation failures.
@@ -31,11 +33,11 @@ Pending the source qualification receipts. Comparative performance is not run: h
 ```sh
 scripts/build-dorado-source.sh
 scripts/record-command.sh source-qualification-smoke uv run --locked python scripts/qualify-source.py \
-  --build provenance/source-build-20261023.json --output results/source-qualification/20261023 --through smoke
+  --build provenance/source-build-20261023.json --output results/source-qualification/20261023-performance --through smoke
 scripts/record-command.sh source-qualification-full uv run --locked python scripts/qualify-source.py \
-  --build provenance/source-build-20261023.json --output results/source-qualification/20261023 --through full
+  --build provenance/source-build-20261023.json --output results/source-qualification/20261023-performance --through full
 scripts/record-command.sh source-qualification-audit uv run --locked python scripts/qualify-source.py \
-  --output results/source-qualification/20261023 --verify-only
+  --output results/source-qualification/20261023-performance --verify-only
 ```
 
 The CLI returns 0 for exact equivalence, 1 for a retained difference, and 2 for an incomplete/invalid operation. Inspect the separate gate fields. It acquires the canonical host lock and fails before execution if another experiment owns it. Preserve that attempt and wait for the lock. The full outputs and all failed attempts remain outside Git.
