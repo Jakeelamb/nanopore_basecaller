@@ -1,6 +1,6 @@
 # Unchanged source qualification
 
-Smoke qualification passes. Full development/validation qualification is waiting for other experiments to finish on the shared host. This document separates build acceptance, native runtime support, exact vendor equivalence, bounded accuracy, yield, and comparative performance. It introduces no candidate algorithm.
+Full development/validation native processing and all eight fixed-domain accuracy scores are verified. Canonical source/vendor calls and every numerical accuracy field are equal. The frozen literal accuracy-artifact gate fails because six diagnostic tables have different row order. Its failure is retained; there is no overall exact-artifact pass. This document separates build acceptance, native runtime support, exact vendor equivalence, bounded accuracy, yield, and comparative performance. It introduces no candidate algorithm.
 
 ## Accepted build and trace
 
@@ -26,7 +26,7 @@ Full admission requires 39 GiB free, including the 30 GiB reserve. The four sour
 
 ## Results
 
-The accepted smoke report is `results/source-qualification/20261023-performance/qualification.json`, contract `4bd255279f022fc0e94e29b27dc493ee612931aa3d9a530c4950de0d1eafdf72`. Its raw CLI receipt, `logs/20261023T030425Z-source-qualification-performance-smoke-DQ5yjU`, exits zero.
+The original accepted smoke report is retained in the raw CLI stdout at `logs/20261023T030425Z-source-qualification-performance-smoke-DQ5yjU`, exit zero, contract `4bd255279f022fc0e94e29b27dc493ee612931aa3d9a530c4950de0d1eafdf72`. The mutable summary path `results/source-qualification/20261023-performance/qualification.json` now contains the completed full report below.
 
 | Gate | Observed result |
 | --- | --- |
@@ -36,12 +36,39 @@ The accepted smoke report is `results/source-qualification/20261023-performance/
 | Source FASTA/index parity | Verified for both tiers; 55 HAC and 57 SUP mapped smoke records |
 | Smoke basecalls, alignments, and parent ledgers | Exact canonical equality for both tiers |
 | Smoke accuracy | Both fixed domains verified; all metrics and seven native tables equal per unit/domain |
-| Full development/validation | Pending; one successful development HAC basecall retained, no complete full unit accepted yet |
+| Full development/validation | Four verified observations; every requested parent represented in both tiers |
+| Full basecalls, alignments, and parent ledgers | Exact canonical equality for all four units |
+| Full accuracy | Eight verified scores; every numerical score field equal |
+| Literal full accuracy artifacts | **Different**: 50/56 files byte-identical; six alternate-alignment tables differ in row order |
 | Comparative performance | Not run |
 
 The first full development HAC basecaller succeeded with qualified measurement receipts. Its successful attempt remains unique and unchanged. A later `calmd` check was interrupted when the profile changed from performance to balanced. A temporary native Power Profiles daemon hold was then tested under the canonical lock. It entered performance for its command and restored balanced afterward. The resumed `calmd` computation exited zero, but its measurement was rejected because another GPU process appeared during the check. Both attempts remain retained. No successful GPU basecaller was repeated to repair these downstream failures.
 
-The tested hold does not override an explicit user profile change. Native measurement checks continue to fail closed on profile drift or foreign GPU activity. The failed reference checks therefore remain unqualified even where a native computation exited zero. There is no active hold or owned native job at this waiting checkpoint; the host is balanced. Full source outputs, eight full accuracy scores, full equivalence, read-only final audit, and completed-run resume proof remain open.
+After recovery, the user explicitly requested resumption. The held command completed in `logs/20261023T140301Z-source-qualification-performance-held-mpmyLI`, with exit **1** and empty stderr. This is the declared completed-difference exit, not a native execution failure. The successful original HAC basecall was reused exactly once. Its new reference check and the remaining full units passed their native and measurement controls. Both earlier rejected reference checks remain unqualified and retained.
+
+The tested hold does not override an explicit user profile change. Native measurement checks continue to fail closed on profile drift or foreign GPU activity. The successful resumption does not retroactively qualify either rejected attempt.
+
+| Cohort / tier | Represented / requested parents | Children | Called bases | Native basecall seconds |
+| --- | ---: | ---: | ---: | ---: |
+| Development HAC | 2,608 / 2,608 | 2,614 | 50,561,593 | 35.41 |
+| Development SUP | 2,608 / 2,608 | 2,617 | 50,716,622 | 171.31 |
+| Validation HAC | 2,027 / 2,027 | 2,039 | 43,928,382 | 31.24 |
+| Validation SUP | 2,027 / 2,027 | 2,041 | 43,969,306 | 148.62 |
+
+These are single descriptive native process clocks under the frozen performance policy, including the retained original HAC process. They are not paired repeated performance estimates. Native automatic batch selection remains enabled; precomputed batch benchmarks were unavailable.
+
+All eight source/official numerical score objects are exactly equal, including counts, exposure, bootstrap intervals, Q strata, and subordinate endpoints. The table below gives mean parent error on the 100 bp invariant domain. The 500 bp domain, aggregate error, and exact pins remain in the machine-readable evidence. Eligible parent sets differ by model; this is not a paired HAC-versus-SUP accuracy comparison.
+
+| Cohort / tier | Eligible parents, 100 bp | Mean parent error, source and official |
+| --- | ---: | ---: |
+| Development HAC | 2,186 | 1.421001% |
+| Development SUP | 2,190 | 1.114740% |
+| Validation HAC | 1,743 | 1.686518% |
+| Validation SUP | 1,752 | 1.488675% |
+
+The six differing files are `alternate-alignments.tsv` for development SUP, validation HAC, and validation SUP, each at both paddings. An independent comparison found identical headers and exact row multisets, preserving duplicate counts. The scorer emits those diagnostic rows in input SAM order, while the predeclared native comparison ignores SAM record order. This explains the observed literal differences. The supplemental row comparison is a diagnosis, not a replacement endpoint: `accuracy_full` remains `different`. Neither the frozen adapter nor scorer was modified, and no producer or score was repeated to make this result pass.
+
+The completed-run resume and frozen read-only audit pass in `logs/20261023T141824Z-source-completed-resume-proof-6h0oCU`, exit 0. All 6,127 protected unit/score files remain unchanged, including 3,005 JSON files. A complete `execve` trace contains only uv and Python: zero native producers or scorers launch. The qualification report is unchanged, including `accuracy_full: different`. The [full evidence manifest](../provenance/verification/source-qualification-full-20261023.json) binds the actual receipts, scores, diagnostic comparison, independent review, and [executed proof snapshot](../provenance/verification/source-qualification-completed-resume-20261023.py).
 
 Historical official full outputs supply semantic controls, while a speed ratio requires fresh paired repeated arms. New source process clocks are descriptive only. The [prospective protocol](prospective-experiment.md) defines the separate timing experiment.
 
@@ -61,7 +88,7 @@ The CLI returns 0 for exact equivalence, 1 for a retained difference, and 2 for 
 
 Native `UNIT:STAGE` retry and fresh accuracy-attempt retry are exposed by the CLI. Failed adapter-owned comparison, source-FASTA, or corruption-control stages need explicit retained-stage repair; the CLI does not provide a generic retry for them. Repair a successful producer's projection from its retained outputs. Do not repeat a GPU producer merely to repair an observation.
 
-After the other experiments finish, resume the interrupted reference check and the remaining full work with the exact retained controller below. The outer `flock` owns the canonical lock for the entire profile hold. The controller calls the unchanged adapter function directly, so it does not acquire the CLI's lock a second time. It checks adapter hash `58d38686…` and the live profile before resuming. Its [public snapshot](../provenance/verification/source-qualification-resume-20261023.py) is byte-identical to the executed local helper, SHA-256 `e122e64a2e3d7056ef9ef62294331b38ebb0f8f0622537c9977b8ee8920af588`.
+The following retained controller performed the authorized resumption. The outer `flock` owns the canonical lock for the entire profile hold. The controller calls the unchanged adapter function directly, so it does not acquire the CLI's lock a second time. It checks adapter hash `58d38686…` and the live profile before resuming. Its [public snapshot](../provenance/verification/source-qualification-resume-20261023.py) is byte-identical to the originally executed local helper, SHA-256 `e122e64a2e3d7056ef9ef62294331b38ebb0f8f0622537c9977b8ee8920af588`.
 
 ```sh
 scripts/record-command.sh source-qualification-performance-held \
@@ -71,7 +98,7 @@ scripts/record-command.sh source-qualification-performance-held \
   uv run --locked python provenance/verification/source-qualification-resume-20261023.py
 ```
 
-This retries only `source:full-development-hac:calmd`. The retained HAC basecall and other successful native stages are reused. The hold is released on command completion. The [Power Profiles daemon API](https://upower.pages.freedesktop.org/power-profiles-daemon/gdbus-org.freedesktop.UPower.PowerProfiles.html) documents the hold and explicit-user-change behavior. The successful hold probe is `logs/20261023T032415Z-source-profile-hold-probe-ZJYfDY`; the actual held attempt is `logs/20261023T032715Z-source-qualification-performance-held-veqpNW`. Keep both failed `calmd` attempts when resuming.
+The retry selector authorizes repeating only failed `source:full-development-hac:calmd`; it never repeats a successful stage. The resumption also performs the remaining declared work. The hold is released on command completion. The [Power Profiles daemon API](https://upower.pages.freedesktop.org/power-profiles-daemon/gdbus-org.freedesktop.UPower.PowerProfiles.html) documents the hold and explicit-user-change behavior. The successful hold probe is `logs/20261023T032415Z-source-profile-hold-probe-ZJYfDY`; the earlier rejected held attempt is `logs/20261023T032715Z-source-qualification-performance-held-veqpNW`. Keep both failed `calmd` attempts.
 
 ## Research scope
 

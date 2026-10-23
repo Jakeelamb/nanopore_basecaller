@@ -1,6 +1,6 @@
 # Source qualification review
 
-Independent same-family Sol reviewers checked the source trace/build, adapter implementation, experiment design, and actual smoke artifacts. These are separate scoped reviews. They are not cross-model validation or a claim that all source code and biological behavior are proven.
+Independent same-family Sol reviewers checked the source trace/build, adapter implementation, experiment design, actual smoke artifacts, recovery safety, and final full observations/scores. These are separate scoped reviews. They are not cross-model validation or a claim that all source code and biological behavior are proven.
 
 ## Accepted scope
 
@@ -12,15 +12,19 @@ Independent same-family Sol reviewers checked the source trace/build, adapter im
 
 The accepted adapter SHA-256 is `58d38686ebec1d868d027a002fca68c7e48a724a252b43074849d05adabc3b51`. Its tests are `127c5adad192971330e3059770fdd751a6c019dedbf668c7adeef1053da971b3`. The frozen native verifier remains `39cb086598e5de0ae8c8d113f86c06a2d7721f34799e7cb258ea5dee744fb9fc`; the accuracy coordinator remains `b5c6da542cdcb81689a93f5c7667e2933a91aedb5bb4f172e348c3de6ec3b49b`.
 
-## Retained failures and waiting scope
+## Retained failures and completed full run
 
 The first balanced-policy native launch was rejected before a producer started after the host became performance. A new prospectively sealed performance root passed smoke qualification. Its first full development HAC basecall succeeded and remains retained exactly once. A later CPU reference check was interrupted by profile drift, then a held retry exited zero but failed its measurement gate for foreign GPU activity. A successful native exit does not override that failed gate.
 
-The native profile-hold probe entered performance only for its guarded command and returned to balanced. The actual hold has been released. Other experiments still use the shared host, and the user requested waiting before native resumption. No successful basecaller is repeated to repair a downstream observation.
+The native profile-hold probe entered performance only for its guarded command and returned to balanced. The user initially requested waiting, then explicitly authorized resumption after recovery. The full run uses the same sealed controller and native policies. No successful basecaller was repeated to repair a downstream observation.
 
-The [waiting manifest](../provenance/verification/source-qualification-waiting-20261023.json) binds the accepted smoke report, source plans, exact successful HAC basecall receipt, both unqualified reference-check attempts, CI receipt, and byte-identical recovery-controller snapshot. The [qualification report](source-qualification-results.md) contains the precise resume command.
+The historical [waiting manifest](../provenance/verification/source-qualification-waiting-20261023.json) binds the then-accepted smoke report, source plans, exact successful HAC basecall receipt, both unqualified reference-check attempts, CI receipt, and byte-identical recovery-controller snapshot. Its smoke-only report pin describes that historical checkpoint. The current [full manifest](../provenance/verification/source-qualification-full-20261023.json) binds the completed evidence. The [qualification report](source-qualification-results.md) contains the executed command and resulting gates.
 
-Full native observations, eight full fixed-domain scores, full source/vendor equivalence, independent final pin audit, read-only final audit, and completed-run zero-producer resume proof remain pending. Comparative performance is not run. Publication-level generalization remains outside this pilot.
+The final independent audit checked every bound full native stage's latest identity, raw command, native exit, clocks, and retained measurement samples. It verified four complete observations, exactly one basecall attempt per unit, eight canonical comparison receipts, eight native scoring receipts, and the actual eight numerical score objects. It checked selected small pins directly; large output hashes were checked by the unchanged frozen final audit, not exhaustively rehashed independently.
+
+Full canonical basecalls/alignments/ledgers and all numerical score fields are equal. The frozen literal accuracy-artifact gate remains **different**: six alternate-alignment files differ in row order, while their headers and exact row multisets match and row-removal negative controls reject. The scorer streams alternate-alignment rows in input SAM order (`tools/accuracy/src/lib.rs`, lines 905–910 and 959–993), whereas native canonical comparison ignores record order. Fifty of 56 native score tables are byte-identical. There is no post hoc gate substitution or overall literal-artifact pass.
+
+The completed-run proof calls the unchanged full qualifier and read-only auditor. All 6,127 protected unit/score files, including 3,005 JSON files, remain unchanged. The complete `execve` trace contains exactly uv and Python, with no native producer or scorer execution. The proof receipt exits zero and its report equals the prior completed qualification, including the failed artifact gate. The native full command's exit 1 is therefore retained as a literal artifact difference, not classified as an execution error. Comparative performance is not run. Publication-level generalization remains outside this pilot.
 
 ## Evidence locations
 
@@ -30,9 +34,14 @@ The detailed independent reports remain locally at:
 - `logs/source-qualification-20261023/design/judgment.md`
 - `logs/source-qualification-20261023/design/protocol-review.md`
 - `logs/source-qualification-20261023/adapter-review.md`
+- `logs/source-qualification-20261023/recovery-review-20261023.md`
+- `logs/source-qualification-20261023/full-review-20261023.md`
+- `logs/source-qualification-20261023/full-review-audit-20261023.json`
 
-Their SHA-256 identities are respectively `868916199161d47e64e8dddc41150bfcf996c3c19258af1204f02ff363ffacde`, `e8872ca6a046251d85ebf99f5affc3a16e647a93df48804194652ea7c1fdcffd`, `5e1520308a9d9d3b0701ed384589de3d374e33a4f03ee9a20889dfef5ee13696`, and `eab4a9b654a7861fa8e81c2ecd32ca4e1f124f5de1556201338311838d5fc795`.
+The SHA-256 identities of the first four reports are respectively `868916199161d47e64e8dddc41150bfcf996c3c19258af1204f02ff363ffacde`, `e8872ca6a046251d85ebf99f5affc3a16e647a93df48804194652ea7c1fdcffd`, `5e1520308a9d9d3b0701ed384589de3d374e33a4f03ee9a20889dfef5ee13696`, and `eab4a9b654a7861fa8e81c2ecd32ca4e1f124f5de1556201338311838d5fc795`.
 
 Build the Lever kept native execution and scoring in their maintained owners. Prove It Works required genuine native positives and rejection controls. Attack the Premise tested the failed assumption that an observed host profile would remain stable, then used a scoped native hold. Separate Before Serializing Shared State kept outputs separate while one canonical lock coordinated the GPU. The foreign-process failure demonstrates the remaining limit of that coordination on a shared host.
 
 Adapter CPU contracts passed in `logs/20261023T030232Z-source-adapter-policy-cpu-contracts-1scpN4`. [CPU CI on f5b9ebc](https://github.com/Jakeelamb/nanopore_basecaller/actions/runs/39892964226) passes its listed contracts, including the source adapter and Rust scorer tests. That is CPU evidence only. Native smoke acceptance is `logs/20261023T030425Z-source-qualification-performance-smoke-DQ5yjU`, exit zero. Raw failed commands, native outputs, and diagnostic profiles remain outside Git.
+
+Full execution is `logs/20261023T140301Z-source-qualification-performance-held-mpmyLI`, exit 1 for the preserved literal difference. Completed resume/read-only audit is `logs/20261023T141824Z-source-completed-resume-proof-6h0oCU`, exit 0. Its [public controller snapshot](../provenance/verification/source-qualification-completed-resume-20261023.py) matches the executed ignored helper byte for byte. These real-artifact checks validate this evidence update; unchanged build, smoke, and CPU suites were not repeated locally.

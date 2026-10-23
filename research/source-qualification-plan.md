@@ -7,9 +7,9 @@ This run qualifies the unchanged Dorado source and prepares prospective accuracy
 - [x] Read the Principles section of Poteto Mode.
 - [x] Phase A: Frame.
 - [x] Phase B: Design the workflow.
-- [ ] Phase C: Run the loop.
+- [x] Phase C: Run the loop.
 - [x] Phase D: Keep the audit trail.
-- [ ] Phase E: Verify and hand back.
+- [x] Phase E: Verify and hand back.
 
 ## Completion predicate
 
@@ -50,8 +50,10 @@ The selected adapter design uses the exact ordinary emitted version and calls th
 
 `decisions.tsv` remains the canonical decision trail. A failed build, runtime check, equivalence comparison or projection remains evidence. Publication-level biological claims require a prospectively reserved external cohort and an analysis suited to donor/flowcell replication; this pilot alone cannot supply those claims.
 
-## Waiting checkpoint
+## Final execution checkpoint
 
-The build, source trace, adapter CPU contracts, runtime diagnostics, and full smoke qualification pass their scoped checks. Full development/validation remains incomplete. A successful development HAC GPU basecall is retained exactly once. Its downstream reference check was first interrupted by profile drift, then completed natively but rejected by the measurement gate for foreign GPU activity. The temporary profile hold was released, and the host is balanced. The user requested waiting for the other experiments to finish before continuing native work.
+After recovery, the user explicitly requested resumption, superseding the prior waiting instruction. The retained held controller reused the successful HAC basecall, retried the rejected CPU reference check, and completed all four full native observations and eight fixed-domain scores. Original-parent processing is complete in every unit. Full canonical basecalls, alignments, and ledgers are equal; every numerical score field is equal.
 
-The next action is the held resume command in [the qualification report](source-qualification-results.md). It reuses the successful basecall and retries only the unqualified CPU reference check, then proceeds through remaining declared units and domains. Do not mark Phase C or E complete until full native/scoring/comparison evidence, independent artifact audit, and zero-producer resume proof exist. PR 1 remains unmerged.
+The frozen full accuracy-artifact gate completed with a **different** result and CLI exit 1. Six alternate-alignment tables have identical headers and row multisets but different row order; 50 of 56 table files are byte-identical. This diagnosis does not alter the frozen endpoint. The experiment is complete with a retained failed literal-artifact gate, rather than an overall equivalence pass.
+
+The completed-run resume and frozen read-only audit pass: 6,127 protected files are unchanged, and a complete process execution trace contains only uv and Python, with zero native producer launches. Final review and pins are summarized in [the qualification report](source-qualification-results.md) and [the full evidence manifest](../provenance/verification/source-qualification-full-20261023.json). Successful native producers and all rejected attempts remain retained. Comparative performance is not run. PR 1 remains unmerged.
