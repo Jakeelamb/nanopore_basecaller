@@ -8,3 +8,5 @@
 /logs/
 __pycache__/
 .pytest_cache/
+/tools/accuracy/target/
+/.tmp_pod5_v3_v4_migration_*/

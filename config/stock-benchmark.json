@@ -1,0 +1,15 @@
+{
+  "dorado": "software/bin/dorado",
+  "samtools": "samtools",
+  "models": {
+    "hac": "models/dna_r10.4.1_e8.2_400bps_hac@v6.0.0",
+    "sup": "models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0"
+  },
+  "reference": "references/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz",
+  "index": "references/GRCh38-lr-hq.mmi",
+  "reference_receipt": "provenance/reference-qualified.json",
+  "index_receipt": "provenance/index-qualified.json",
+  "split_fixture": "software/dorado-src/tests/data/single_split_read/single_split_read.pod5",
+  "reserve_gib": 30,
+  "headroom_gib": 8
+}

@@ -1,0 +1,227 @@
+{
+  "build": {
+    "path": "/home/jake/Projects/nanopore_basecaller/provenance/source-build-20261023.json",
+    "sha256": "cc69dea84a6ab16ed68bc9f32586735e4c67f96c0b29370a7484d8b26cd47dac",
+    "size": 50085
+  },
+  "failure": {
+    "core_info": {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T023956Z-source-profile-crash-info-yB8rhz/stdout",
+      "sha256": "b0a22e1d09018ea22a89da0bbe9c8c05a8088cb686d5df1f636a89df186c685e",
+      "size": 11973
+    },
+    "core_pid": 888823,
+    "exit": 139,
+    "mechanism": "Repeated Nsight OSRT mutex interception / Dorado allocator / pthread_setspecific frames. CUDA/NVTX-only collection and ordinary execution passed; exact profiler defect not proven.",
+    "raw_run": "logs/20261023T023819Z-source-profile-hac-retry-eh5jur"
+  },
+  "limits": [
+    "Startup/autobatch work is included; no steady-state limiter or speedup claim.",
+    "No hardware-counter memory/compute/occupancy diagnosis.",
+    "OSRT and CPU sampling unavailable in these accepted traces.",
+    "Profiled outputs are diagnostics, separate from controlled qualification."
+  ],
+  "observations": [
+    {
+      "diagnostic": "unprofiled",
+      "metrics": {
+        "called_bases": 481339,
+        "children": 32,
+        "records": 32,
+        "represented_parents": 32,
+        "requested_parents": 32,
+        "secondary": 0,
+        "split_parents": 0,
+        "supplementary": 0
+      },
+      "native_contracts": "verified",
+      "pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/unprofiled/calls.bam",
+          "sha256": "3071ac44c0ba0942323d3fb41a04cece0e69e74bcfa31ae049fad02355a4a27c",
+          "size": 426255
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/unprofiled/calls.sam",
+          "sha256": "7572ad5c13fbee8332ccaa8073e294338eea3baf97953dc1a8ff28d934eba3be",
+          "size": 975172
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/unprofiled/native.stderr",
+          "sha256": "3ed5277f28d5c58f976380978175b50e8dd9b4b3cad027f0a910a9ec310284ef",
+          "size": 4994
+        }
+      ],
+      "tier": "hac"
+    },
+    {
+      "diagnostic": "cuda-only-hac",
+      "metrics": {
+        "called_bases": 481339,
+        "children": 32,
+        "records": 32,
+        "represented_parents": 32,
+        "requested_parents": 32,
+        "secondary": 0,
+        "split_parents": 0,
+        "supplementary": 0
+      },
+      "native_contracts": "verified",
+      "pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/calls.bam",
+          "sha256": "28e5e6d395f71f618d96090fc209f3aa7864ec6720ea0b51a94316bd008bfb67",
+          "size": 425924
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/calls.sam",
+          "sha256": "8881634f74fbe1777b45244d7399ec254498a21c24014ab72eb9f7a1a2d06625",
+          "size": 975175
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/native.stderr",
+          "sha256": "4383c83f94adaf837170815c6569233fae04aed9edf58c61bce60cc420340102",
+          "size": 4994
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/stats.csv",
+          "sha256": "42b2ee7d6693614d3c919fc1dc5155688ca21d9cc84d152e4cf9021771031588",
+          "size": 13878
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/stats.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/trace.nsys-rep",
+          "sha256": "9d4ce6577b64a54ad24636a57ba5a175fb08144a2d10fa33cb8e988f0e602ab0",
+          "size": 448102
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-hac/trace.sqlite",
+          "sha256": "ed8a0a092dccdbb4bca289fb52c45c16e9e42f49dba5686709a1322f7fd1a704",
+          "size": 1601536
+        }
+      ],
+      "tier": "hac"
+    },
+    {
+      "diagnostic": "cuda-only-sup",
+      "metrics": {
+        "called_bases": 481774,
+        "children": 33,
+        "records": 33,
+        "represented_parents": 32,
+        "requested_parents": 32,
+        "secondary": 0,
+        "split_parents": 1,
+        "supplementary": 0
+      },
+      "native_contracts": "verified",
+      "pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/calls.bam",
+          "sha256": "72ac9703e4b03b8e1e51c87030fa0410da327b7c3690ee782b791566dd372ee7",
+          "size": 351703
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/calls.sam",
+          "sha256": "5f9c9fa34c392dfe475477b8e86354c726f242c7cfa010f9b1650ad694c09a06",
+          "size": 976820
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/native.stderr",
+          "sha256": "9b99cfdf025abdccc65c1dadfbe790f9bd8ab2885de797660ed600573dd3e870",
+          "size": 3008
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/stats.csv",
+          "sha256": "b178ced56463634135256473ab1294eb2b9f32c96952852249699c5fea6b87d3",
+          "size": 19066
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/stats.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/trace.nsys-rep",
+          "sha256": "c856a148e5e163a8e67ddff7bc12837b91ba1668ac48853b149a4e4811c5aa41",
+          "size": 691238
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller/results/source-profile/20261023/cuda-only-sup/trace.sqlite",
+          "sha256": "3662a2846a71cdc105d032f0571ef1c3ea1da58dc0578b65d6b140d99aa42731",
+          "size": 2199552
+        }
+      ],
+      "tier": "sup"
+    }
+  ],
+  "producer": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw",
+  "producer_pins": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/command.sh",
+      "sha256": "4dd51f86d5406d33cb1291f58693dad650c69a44a3ec99e3e689ce3602e9c4b8",
+      "size": 64
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/cwd.txt",
+      "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4",
+      "size": 40
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/end.txt",
+      "sha256": "f227ae0084129f2d617a32b84892826e6510cb36f7c6d093aeca7a5b0d2c144a",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/exit-status.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size": 2
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/start.txt",
+      "sha256": "743cf8710289fff38bec4fe70ad1b181857afbd58bfaf8ff0a90cf52f34be27e",
+      "size": 21
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/stdout",
+      "sha256": "3a443f6b8d24c460158cde460293602333ee04564c50b56da07ef03539d8b4cb",
+      "size": 2198
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T024057Z-source-profile-isolation-lqasiw/time.txt",
+      "sha256": "5bbe6c96b1c9018e67509175c5f9737430efc2fc0bbbe91643fe950884fecd1e",
+      "size": 797
+    }
+  ],
+  "profiler_archive": {
+    "path": "/home/jake/Projects/nanopore_basecaller/software/nsight-systems-2026.5.1/package.deb",
+    "sha256": "61829db6392e5c293ada1319df86a97c3356bc810335a1975cb551fcfe3eca08",
+    "size": 225594886
+  },
+  "projector": {
+    "path": "/home/jake/Projects/nanopore_basecaller/logs/source-qualification-20261023/profile-project.py",
+    "sha256": "a5dfedfbb86e5104e21a312d5a5884c2f9f0830b6ea0f4eab757f53f3b9216fc",
+    "size": 2822
+  },
+  "schema": 1,
+  "scope": "32-parent HG002 development diagnostics; no timing claim",
+  "script": {
+    "path": "/home/jake/Projects/nanopore_basecaller/logs/source-qualification-20261023/profile-diagnostics.sh",
+    "sha256": "ead0f0894f8a3ee8e2cc25fc5731f7c23cb3c997fae30fc1f520d85e1f6910db",
+    "size": 1784
+  },
+  "verifier": {
+    "path": "/home/jake/Projects/nanopore_basecaller/scripts/benchmark.py",
+    "sha256": "39cb086598e5de0ae8c8d113f86c06a2d7721f34799e7cb258ea5dee744fb9fc",
+    "size": 82533
+  }
+}

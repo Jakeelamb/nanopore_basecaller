@@ -1,0 +1,21 @@
+{
+  "observed_utc": "2026-10-22T22:28:33.199130+00:00",
+  "plan_identity": "fb6985a6c83e9ae2d340e0df5941883800ebc7b58ee7aead834194cdd1a68f4b",
+  "initial_power_snapshot": {
+    "/sys/class/power_supply/ACAD/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:001/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:002/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:003/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:004/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:005/online": "0"
+  },
+  "final_power_snapshot": {
+    "/sys/class/power_supply/ACAD/online": "1",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:001/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:002/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:003/online": "0",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:004/online": "1",
+    "/sys/class/power_supply/ucsi-source-psy-USBC000:005/online": "0"
+  },
+  "scope": "Two host snapshots only; power source was not recorded per native attempt and transition time is unknown."
+}

@@ -1,0 +1,31 @@
+{
+  "tools": [
+    {
+      "name": "minimap2",
+      "path": "/home/jake/Projects/nanopore_basecaller/software/bin/minimap2",
+      "sha256": "d17e2cc99b5fcc840b6506dc884203657fdec57d92faa826f6b9dcb1d2daddba",
+      "size": 1136248,
+      "version": "2.31-r1302\n"
+    },
+    {
+      "name": "samtools",
+      "path": "/usr/bin/samtools",
+      "sha256": "e839773cc27090fa109588cae8b8240b0d48de816a25b962045867a4c3b7e1ff",
+      "size": 779616,
+      "version": "samtools 1.24\nUsing htslib 1.24\nCopyright (C) 2026 Genome Research Ltd.\n\nSamtools compilation details:\n    Features:       build=configure curses=yes \n    CC:             gcc\n    CPPFLAGS:       \n    CFLAGS:         -Wall -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -g -ffile-prefix-map=/home/jake/.cache/yay/samtools/src=/usr/src/debug/samtools -flto=auto\n    LDFLAGS:        -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now          -Wl,-z,pack-relative-relocs -flto=auto\n    HTSDIR:         \n    LIBS:           \n    CURSES_LIB:     -lncursesw\n\nHTSlib compilation details:\n    Features:       build=configure libcurl=yes S3=yes GCS=yes libdeflate=yes lzma=yes bzip2=yes plugins=yes plugin-path=/usr/lib/htslib/plugins: htscodecs=1.6.7\n    CC:             gcc\n    CPPFLAGS:       \n    CFLAGS:         -Wall -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -g -ffile-prefix-map=/home/jake/.cache/yay/htslib/src=/usr/src/debug/htslib -flto=auto -ffat-lto-objects -fvisibility=hidden\n    LDFLAGS:        -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now          -Wl,-z,pack-relative-relocs -flto=auto -fvisibility=hidden -rdynamic\n\nHTSlib URL scheme handlers present:\n    built-in:\t file, preload, data\n    Amazon S3:\t s3+https, s3, s3+http\n    libcurl:\t gophers, smtp, wss, rtsp, tftp, mqtts, pop3, imaps, pop3s, ws, ftps, https, ftp, gopher, sftp, imap, http, smtps, scp, dict, mqtt, telnet\n    Google Cloud Storage:\t gs+http, gs+https, gs\n    crypt4gh-needed:\t crypt4gh\n    mem:\t mem\n"
+    },
+    {
+      "name": "bgzip",
+      "path": "/usr/bin/bgzip",
+      "sha256": "073d1d72e082e28ef8b335a2004003581358dd9ab7a9a2e56972998efe292b53",
+      "size": 899376,
+      "version": "bgzip (htslib) 1.24\nCopyright (C) 2026 Genome Research Ltd.\n"
+    }
+  ],
+  "minimap_source_commit": "3c28777e7e2dcc90f825de1b9f17a89cca7d4452",
+  "ont_parent_commit": "3a7e4e229de46f4565ec7db727748e2122181d4f",
+  "patches": "none; upstream nested source built in separate archive copy",
+  "build_receipts": [
+    "logs/20261022T200713Z-minimap-build-AH2dEb"
+  ]
+}

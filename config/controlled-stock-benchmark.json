@@ -1,0 +1,33 @@
+{
+  "dorado": "software/bin/dorado",
+  "samtools": "samtools",
+  "models": {
+    "hac": "models/dna_r10.4.1_e8.2_400bps_hac@v6.0.0",
+    "sup": "models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0"
+  },
+  "reference": "references/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz",
+  "index": "references/GRCh38-lr-hq.mmi",
+  "reference_receipt": "provenance/reference-qualified.json",
+  "index_receipt": "provenance/index-qualified.json",
+  "split_fixture": "software/dorado-src/tests/data/single_split_read/single_split_read.pod5",
+  "reserve_gib": 30,
+  "headroom_gib": 8,
+  "timing_workload": "full-development",
+  "measurement_policy": {
+    "cache_policy": "warmed-filesystem",
+    "ac_online": {"path": "/sys/class/power_supply/ACAD/online", "required": "1"},
+    "platform_profile": {"path": "/sys/firmware/acpi/platform_profile", "required": "balanced"},
+    "cpu_affinity": "frozen-plan",
+    "foreign_gpu_compute": "reject",
+    "sample_interval_seconds": 1,
+    "max_sample_gap_seconds": 2.5,
+    "required_gpu_fields": ["utilization.gpu", "memory.used", "power.draw", "temperature.gpu", "clocks.sm"],
+    "cooldown": {
+      "max_temperature_celsius": 40,
+      "max_utilization_percent": 5,
+      "consecutive_samples": 3,
+      "interval_seconds": 1,
+      "timeout_seconds": 600
+    }
+  }
+}
