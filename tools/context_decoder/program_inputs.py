@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ORIGINAL = Path('/home/jake/Projects/nanopore_basecaller-context-feedback-v2/scripts/context-feedback.py')
+ORIGINAL_SOURCE_SHA256 = '7a1b9c6f05597dd70e5eb96c894c2ed9e0cf811c28cc7735354fa1aed1f0164b'
 SNAPSHOT = Path('/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json')
 SNAPSHOT_SHA256 = 'f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324'
 SCHEMA = Path(__file__).with_name('study') / 'wire-schema.json'
@@ -131,7 +132,86 @@ def reference_geometry(window, observation, c):
         values = mapping[lo:hi]
         require(len(values) == y-x and all(v is not None for v in values)
                 and all(v == u+1 for u,v in zip(values,values[1:])), 'Native guard gapped/clipped')
-    return interval(a,b+10), interval(a+10,b-10)
+    core = window['ref_start']+10, window['ref_end']-10
+    require(core[0] < core[1], 'Native reference core is empty')
+    return interval(a,b+10), core
+
+
+def verify_prepared(packet, boundary, stages):
+    require(set(packet) == {'completion','manifest','cases','truth','selectedCaseIDs','census'}, 'Prepared descriptor fields differ')
+    boundary.check(packet['completion'])
+    directory = Path(packet['completion']['path']).parent
+    require(Path(packet['completion']['path']) == directory/'complete.json', 'Prepared completion location differs')
+    seal = boundary.read(packet['completion']['path'])
+    require(seal['schema'] == 'context-program-inputs-complete/1' and seal['complete'] is True
+            and seal['manifest'] == packet['manifest'], 'Prepared completion differs')
+    for key,name in (('manifest','manifest.json'),('cases','cases.tsv'),('truth','truth.tsv')):
+        require(packet[key]['path'] == str(directory/name), 'Prepared packet location differs')
+        boundary.check(packet[key])
+    manifest = boundary.read(packet['manifest']['path'])
+    require(manifest['schema'] == 'context-program-inputs/1'
+            and all(manifest[key] == packet[key] for key in ('cases','truth','census','selectedCaseIDs')), 'Prepared manifest differs')
+    for key,name in (('inference','inference-manifest.json'),('truth_manifest','truth-manifest.json')):
+        require(manifest[key]['path'] == str(directory/name), 'Prepared manifest location differs')
+        boundary.check(manifest[key])
+    inference = boundary.read(manifest['inference']['path'])
+    truth = boundary.read(manifest['truth_manifest']['path'])
+    require(inference['schema'] == 'context-program-inference-manifest/1' and inference['truth_input'] is False
+            and inference['scope'] == manifest['scope'] and truth['schema'] == 'context-program-truth-manifest/1'
+            and truth['inference'] == manifest['inference'], 'Prepared ancestry differs')
+    require(truth['regions']['path'] == str(directory/'regions.txt'), 'Prepared regions location differs')
+    expected = [packet['cases'],packet['truth'],manifest['inference'],manifest['truth_manifest'],truth['regions']]
+    require(len(seal['files']) == 5 and len({item['path'] for item in seal['files']}) == 5
+            and {item['path']:item for item in seal['files']} == {item['path']:item for item in expected}, 'Prepared file census differs')
+    for item in expected:
+        boundary.check(item)
+    for key,kind,manifest_key in (('cases','candidate','inference'),('truth','truth','truth_manifest')):
+        with Path(packet[key]['path']).open(encoding='ascii') as stream:
+            header = stream.readline(4096)
+        require(header == '\t'.join(['SCHEMA',boundary.read(SCHEMA)[kind+'_schema'],manifest[manifest_key]['sha256']])+'\n', 'Prepared packet header differs')
+    source_map = {item['path']:item for item in manifest['source_pins']}
+    require(len(source_map) == len(manifest['source_pins']), 'Prepared consumed source census differs')
+    for item in manifest['source_pins']:
+        boundary.check(item)
+    for item in inference['consumed_pins'] + [truth[key] for key in ('reference','fai','snapshot','samtools','archive','extraction')]:
+        require(source_map.get(item['path']) == item, 'Prepared consumed source link differs')
+    require(len(inference['cases']) == len(packet['selectedCaseIDs']) == len(set(packet['selectedCaseIDs'])) == packet['census']['selected_cases']
+            and [item['case']['case_id'] for item in inference['cases']] == packet['selectedCaseIDs'], 'Prepared case census differs')
+    for key,value in inference['census'].items():
+        require(packet['census'][key] == value, 'Prepared inference census differs')
+    require(inference['original_auditor']['path'] == str(ORIGINAL), 'Original auditor path differs')
+    boundary.check(inference['original_auditor'])
+    original = original_auditor()
+    identity = original.inventory_hash(original.sources())
+    require(identity == ORIGINAL_SOURCE_SHA256 == inference['old_source_inventory_sha256'], 'Original source inventory differs')
+    proofs = inference['proofs']
+    require(len(proofs) == 2 and {proof['phase'] for proof in proofs} == {'full','private'}, 'Original proof census differs')
+    for proof in proofs:
+        path = original.RESULTS/('v2-'+proof['phase']+'-1')
+        require(proof['execution']['path'] == str(path/'execution-complete.json'), 'Original proof location differs')
+        boundary.check(proof['execution'])
+        require(original.evidence.completed(path,proof['phase'],identity,original.c) == proof, 'Original proof differs')
+    mask_directory = original.RESULTS/'v2-observe-full-1/final_rerank'
+    observer_proof = truth['observer']
+    for key,name in (('completion','complete.json'),('execution','execution-complete.json')):
+        require(observer_proof[key]['path'] == str(mask_directory/name), 'Original observer location differs')
+        boundary.check(observer_proof[key])
+    observer = load_module('context_program_original_observer_reuse',original.ROOT/'tools/context_decoder/observe.py')
+    observed = observer.completed_producer(mask_directory/'complete.json','arm','ordinary')
+    for stage in observed['stages']:
+        original.evidence.stage(stage,original.c)
+    mask_names = boundary.read(SCHEMA)['enums']['mask_name']
+    require(len(truth['masks']) == len(mask_names)
+            and {item['path'] for item in truth['masks']} == {str(mask_directory/('pair-native-'+name)/'matched.bed') for name in mask_names}, 'Original mask census differs')
+    for item in truth['masks']:
+        boundary.check(item)
+        require(item in observed['outputs'], 'Original matched mask lacks producer pin')
+    argv = [truth['samtools']['path'],'faidx','-r',truth['regions']['path'],truth['reference']['path']]
+    observed_stages = [boundary.read(stage['path']) for stage in stages]
+    extraction = [stage for stage in observed_stages if stage['argv'] == argv]
+    require(len(extraction) == 1 and extraction[0]['raw']['stdout'] == truth['extraction'], 'Prepared extraction producer differs')
+    boundary.check(truth['extraction'])
+    return manifest
 
 
 def project_case(namespace, row, c, check, graph, project_centers, observation, schema):
@@ -334,6 +414,7 @@ def prepare(output, execution, scope='all'):
     check(c.pin(SCHEMA)); check(c.pin(__file__))
     original_sources = w.sources()
     identity = w.inventory_hash(original_sources)
+    require(identity == ORIGINAL_SOURCE_SHA256, 'Original source inventory differs')
     for source in original_sources:
         check(source)
     full_dir,private_dir = w.RESULTS/'v2-full-1',w.RESULTS/'v2-private-1'
@@ -427,7 +508,8 @@ def prepare(output, execution, scope='all'):
     truth_records = label_records(facts,fragments,masks,archives,exclusions,c)
     truth_ancestry = dict(schema='context-program-truth-manifest/1',inference=inference_pin,reference=reference,fai=fai,
                           snapshot=snapshot_pin,samtools=samtools,regions=c.pin(region_path),extraction=extraction_stdout,
-                          masks=pins,archive=archive_pin,challenge_exclusions=private['selection']['challenge_exclusions'])
+                          masks=pins,archive=archive_pin,challenge_exclusions=private['selection']['challenge_exclusions'],
+                          observer=dict(completion=c.pin(mask_directory/'complete.json'),execution=c.pin(mask_directory/'execution-complete.json')))
     c.fresh(output/'truth-manifest.json',truth_ancestry)
     truth_manifest_pin = c.pin(output/'truth-manifest.json')
     write_packet(output/'truth.tsv',schema,'truth',truth_manifest_pin['sha256'],truth_records)
@@ -459,4 +541,5 @@ def prepare(output, execution, scope='all'):
         os.fsync(descriptor)
     finally:
         os.close(descriptor)
-    return dict(manifest=manifest_pin,cases=cases_pin,truth=truth_pin,selectedCaseIDs=manifest['selectedCaseIDs'],census=census)
+    return dict(completion=c.pin(output/'complete.json'),manifest=manifest_pin,cases=cases_pin,truth=truth_pin,
+                selectedCaseIDs=manifest['selectedCaseIDs'],census=census)

@@ -39,6 +39,13 @@ def identity(pins):
     return hashlib.sha256(json.dumps(pins, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
+def packet_boundary():
+    spec = importlib.util.spec_from_file_location('program_packet_boundary', ROOT/'tools/context_decoder/program_inputs.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def configuration(path):
     value = c.read(path)
     c.require(set(value) == {'schema','role','baseline','scopes','python_test_count','execution'}
@@ -143,16 +150,7 @@ def completed(directory, phase, visited=None):
         c.require(len(producers) == 1, 'Native command lacks one linked producer')
         native(target,producers[0],sources())
     if phase == 'prepare':
-        packet = summary['prepared']
-        for key in ('manifest','cases','truth'):
-            c.check(packet[key])
-        prepared_seal = c.read(Path(packet['manifest']['path']).parent/'complete.json')
-        c.check(prepared_seal['manifest'])
-        c.require(prepared_seal['complete'] is True and prepared_seal['manifest'] == packet['manifest'], 'Input packet completion differs')
-        for item in prepared_seal['files']:
-            c.check(item)
-        for item in c.read(packet['manifest']['path'])['source_pins']:
-            c.check(item)
+        packet_boundary().verify_prepared(summary['prepared'],c,summary['stages'])
     return dict(phase=phase,outer=c.pin(directory/'execution-complete.json'),summary=summary)
 
 
@@ -227,9 +225,7 @@ def worker(args):
         dependencies.append(dict(phase='qualify',outer=prior['outer']))
         binaries = prior['summary']['binaries']
         if args.phase == 'prepare':
-            spec = importlib.util.spec_from_file_location('program_packet_boundary', ROOT/'tools/context_decoder/program_inputs.py')
-            module = importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-            prepared = module.prepare(output/'prepared',execution,args.scope)
+            prepared = packet_boundary().prepare(output/'prepared',execution,args.scope)
         else:
             c.require(args.prepared is not None, 'Successful prepared packet required')
             packet = completed(args.prepared,'prepare')

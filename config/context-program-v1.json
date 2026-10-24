@@ -10,7 +10,7 @@
     "first32",
     "all"
   ],
-  "python_test_count": 33,
+  "python_test_count": 54,
   "execution": {
     "canonical_lock": "/home/jake/Projects/nanopore_basecaller/results/stock/host.lock",
     "maximum_wall_seconds": 300,

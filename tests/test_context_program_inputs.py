@@ -1,10 +1,11 @@
-"""Hermetic packet boundary controls; genuine inputs are controller-owned checks."""
 import copy
 import importlib.util
+import json
 import os
 from pathlib import Path
 import subprocess
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest import mock
 
@@ -176,6 +177,41 @@ class Inputs(unittest.TestCase):
         observation=dict(self.observation,reverse=True)
         self.assertEqual(p.reference_geometry(window,observation,c),((100,140),(120,130)))
 
+    def boundary_geometry(self, op, trailing):
+        for reverse in (False,True):
+            with self.subTest(reverse=reverse):
+                before = (20,29 if op == 'I' else 30)[trailing != reverse]
+                after = 80-before-(1 if op == 'I' else 0)
+                fields = list(self.observation['fields']); fields[5] = f'{before}M1{op}{after}M'
+                end = 139 if op == 'I' else 141
+                window = dict(self.window,reverse=reverse,read_start=40 if reverse else 10,
+                              read_end=70 if reverse else 40,ref_end=end)
+                observation = dict(self.observation,fields=fields,reverse=reverse)
+                expanded = (100,end) if reverse else (110,end+10)
+                self.assertEqual(p.reference_geometry(window,observation,c),(expanded,(120,end-10)))
+
+    def test_leading_core_insertion_preserves_anchor_cuts(self):
+        self.boundary_geometry('I',False)
+
+    def test_trailing_core_insertion_preserves_anchor_cuts(self):
+        self.boundary_geometry('I',True)
+
+    def test_leading_core_deletion_preserves_anchor_cuts(self):
+        self.boundary_geometry('D',False)
+
+    def test_trailing_core_deletion_preserves_anchor_cuts(self):
+        self.boundary_geometry('D',True)
+
+    def test_gapped_or_clipped_anchor_still_rejected(self):
+        for reverse in (False,True):
+            for op in ('I','D','S'):
+                with self.subTest(reverse=reverse,op=op):
+                    fields = list(self.observation['fields']); fields[5] = f'15M1{op}{65 if op == "D" else 64}M'
+                    window = dict(self.window,reverse=reverse,read_start=40 if reverse else 10,
+                                  read_end=70 if reverse else 40,ref_end=141 if op == 'D' else 139)
+                    with self.assertRaisesRegex(ValueError,'gapped/clipped'):
+                        p.reference_geometry(window,dict(self.observation,fields=fields,reverse=reverse),c)
+
     def test_truth_mutation_cannot_change_inference_bytes(self):
         records,fact=self.project();cases=self.directory/'cases.tsv'
         p.write_packet(cases,SCHEMA,'candidate','a'*64,records);before=cases.read_bytes()
@@ -219,6 +255,202 @@ class Inputs(unittest.TestCase):
         result=subprocess.run([binary,'replay','--cases',str(cases),'--cases-sha256',c.pin(cases)['sha256'],
                                '--output',str(self.directory/'native-output')],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
+
+
+class PreparedReuse(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.directory = Path(temporary.name)
+        self.prepared = self.directory/'prepared'; self.prepared.mkdir()
+        self.original_root = self.directory/'original'
+        self.results = self.original_root/'results'
+        self.original_path = self.original_root/'scripts/context-feedback.py'
+        self.original_path.parent.mkdir(parents=True)
+        self.original_path.write_text('fixture original auditor\n')
+        self.source_path = self.original_root/'source.cpp'; self.source_path.write_text('fixture source\n')
+        self.binary = self.original_root/'binary'; self.binary.write_text('fixture binary\n')
+        self.identity = p.digest([c.pin(self.original_path),c.pin(self.source_path)])
+        self.raw = {}; self.proofs = []
+        for phase in ('full','private'):
+            stage,raw = self.stage('v2-'+phase+'-1/producer')
+            self.raw[phase] = raw
+            outer = self.write('v2-'+phase+'-1/execution-complete.json',dict(stages=[stage]))
+            self.proofs.append(dict(execution=outer,phase=phase,binary=c.pin(self.binary)))
+        self.observer_stage,self.raw['observer'] = self.stage('v2-observe-full-1/final_rerank/producer')
+        self.mask_directory = self.results/'v2-observe-full-1/final_rerank'
+        self.masks = [self.write('v2-observe-full-1/final_rerank/pair-native-'+name+'/matched.bed',{})
+                      for name in SCHEMA['enums']['mask_name']]
+        self.observer_seal = self.write('v2-observe-full-1/final_rerank/complete.json',dict(stages=[self.observer_stage],outputs=self.masks))
+        self.observer_outer = self.write('v2-observe-full-1/final_rerank/execution-complete.json',{})
+        self.regions = self.local('regions.txt','chrFixture:1-20\n')
+        self.extraction = self.local('extraction.fa','>chrFixture:1-20\n'+'A'*20+'\n')
+        self.truth_sources = {key:self.write(key+'.json',{}) for key in ('reference','fai','snapshot','samtools','archive')}
+        self.argv = [self.truth_sources['samtools']['path'],'faidx','-r',self.regions['path'],self.truth_sources['reference']['path']]
+        self.extraction_stage = self.write('current-extraction.json',dict(argv=self.argv,raw=dict(stdout=self.extraction)))
+        self.census = dict(selected_cases=1,local_alignment_cells=20,alignment_cells=20,private_event_alignment_cells=0)
+        self.inference = dict(schema='context-program-inference-manifest/1',scope='query0',truth_input=False,
+                              original_auditor=c.pin(self.original_path),old_source_inventory_sha256=self.identity,
+                              proofs=self.proofs,consumed_pins=[],census=dict(selected_cases=1,local_alignment_cells=20),cases=[dict(case=dict(case_id='case'))])
+        self.truth = dict(schema='context-program-truth-manifest/1',regions=self.regions,extraction=self.extraction,
+                          observer=dict(completion=self.observer_seal,execution=self.observer_outer),masks=self.masks,
+                          **self.truth_sources)
+        self.auditor = SimpleNamespace(ROOT=self.original_root,RESULTS=self.results,c=c,
+            sources=lambda:[c.pin(self.original_path),c.pin(self.source_path)],inventory_hash=p.digest,
+            evidence=SimpleNamespace(completed=self.completed,stage=self.check_stage))
+        self.observer = SimpleNamespace(completed_producer=self.observed)
+        for name,value in (('ORIGINAL',self.original_path),('ORIGINAL_SOURCE_SHA256',self.identity),
+                           ('original_auditor',lambda:self.auditor),('load_module',lambda *_:self.observer)):
+            patcher = mock.patch.object(p,name,value); patcher.start(); self.addCleanup(patcher.stop)
+        self.refresh()
+
+    def write(self, name, value):
+        path = self.results/name; path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(json.dumps(value)+'\n')
+        return c.pin(path)
+
+    def local(self, name, value):
+        path = self.prepared/name
+        path.write_text(value if isinstance(value,str) else json.dumps(value)+'\n')
+        return c.pin(path)
+
+    def stage(self, name):
+        raw = self.write(name+'/stdout',{})
+        return self.write(name+'/finish.json',dict(raw=[raw])),raw
+
+    def check_stage(self, pin, boundary):
+        boundary.check(pin)
+        stage = boundary.read(pin['path'])
+        for item in stage['raw']:
+            boundary.check(item)
+
+    def completed(self, directory, phase, identity, boundary):
+        self.assertEqual(identity,self.identity)
+        outer = c.pin(directory/'execution-complete.json')
+        for stage in boundary.read(outer['path'])['stages']:
+            self.check_stage(stage,boundary)
+        return dict(execution=outer,phase=phase,binary=c.pin(self.binary))
+
+    def observed(self, manifest, command, mode):
+        self.assertEqual((manifest,command,mode),(self.mask_directory/'complete.json','arm','ordinary'))
+        c.check(self.observer_outer); c.check(self.observer_seal)
+        return c.read(manifest)
+
+    def refresh(self, case_header=None, truth_header=None, files=None):
+        inference_pin = self.local('inference-manifest.json',self.inference)
+        self.truth['inference'] = inference_pin
+        truth_manifest = self.local('truth-manifest.json',self.truth)
+        cases = self.local('cases.tsv','SCHEMA\tcontext-candidate-case/1\t'+(case_header or inference_pin['sha256'])+'\n')
+        truth = self.local('truth.tsv','SCHEMA\tcontext-oracle-truth/1\t'+(truth_header or truth_manifest['sha256'])+'\n')
+        self.manifest = dict(schema='context-program-inputs/1',scope='query0',cases=cases,truth=truth,inference=inference_pin,
+                             truth_manifest=truth_manifest,census=self.census,selectedCaseIDs=['case'],
+                             source_pins=[*self.truth_sources.values(),self.extraction])
+        manifest_pin = self.local('manifest.json',self.manifest)
+        expected = [cases,truth,inference_pin,truth_manifest,self.regions]
+        completion = self.local('complete.json',dict(schema='context-program-inputs-complete/1',complete=True,
+                               manifest=manifest_pin,files=expected if files is None else files))
+        self.packet = dict(completion=completion,manifest=manifest_pin,cases=cases,truth=truth,census=self.census,selectedCaseIDs=['case'])
+
+    def verify(self):
+        return p.verify_prepared(self.packet,c,[self.extraction_stage])
+
+    def missing(self, target):
+        real_open = Path.open
+        def opened(path, *args, **kwargs):
+            if path == target:
+                raise FileNotFoundError(str(path))
+            return real_open(path,*args,**kwargs)
+        return mock.patch.object(Path,'open',opened)
+
+    def test_complete_hermetic_handoff_revalidates(self):
+        self.assertEqual(self.verify(),self.manifest)
+
+    def test_missing_original_execution_rejected(self):
+        for phase in ('full','private'):
+            with self.subTest(phase=phase):
+                target = Path(next(x for x in self.proofs if x['phase'] == phase)['execution']['path'])
+                with self.missing(target):
+                    with self.assertRaises(FileNotFoundError):
+                        self.verify()
+
+    def test_missing_nested_producer_file_rejected(self):
+        Path(self.raw['full']['path']).unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.verify()
+
+    def test_missing_nested_producer_stage_rejected(self):
+        outer = c.read(self.proofs[0]['execution']['path'])
+        Path(outer['stages'][0]['path']).unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.verify()
+
+    def test_missing_observer_stage_rejected(self):
+        Path(self.observer_stage['path']).unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.verify()
+
+    def test_missing_observer_execution_rejected(self):
+        Path(self.observer_outer['path']).unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.verify()
+
+    def test_missing_observer_raw_file_rejected(self):
+        Path(self.raw['observer']['path']).unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.verify()
+
+    def test_changed_original_source_rejected(self):
+        self.source_path.write_text('changed source\n')
+        with self.assertRaisesRegex(ValueError,'Original source inventory'):
+            self.verify()
+
+    def test_missing_prepared_manifest_files_rejected(self):
+        for name in ('inference-manifest.json','truth-manifest.json','regions.txt'):
+            with self.subTest(name=name):
+                target = self.prepared/name
+                with self.missing(target):
+                    with self.assertRaises(FileNotFoundError):
+                        self.verify()
+
+    def test_modified_completion_pin_rejected(self):
+        self.local('complete.json',{})
+        with self.assertRaisesRegex(ValueError,'Changed file'):
+            self.verify()
+
+    def test_empty_duplicate_or_omitted_file_census_rejected(self):
+        omitted = [self.packet['cases'],self.packet['truth'],self.manifest['inference'],self.manifest['truth_manifest']]
+        for files in ([],[self.regions]*5,omitted):
+            with self.subTest(files=files):
+                self.refresh(files=files)
+                with self.assertRaisesRegex(ValueError,'file census'):
+                    self.verify()
+
+    def test_foreign_file_census_rejected(self):
+        self.refresh(files=[self.packet['cases'],self.packet['truth'],self.manifest['inference'],self.manifest['truth_manifest'],self.extraction])
+        with self.assertRaisesRegex(ValueError,'file census'):
+            self.verify()
+
+    def test_cross_packet_header_rejected(self):
+        for key in ('case_header','truth_header'):
+            with self.subTest(key=key):
+                self.refresh(**{key:'0'*64})
+                with self.assertRaisesRegex(ValueError,'packet header'):
+                    self.verify()
+
+    def test_duplicate_original_proof_rejected(self):
+        self.inference['proofs'] = [self.proofs[0],self.proofs[0]]; self.refresh()
+        with self.assertRaisesRegex(ValueError,'proof census'):
+            self.verify()
+
+    def test_uncovered_consumed_source_rejected(self):
+        self.inference['consumed_pins'] = [c.pin(self.source_path)]; self.refresh()
+        with self.assertRaisesRegex(ValueError,'consumed source link'):
+            self.verify()
+
+    def test_extraction_producer_mismatch_rejected(self):
+        self.extraction_stage = self.write('current-extraction.json',dict(argv=['wrong'],raw=dict(stdout=self.extraction)))
+        with self.assertRaisesRegex(ValueError,'extraction producer'):
+            self.verify()
 
 
 class Census(unittest.TestCase):
