@@ -1,0 +1,39 @@
+{
+  "schema": "context-support-source/1",
+  "donor": "HG002",
+  "flowcell": "PAW71238",
+  "role": "exposed_development_support",
+  "objects": {
+    "cram": {
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/analysis/wf-human-variation/sup/HG002/PAW71238/output/SAMPLE.haplotagged.cram",
+      "size": 89968340536,
+      "etag": "\"048c8a3ecf528f8f3e0f47833379bfa3-5363\"",
+      "last_modified": "Tue, 14 Jan 2025 17:22:15 GMT",
+      "version_id": "tqRVLLsvHsjjj5Gc1HxSe8bg0lleq7RC"
+    },
+    "crai": {
+      "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/analysis/wf-human-variation/sup/HG002/PAW71238/output/SAMPLE.haplotagged.cram.crai",
+      "size": 537321,
+      "etag": "\"09a8a9082c98e7cfc27964d3200ebb90\"",
+      "last_modified": "Tue, 14 Jan 2025 17:27:05 GMT",
+      "version_id": "HFSDDy6OmFr.eK2XPZhliQyrcO9kEglI"
+    }
+  },
+  "metadata_lookup": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v3/logs/context-feedback-program/design/support-data-headers.json",
+    "size": 40909,
+    "sha256": "b45addbd1918f5cc55d23fd6b36349fc553bfcddb7f6108b3944842236729c87"
+  },
+  "target_summary": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/results/context-feedback/v2-full-1/summary.json",
+    "size": 709568,
+    "sha256": "0bf92277ebb857cecd6da14dfaecb055cc02e652638e98dfa7636b5d57de4ef3"
+  },
+  "original_auditor": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/scripts/context-feedback.py",
+    "size": 31802,
+    "sha256": "2fafa11126633d9998994e529f3b7400995d07fef0259a8fdd568de776f9adc7"
+  },
+  "old_source_inventory_sha256": "7a1b9c6f05597dd70e5eb96c894c2ed9e0cf811c28cc7735354fa1aed1f0164b",
+  "flank_bases": 100
+}
