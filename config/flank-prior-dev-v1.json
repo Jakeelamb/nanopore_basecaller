@@ -1,0 +1,40 @@
+{
+  "schema": "flank-prior-protocol/1",
+  "role": "development",
+  "cohort": "/home/jake/Projects/nanopore_basecaller-retrieval/results/compound-frontier/20261023T160645Z-full-b2ea3920/admission/cohort.json",
+  "bridge_completion": "/home/jake/Projects/nanopore_basecaller-retrieval/results/compound-frontier/20261023T160645Z-full-b2ea3920/admission/complete.json",
+  "windows_receipt": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/development/artifacts/windows.json",
+  "mapped_sam_sha256": "db01733a1847c37b3e30da8839af233728b7bc00421828f291b3da3c3bf2c6fe",
+  "checkpoint_query_indices": [
+    0,
+    31
+  ],
+  "followup_query_indices_if_uninformative": [
+    0,
+    450
+  ],
+  "weight": 1.0,
+  "margin": 0.5,
+  "neural_deficit": 0.5,
+  "guard_reference_bases": 50,
+  "flank_reference_bases": 50,
+  "max_flank_bases": 64,
+  "max_prototypes": 256,
+  "flank_distance": "unit-Levenshtein-left-plus-right-best-exemplar",
+  "bonus": "ln1p((e-1)*exp(-ln(3)*(d_h-d_min))); exact 1 for ties",
+  "abstain": "binary-panel",
+  "initial_budget": {
+    "cpus": 1,
+    "rss_mib": 1024,
+    "seconds": 60,
+    "output_mib": 100
+  },
+  "full_budget": {
+    "cpus": 1,
+    "rss_mib": 4096,
+    "seconds": 600,
+    "output_mib": 2048,
+    "disk_floor_gib": 30
+  },
+  "bridge_completion_sha256": "4e1284e3b9bf953dd9bb606f07740647394b7d4e53664f44d1dabac9ec347829"
+}

@@ -1,0 +1,129 @@
+[
+  {
+    "id": "dorado",
+    "path": "software/archives/dorado-2.1.2-linux-x64.tar.gz",
+    "url": "https://cdn.oxfordnanoportal.com/software/analysis/dorado-2.1.2-linux-x64.tar.gz",
+    "bytes": 3466666099,
+    "etag": "caad040be31e0c4b0e0703fd9a0f8080-414",
+    "role": "stock_binary"
+  },
+  {
+    "id": "grch38",
+    "path": "references/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz",
+    "bytes": 886344618,
+    "md5": "3a3347eae0893f96ecf495d1c39e2284",
+    "role": "reference"
+  },
+  {
+    "id": "HG005_GRCh38_1_22_v4.2.1_benchmark.bed",
+    "path": "truth/HG005/HG005_GRCh38_1_22_v4.2.1_benchmark.bed",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/ChineseTrio/HG005_NA24631_son/NISTv4.2.1/GRCh38/HG005_GRCh38_1_22_v4.2.1_benchmark.bed",
+    "bytes": 18615340,
+    "md5": "f06ec2339592168a75ad4236b87cb2a3",
+    "role": "variant_benchmark"
+  },
+  {
+    "id": "HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+    "path": "truth/HG005/HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/ChineseTrio/HG005_NA24631_son/NISTv4.2.1/GRCh38/HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+    "bytes": 139334496,
+    "md5": "35fe853b7e8d979daa91033ed6863e98",
+    "role": "variant_benchmark"
+  },
+  {
+    "id": "HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
+    "path": "truth/HG005/HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/ChineseTrio/HG005_NA24631_son/NISTv4.2.1/GRCh38/HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
+    "bytes": 1615818,
+    "md5": "ffd21b44e0bfe4133b4f34fba88ea57e",
+    "role": "variant_benchmark"
+  },
+  {
+    "id": "grch38.fai",
+    "path": "references/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz.fai",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz.fai",
+    "bytes": 7804,
+    "md5": "5fddbc109c82980f9436aa5c21a57c61",
+    "role": "reference_index"
+  },
+  {
+    "id": "grch38.gzi",
+    "path": "references/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz.gzi",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.gz.gzi",
+    "bytes": 770664,
+    "md5": "cfa1ee11b1ecb29f936578b27014fbe0",
+    "role": "reference_index"
+  },
+  {
+    "id": "hg002-development",
+    "path": "data/raw/HG002/PAW70337/PAW70337_66b2eea5_de8117b1_33.pod5",
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG002/PAW70337/pod5/PAW70337_66b2eea5_de8117b1_33.pod5",
+    "bytes": 555013832,
+    "etag": "e5491bb43a46f9579defeff48d251065-67",
+    "role": "development",
+    "sample": "HG002",
+    "flowcell": "PAW70337"
+  },
+  {
+    "id": "hg002-validation",
+    "path": "data/raw/HG002/PAW71238/PAW71238_a8351990_11d77535_10.pod5",
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG002/PAW71238/pod5/PAW71238_a8351990_11d77535_10.pod5",
+    "bytes": 479362680,
+    "etag": "02fd156f4b0d185668d8361023ade697-58",
+    "role": "validation",
+    "sample": "HG002",
+    "flowcell": "PAW71238"
+  },
+  {
+    "id": "hg005-sealed-test",
+    "path": "data/raw/HG005/PAW87816/PAW87816_017ec17c_cb358aeb_52.pod5",
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG005/PAW87816/pod5/PAW87816_017ec17c_cb358aeb_52.pod5",
+    "bytes": 2175154136,
+    "etag": "17dad61a6610ce9aea855441b3aca1f6-260",
+    "role": "sealed_test",
+    "sample": "HG005",
+    "flowcell": "PAW87816"
+  },
+  {
+    "id": "HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+    "path": "truth/HG002/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+    "bytes": 156252944,
+    "role": "variant_benchmark"
+  },
+  {
+    "id": "HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
+    "path": "truth/HG002/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
+    "bytes": 1657747,
+    "role": "variant_benchmark"
+  },
+  {
+    "id": "HG002_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed",
+    "path": "truth/HG002/HG002_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed",
+    "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed",
+    "bytes": 11494021,
+    "role": "variant_benchmark"
+  },
+  {
+    "id": "model-hac",
+    "path": "software/archives/dna_r10.4.1_e8.2_400bps_hac@v6.0.0.zip",
+    "url": "https://cdn.oxfordnanoportal.com/software/analysis/dorado/dna_r10.4.1_e8.2_400bps_hac@v6.0.0.zip",
+    "bytes": 26084668,
+    "sha256": "5812471f26a59a717f8d56c2dffe5db603426cbf7701f9361ad3ad1f84ee51f6",
+    "etag": "474e2f6b77f8bfb9616c65ddc9d47968-4",
+    "role": "stock_model",
+    "model_name": "dna_r10.4.1_e8.2_400bps_hac@v6.0.0"
+  },
+  {
+    "id": "model-sup",
+    "path": "software/archives/dna_r10.4.1_e8.2_400bps_sup@v5.2.0.zip",
+    "url": "https://cdn.oxfordnanoportal.com/software/analysis/dorado/dna_r10.4.1_e8.2_400bps_sup@v5.2.0.zip",
+    "bytes": 186952858,
+    "sha256": "94ddebdee5db58676f447cf09a6710ff6da3b5cba1fabead867d8672255bc73e",
+    "etag": "dc7335abad3046da0d50ea361d2d9665-23",
+    "role": "stock_model",
+    "model_name": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0"
+  }
+]

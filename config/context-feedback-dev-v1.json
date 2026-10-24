@@ -1,0 +1,51 @@
+{
+  "schema": "context-feedback-config/1",
+  "role": "development",
+  "scope": "offline retained-neural-score context decoding; no encoder, native Dorado or streaming integration",
+  "inputs": {
+    "handoff": "/home/jake/Projects/nanopore_basecaller-retrieval/results/compound-frontier/handoff-evidence.json",
+    "handoff_sha256": "76035b228f2baf00882aaf48bf9d61b38cb892339807f784987d70c6dc29d87d",
+    "package": "/home/jake/Projects/nanopore_basecaller-retrieval/results/compound-frontier/20261023T160645Z-full-b2ea3920/admission",
+    "admission_receipt": "/home/jake/Projects/nanopore_basecaller-retrieval/logs/compound-frontier/20261023T160729Z-admit-8c39ee6e/finish.json",
+    "original_cohort_sha256": "ac14c13bf51865af3bb9c69ce8266694efa7e7a9e84d17454946ea3febefa814",
+    "plan_sha256": "0740fa50b0611fcb41ab023d5f567b8b596635a81416305ff2b58d00cb7e5874",
+    "mapped_sam_sha256": "db01733a1847c37b3e30da8839af233728b7bc00421828f291b3da3c3bf2c6fe",
+    "query0": {
+      "query_index": 0,
+      "parent": "7214d805-8331-49aa-af61-478be074d7a6",
+      "tensor": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/development/native-export/p1061436_b6_s23.scores",
+      "tensor_sha256": "2155a435c42aae305635e41f3c79507a4ad249eb2fd84d8e5935898effcc9edd",
+      "tensor_size": 4112461,
+      "timesteps": 84,
+      "interpretation": "shared with raw-current diagnostic; exploratory development, not independent confirmation"
+    }
+  },
+  "policy": {
+    "beam_width": 128,
+    "max_symbols": 128,
+    "min_symbols": 20,
+    "context_weight": 0.5,
+    "maximum_signal_deficit": 0.5,
+    "minimum_objective_margin": 0.5,
+    "minimum_mapq": 30,
+    "tie_rule": "objective, then native, then lexical final sequence; lexical partial prefix ties",
+    "context_formula": "negative minimum Levenshtein distance to any local path; partial prefixes compare any local path prefix; terminal sequences compare whole paths",
+    "escape_rule": "independent same-width reference-free beam plus immutable native control; final exact signal rescore; deficit/margin gates; symbol bound or missing eligible finalists abstain to native",
+    "beam_pruning": "explicit approximate search with every retained-prefix census and pruned count; never an exact optimum claim"
+  },
+  "qualification_queries": [0],
+  "checkpoint_queries": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+  "execution": {
+    "requires_external_admission": true,
+    "default_admission": null,
+    "canonical_lock": "/home/jake/Projects/nanopore_basecaller/results/stock/host.lock",
+    "proposed_wall_seconds": 300,
+    "proposed_cpu_quota": 2,
+    "proposed_address_bytes": 8589934592,
+    "proposed_memory_bytes": 4294967296,
+    "proposed_swap_bytes": 0,
+    "proposed_output_bytes": 104857600,
+    "context_edit_cell_cap": 1000000000,
+    "disk_reserve_bytes": 32212254720
+  }
+}

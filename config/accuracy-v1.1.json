@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "version": "1.1",
+  "amends": "config/accuracy-v1.json",
+  "endpoint": "GIAB-supported reference-identical local-primary accuracy outside fixed unsupported-star confidence neighborhoods",
+  "spanning_policy": "exclude-confidence-neighborhood",
+  "rule": "For every ALT * REF span, select all intersected ORIGINAL merged confident intervals plus the closest strict left and right intervals. If the span is in a gap, select its two adjacent intervals. Select from the original set, never recursively after removals. Union and deduplicate all selections before either 100 or 500 bp erosion. Retain the star REF footprint with padding and every original/concrete/repeat mask. Validate REF/sample/GT/coordinates; other symbolic and breakend alleles still fail.",
+  "qualification": "conditional on GIAB confident homozygous-reference assertions and publisher donor labels; no missing deletion reconstruction",
+  "reason": "The strict full HG002 truth pass rejected genuine spanning stars at chr1:93847010 and chr1:93847011 without a covering upstream concrete deletion. Both are outside the confident BED. No new cohort accuracy result had been scored when this domain amendment was frozen.",
+  "strict_failure": "logs/20261022T234349Z-stock-44358f6f256c42b0accb56ba4421d1ac-zIK8uS",
+  "independent_review": "logs/controlled-design-20261022/accuracy-review.md"
+}

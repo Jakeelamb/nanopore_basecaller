@@ -1,0 +1,69 @@
+{
+  "schema": "context-atlas-full-evidence/1",
+  "source_revision": "6a8c23e8a34d37bef76f25c30cc007bf429deae5",
+  "sources_sha256": "695b709b50d0b2cfbc3e227ec6e3ca94b89e5e37db6296fb7c4a771c7c8784aa",
+  "development_only": true,
+  "biological_qualification": false,
+  "files": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-engineering-1/execution-complete.json",
+      "size": 2519,
+      "sha256": "cf6bfe7702674a700b56114321a4441e91e6cc1e3622ea8b3370d79519741b72"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-q0-1/execution-complete.json",
+      "size": 2511,
+      "sha256": "d10a35c56186dfa3e194a1d19c6db50612f5ff2b73fb7704b02d466da32700d3"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-evaluate-q0-1/execution-complete.json",
+      "size": 2521,
+      "sha256": "053fc66bc10a2943e12b80e48b899fffcd577e9d62d6c6d6ea06b5b9e0e5689e"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-first32-1/execution-complete.json",
+      "size": 2556,
+      "sha256": "2234c5280686527eb0ea6ac4a08608d7e5e8ed094c4dbc2c05cb6a6a5ecc9432"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-evaluate-first32-1/execution-complete.json",
+      "size": 2566,
+      "sha256": "f5e64a440ee79853e63b604f24f4ba693a86827f43b20825aba91de8d46b1220"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-all-1/execution-complete.json",
+      "size": 2520,
+      "sha256": "14e4fc1c4f9de03c789cbb20dc9df71d953a78002ce8278873cbb7ac6d30ae45"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-evaluate-all-1/execution-complete.json",
+      "size": 2530,
+      "sha256": "2faaba1a55b5fecc621902e2cc1bb351043c82caca388d1c56069549a5d6f50e"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-all-1/prepared/complete.json",
+      "size": 1656,
+      "sha256": "a4a17d2f1f3796a95e3ad3ceaebd41ac61822d4cc621be4d218734779f6e7949"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-evaluate-all-1/native-atlas/complete.json",
+      "size": 8218,
+      "sha256": "eaf29b25da7437e2467885d67c34fee5b5990cbbee19b4e58c76877066216b24"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-atlas-audit-1/result.json",
+      "size": 8569,
+      "sha256": "b17e2c321bfd31e80d44fa725639e49490f3326ca2b99c3a4d6a38efca61c567"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/logs/context-feedback-program/reviews/boundary-delta.md",
+      "size": 26041,
+      "sha256": "947f97013cae69c372107889a45496fa54e842b874a8fd52603037dd5d905c51"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/logs/context-feedback-program/reviews/math-full-runtime.md",
+      "size": 14092,
+      "sha256": "5a35e8571877fe61daf9d97e4918b73a19f4d77fd97f1b8164e02e9d785c2983"
+    }
+  ]
+}
