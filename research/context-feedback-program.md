@@ -8,8 +8,8 @@ The target is location-aware improvement of uncertain molecule sequence with exp
 
 - [x] Ground the frozen baseline, research findings and current resource state.
 - [x] Compare two architecture sketches for candidate/truth diagnostics and select one coherent interface.
-- [ ] Implement and independently qualify the retained-candidate oracle and orchestration.
-- [ ] Run the complete ordinary and private diagnostic without repeating neural producers.
+- [x] Implement and independently qualify the retained-candidate oracle and orchestration.
+- [x] Run the complete ordinary and private diagnostic without repeating neural producers.
 - [ ] Implement and compare uncertainty targeting, contextual scoring and correction decisions as separately declared variants.
 - [ ] Implement and qualify joint latent-state inference against equivalent late scoring before testing genuine retained frames.
 - [ ] Implement bounded prefix feedback and validate signal availability, lookahead, state continuity, location proposals and output commitments.
