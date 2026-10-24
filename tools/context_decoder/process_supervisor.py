@@ -90,7 +90,7 @@ def unloaded_terminal(observation, expected_group):
             and not group.exists())
 
 
-def supervise(phase, config, output, admission, qualification, query0, boundary, process_guard):
+def supervise(phase, config, output, admission, qualification, query0, boundary, process_guard, checkpoint=None):
     boundary.require(admission is not None, 'SOURCE ONLY: fresh external admission is required')
     grant = boundary.read(admission)
     boundary.require(grant['schema'] == 'context-feedback-admission/1' and grant['phase'] == phase
@@ -139,6 +139,8 @@ def supervise(phase, config, output, admission, qualification, query0, boundary,
             command += ['--qualification', str(Path(qualification).resolve())]
         if query0:
             command += ['--query0', str(Path(query0).resolve())]
+        if checkpoint:
+            command += ['--checkpoint', str(Path(checkpoint).resolve())]
         boundary.fresh(directory / 'command.json', dict(argv=command, grant=grant, source=boundary.pin(__file__)))
         process = None
         error = None

@@ -113,6 +113,16 @@ def completed(directory, phase, source_identity, boundary, seen=None):
             if 'native' not in outcome or outcome.get('reused_query0'):
                 continue
             boundary.check(outcome['native']['completion'])
+            for key in ('base_frame', 'construction'):
+                if key in outcome:
+                    boundary.check(outcome[key])
+            if 'construction' in outcome:
+                construction = boundary.read(outcome['construction']['path'])
+                for item in construction.get('reconstruction_metadata', []):
+                    boundary.check(item)
+                for key in ('parent','base_frame','frame'):
+                    if key in construction:
+                        boundary.check(construction[key])
             producer = stage(outcome['native']['receipt'], boundary)
             target = Path(outcome['native']['completion']['path']).parent
             attempt = boundary.read(target / 'attempt.json')
