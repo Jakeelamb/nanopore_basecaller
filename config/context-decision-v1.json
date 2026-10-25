@@ -1,0 +1,28 @@
+{
+  "schema": "context-decision-config/1",
+  "role": "development",
+  "base_revision": "6a8c23e8a34d37bef76f25c30cc007bf429deae5",
+  "toolchain": {
+    "compiler": {"path": "/usr/bin/c++", "size": 1738072, "sha256": "f04191f6a7b2cd7d9a62e1745872b8a6088791e5af6955488c69c9b2c4668bc9"},
+    "formatter": {"path": "/usr/bin/clang-format", "size": 104608, "sha256": "cd50c00c4b3475329257d717f9e778769d00d1eff5c03436ebc39b023ddd6394"}
+  },
+  "candidate_packet": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-all-1/prepared/cases.tsv",
+    "sha256": "9cda8f2adcad2c495e300b208e85f009d924d7dd39d46dad8099310817257dd7"
+  },
+  "context_weight": 0.5,
+  "neural_deficit_limit": 0.5,
+  "objective_margin": 0.5,
+  "arms": ["feasible_escape", "feasible_partial"],
+  "execution": {
+    "canonical_lock": "/home/jake/Projects/nanopore_basecaller/results/stock/host.lock",
+    "maximum_wall_seconds": 300,
+    "cpu_quota": 2,
+    "memory_bytes": 4294967296,
+    "address_space_bytes": 8589934592,
+    "swap_bytes": 0,
+    "maximum_output_bytes": 4294967296,
+    "maximum_growth_bytes": 104857600,
+    "disk_floor_bytes": 32212254720
+  }
+}
