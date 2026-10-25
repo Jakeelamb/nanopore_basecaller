@@ -1,0 +1,19 @@
+# Qualified offline uncertainty nominations
+
+The complete retained-score population is qualified and its 512 selected windows are frozen. This is a targeting result. Error exposure, context attachment, decoding and biological accuracy remain separate experiments.
+
+The native scanner verifies 1,557 unique original score files, totaling 6,407,427,934 bytes, and accounts for all 64 parents. It computes the declared completed-chunk conditional-CRF uncertainty proxy on 1,242 eligible chunks from 52 parents. Mapping quality, nonautosomal location, unmapped records and two parent sequence/quality mismatches retain explicit exclusions. Excluded score files still undergo hash, shape and finite-value validation.
+
+The complete scan yields 38,358 local proposals. Global greedy selection retains 512 nonoverlapping 21-base centers from 43 parents. The final coordinate-set SHA256 is `d122671e29e4d9c4514eb982404ec627604dbf830a1e5e86141b1bad76da4291`. These windows use native moves, mapped guard ownership and a neural entropy rank. Truth and reference-disagreement labels do not select or rank them. The proxy is not calibrated error probability, and complete-chunk scores contain future information.
+
+The native implementation passes 3,044 assertions against 9,300 independently enumerated paths and 2,800 complete edge comparisons. All 16 Python boundary controls execute with zero skips. Four copied genuine-score controls distinguish the registered root-hash rejection from independently pinned nonfinite, trailing and truncated payload rejections. No original score file changes.
+
+Fifty disjoint scan units consume each original chunk once. All 50 maintained receipt verifications, full collection and global merge pass. Query 0 and the first 32 chunks remain reused. The scanner stages total 149.14 seconds wall time and 146.35 seconds CPU time, with maximum RSS 56,360 KiB. These are single-pass execution costs, not a speed comparison or a pure numerical-kernel benchmark.
+
+Each admitted unit uses two CPUs, 4 GiB memory, 8 GiB address space, zero swap, a 300-second outer bound and nonblocking canonical lock intake. Live kernel and service observations precede work. Sampled output thresholds are 100 MiB new growth and 4 GiB retained aggregate, with a 30 GiB disk reserve. The native batch cap is 20 million state-timestep cells. Failed earlier compiler, cache-type and lock attempts remain retained in the original worktree. Installed CMake normalizes compiler-cache entries to `STRING`; this isolated version checks the actual cache type and exact compiler identity without altering those old receipts.
+
+An independent same-family review returns `PASS_EVIDENCE_FOR_OFFLINE_NOMINATIONS`. It reconstructs global greedy selection from all 38,358 rows and reproduces the exact 512 outputs. It independently checks every selected native core and guard binding, the original score-pin census, disjoint batches, maintained verifier links and 105 live kernel-proof chains. It reads no tensor bodies or reruns producers. Actual hash and finite-value qualification comes from the inspected native scanner and its successful retained executions.
+
+The review is `logs/context-feedback-program/reviews/uncertainty-final-runtime.md`, SHA256 `942a43759a423324e306bd447b5dff82244f4a9051ec14162a810eefe67f0626`. The final artifact audit completion is `results/context-feedback/uncertainty-v2-full-audit-1/complete.json`, SHA256 `a71bb5e041bdba6c4d6f095f0c36f82a94780e3565e74b42e86ac9729ba3819c`. [Exact source and evidence pins](context-uncertainty-result-pins.json) identify the local artifacts.
+
+No neural producer, graph producer, GPU operation or biological evaluation runs in this unit. It does not establish online causality, basecalling improvement, allele safety or promotion, and it does not close the separate catalogue bridge.

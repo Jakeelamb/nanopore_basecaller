@@ -1,0 +1,16 @@
+[
+  "CMakeLists.txt",
+  ".clang-format",
+  "source-files.json",
+  "verify_formatter.cmake",
+  "prepare.py",
+  "README.md",
+  "include/context_uncertainty/uncertainty.h",
+  "src/posterior.cpp",
+  "src/runtime.cpp",
+  "src/main.cpp",
+  "tests/controls.cpp",
+  "tests/main.cpp",
+  "../context_decoder/evidence.py",
+  "../../research/context-uncertainty-unit.md"
+]
