@@ -1,0 +1,103 @@
+{
+  "compiled_scorer_inventory": "54e022509ac9735381bd4da1408190c64a5495d183c790dfc50c0442139bb664",
+  "completions": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-model-engineering-2/complete.json",
+      "sha256": "cb44c353426d0150d8c10ff6ef366ef3773109399061d3b734d81fef9b6c2d54",
+      "size": 3377
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-model-query0-1/complete.json",
+      "sha256": "d9c75632535d3ae7ae6e9366dc8d04f6244567b6efdbdebc03bdc94a4d6e9cac",
+      "size": 2872
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-model-checkpoint-1/complete.json",
+      "sha256": "9f8241786d6f4fd0960800832412453239a21d33fdb5c39866cfe3baff40643f",
+      "size": 2400
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-model-all-1/complete.json",
+      "sha256": "a5c7aa7f37f815a99e58b32767c128c9c7fdb4727805620059a24c6c56f187c5",
+      "size": 4953
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-observer-v2-engineering-1/complete.json",
+      "sha256": "18cad3d7e06ba21d961b90bd1bda7645eb77d2f6c9cd25b555acdb9360e0ccca",
+      "size": 1648
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-model-annotation-2/complete.json",
+      "sha256": "01d3286a2f6a5e9de46ade3c190fbf88e8ef1fadf66629d732405fb298280498",
+      "size": 2182
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-model-emission-2/complete.json",
+      "sha256": "2e36a7da50eb8291ee0af0fa08c920576f1caabb7ad805f481fec571f75f3069",
+      "size": 2170
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-measure-graph-1/complete.json",
+      "sha256": "d1cac4af5d61634e9c281ab6ed40e3b7181d31f7335ea63eaca848237633b7b4",
+      "size": 30055
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-measure-reference-1/complete.json",
+      "sha256": "76ca9c3490c7b191f8a60c66399301cf1beeb7f8c6d50269cd9c21483dca4617",
+      "size": 30295
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/results/context-feedback/v5-measure-review-1/complete.json",
+      "sha256": "0c813b385c81c32b4dfb107de7fd1b5d35ae0db43bbec8181c5c4a0e54163b4d",
+      "size": 108716
+    }
+  ],
+  "independent_audit": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/logs/context-feedback-program/reviews/model-final-audit.py",
+    "sha256": "fad27d2d7b80fa0183a43b04076406950874b831085d3bda8ef12b8954d3de2d",
+    "size": 22963
+  },
+  "independent_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/logs/context-feedback-program/reviews/model-final.md",
+    "sha256": "665b968def752e261a43ce1a4673730f2612f5be60fbe3f8398225e458d901d8",
+    "size": 16684
+  },
+  "promotion": false,
+  "raw_signals_weights_references_and_results_committed": false,
+  "role": "exposed_HG002_development",
+  "schema": "context-model-result-pins/1",
+  "scorer_source_base": "3c619205cb3672e77f762aed3c1bd47288d8ead7",
+  "sources": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tools/context_decoder/model_observe.py",
+      "sha256": "d20da3f3ce5581504d659917b0ee1cd6d7fce773a66a437c790a195fa0ae1abf",
+      "size": 43095
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tools/context_decoder/model_observe_v2.py",
+      "sha256": "39b1e062695c0b40ec142d670a79b9f61ec3f38320e14a4810822e34220fa5d7",
+      "size": 43153
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tools/context_decoder/model_measure.py",
+      "sha256": "e05619d9a04501d7f740daa0cda10f02bb853d122b257743c023575d62366f1c",
+      "size": 26227
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tests/test_context_model_observe.py",
+      "sha256": "b01144d1bbc1051a958a75b609b56e90d6fca98ac1eefbe903c5ed4a93ff5708",
+      "size": 17064
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tests/test_context_model_observe_v2.py",
+      "sha256": "6e03deeae8fa4cec9a6d16538f14599f89d24101e59c4cd29f673de4b843443e",
+      "size": 19305
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tests/test_context_model_measure.py",
+      "sha256": "1a7f60d9ddf3cabf03cb9b8c401cd076207176976d0ecb16e2d9bba502701736",
+      "size": 6137
+    }
+  ],
+  "verdict": "REJECT"
+}

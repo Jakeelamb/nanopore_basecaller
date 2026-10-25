@@ -1,0 +1,14 @@
+[
+  "CMakeLists.txt",
+  ".clang-format",
+  "source-files.json",
+  "README.md",
+  "verify_formatter.cmake",
+  "include/context_model/model.h",
+  "private/context_model/runtime.h",
+  "src/model.cpp",
+  "src/runtime.cpp",
+  "src/main.cpp",
+  "tests/controls.cpp",
+  "tests/main.cpp"
+]

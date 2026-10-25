@@ -1,0 +1,39 @@
+{
+  "schema": "graph-frontier-protocol/1",
+  "policies": [
+    {
+      "id": "native-preservation",
+      "prior": "none",
+      "lambda": 0,
+      "neural_deficit": 0,
+      "margin": 1.7976931348623157e+308
+    },
+    {
+      "id": "compound-reference-free",
+      "prior": "none",
+      "lambda": 0,
+      "neural_deficit": 0.5,
+      "margin": 0.5
+    },
+    {
+      "id": "compound-panel-100",
+      "prior": "panel",
+      "lambda": 1,
+      "neural_deficit": 0.5,
+      "margin": 0.5
+    },
+    {
+      "id": "compound-linear-100",
+      "prior": "linear",
+      "lambda": 1,
+      "neural_deficit": 0.5,
+      "margin": 0.5
+    }
+  ],
+  "frontier": {
+    "enabled": false,
+    "priors": [],
+    "margin": 0.5,
+    "neural_deficit": 0.5
+  }
+}
