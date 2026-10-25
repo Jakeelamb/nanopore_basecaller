@@ -137,7 +137,7 @@ class Transport:
                 'Range plus one-byte overrun detection exceeds aggregate cap')
         request_id = uuid.uuid4().hex
         payload = directory / (request_id + '.data')
-        target = obj['url'] + '?versionId=' + urllib.parse.quote(obj['version_id'], safe='')
+        target = obj['url']
         request = urllib.request.Request(target, headers={
             'Range': f'bytes={begin}-{end-1}', 'Accept-Encoding': 'identity',
             'If-Match': obj['etag'], 'If-Unmodified-Since': obj['last_modified']})

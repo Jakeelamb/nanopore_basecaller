@@ -55,12 +55,12 @@ class RangeControls(unittest.TestCase):
         opener = Opener(response)
         return t.Transport(self.output,maximum_bytes,20,opener),response,opener
 
-    def test_exact_range_and_versioned_conditional_request(self):
+    def test_exact_range_and_version_pinned_conditional_request(self):
         transfer,response,opener = self.transfer()
         value = transfer.fetch('cram',self.obj,10,20)
         self.assertEqual(t.check(value).read_bytes(),b'0123456789')
         request,timeout = opener.requests[0]
-        self.assertTrue(request.full_url.endswith('?versionId=v%2F1'))
+        self.assertEqual(request.full_url,self.obj['url'])
         self.assertEqual(request.get_header('Range'),'bytes=10-19')
         self.assertEqual(request.get_header('If-match'),'"frozen"')
         self.assertEqual(timeout,20)

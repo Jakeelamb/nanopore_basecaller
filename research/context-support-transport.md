@@ -14,7 +14,7 @@ The target set consists of the 311 previously admitted ordinary v2 core interval
 
 ## Transport and pricing
 
-Every body request has an explicit half-open byte range converted to one HTTP Range, a maximum 1 MiB body, `Accept-Encoding: identity`, `If-Match`, `If-Unmodified-Since`, and the pinned S3 version ID. Redirects are refused. Status must be 206. Content-Range, Content-Length, ETag, Last-Modified, version and encoding must match before any application body read. A 200 response is rejected before its body is read. Requested payload length plus one overrun-detection byte is durably reserved before each HTTP operation. Failed attempts retain partial bytes and reserve budget on resume. These are application payload bounds, not TCP/TLS traffic accounting.
+Every body request has an explicit half-open byte range converted to one HTTP Range, a maximum 1 MiB body, `Accept-Encoding: identity`, `If-Match` and `If-Unmodified-Since`. It requests the public current-object URI. Redirects are refused. Status must be 206. Content-Range, Content-Length, ETag, Last-Modified, the exact pinned response version ID and encoding must match before any application body read. A 200 response is rejected before its body is read. The version-specific URI returned 403 in the preserved first attempt; changing the URI does not change the accepted object identity. Requested payload length plus one overrun-detection byte is durably reserved before each HTTP operation. Failed attempts retain partial bytes and reserve budget on resume. These are application payload bounds, not TCP/TLS traffic accounting.
 
 Each successful range has an immutable content pin and request/response receipt. Resume reuses only the exact object, range and payload hash. Corruption rejects reuse; it does not silently overwrite or redownload an allegedly successful chunk. New attempts retain their own files and errors. Output has an exclusive local writer lock. That lock does not replace the canonical host lock held by the coordinator.
 
@@ -29,7 +29,7 @@ The separate `fetch` phase requires the exact successful inspect-manifest hash a
 Use the shared UV environment. Run these commands only inside the coordinator's exact source-bound CPU supervisor, with fresh nonblocking canonical host-lock acquisition and terminal-tree proof before lock release. Proposed engineering limits are 300 seconds, two CPUs, 4 GiB memory, 8 GiB address space, zero swap, 100 MiB aggregate output stop threshold and a 30 GiB disk reserve. No GPU, model or stock producer is invoked. Qualification is one unit, followed by a separately declared inspect unit under the same host limits. These are ready commands, not executed acceptance evidence.
 
 ```bash
-cd /home/jake/Projects/nanopore_basecaller-context-feedback-support
+cd /home/jake/Projects/nanopore_basecaller-context-feedback-support-v2
 UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv \
   uv run --no-sync python -m unittest discover -s tests -p test_support_transport.py -v
 ```

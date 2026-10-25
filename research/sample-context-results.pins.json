@@ -1,0 +1,1108 @@
+{
+  "baseline": "98fc0e0310e715ad5fe2aa10f04d9f1f3ae5952c",
+  "corrected_assembly": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/assembly.json",
+    "sha256": "fcd17478d81b620c86e489136f0ef54450e2b4bd039aab0b2a4dde337e62d8fe",
+    "size": 117506
+  },
+  "engineering_commands": [
+    {
+      "argv": [
+        "/usr/bin/c++",
+        "--version"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-version-compiler/finish.json",
+        "sha256": "a2f40e13f71d332ea6e0208945cad0f6081c2f3c66d879f0800aa957f2a46c1c",
+        "size": 3744
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/clang-format",
+        "--version"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-version-formatter/finish.json",
+        "sha256": "16efedd943ee88acfa4f6b1bee08564bea24f8e8106326bf8df2e6e7a05277ea",
+        "size": 3763
+      }
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "--version"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-version-uv/finish.json",
+        "sha256": "74377f9ba3ecec8875d5665082026f90f147485bcfff2f75968cd2d065ff964d",
+        "size": 3689
+      }
+    },
+    {
+      "argv": [
+        "/home/jake/.local/share/uv/python/cpython-3.12.8-linux-x86_64-gnu/bin/python3.12",
+        "--version"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-version-python/finish.json",
+        "sha256": "40311c7ade1f11f4b177a7b39423636a4127b53961200b2c5ffb7d3a23261e27",
+        "size": 3789
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cmake",
+        "-S",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/tools/sample_context",
+        "-B",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DSAMPLE_FORMATTER=/usr/bin/clang-format"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-configure/finish.json",
+        "sha256": "0e3e091da6b01a5a5fff983db9479534370b56ca7795478adb4ae858555d5c78",
+        "size": 4018
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cmake",
+        "--build",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build",
+        "--parallel",
+        "2"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-build/finish.json",
+        "sha256": "b71bdaa1f72a82b8cb183ad0b2898d0251d6075ee41d18b753a665b741b064d3",
+        "size": 3776
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cmake",
+        "--build",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build",
+        "--target",
+        "format-check"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-format-check/finish.json",
+        "sha256": "a82585e8dee7a87f180691eeac89bcf5e492081025bc4dc360a367a18ac76557",
+        "size": 3861
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/ctest",
+        "--test-dir",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build",
+        "--output-on-failure",
+        "--parallel",
+        "1"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/stages/sample-ctest/finish.json",
+        "sha256": "43a2cc8022047ee37be302b85f2138624d48e14e763c1b9a0dcb1d8bdfc31758",
+        "size": 3806
+      }
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/sample_context/tests",
+        "-p",
+        "test_pipeline.py",
+        "-v"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/stages/sample-python-controls/finish.json",
+        "sha256": "becbe32237e51686757fe31c52fdc9ce8edbd4fbac3578b96293289ea6b8c355",
+        "size": 4032
+      }
+    },
+    {
+      "argv": [
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build/sample-context",
+        "qualify",
+        "--output",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/arithmetic"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/stages/sample-arithmetic/finish.json",
+        "sha256": "6f41e2651f1be9ae925af9fefa47d81052e49fdbfab990dc721c4524b5d68faf",
+        "size": 4087
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/ldd",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build/sample-context"
+      ],
+      "exit": 0,
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/stages/sample-linked-libraries/finish.json",
+        "sha256": "3081cdd82ab7b7dcc17f000e3a08e9aae2fabc0e6f2c1bc2217ce5b4abd00c58",
+        "size": 3998
+      }
+    }
+  ],
+  "frozen_census": [
+    "tools/sample_context/.clang-format",
+    "tools/sample_context/CMakeLists.txt",
+    "tools/sample_context/README.md",
+    "tools/sample_context/include/sample_context/context.h",
+    "tools/sample_context/pipeline.py",
+    "tools/sample_context/source-files.json",
+    "tools/sample_context/src/context.cpp",
+    "tools/sample_context/src/main.cpp",
+    "tools/sample_context/src/runtime.cpp",
+    "tools/sample_context/tests/controls.cpp",
+    "tools/sample_context/tests/main.cpp",
+    "tools/sample_context/tests/test_pipeline.py",
+    "tools/sample_context/verify_formatter.cmake",
+    "tools/context_decoder/study/wire-schema.json",
+    "research/sample-context-unit.md"
+  ],
+  "large_artifact_evidence": [
+    {
+      "full_hash": "retained admitted producer and consumer checks",
+      "independent_check": "current-size-only",
+      "pin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044011Z-sample-view-full-LKoiHG/stdout",
+        "sha256": "a3b329198ecd3c229c12da7869c7320253bf2c41ecbf976c5185d79bd34eb613",
+        "size": 491244250
+      }
+    },
+    {
+      "full_hash": "retained admitted producer and consumer checks",
+      "independent_check": "current-size-only",
+      "pin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/selected-view.cram",
+        "sha256": "87e9d852c066e5910c1b730cf63830028693b8e0f567f60fa6db016b993aab49",
+        "size": 259201887
+      }
+    }
+  ],
+  "local_bytecheck": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-delivery-bytecheck-v1.py",
+    "sha256": "92a7edcc38f5636aaabecff591fa7fee571b80882dbacb62b17c9c01e910394c",
+    "size": 8312
+  },
+  "preserved_prior_failures": [
+    "sample-format-1 outer false-unload observation",
+    "sample-engineering-2 CTest-summary projection",
+    "sample-native-assemble-1 inherited-controller framing",
+    "sample-native-assemble-2 NONBLOCK refusal",
+    "sample-native-assemble-3 original0106 derivative",
+    "sample-native-pilot-1 header-only native body failure"
+  ],
+  "qualification_flags": {
+    "biological_qualification": false,
+    "consumer_ready": false,
+    "exploratory_source_consumption_qualified": true,
+    "independent_donor_confirmation": false,
+    "physical_read_independence_qualified": false,
+    "promotion_eligible": false,
+    "source_qualification": false,
+    "strict_read_level_qualified": false
+  },
+  "qualification_scope": "Retained finite-source producer closure and descriptive table consistency under the explicitly predeclared exploratory published-protocol lineage assumption.",
+  "qualified_binary": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build/sample-context",
+    "sha256": "66c21a7b76570b5a52aaa943d48ae1512ecbb45db5061d1efffb927a032cf55b",
+    "size": 437472
+  },
+  "report": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/research/sample-context-results.md",
+    "sha256": "7fd48b5fe5d657c4a26604fbffa7621c7ba7f26be810dd99d7980c7996f1a82b",
+    "size": 5732
+  },
+  "retained_metadata": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-format-1/source-freeze.json",
+      "sha256": "ea0fab88eec6ec1d038ba7f057e3d1bf40808a180f927bbde83e1f649538300c",
+      "size": 8280
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-runtime-handoff-v1.json",
+      "sha256": "34af15fa77af94810ecaaf9711881fc9348873d83923b2038a66c8e3cf0f2ec1",
+      "size": 34228
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback-program/reviews/sample-source-view-runtime-final.json",
+      "sha256": "c8916b0014e327b121e7068f47cce2abbbe85d7dcc64e8f6abb01bd8b34f14eb",
+      "size": 10245
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback-program/reviews/sample-source-view-runtime-final-attempt1.json",
+      "sha256": "f453cfedcf2523d8896e5e8ec9a31c0279de7f20125b45766accfd08f8d3a5de",
+      "size": 177161
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1-source-cut.json",
+      "sha256": "9ae6dce18d50c780633214a8ef215efc9b550360ac7bf65e4b3029211ba6e6bc",
+      "size": 5296
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/context-feedback/support-engineering-1/complete.json",
+      "sha256": "e73dc6ad71fe8e752f91d43ce89e8b772306e2bef537c5f5fbfb63af5de7a65a",
+      "size": 1926
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/context-feedback/support-fetch-v3-controls-1/complete.json",
+      "sha256": "ebacbba671775d2d1345aea17f23c196051301086edcd962e0ccd745337cb653",
+      "size": 2753
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/complete.json",
+      "sha256": "02e7ac5eee60d3d89ee0a6793845f7de28b5b872949369152b9dec2618ec1754",
+      "size": 12246
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/runtime-closure.json",
+      "sha256": "1ba09241a8b133dd88b0946a1d04a46abe5a53ebe911b124aec78e7b709e1519",
+      "size": 9149
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-continuation-1/original-partial.json",
+      "sha256": "0a1bcfe19ba6c4977ac4696c0738b43ca38fc515737bd88799d7ff3811b9dad8",
+      "size": 6978
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-native-reference-1/complete.json",
+      "sha256": "3cb2d492453cf2ad421f693172e6e6fa7d9aa901c1bc0f6a9ea91c9875aed4df",
+      "size": 12515
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/run-sample-engineering-2/start.json",
+      "sha256": "e8d74a28d35c43c0570b88172e2f42cdd501e046255e8316c606af05260d0c18",
+      "size": 7266
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-plan-all-1/complete.json",
+      "sha256": "3dd9bb37b5344ab939b6c9e161a4c19aa4de933cc64bf9e72cfb2231175bcf07",
+      "size": 8807
+    }
+  ],
+  "roles": {
+    "exploratory_published_protocol": {
+      "available_cases": 356,
+      "cases": 368,
+      "context_rows": 789,
+      "exclusion_observations": {
+        "base_quality_below_10": 953,
+        "core_cut_ambiguous": 324,
+        "guard_gapped_clipped_or_mismatched": 3064,
+        "guard_not_covered": 96,
+        "mapping_quality": 372
+      },
+      "family_window_votes": 13179,
+      "independence_qualified": false,
+      "lineage_names": 5309,
+      "physical_windows": 342,
+      "statuses": {
+        "exploratory_available": 356,
+        "no_resolved_support": 12
+      }
+    },
+    "strict": {
+      "available_cases": 0,
+      "cases": 368,
+      "context_rows": 0,
+      "exclusion_observations": {
+        "mapping_quality": 372,
+        "producer_lineage_unqualified": 4937
+      },
+      "family_window_votes": 0,
+      "independence_qualified": false,
+      "lineage_names": 5309,
+      "physical_windows": 342,
+      "statuses": {
+        "producer_lineage_unqualified": 368
+      }
+    }
+  },
+  "schema": "sample-context-publication-pins/1",
+  "scientific_jobs_replayed": false,
+  "source_bytes_changed": false,
+  "source_view": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/source-view.json",
+    "sha256": "7394aca5de2a34df4a050397028ccf1bd226278de2fb08115d223cb0ee4390e6",
+    "size": 357500
+  },
+  "source_view_commands": [
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1.py",
+        "sample-source-view-proof-1",
+        "--intake",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/outer-intake.json",
+        "--intake-sha256",
+        "bd0b193c6574d36f299a568361245feff7505fc7c2e8da59c597a6d6f9345544",
+        "--task",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-proof-1-task.json",
+        "--task-sha256",
+        "fedef1a79567c2a105677751d4f5386455ef75e6b6484c098b7e033e53e5729c"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043749Z-sample-source-view-proof-1-mgy8AK/command.sh",
+        "sha256": "bedfb5c9412e6928b34b813f752b03bd42a428cb1ddead77dbd27f8e662112f8",
+        "size": 654
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 3.05,
+      "end": "2026-10-25T04:37:52Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043749Z-sample-source-view-proof-1-mgy8AK/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:37:49Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/c++",
+        "-std=c++23",
+        "-O2",
+        "-DNDEBUG",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wconversion",
+        "-Wsign-conversion",
+        "-Wshadow",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-cram-framing-v3.cpp",
+        "-o",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/sample-cram-framing",
+        "-lhts",
+        "-lz"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043750Z-sample-view-framing-compile-NxFY1N/command.sh",
+        "sha256": "9fcaeab3a0e778650f1e2f772f4b0ad65d87a58bc384ae5d8751d07fb2cd669b",
+        "size": 425
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 1.61,
+      "end": "2026-10-25T04:37:52Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043750Z-sample-view-framing-compile-NxFY1N/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:37:50Z"
+    },
+    {
+      "argv": [
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/sample-cram-framing",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/support-context/paw71238-inspect-1/0a98559380be4cf68d53f879f1664e1d/header.cram",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/support-context/paw71238-inspect-1/0a98559380be4cf68d53f879f1664e1d/index.crai",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/spans.tsv",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/targets.tsv",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/metadata-scratch"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043752Z-sample-view-framing-metadata-3XJgTS/command.sh",
+        "sha256": "a271151f591380b6270dcc91a7de1c0c78c3da00376dfc858658ecbafcb3150d",
+        "size": 843
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 0.01,
+      "end": "2026-10-25T04:37:52Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043752Z-sample-view-framing-metadata-3XJgTS/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:37:52Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/ldd",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/sample-cram-framing"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043752Z-sample-view-framing-libraries-hQczvH/command.sh",
+        "sha256": "7880f46da59453826ffe22947c640df24a26e28731ab7c1ddd3d30f4361be393",
+        "size": 152
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 0.0,
+      "end": "2026-10-25T04:37:52Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-proof-1/recorder-root/logs/20261025T043752Z-sample-view-framing-libraries-hQczvH/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:37:52Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1.py",
+        "sample-source-view-assemble-1",
+        "--intake",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/outer-intake.json",
+        "--intake-sha256",
+        "6e73f780cf6f0b6e78d1173470866b43c62cb69c78a22a35fa4caa0756833ea8",
+        "--task",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-assemble-1-task.json",
+        "--task-sha256",
+        "725aac3c5cc1a77ac7965b944518b423ac150d4e67a2b3e956b272668f449eb8"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/recorder-root/logs/20261025T043819Z-sample-source-view-assemble-1-tbhwSO/command.sh",
+        "sha256": "1b2635d6a39cd0b9af26928baf1bc3c8dffc33c46ccc26ff0dfcaea5a5c3e6be",
+        "size": 663
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 13.11,
+      "end": "2026-10-25T04:38:32Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/recorder-root/logs/20261025T043819Z-sample-source-view-assemble-1-tbhwSO/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:38:19Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/samtools",
+        "quickcheck",
+        "-v",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/selected-view.cram"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/recorder-root/logs/20261025T043832Z-sample-view-quickcheck-vMzyGi/command.sh",
+        "sha256": "038d7bcc936cb0bc597773be1c216e6500a0e667c0154d17e867f198979bf059",
+        "size": 173
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 0.0,
+      "end": "2026-10-25T04:38:32Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/recorder-root/logs/20261025T043832Z-sample-view-quickcheck-vMzyGi/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:38:32Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1.py",
+        "sample-source-view-pilot-1",
+        "--intake",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-pilot-1/outer-intake.json",
+        "--intake-sha256",
+        "38da4eb0c170d9aaa6b2c817f4d46d5b0f7a60aa312dd7c61be6c073afedba87",
+        "--task",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-pilot-1-task.json",
+        "--task-sha256",
+        "0010bc14f44659204b94b61097f6c566a863a2e6e89397694b93a804b1494aac"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-pilot-1/recorder-root/logs/20261025T043857Z-sample-source-view-pilot-1-rebJK3/command.sh",
+        "sha256": "361376b3137909972f16d819264b9cd28a3fbc7cd4c6da1f16e0172fbcdba860",
+        "size": 654
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 11.33,
+      "end": "2026-10-25T04:39:08Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-pilot-1/recorder-root/logs/20261025T043857Z-sample-source-view-pilot-1-rebJK3/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:38:57Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/samtools",
+        "view",
+        "-h",
+        "--no-PG",
+        "-T",
+        "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout",
+        "-L",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-pilot-1/pilot.bed",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/selected-view.cram"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-pilot-1/recorder-root/logs/20261025T043905Z-sample-view-pilot-hbNZPa/command.sh",
+        "sha256": "aed524ab2fb74fc51929fda1b6bf8984cda8b7a3f3a7492ea1e065cb03824ac9",
+        "size": 415
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 3.21,
+      "end": "2026-10-25T04:39:08Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-pilot-1/recorder-root/logs/20261025T043905Z-sample-view-pilot-hbNZPa/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:39:05Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1.py",
+        "sample-source-view-full-1",
+        "--intake",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/outer-intake.json",
+        "--intake-sha256",
+        "a6f5c805fe2a441e624f869a90349f5d0b3c405555dbf7c9c06536b24b336ba0",
+        "--task",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-full-1-task.json",
+        "--task-sha256",
+        "f6dd234e800ebeab3defa45640709d30dc28e6582a2dea43a2dab907654ed401"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044003Z-sample-source-view-full-1-Nsr2xn/command.sh",
+        "sha256": "691103cec74451d6af2ba0b93589575a4cd9e91212621824653c7be68ac90564",
+        "size": 651
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 15.98,
+      "end": "2026-10-25T04:40:19Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044003Z-sample-source-view-full-1-Nsr2xn/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:40:03Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/samtools",
+        "view",
+        "-h",
+        "--no-PG",
+        "-T",
+        "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout",
+        "-L",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-native-reference-1/plan/targets.bed",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-assemble-1/selected-view.cram"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044011Z-sample-view-full-LKoiHG/command.sh",
+        "sha256": "fe7a51edd5ca93f64052fc57fba59580845e98a45ce63b1819239a80d54c2e74",
+        "size": 421
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 7.36,
+      "end": "2026-10-25T04:40:18Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044011Z-sample-view-full-LKoiHG/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:40:11Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1.py",
+        "sample-source-view-packet-1",
+        "--intake",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/outer-intake.json",
+        "--intake-sha256",
+        "b653a8e35872dd727d2976d17f53a67569bb246665cde5714a031e1604cc1b61",
+        "--task",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-packet-1-task.json",
+        "--task-sha256",
+        "a256852d05c26193c0b7fcbc6ce7267d27e539e903e10cb798ab5f1cd442d567"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/recorder-root/logs/20261025T044105Z-sample-source-view-packet-1-ahRilk/command.sh",
+        "sha256": "3a5ccebdc5f7f2b6867179d6c3389728ea713af48dab5a12ddf94c964c2d6988",
+        "size": 657
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 24.88,
+      "end": "2026-10-25T04:41:30Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/recorder-root/logs/20261025T044105Z-sample-source-view-packet-1-ahRilk/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:41:05Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/tools/sample_context/pipeline.py",
+        "packet",
+        "--request",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/packet-strict-request.json",
+        "--request-sha256",
+        "369aaad8dcb3e8a56e585637d0c0576581b6cbf921c7263176d086909f69cd37",
+        "--output",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/packet-strict"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/recorder-root/logs/20261025T044114Z-sample-pipeline-packet-strict-8xg2ks/command.sh",
+        "sha256": "ad36961ffc6d623025649a5828090484a9700e904c087b1910a71c4a9f69db1f",
+        "size": 535
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 8.05,
+      "end": "2026-10-25T04:41:22Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/recorder-root/logs/20261025T044114Z-sample-pipeline-packet-strict-8xg2ks/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:41:14Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/tools/sample_context/pipeline.py",
+        "packet",
+        "--request",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/packet-exploratory_published_protocol-request.json",
+        "--request-sha256",
+        "12ab70e795f611bc4eef2d565609dcddcd941ba03b64988db4c12c3bcfe1e418",
+        "--output",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/packet-exploratory_published_protocol"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/recorder-root/logs/20261025T044122Z-sample-pipeline-packet-exploratory_published_protocol-nR5xN0/command.sh",
+        "sha256": "6ab0fc3240fbb220b02dc506a4914416b3522b40ca67a573a6847faa3b1d2bc0",
+        "size": 583
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 8.1,
+      "end": "2026-10-25T04:41:30Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/recorder-root/logs/20261025T044122Z-sample-pipeline-packet-exploratory_published_protocol-nR5xN0/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:41:22Z"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-v1.py",
+        "sample-source-view-tables-1",
+        "--intake",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/outer-intake.json",
+        "--intake-sha256",
+        "4bfcb8b85c2c823c73a9c73faeee6ef41d83d05bc66e3934c383d3a03f4aa413",
+        "--task",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-tables-1-task.json",
+        "--task-sha256",
+        "f43a6d46bef70aed04fe7933f0e51539658d20cea765feb5b1e1200cbf349f7f"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/recorder-root/logs/20261025T044159Z-sample-source-view-tables-1-d0iZbq/command.sh",
+        "sha256": "2b09697e762ffcc953c7f47836a10f3bda907abb7aa033f83691b1e8bb21f3c1",
+        "size": 657
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 9.72,
+      "end": "2026-10-25T04:42:08Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/recorder-root/logs/20261025T044159Z-sample-source-view-tables-1-d0iZbq/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:41:59Z"
+    },
+    {
+      "argv": [
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build/sample-context",
+        "build",
+        "--cases",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/packet-exploratory_published_protocol/cases.tsv",
+        "--cases-sha256",
+        "a3385cf79aaccc6b78a93e4e5ff6ff984a68b78aea2612f48426febca2dda573",
+        "--sam",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044011Z-sample-view-full-LKoiHG/stdout",
+        "--sam-sha256",
+        "a3b329198ecd3c229c12da7869c7320253bf2c41ecbf976c5185d79bd34eb613",
+        "--output",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/exploratory_published_protocol",
+        "--context-role",
+        "exploratory_published_protocol"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/recorder-root/logs/20261025T044159Z-sample-view-tables-exploratory_published_protocol-jY5qEi/command.sh",
+        "sha256": "27947b1443d8ae348ddca305b770dcebad308c991c05e9e16600b5279703c83c",
+        "size": 868
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 4.38,
+      "end": "2026-10-25T04:42:04Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/recorder-root/logs/20261025T044159Z-sample-view-tables-exploratory_published_protocol-jY5qEi/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:41:59Z"
+    },
+    {
+      "argv": [
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-engineering-2/build/sample-context",
+        "build",
+        "--cases",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-packet-1/packet-strict/cases.tsv",
+        "--cases-sha256",
+        "87ab080fab4d539a79cb86cb330b791e66631adec2d722aa3f70eda2c013f610",
+        "--sam",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-full-1/recorder-root/logs/20261025T044011Z-sample-view-full-LKoiHG/stdout",
+        "--sam-sha256",
+        "a3b329198ecd3c229c12da7869c7320253bf2c41ecbf976c5185d79bd34eb613",
+        "--output",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/strict"
+      ],
+      "command": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/recorder-root/logs/20261025T044204Z-sample-view-tables-strict-i2u0ty/command.sh",
+        "sha256": "c574c44c0f665c09cc9579484dcfcd2f13b5bd28612f6381bdb4213f066423de",
+        "size": 774
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2",
+      "elapsed_seconds": 4.16,
+      "end": "2026-10-25T04:42:08Z",
+      "exit": 0,
+      "exit_status": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/recorder-root/logs/20261025T044204Z-sample-view-tables-strict-i2u0ty/exit-status.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2
+      },
+      "start": "2026-10-25T04:42:04Z"
+    }
+  ],
+  "sources": [
+    {
+      "path": "logs/context-feedback/program-runs/fetch-v3-handoff.py",
+      "sha256": "4cbc4300898776b4d1420c0543beb5961010d0cc6c2d515a1f6eabae1911e238",
+      "size": 1868
+    },
+    {
+      "path": "logs/context-feedback/program-runs/qualify-fetch-v3.py",
+      "sha256": "eec1b3ccb23b3c3e1a69177d93075b3f604b7c7bd8ce78e1e4af750eca56ebf2",
+      "size": 1923
+    },
+    {
+      "path": "logs/context-feedback/program-runs/run-sample-bounded-v2.py",
+      "sha256": "fe4cedf2e9341398972c68b55371720a832eb70ab7537e0b057b02d8804a6d5f",
+      "size": 13380
+    },
+    {
+      "path": "logs/context-feedback/program-runs/run-sample-bounded.py",
+      "sha256": "c116a6a54764c5b26dd74d9cdf76060761c757118fcf07056f98b4563dd58cff",
+      "size": 11305
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-assembly-adapter-v1.py",
+      "sha256": "644d51e5583339a09fe13e34848c392f63f393cf5b635d58061ab830aa021bee",
+      "size": 7265
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-cram-framing-v2.cpp",
+      "sha256": "9e635f75c24fc9d69346eb4ee5c6c913d514811ed123f059db48cbf6d846c59f",
+      "size": 13266
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-cram-framing-v2.py",
+      "sha256": "0f8bb1975fd1035cbd28ee23234bd77a6982421a138f463add5ba083b05dfb99",
+      "size": 5733
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-cram-framing-v3.cpp",
+      "sha256": "41e9bfbcf6cb4ec5b96a1a27a6322ff197e0e3c4204a2d94fb095d091238ff24",
+      "size": 17673
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-engineering-chain-v1.py",
+      "sha256": "62ea1691281c63f0f4e833e03a3d9e9037f015d687b15cf9b041a7ed1c001cdf",
+      "size": 12483
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-engineering-continue-v1.py",
+      "sha256": "b2ecf8827b8ca5b5ebecfe89283c0c48edbf9ae882db14dce230357c7f445366",
+      "size": 5599
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-engineering.py",
+      "sha256": "3b19983304a74fd6d31c51925257d65e1749bb691e3c36f3539c5eb79eb6a5bf",
+      "size": 6196
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-native-v1.py",
+      "sha256": "dabd4277e24bdb0fddd128ac439baa23ba5bd9439465f9e4abe7c6454b6e511d",
+      "size": 19056
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-native-v2.py",
+      "sha256": "b22163d82c2fbeaee8fa2814d69ad91722ea38938635f0ed6bd37d6218b669ab",
+      "size": 19919
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-plan-continued-v1.py",
+      "sha256": "2226d4d4c9280ac986e5cd0e98a843b84677ccc14d98a236d0f625707fbb4a84",
+      "size": 4328
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-prefix-fetch-v1.py",
+      "sha256": "ecd605cfc71411864ba6edeeaf7f8cff7a5940fc50302d83c605cf4c2dfc63c1",
+      "size": 11505
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-runtime.py",
+      "sha256": "d5775d66a7949c7355c12862b73a8bdd20cda610b4ab8e578c6c8d908e3a0561",
+      "size": 12981
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-source-view-price-v1.py",
+      "sha256": "158ff33d19c5b97c5ca1136082b14f28da4f5ec0d349dd6ac32b2c937300488d",
+      "size": 8428
+    },
+    {
+      "path": "logs/context-feedback/program-runs/sample-source-view-v1.py",
+      "sha256": "fddc517c1c30a6840b9cb5633db2e85ae42d6d3e0bb19e08c2f3c66bce9c0b41",
+      "size": 25820
+    },
+    {
+      "path": "logs/context-feedback/program-runs/support-unit.py",
+      "sha256": "09620826c5d9d636ff2243e73e3ad96f35f40837a430d75d7b0daf4a4aee58c2",
+      "size": 15628
+    },
+    {
+      "path": "logs/context-feedback-program/reviews/sample-source-view-runtime-final-audit.py",
+      "sha256": "f3676c3fd30fd3a75b50e693f6332102085a8acb2823cf2724539556eec71ab5",
+      "size": 30730
+    },
+    {
+      "path": "research/context-support-transport.md",
+      "sha256": "014f6a15c54cb8a78b9624b50f0a88cdc497f3fd0d46541cb42c849456ea3d38",
+      "size": 10577
+    },
+    {
+      "path": "research/sample-context-unit.md",
+      "sha256": "e4e18407f8c8a9bdc89a3864b2db1088fd855ddde0ea5f42e48100eba9b804e4",
+      "size": 14473
+    },
+    {
+      "path": "scripts/record-command.sh",
+      "sha256": "f3e0f628d3a32ef0551537ad4acb8585c0690b9203e3f48f765110703e397833",
+      "size": 716
+    },
+    {
+      "path": "tests/test_support_transport.py",
+      "sha256": "69fc9d7d545e67a63511343ba3c7272af5f1c4f78f181c8fb0ef177910383f66",
+      "size": 10301
+    },
+    {
+      "path": "tests/test_support_transport_fetch_v3.py",
+      "sha256": "af69879e3af91f69d4e9e61658ebc8f091a731c03428cafb89c119cb4b09115b",
+      "size": 10751
+    },
+    {
+      "path": "tools/context_decoder/process_guard.py",
+      "sha256": "dd90a7c50cd1b3044178e3ee248e7f5e948840496b1ad0cee3b99dadad6a14e9",
+      "size": 3443
+    },
+    {
+      "path": "tools/context_decoder/process_supervisor.py",
+      "sha256": "4fa1783e25e4bebf6f247db57e9f4ca8c00e3bad445d33a8b0586dd904915eea",
+      "size": 14262
+    },
+    {
+      "path": "tools/context_decoder/study/wire-schema.json",
+      "sha256": "0301347eb358c786ca6a3a29a6f8c4630aeebb556431eddfa9378b75cedaf299",
+      "size": 4486
+    },
+    {
+      "path": "tools/sample_context/.clang-format",
+      "sha256": "d0ca2be63d1a078b9c836436f907311d7d86c45f21f0cbc0b0d393b604cf8dfe",
+      "size": 152
+    },
+    {
+      "path": "tools/sample_context/CMakeLists.txt",
+      "sha256": "c6d0e014d5a9f1000d9f14e8bdf0f79ad84624e6426d4211c947236f34963990",
+      "size": 4056
+    },
+    {
+      "path": "tools/sample_context/README.md",
+      "sha256": "8fb655a0168193060a5e8a5d0ffe5426afb46b4ca3a6fa1defe56827e136bb5c",
+      "size": 15372
+    },
+    {
+      "path": "tools/sample_context/include/sample_context/context.h",
+      "sha256": "ab327146e1a6d702147c2e5dc842129b8d86ec16ec8fa0431caf0e383ff12062",
+      "size": 2900
+    },
+    {
+      "path": "tools/sample_context/pipeline.py",
+      "sha256": "cf73b309cccb90da83768170528372ab1253f0e34852568980fc6a240c61338d",
+      "size": 34820
+    },
+    {
+      "path": "tools/sample_context/source-files.json",
+      "sha256": "811936305f7cbb3c0ba75bc4707e489a5b024a9067e04001997b5a3f750406b3",
+      "size": 385
+    },
+    {
+      "path": "tools/sample_context/src/context.cpp",
+      "sha256": "d85bd7c83d4635a42c4d7476e83d75889a3241c1a0da7ff5f2c64d299fdd5562",
+      "size": 36195
+    },
+    {
+      "path": "tools/sample_context/src/main.cpp",
+      "sha256": "40b52872abcf2b31149003b6b359fe70bf01a6b996d1b7a74b84c52bb4aa8372",
+      "size": 6483
+    },
+    {
+      "path": "tools/sample_context/src/runtime.cpp",
+      "sha256": "7ead1a452757d6416a0e2e5dff8b348f83a8d7e499f045838ecb8b3dc8a1ca0b",
+      "size": 5465
+    },
+    {
+      "path": "tools/sample_context/tests/controls.cpp",
+      "sha256": "3f82e5a9341a13128f5408522911fa4268176ef4c36201fcc7131c81ae69fcc7",
+      "size": 30318
+    },
+    {
+      "path": "tools/sample_context/tests/main.cpp",
+      "sha256": "b3ba12978a490e5e066899ee9d745a7bb03c34ae1ddf46dce9c6c35b01f44424",
+      "size": 267
+    },
+    {
+      "path": "tools/sample_context/tests/test_pipeline.py",
+      "sha256": "2ef57970ab2b207093863ecfc94a48d1549862e96d7b7ead420b9dc579561f49",
+      "size": 11291
+    },
+    {
+      "path": "tools/sample_context/verify_formatter.cmake",
+      "sha256": "4b917898cd94ed0d3cc77ee60c7328d6f2962ba33af41b6e6d356bd80cef679e",
+      "size": 248
+    },
+    {
+      "path": "tools/support_context/source.json",
+      "sha256": "86fce07a6f38ce6ffd98ea1f056126232d5b89efe91888806adfca724e0519fc",
+      "size": 1744
+    },
+    {
+      "path": "tools/support_context/transport.py",
+      "sha256": "374a10ec66511478649fa86d12199f645c2debecb01905b4b8312258dafeaba8",
+      "size": 23883
+    },
+    {
+      "path": "tools/support_context/transport_fetch_v3.py",
+      "sha256": "185ef1a5d8468817ce5792a49a0fe52ca308b2f18b672a3991f2a0d836a7839a",
+      "size": 24171
+    }
+  ],
+  "staged_allowlist": [
+    "logs/context-feedback-program/reviews/sample-source-view-runtime-final-audit.py",
+    "logs/context-feedback/program-runs/fetch-v3-handoff.py",
+    "logs/context-feedback/program-runs/qualify-fetch-v3.py",
+    "logs/context-feedback/program-runs/run-sample-bounded-v2.py",
+    "logs/context-feedback/program-runs/run-sample-bounded.py",
+    "logs/context-feedback/program-runs/sample-assembly-adapter-v1.py",
+    "logs/context-feedback/program-runs/sample-cram-framing-v2.cpp",
+    "logs/context-feedback/program-runs/sample-cram-framing-v2.py",
+    "logs/context-feedback/program-runs/sample-cram-framing-v3.cpp",
+    "logs/context-feedback/program-runs/sample-engineering-chain-v1.py",
+    "logs/context-feedback/program-runs/sample-engineering-continue-v1.py",
+    "logs/context-feedback/program-runs/sample-engineering.py",
+    "logs/context-feedback/program-runs/sample-native-v1.py",
+    "logs/context-feedback/program-runs/sample-native-v2.py",
+    "logs/context-feedback/program-runs/sample-plan-continued-v1.py",
+    "logs/context-feedback/program-runs/sample-prefix-fetch-v1.py",
+    "logs/context-feedback/program-runs/sample-runtime.py",
+    "logs/context-feedback/program-runs/sample-source-view-price-v1.py",
+    "logs/context-feedback/program-runs/sample-source-view-v1.py",
+    "logs/context-feedback/program-runs/support-unit.py",
+    "research/context-support-transport.md",
+    "research/sample-context-results.md",
+    "research/sample-context-results.pins.json",
+    "research/sample-context-unit.md",
+    "tests/test_support_transport.py",
+    "tests/test_support_transport_fetch_v3.py",
+    "tools/sample_context/.clang-format",
+    "tools/sample_context/CMakeLists.txt",
+    "tools/sample_context/README.md",
+    "tools/sample_context/include/sample_context/context.h",
+    "tools/sample_context/pipeline.py",
+    "tools/sample_context/source-files.json",
+    "tools/sample_context/src/context.cpp",
+    "tools/sample_context/src/main.cpp",
+    "tools/sample_context/src/runtime.cpp",
+    "tools/sample_context/tests/controls.cpp",
+    "tools/sample_context/tests/main.cpp",
+    "tools/sample_context/tests/test_pipeline.py",
+    "tools/sample_context/verify_formatter.cmake",
+    "tools/support_context/transport.py",
+    "tools/support_context/transport_fetch_v3.py"
+  ],
+  "verdict": "PASS_EVIDENCE_FOR_EXPLORATORY_SOURCE_ONLY"
+}
