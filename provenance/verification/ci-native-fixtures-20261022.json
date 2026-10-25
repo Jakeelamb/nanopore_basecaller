@@ -1,0 +1,232 @@
+{
+  "scope": "Test fixture initialization only; no production/native benchmark source or artifact change.",
+  "failed_ci_run": "https://github.com/Jakeelamb/nanopore_basecaller/actions/runs/39866163062",
+  "failed_ci_commit": "47ad7790da810bd0d59fb90a4f13f08decc653f6",
+  "cause": "Fresh checkout has no logs directory. Native fixtures invoked recorder before arranging its bootstrap prerequisite.",
+  "correction": "Create PROJECT/logs in NativeBamTests.setUp. Test assertions and production behavior are unchanged.",
+  "clean_checkout_tests": 15,
+  "clean_checkout_skipped_genuine_data_tests": 2,
+  "genuine_local_tests": 15,
+  "genuine_local_skipped": 0,
+  "files": [
+    {
+      "path": "tests/test_benchmark.py",
+      "sha256": "53f965c65f4a0837f1d3ce329c4b7f8399266f6250794cbf8a432f9286271ba6",
+      "size": 41960
+    },
+    {
+      "path": "scripts/benchmark.py",
+      "sha256": "7623a939d4dca46e64d57a2be312b37a7c84d64aac9401e22d5c5b0e4a65ca55",
+      "size": 60725
+    },
+    {
+      "path": "scripts/record-command.sh",
+      "sha256": "f3e0f628d3a32ef0551537ad4acb8585c0690b9203e3f48f765110703e397833",
+      "size": 716
+    },
+    {
+      "path": "scripts/summarize-benchmark.py",
+      "sha256": "352d9758b5bb6bb3ab6c80f0371bb655be736a95db483f231e0997ff0a870616",
+      "size": 14787
+    },
+    {
+      "path": "research/stock-baseline-results.md",
+      "sha256": "9b422491a5f890e2c5e124c930c5dbe7548269087df2e2adb9fe09868388472f",
+      "size": 16954
+    }
+  ],
+  "attempts": [
+    {
+      "label": "clean-checkout-red",
+      "exit": 1,
+      "command": "env PYTHONPATH=tests uv run --locked python -m unittest test_benchmark.NativeBamTests -v",
+      "retained_receipt": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN",
+      "pins": [
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/command.sh",
+          "sha256": "a99e5426fb5d73b22c02097e42d7f4b4d8f773ec37e311e3326fe2e81b454afa",
+          "size": 90
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/cwd.txt",
+          "sha256": "d75ef9fd286800fd2e8df6e04cadc1fd145b8c73d645d9071cbe32295560c7ba",
+          "size": 33
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/end.txt",
+          "sha256": "a8a18a625c57528317cc3bfeffcb23162951667fe88a4740d446f2dee49a33e9",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/exit-status.txt",
+          "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+          "size": 2
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/start.txt",
+          "sha256": "19526de523f7c9cb9adfb95cf54b72ad7e06fcb4957be480b7b7838a8f409649",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/stderr",
+          "sha256": "eb7a064c9adbf98f64328053c4c4ec7ad02b97ecb25d156a5bfb8ac731a5dc80",
+          "size": 7038
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "logs/20261022T223953Z-ci-clean-checkout-red-NiPJEN/time.txt",
+          "sha256": "7efb1d825313e7b38421a29f9229e10171a8a7cd01657f1e097bd4a06ddcf37d",
+          "size": 855
+        }
+      ]
+    },
+    {
+      "label": "recorder-prerequisite-red",
+      "exit": 1,
+      "command": "/tmp/nanopore-ci-checkout.liJreS/scripts/record-command.sh native-version samtools --version",
+      "retained_receipt": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV",
+      "pins": [
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/command.sh",
+          "sha256": "2e0422a7b9f3e4e4b5b3298831742963976e35178fa111854311a1cb97b3b386",
+          "size": 94
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/cwd.txt",
+          "sha256": "d75ef9fd286800fd2e8df6e04cadc1fd145b8c73d645d9071cbe32295560c7ba",
+          "size": 33
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/end.txt",
+          "sha256": "5313e6b7452c61a0ea00a62d95cebed08aee3389c0c60400dbda70f8c6f8ce2a",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/exit-status.txt",
+          "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+          "size": 2
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/start.txt",
+          "sha256": "5313e6b7452c61a0ea00a62d95cebed08aee3389c0c60400dbda70f8c6f8ce2a",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/stderr",
+          "sha256": "90c90c68e363a972f79b521877d17b593465be6acfc379768f96e1995a2f5bd5",
+          "size": 158
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "logs/20261022T224027Z-ci-recorder-prerequisite-red-KRb8xV/time.txt",
+          "sha256": "0fb9009c497f9cc94b2ec2a83ffc754f2ff1e768e3c1057ae5b5148dfb75fa6a",
+          "size": 845
+        }
+      ]
+    },
+    {
+      "label": "clean-checkout-green",
+      "exit": 0,
+      "command": "env PYTHONPATH=tests uv run --locked python -m unittest test_benchmark.NativeBamTests -v",
+      "retained_receipt": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG",
+      "pins": [
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/command.sh",
+          "sha256": "a99e5426fb5d73b22c02097e42d7f4b4d8f773ec37e311e3326fe2e81b454afa",
+          "size": 90
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/cwd.txt",
+          "sha256": "d75ef9fd286800fd2e8df6e04cadc1fd145b8c73d645d9071cbe32295560c7ba",
+          "size": 33
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/end.txt",
+          "sha256": "653cbfe39f2b3221804e62f6ebeb864d7e43cb7e641f6bcee3448130a46df9cc",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/start.txt",
+          "sha256": "07d801019f0a871c14a892df45f8b4cd50bb4f7b24840c50c9aace666985c5d4",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/stderr",
+          "sha256": "47ca3f91bc2132e990a7ead36582d1ff08094f9fefd1359a4c252cb44d75934d",
+          "size": 2460
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "logs/20261022T224033Z-ci-clean-checkout-green-ZOdMqG/time.txt",
+          "sha256": "8b4dca59feac209c856c54d2936f53a1ba07ed110cee55e37f16c89867ad6826",
+          "size": 808
+        }
+      ]
+    },
+    {
+      "label": "genuine-native-green",
+      "exit": 0,
+      "command": "env PYTHONPATH=tests NANOPORE_NATIVE_BAM=logs/20261022T210643Z-manual-dev32-hac-sxfbo5/stdout NANOPORE_CALMD_PLAN=results/stock/stock-20261022/plan.json uv run --locked python -m unittest test_benchmark.NativeBamTests -v",
+      "retained_receipt": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb",
+      "pins": [
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/command.sh",
+          "sha256": "899220513ce195a055b98359659bf3967901e1ff01ef75f3d2bd20bc62e937c8",
+          "size": 222
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/cwd.txt",
+          "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4",
+          "size": 40
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/end.txt",
+          "sha256": "7abe9dff297b93c011b0feed578758b412b1560f3153e5a7e6e12498e4864b4e",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/start.txt",
+          "sha256": "5d2f2f5d8040ce11260e5fd5d1aeb12c75addb5b5f4200f956359e11697cac56",
+          "size": 21
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/stderr",
+          "sha256": "665c48d4f56bbc05131dbc4d4433680b56b34d557d8d51030c2802b454d5fe94",
+          "size": 2311
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/stdout",
+          "sha256": "b2d2f3ddad5048c4a09b6f5576cf73b67f5d117081990a599e1d93cc3e4dbbc2",
+          "size": 144
+        },
+        {
+          "path": "logs/20261022T224102Z-ci-fixed-genuine-native-tests-BfHOAb/time.txt",
+          "sha256": "56e980b07e2fdf4311b39328a7dc48d046adc643cc5e73208c9eda7458575b23",
+          "size": 951
+        }
+      ]
+    }
+  ]
+}

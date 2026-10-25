@@ -1,0 +1,22 @@
+[
+  "CMakeLists.txt",
+  ".clang-format",
+  "verify_formatter.cmake",
+  "native-source-files.json",
+  "prepare.py",
+  "test_prepare.py",
+  "native_unit.py",
+  "test_native_unit.py",
+  "include/prefix_feedback/feedback.h",
+  "src/feedback.cpp",
+  "src/main.cpp",
+  "tests/main.cpp",
+  "tests/controls.cpp",
+  "../context_decoder/include/context_decoder/decoder.h",
+  "../context_decoder/include/context_decoder/guarded.h",
+  "../context_decoder/include/context_decoder/io.h",
+  "../context_decoder/src/decoder.cpp",
+  "../context_decoder/src/guarded.cpp",
+  "../context_decoder/src/io.cpp",
+  "../context_decoder/tests/guarded_controls.cpp"
+]

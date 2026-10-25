@@ -1,0 +1,68 @@
+[
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG002/PAW70337/report_PAW70337_20240619_1342_66b2eea5.json",
+    "retrieved_utc": "2026-10-22T19:40:19.392686+00:00",
+    "sample_rate_entries": [
+      {
+        "json_pointer": "/acquisitions/0/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/1/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/2/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/3/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      }
+    ]
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG002/PAW71238/report_PAW71238_20240619_1342_a8351990.json",
+    "retrieved_utc": "2026-10-22T19:40:49.521914+00:00",
+    "sample_rate_entries": [
+      {
+        "json_pointer": "/acquisitions/0/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/1/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/2/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/3/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      }
+    ]
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG005/PAW87816/report_PAW87816_20240911_1129_017ec17c.json",
+    "retrieved_utc": "2026-10-22T19:40:55.085053+00:00",
+    "sample_rate_entries": [
+      {
+        "json_pointer": "/acquisitions/0/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/1/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/2/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      },
+      {
+        "json_pointer": "/acquisitions/3/acquisition_run_info/config_summary/sample_rate",
+        "value": 5000
+      }
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "schema": "context-program-config/1",
+  "role": "development",
+  "baseline": {
+    "root": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2",
+    "source_inventory_sha256": "7a1b9c6f05597dd70e5eb96c894c2ed9e0cf811c28cc7735354fa1aed1f0164b"
+  },
+  "scopes": [
+    "query0",
+    "first32",
+    "all"
+  ],
+  "python_test_count": 54,
+  "execution": {
+    "canonical_lock": "/home/jake/Projects/nanopore_basecaller/results/stock/host.lock",
+    "maximum_wall_seconds": 300,
+    "cpu_quota": 2,
+    "memory_bytes": 4294967296,
+    "address_space_bytes": 8589934592,
+    "swap_bytes": 0,
+    "maximum_output_bytes": 4294967296,
+    "disk_floor_bytes": 32212254720
+  }
+}

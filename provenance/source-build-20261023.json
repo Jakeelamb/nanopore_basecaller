@@ -1,0 +1,1169 @@
+{
+  "schema_version": 1,
+  "qualification_status": "source_build_and_selected_cpu_contracts_passed",
+  "generated_at_utc": "2026-10-23T02:31:08.987645+00:00",
+  "source": {
+    "canonical_path": "software/dorado-src",
+    "commit": "8b8fc5d36a9c0baab262a743cb175b5878e38ca6",
+    "git_archive_sha256": "50d229f108e630dcd260e63886bffacac5516b3271887cd3382a486543c4738d",
+    "recursive_submodule_count": 22,
+    "recursive_submodules": [
+      {
+        "path": "dorado/3rdparty/CxxUrl",
+        "commit": "eaf46c0207df24853a238d4499e7f4426d9d234c",
+        "git_archive_sha256": "9e459c4ee1226f7867c438fc74229112b90ec9b47d6ed13f6c630261fac592f0"
+      },
+      {
+        "path": "dorado/3rdparty/NVTX",
+        "commit": "e170594ac7cf1dac584da473d4ca9301087090c1",
+        "git_archive_sha256": "d82b9eefd851449553f5cbadd1f865f15a45da10401916f0fe511bd4bc8d677a"
+      },
+      {
+        "path": "dorado/3rdparty/argparse",
+        "commit": "68fd0277eea5412aff9b91c0b70efc698359dae0",
+        "git_archive_sha256": "37517c5ab0a938f0aa5343fa99654f77d5fea87eb1e0769b86cde090607dc190"
+      },
+      {
+        "path": "dorado/3rdparty/catch2",
+        "commit": "914aeecfe23b1e16af6ea675a4fb5dbd5a5b8d0a",
+        "git_archive_sha256": "3f6ce5ba8ae6aba78c1dcabbc291400bb7f33b1631ccaafdc5c4f02d57cf6b0a"
+      },
+      {
+        "path": "dorado/3rdparty/cpp-httplib",
+        "commit": "a7bc00e3307fecdb4d67545e93be7b88cfb1e186",
+        "git_archive_sha256": "59b11574d822b7c1a1e0b75e9a864bc815ebfc1bb8d3f334e56969b7e29bc648"
+      },
+      {
+        "path": "dorado/3rdparty/cxxpool",
+        "commit": "2cb1233b3e23ed01c3f338f2a863f5b39ea44f56",
+        "git_archive_sha256": "a37108c19726fcb861aea2b047956c584938b5c00c9c981c2de4d9698d726d32"
+      },
+      {
+        "path": "dorado/3rdparty/date",
+        "commit": "f94b8f36c6180be0021876c4a397a054fe50c6f2",
+        "git_archive_sha256": "0677c2cac20ae98936b87a7bcedf9970459c88f57196b71b7b6758361b145ce7"
+      },
+      {
+        "path": "dorado/3rdparty/edlib",
+        "commit": "42aa8fa7051fb2aa1c4f144c5eda22a0e753f026",
+        "git_archive_sha256": "e08cbba27f9a942d66bb27130d01206ec900e1d1605e3c62ab3065169d6201ac"
+      },
+      {
+        "path": "dorado/3rdparty/elzip",
+        "commit": "516e161d5c96aa8f2603fb30b10b7770a87332c2",
+        "git_archive_sha256": "1dd7257bd2002e2b2d062f7d621960956265c60d4725478617ba3307c7209071"
+      },
+      {
+        "path": "dorado/3rdparty/elzip/extlibs/minizip",
+        "commit": "cee6d8cbd4da70c48e9df1426607ff95b4f24fa6",
+        "git_archive_sha256": "b94d3e0aff3434e2afc2844c5b0cf783302bf85ddc060fa3bde5f9c9fde15205"
+      },
+      {
+        "path": "dorado/3rdparty/htslib",
+        "commit": "c1f35d67dd5ff1e226d94abe7b850f28c60f5910",
+        "git_archive_sha256": "2345b79915d63c1546dad88a1d7c090a9fc746ed7621d3f90e6cde01611d98b2"
+      },
+      {
+        "path": "dorado/3rdparty/htslib/htscodecs",
+        "commit": "de42211c744ac67d263bfa4200a7cf6af1192d8c",
+        "git_archive_sha256": "fff8d878a483621cae87fd04dbda16faa4608a222ab6d9a50f78f768806bee2b"
+      },
+      {
+        "path": "dorado/3rdparty/indicators",
+        "commit": "88544847c51397004a31cf2817c334624c6350cf",
+        "git_archive_sha256": "74cb405f0cebe14f59f60d675769f341688aed70073cb729190652a45e174c6f"
+      },
+      {
+        "path": "dorado/3rdparty/ont-minimap2",
+        "commit": "3a7e4e229de46f4565ec7db727748e2122181d4f",
+        "git_archive_sha256": "9208a29f5873e84291e75ae82dc0ff6629bb85cedfa19f8b718068e002d67997"
+      },
+      {
+        "path": "dorado/3rdparty/ont-minimap2/src/3rdparty/minimap2",
+        "commit": "3c28777e7e2dcc90f825de1b9f17a89cca7d4452",
+        "git_archive_sha256": "42181a1b223ecf3cad71524544d1c4d024c9c3e2ca087697f0934801c626b88e"
+      },
+      {
+        "path": "dorado/3rdparty/ont-minimap2/src/3rdparty/pthread-win32",
+        "commit": "a89bf2154a28113a7373e25fe2729dee4e004385",
+        "git_archive_sha256": "e9badfc416a2607e33f43c8506c2732660057eb67f4415080f0526690b39051f"
+      },
+      {
+        "path": "dorado/3rdparty/ont-minimap2/src/3rdparty/zlib-ng",
+        "commit": "860e4cff7917d93f54f5d7f0bc1d0e8b1a3cb988",
+        "git_archive_sha256": "e0c847c50f5e0b2b9f6a9a08186b996e13055db755d915936a19086bfcbf62c7"
+      },
+      {
+        "path": "dorado/3rdparty/spdlog",
+        "commit": "6fa36017cfd5731d617e1a934f0e5ea9c4445b13",
+        "git_archive_sha256": "adc439508b28dc03254cd05bd4182a36b93d73fa8f2826c1f74f74fdded3f026"
+      },
+      {
+        "path": "dorado/3rdparty/toml11",
+        "commit": "be08ba2be2a964edcdb3d3e3ea8d100abc26f286",
+        "git_archive_sha256": "9af100b7dd68b417b1d7fbbfd8bd4efd6ded40210b030f9b36f0c9434cd7ac57"
+      },
+      {
+        "path": "dorado/3rdparty/toml11/docs/themes/hugo-book",
+        "commit": "2f64607bc9a4caa6ffc4ed7f614c8ad9a5b6611c",
+        "git_archive_sha256": "636a170185b5ffd062788796b53e419cb856a3e69bf65056ee1d3c14129974d2"
+      },
+      {
+        "path": "dorado/3rdparty/toml11/tests/extlib/doctest",
+        "commit": "ae7a13539fb71f270b87eb2e874fbac80bc8dda2",
+        "git_archive_sha256": "e5044b134640bbc1344f03ad919806d9856ac2973f6bdb80cdb0da67c7d701e6"
+      },
+      {
+        "path": "dorado/3rdparty/toml11/tests/extlib/json",
+        "commit": "8c391e04fe4195d8be862c97f38cfe10e2a3472e",
+        "git_archive_sha256": "fad25d95fd1ca314a3075011cb204efabd9090feb06c7ee2145ddf6abd28dcba"
+      }
+    ],
+    "canonical_clean_after_acceptance": true,
+    "accepted_input_copy": "software/source-build-qualification-20261023/source-input-gcc15",
+    "input_description": "Unchanged upstream input with declared upstream build transformations.",
+    "vendor_transformations": [
+      {
+        "module": "dorado/3rdparty/cxxpool",
+        "diff_sha256": "380da41a4095dd301a372e9018aeb6dfd5326c899b6cce008cbfb67db0a859fa",
+        "patches": [
+          {
+            "path": "dorado/3rdparty/patches/cxxpool.patch",
+            "sha256": "e02ea55267bc3a93dd5fa30883d989dfa2a5deb2ea346c67073276db860260c1"
+          }
+        ]
+      },
+      {
+        "module": "dorado/3rdparty/edlib",
+        "diff_sha256": "cc559bc05273913d0b039c61cc0cc5a4e249e09060413748518515ddc09658e4",
+        "patches": [
+          {
+            "path": "dorado/3rdparty/patches/edlib.patch",
+            "sha256": "4da8e82196ccd30695af7e9384e7a4b5dd3186f89162e75b239d4799bc232cd9"
+          }
+        ]
+      },
+      {
+        "module": "dorado/3rdparty/toml11",
+        "diff_sha256": "49ecb6320c3f22b18c450b95e8d4afaa81a2ba1f0279f0162dad4791b3bcfe40",
+        "patches": [
+          {
+            "path": "dorado/3rdparty/patches/toml11.patch",
+            "sha256": "e46d42aecb3e497470ede359d22839f4c2c044f73bc42b33a05b7700a644d857"
+          }
+        ]
+      },
+      {
+        "module": "dorado/3rdparty/ont-minimap2/src/3rdparty/minimap2",
+        "diff_sha256": "d1b82b6133e9295749ef902475594675def7b8ac96859255b16dedd721b5bddd",
+        "patches": [
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0001-Load-the-counter-of-the-worker-we-might-steal-from-atomically.patch",
+            "sha256": "42bc69f8122346aa70c9d55b7036d8bc6e5febca05cf4db75388636a41527882"
+          },
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0002-Introduce-a-sentinel-to-work-around-UBSan-issues.patch",
+            "sha256": "390d0a090664b432b94ef77c32a8cf24fef6735ae371e50b34026ee35b4b71cc"
+          },
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0003-Skip-radix-sort-if-no-seed-hits.patch",
+            "sha256": "9a6b1ee074f8305d6c485acf0d70e142b76dc96b95a47ce8d208bef522489529"
+          },
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0004-Add-null-check-following-UBSan-finding.patch",
+            "sha256": "88154d2539d99946e860f0488f30b37c83bcb84e940a07e5aea07b7d7fcf5f13"
+          },
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0005-Silence-Wshorten-64-to-32-warning.patch",
+            "sha256": "c521c16f6054b4ed36ef780bb41ff3c3bfb2a3694fdb1432eadcc2cd9dc4d764"
+          },
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0006-Abort-on-allocation-failure-in-index-loading.patch",
+            "sha256": "571ad856b70ad5377a01f7c33d89878c85beae690413267b26b4469e4bc3074d"
+          },
+          {
+            "path": "dorado/3rdparty/ont-minimap2/src/patches/0007-Add-callbacks-for-memory-management.patch",
+            "sha256": "fcde1736f43c98e6620fb0ac87b51107da9285722d73e5751516eac3e467dd1a"
+          }
+        ]
+      }
+    ],
+    "vendor_transformations_evidence": {
+      "path": "software/source-build-qualification-20261023/evidence/vendor-transformations.json",
+      "sha256": "deadd3a85dfad0cc0226f1d28a0658c662b2f3585b4837e704b0a5414c9fd56e",
+      "bytes": 3180
+    },
+    "copied_git_isolation_evidence": {
+      "path": "software/source-build-qualification-20261023/evidence/copied-git-isolation-gcc15.json",
+      "sha256": "817f24c39f743b8892b20e38904e69eef41ac741509376930a84c4f9665e7c19",
+      "bytes": 7344
+    }
+  },
+  "build": {
+    "binary": {
+      "path": "software/source-build-qualification-20261023/build-gcc15/bin/dorado",
+      "sha256": "2da85ebceb6e0bc9bbba00d982f92bbb83bbe1e7d0c498a56f35309b8883957e",
+      "bytes": 390785672
+    },
+    "tests_binary": {
+      "path": "software/source-build-qualification-20261023/build-gcc15/tests/dorado_tests",
+      "sha256": "e3f64c864df19c70bd5a7074b1cb44fcc4c212163000c0354e359ae40b23f5b6",
+      "bytes": 339756976
+    },
+    "version": "2.1.2+8b8fc5d",
+    "type": "Release",
+    "generator": "Ninja 1.13.2",
+    "cmake": "4.4.4",
+    "compiler": "GCC 15.3.0",
+    "compiler_prefix": "software/source-build-qualification-20261023/toolchain-gcc15",
+    "cuda_toolkit": "13.4.92",
+    "cuda_toolkit_root": "/opt/cuda",
+    "configured_torch_cuda_architectures": [
+      "75",
+      "80",
+      "86",
+      "87",
+      "90"
+    ],
+    "cxx_standard": 23,
+    "cuda_standard_configured": 20,
+    "dorado_cuda_translation_units_compiled": 0,
+    "release_flags": "-O3 -DNDEBUG",
+    "jobs": 6,
+    "ccache": {
+      "version": "4.14.1",
+      "directory": "software/source-build-qualification-20261023/ccache",
+      "maximum_bytes": 1000000000,
+      "compiler_check": "content",
+      "isolation": "Per-build directory; global cache unmodified."
+    },
+    "authored_source_patches": [],
+    "unsupported_compiler_bypass_flags": [],
+    "basecalling_components_disabled": [],
+    "cmake_cache": {
+      "path": "software/source-build-qualification-20261023/build-gcc15/CMakeCache.txt",
+      "sha256": "6e372980d130d3cb768fce6d89c5ea59e9cdf7280ef976a3adabf78dfcfe44b7",
+      "bytes": 81277
+    },
+    "compile_commands": {
+      "path": "software/source-build-qualification-20261023/build-gcc15/compile_commands.json",
+      "sha256": "4f7e9a29345d70251c8d9938ff668f4a8667e1fce5b58b0501730100fa23b566",
+      "bytes": 2012483
+    },
+    "build_script": {
+      "path": "scripts/build-dorado-source.sh",
+      "sha256": "e99ad6ac44e428293b7739abeab41a6f288f85911a0dd605cd2e9504f766c61d",
+      "bytes": 7897
+    },
+    "source_input_must_remain_pristine_before_first_configure": true,
+    "existing_successful_configuration_reused_on_rerun_to_preserve_exact_upstream_version": true,
+    "translation_units_by_suffix": {
+      ".cpp": 489,
+      ".c": 39,
+      ".cu": 0
+    }
+  },
+  "dependency_archives": [
+    {
+      "path": "software/source-build-qualification-20261023/archives/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi.zip",
+      "sha256": "8680441dbe3b0990fa7a99a70319affe25bc51f0cd6e105c3e07d522d7355929",
+      "bytes": 1281640079,
+      "upstream_sha256_matches": true
+    },
+    {
+      "path": "software/source-build-qualification-20261023/archives/libkoi-0.7.5-Linux-x86_64-cuda-13.0.tar.gz",
+      "sha256": "0600a138761b17467bd3a1f8933c6a6a02e17415a9da377f22bc14357c3101ca",
+      "bytes": 58019481,
+      "upstream_sha256_matches": true
+    },
+    {
+      "path": "software/source-build-qualification-20261023/archives/lib_pod5-0.3.39-linux-x64.tar.gz",
+      "sha256": "7fcf1d9f1da6f1bd13167782e900462fbadb0db57c666911bdba9bbdfd4e7e06",
+      "bytes": 44034293,
+      "upstream_sha256_matches": true
+    },
+    {
+      "path": "software/source-build-qualification-20261023/archives/flashattention-fa4-v4.0.0.beta10-1-cu13.0-Linux-x86_64.zip",
+      "sha256": "8be268c386855e342e8881a1ec973daeb5c6e65bb71cc9bc0b814d22dc6485d4",
+      "bytes": 22810302,
+      "upstream_sha256_matches": true
+    },
+    {
+      "path": "software/source-build-qualification-20261023/archives/openssl-3.5.5-linux-x86_64.zip",
+      "sha256": "20d7e3caf86368e03f61071c67d152cc3e18865d8b38e369df74ae4c57d1421b",
+      "bytes": 10870554,
+      "upstream_sha256_matches": true
+    }
+  ],
+  "dependency_file_manifest": {
+    "path": "software/source-build-qualification-20261023/evidence/dependency-files.sha256",
+    "sha256": "a77c40a0069d0ee21de8de4b3b17e630dc1439b314987a0d252e0a0e1dabf337",
+    "bytes": 2545566
+  },
+  "compiler_file_manifest": {
+    "path": "software/source-build-qualification-20261023/evidence/gcc15-files.sha256",
+    "sha256": "edf1675775340279d7fe2aef08b51d38673549e99d54c3f9b2c67e56fa7f0497",
+    "bytes": 389552
+  },
+  "compiler_packages": [
+    {
+      "path": "/var/cache/pacman/pkg/gcc15-15.3.0+r0.g4db0e8df15be-2-x86_64.pkg.tar.zst",
+      "sha256": "827ea95be9ef8be6b6f866723a3bff495b6733ab750bed1710b8a7bc18cf8565"
+    },
+    {
+      "path": "/var/cache/pacman/pkg/gcc15-libs-15.3.0+r0.g4db0e8df15be-2-x86_64.pkg.tar.zst",
+      "sha256": "2cb1d67809b9089ddc812ead5458904fc67ea44108562e0cbb6576069631cc16"
+    }
+  ],
+  "runtime_elf_dependencies": [
+    {
+      "soname": "libz-ng.so.2",
+      "path": "/usr/lib/libz-ng.so.2.3.3",
+      "sha256": "471f8566a997cfb3d8f82f18e0ee51bb27afe087ee5d7b10ac86317062f65ec6",
+      "bytes": 166048,
+      "resolved_from": "/usr/lib/libz-ng.so.2"
+    },
+    {
+      "soname": "libz.so.1",
+      "path": "/usr/lib/libz.so.1.3.2",
+      "sha256": "6c78c5e58c3bb49a1cd151a95cdf1a17fe07a91a57a59e0279b984c533075ca9",
+      "bytes": 108560,
+      "resolved_from": "/usr/lib/libz.so.1"
+    },
+    {
+      "soname": "libbrotlienc.so.1",
+      "path": "/usr/lib/libbrotlienc.so.1.2.0",
+      "sha256": "8dbc539197d276310ce2750dcb73de5465a1259d46a5d1894e6138fd354bf5c7",
+      "bytes": 780768,
+      "resolved_from": "/usr/lib/libbrotlienc.so.1"
+    },
+    {
+      "soname": "libbrotlidec.so.1",
+      "path": "/usr/lib/libbrotlidec.so.1.2.0",
+      "sha256": "0883fb05fa42aa6a883722098530ab08551ed317e38a2311f5c96e94dd460979",
+      "bytes": 55168,
+      "resolved_from": "/usr/lib/libbrotlidec.so.1"
+    },
+    {
+      "soname": "libbrotlicommon.so.1",
+      "path": "/usr/lib/libbrotlicommon.so.1.2.0",
+      "sha256": "4f895094b7b6ff9c82909e6516bc9cf212e2ec5af451d39bf1bcbc5e5fa225b2",
+      "bytes": 141264,
+      "resolved_from": "/usr/lib/libbrotlicommon.so.1"
+    },
+    {
+      "soname": "libzstd.so.1",
+      "path": "/usr/lib/libzstd.so.1.5.7",
+      "sha256": "f023d49e85fb22057bfdd21857263d2638b73356c06f3b342f678a75212379f8",
+      "bytes": 939976,
+      "resolved_from": "/usr/lib/libzstd.so.1"
+    },
+    {
+      "soname": "libtorch.so",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libtorch.so",
+      "sha256": "69f3d5034219d19698ebf081b9ab7addea37a418fffa22a928a739134f8fad3c",
+      "bytes": 103104,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libtorch.so"
+    },
+    {
+      "soname": "libtorch_cpu.so",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libtorch_cpu.so",
+      "sha256": "144ad1060592d6cca41592bc3f60b3ff6fa54ac6f6b72f3f273c33b79d8bf217",
+      "bytes": 402996784,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libtorch_cpu.so"
+    },
+    {
+      "soname": "libtorch_cuda.so",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libtorch_cuda.so",
+      "sha256": "1cde8002671553f3b21d4c340e0aecea96e1dac5f72ab67ade9c6892e87f5a89",
+      "bytes": 613591648,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libtorch_cuda.so"
+    },
+    {
+      "soname": "libc10_cuda.so",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libc10_cuda.so",
+      "sha256": "130a056212be4e25b8bcaa8c197b6813802e9824fd0274a0bc765108421d8b91",
+      "bytes": 1635648,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libc10_cuda.so"
+    },
+    {
+      "soname": "libc10.so",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libc10.so",
+      "sha256": "c197c3767112889d405973af5fdd5505992177be290b9ac2ff9c27849739f1dc",
+      "bytes": 1367256,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libc10.so"
+    },
+    {
+      "soname": "libcublas.so.13",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libcublas.so.13.8.0.4",
+      "sha256": "c0c5a5f16b29c42f1b55b4d081f2ae685e602e3fcf37b7407049d7247036d023",
+      "bytes": 57594520,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libcublas.so.13"
+    },
+    {
+      "soname": "libstdc++.so.6",
+      "path": "/usr/lib/libstdc++.so.6.0.36",
+      "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+      "bytes": 2939928,
+      "resolved_from": "/usr/lib/libstdc++.so.6"
+    },
+    {
+      "soname": "libm.so.6",
+      "path": "/usr/lib/libm.so.6",
+      "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+      "bytes": 1268336,
+      "resolved_from": "/usr/lib/libm.so.6"
+    },
+    {
+      "soname": "libgcc_s.so.1",
+      "path": "/usr/lib/libgcc_s.so.1",
+      "sha256": "e618cb9c90c2eb3a1dad1cfea5b6c1eebcf2e799ad805976f4ae47bdd61c716a",
+      "bytes": 182512,
+      "resolved_from": "/usr/lib/libgcc_s.so.1"
+    },
+    {
+      "soname": "libc.so.6",
+      "path": "/usr/lib/libc.so.6",
+      "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+      "bytes": 2215072,
+      "resolved_from": "/usr/lib/libc.so.6"
+    },
+    {
+      "soname": "/lib64/ld-linux-x86-64.so.2",
+      "path": "/usr/lib/ld-linux-x86-64.so.2",
+      "sha256": "f5e11cc62f8f2c24dff532982559f4303dba3b17e7450551372a88c8e7ea8757",
+      "bytes": 263152,
+      "resolved_from": "/usr/lib64/ld-linux-x86-64.so.2"
+    },
+    {
+      "soname": "librt.so.1",
+      "path": "/usr/lib/librt.so.1",
+      "sha256": "e06e12b8a78494908d08376838c380fb3817bfd7d54f6a86ef050016f7ade5f8",
+      "bytes": 14424,
+      "resolved_from": "/usr/lib/librt.so.1"
+    },
+    {
+      "soname": "libdl.so.2",
+      "path": "/usr/lib/libdl.so.2",
+      "sha256": "9b3812e7f6b766e2d0a1d9eeca1a58c1272392859e8b04f708b2f86b2256d03c",
+      "bytes": 14352,
+      "resolved_from": "/usr/lib/libdl.so.2"
+    },
+    {
+      "soname": "libiomp5.so",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libiomp5.so",
+      "sha256": "31023e22f5705be758d3c4460674b6766f4b6c0b223a2ad5f9ca3e2bb2a82fe9",
+      "bytes": 2757464,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libiomp5.so"
+    },
+    {
+      "soname": "libpthread.so.0",
+      "path": "/usr/lib/libpthread.so.0",
+      "sha256": "839b91403f89fa4c6888d50deb2b59cd0612f8cfe3d57dd9d6314832b4cb31ab",
+      "bytes": 14360,
+      "resolved_from": "/usr/lib/libpthread.so.0"
+    },
+    {
+      "soname": "libcudart.so.13",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libcudart.so.13.4.92",
+      "sha256": "7fb00519a24512bf677b59e87921e5c05aac8246ceb6a57435c0d9dfeef364f6",
+      "bytes": 798496,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libcudart.so.13"
+    },
+    {
+      "soname": "libcusparse.so.12",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libcusparse.so.12.8.6.72",
+      "sha256": "276b1e81f858ceebb10c9bb2a7b9993803c6b99fba0c1544f7a3f91b68881614",
+      "bytes": 187843568,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libcusparse.so.12"
+    },
+    {
+      "soname": "libcufft.so.12",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libcufft.so.12.4.0.43",
+      "sha256": "4bedea83377d8b44c071921b79d3526a6de5f718644fe6a0c67c81ee791c2856",
+      "bytes": 233289888,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libcufft.so.12"
+    },
+    {
+      "soname": "libcusolver.so.12",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libcusolver.so.12.3.5.3",
+      "sha256": "5fd766552c030794eaf3367e912373d1c5d712aab0e08ac27a1b0dd01def668b",
+      "bytes": 173981128,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libcusolver.so.12"
+    },
+    {
+      "soname": "libcusparseLt.so.0",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libcusparseLt.so.0.7.1.0",
+      "sha256": "0bb86669a32c45b6dbe4e4c602f2c56537d74920750a5319479b915bffcf0248",
+      "bytes": 424941032,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libcusparseLt.so.0"
+    },
+    {
+      "soname": "libcudnn.so.9",
+      "path": "software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libcudnn.so.9.13.1",
+      "sha256": "887dd4ecf23e0e465062770f5a95acd81bbd146092d6b043cf89e40a392f4119",
+      "bytes": 125136,
+      "resolved_from": "/home/jake/Projects/nanopore_basecaller/software/source-build-qualification-20261023/dependencies/torch-2.9.0.0-ont-CUDA-13.0-linux-x64-cxx11-abi/libtorch/lib/libcudnn.so.9"
+    },
+    {
+      "soname": "libcublasLt.so.13",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libcublasLt.so.13.8.0.4",
+      "sha256": "d3b51f2253ba58f0a7f299b883bc6b4f3a27f81701c9ab15accb3bd770a91669",
+      "bytes": 545528240,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libcublasLt.so.13"
+    },
+    {
+      "soname": "libnvJitLink.so.13",
+      "path": "/opt/cuda/targets/x86_64-linux/lib/libnvJitLink.so.13.4.92",
+      "sha256": "3afdb9677477dd584d3712a9bf2978d085729f0ed6e6432027e925d1e312e3c9",
+      "bytes": 103602848,
+      "resolved_from": "/opt/cuda/targets/x86_64-linux/lib/libnvJitLink.so.13"
+    }
+  ],
+  "acceptance": {
+    "full_release_build": "passed_582_tasks",
+    "incremental_rebuild": "passed_no_work_to_do",
+    "version": "passed_exact",
+    "help": "passed",
+    "elf_ldd_dependency_closure": "passed",
+    "cpu_tests": {
+      "status": "passed",
+      "cases_selected": 55,
+      "main_binary_cases_inventoried": 610,
+      "main_binary_cases_not_selected": 555,
+      "junit_assertions_total": 6750655,
+      "junit_testcase_elements": 108,
+      "errors": 0,
+      "failures": 0,
+      "skips_within_selection": 0,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1"
+      },
+      "junit": {
+        "path": "software/source-build-qualification-20261023/evidence/cpu-tests.xml",
+        "sha256": "75276d687f47203984fae1f4202e29e0790ce9f142f5dcd9ae156f6402fbb15c",
+        "bytes": 14830
+      },
+      "selection_and_explicit_not_selected_inventory": {
+        "path": "software/source-build-qualification-20261023/evidence/cpu-selection.json",
+        "sha256": "ec41dfce2792b690e14669506034004b652ff9d8ce77c718f38a10226aa31ce6",
+        "bytes": 166388
+      },
+      "selection_xml": {
+        "path": "software/source-build-qualification-20261023/evidence/selected-tests.xml",
+        "sha256": "81b965128059c7b0ac213b4586b73882d1f09729b9dce20ecd59e64a287384bc",
+        "bytes": 18863
+      },
+      "complete_main_binary_inventory_xml": {
+        "path": "software/source-build-qualification-20261023/evidence/upstream-tests.xml",
+        "sha256": "8edd09453f65d71189cc6f44b6089274f7c36fa293810077c1ccbbe6c280808d",
+        "bytes": 222520
+      }
+    },
+    "ctest_inventory_only_not_executed": [
+      "test_dorado_benchmarks",
+      "test_dorado_read_pipeline_base",
+      "test_dorado_splitter",
+      "test_dorado_utils",
+      "dorado_tests",
+      "dorado_smoke_tests"
+    ],
+    "gpu_functional_parity": "not_qualified_by_build_owner",
+    "complete_input_processing": "not_qualified_by_build_owner",
+    "biological_accuracy": "not_qualified",
+    "performance": "not_qualified",
+    "vendor_binary_reproducibility": "not_claimed_cuda_stack_differs"
+  },
+  "failed_attempts": [
+    {
+      "receipt": "logs/20261023T015850Z-source-build-fetch-torch-th5IRQ",
+      "exit_status": 143,
+      "reason": "Deliberately cancelled slow sequential transfer; retained partial and used four HTTP ranges."
+    },
+    {
+      "receipt": "logs/20261023T020221Z-source-build-dependencies-check-RfGfG3",
+      "exit_status": 2,
+      "reason": "Observation command used invalid uv run -c syntax; corrected to uv run python -c."
+    },
+    {
+      "receipt": "logs/20261023T021005Z-source-build-compile-3VP8tc",
+      "exit_status": 1,
+      "reason": "GCC16 exposed missing cstdint include in unchanged ModBaseContext.h. Retained; fresh GCC15 input/build passed."
+    },
+    {
+      "receipt": "logs/20261023T022450Z-source-build-rerun-acceptance-bV48Ah",
+      "exit_status": 127,
+      "reason": "Acceptance lever initially used bin/dorado_tests; corrected to actual tests/dorado_tests; final rerun passed."
+    },
+    {
+      "receipt": "logs/20261023T022455Z-source-build-upstream-test-inventory-e6IRjb",
+      "exit_status": 127,
+      "reason": "Nested failed test inventory from the same wrong path."
+    },
+    {
+      "receipt": "logs/20261023T023009Z-source-build-final-metadata-zoBqeF",
+      "exit_status": 1,
+      "reason": "Metadata assertion assumed a CUDA translation unit. Observed compile database contains489 C++ and39 C units, zero CUDA units; corrected metadata only."
+    }
+  ],
+  "budget": {
+    "required_reserve_bytes": 32212254720,
+    "runtime_admission_headroom_bytes": 8589934592,
+    "initial_available_bytes": 49701539840,
+    "predicted_peak_allocation_bytes": 12884901888,
+    "post_acceptance_available_bytes": 44263702528,
+    "latest_observed_available_bytes": 145193701376,
+    "latest_above_runtime_admission_threshold": true,
+    "path_allocations": {
+      "archives": {
+        "apparent_bytes": 2831499908,
+        "allocated_bytes_from_du": 2831519744
+      },
+      "dependencies": {
+        "apparent_bytes": 2721324273,
+        "allocated_bytes_from_du": 2747625472
+      },
+      "source-input": {
+        "apparent_bytes": 228453904,
+        "allocated_bytes_from_du": 250372096
+      },
+      "source-input-gcc15": {
+        "apparent_bytes": 228453904,
+        "allocated_bytes_from_du": 250372096
+      },
+      "build": {
+        "apparent_bytes": 120607824,
+        "allocated_bytes_from_du": 124284928
+      },
+      "build-gcc15": {
+        "apparent_bytes": 1174150240,
+        "allocated_bytes_from_du": 1178480640
+      },
+      "toolchain-gcc15": {
+        "apparent_bytes": 188088016,
+        "allocated_bytes_from_du": 191475712
+      },
+      "ccache": {
+        "apparent_bytes": 52786842,
+        "allocated_bytes_from_du": 56987648
+      },
+      "evidence": {
+        "apparent_bytes": 26412396,
+        "allocated_bytes_from_du": 28176384
+      },
+      "expected-minimap2": {
+        "apparent_bytes": 1314967,
+        "allocated_bytes_from_du": 1638400
+      }
+    },
+    "caveat": "du path allocations can double-count reflinked blocks. Filesystem availability changed externally after acceptance; this owner deleted no files. No peak unique allocation inferred from free-space deltas."
+  },
+  "limitations": [
+    "Arch Linux is outside NVIDIA listed qualified distributions.",
+    "Dorado source compilation uses opaque upstream prebuilt Koi, Torch, and FlashAttention kernels.",
+    "The separate CUDA13 build stack differs from the official CUDA12.8 distribution.",
+    "ELF dependency closure does not prove every lazily loaded plugin or GPU kernel path.",
+    "555 main-binary cases and all other unfiltered CTest targets were not run.",
+    "An independent clean-machine rebuild has not been performed."
+  ],
+  "receipts": [
+    {
+      "path": "logs/20261022T231941Z-bcftools-source-build-Nc7FyT",
+      "exit_status": 0,
+      "started_utc": "2026-10-22T23:19:41Z",
+      "finished_utc": "2026-10-22T23:20:06Z",
+      "command_sha256": "ff7fb6e26f2c3b1f4477b22190eaa2c607cb0779b7af67f88d7584dba372c8ad"
+    },
+    {
+      "path": "logs/20261023T015816Z-source-build-inventory-SP8OJn",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T01:58:16Z",
+      "finished_utc": "2026-10-23T01:58:16Z",
+      "command_sha256": "126a40bb4d76469cc68680b6129aa928cebfa3efaed6d01ff20d106748c20ba7"
+    },
+    {
+      "path": "logs/20261023T015850Z-source-build-fetch-torch-th5IRQ",
+      "exit_status": 143,
+      "started_utc": "2026-10-23T01:58:50Z",
+      "finished_utc": "2026-10-23T02:00:38Z",
+      "command_sha256": "c5857dc836a52ae7ee513038b3bf24505fb2e44413eea1bc19652b795b752069"
+    },
+    {
+      "path": "logs/20261023T015905Z-source-build-fetch-flashattention-L0nzXo",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T01:59:05Z",
+      "finished_utc": "2026-10-23T01:59:29Z",
+      "command_sha256": "75228a284aff0e27dd9acaccbae4acb53e52ff5e0ce2871f84d58f10e853963e"
+    },
+    {
+      "path": "logs/20261023T015905Z-source-build-fetch-koi-tMcVxG",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T01:59:05Z",
+      "finished_utc": "2026-10-23T01:59:41Z",
+      "command_sha256": "aefc6175965674c1cb51c0cf5a26444698fe5480b45eccaad601b494a6c24d0e"
+    },
+    {
+      "path": "logs/20261023T015905Z-source-build-fetch-openssl-hE1SP6",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T01:59:05Z",
+      "finished_utc": "2026-10-23T01:59:23Z",
+      "command_sha256": "cb7eac7833f4d9ad4b344466bbb99bbbd3146b02a93ca0684264a54298c02bce"
+    },
+    {
+      "path": "logs/20261023T015905Z-source-build-fetch-pod5-VH8cWT",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T01:59:05Z",
+      "finished_utc": "2026-10-23T02:00:29Z",
+      "command_sha256": "782173405672e59d2424a1631424093d4ff0b0bd101739f9e7d178b97905e3e9"
+    },
+    {
+      "path": "logs/20261023T020038Z-source-build-fetch-torch-ranges-Jy90UO",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:00:38Z",
+      "finished_utc": "2026-10-23T02:08:12Z",
+      "command_sha256": "5554315cf6babb2c97876aaf6073421fc295e6e2fdefbe3b0522f0de78d20ebe"
+    },
+    {
+      "path": "logs/20261023T020105Z-source-build-cuda-compiler-probe-ZryiZl",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:01:05Z",
+      "finished_utc": "2026-10-23T02:01:07Z",
+      "command_sha256": "d99a941d3b90aae8f459a2985e65e6968ac6250878469c230cbb1f6dfad58058"
+    },
+    {
+      "path": "logs/20261023T020107Z-source-build-source-pins-m608pz",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:01:07Z",
+      "finished_utc": "2026-10-23T02:01:08Z",
+      "command_sha256": "8fc5830b34400a47d27ed6787d1fe0d788e2af982a2c843684342c1120fbe12f"
+    },
+    {
+      "path": "logs/20261023T020221Z-source-build-dependencies-check-RfGfG3",
+      "exit_status": 2,
+      "started_utc": "2026-10-23T02:02:21Z",
+      "finished_utc": "2026-10-23T02:02:21Z",
+      "command_sha256": "2aa6cdeda9c25f88e3b152cebd0fe043e14bebe1c331f8bc59a747665f35ffc1"
+    },
+    {
+      "path": "logs/20261023T020239Z-source-build-dependencies-check-BylEnm",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:02:39Z",
+      "finished_utc": "2026-10-23T02:02:42Z",
+      "command_sha256": "3ef0f04b1e9306c344a21b42a854ba26bc0f6929d5e3efef44b54429955e1f5d"
+    },
+    {
+      "path": "logs/20261023T020413Z-source-build-extract-small-dependencies-qFzeP0",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:04:13Z",
+      "finished_utc": "2026-10-23T02:04:16Z",
+      "command_sha256": "d5734158f361ca7a72d46c49769487595e00a89b740b7b5bcf20707b6a788169"
+    },
+    {
+      "path": "logs/20261023T020515Z-source-build-cuda-host-policy-O9qwDt",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:05:15Z",
+      "finished_utc": "2026-10-23T02:05:23Z",
+      "command_sha256": "bd8849b50b867d92e74eaf9f9b834eb85b6dd112fa84218a3b43835161cc5a2d"
+    },
+    {
+      "path": "logs/20261023T020743Z-source-build-copy-input-vV51LM",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:07:43Z",
+      "finished_utc": "2026-10-23T02:07:44Z",
+      "command_sha256": "dba98de7ec8bf0b01134214c9e904a9f52206f24c89730700e54014e8fca1e50"
+    },
+    {
+      "path": "logs/20261023T020744Z-source-build-copy-input-check-McRNZM",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:07:44Z",
+      "finished_utc": "2026-10-23T02:07:46Z",
+      "command_sha256": "412e758af399d0884473f74971a2144e5a5170e875383ecc31816d8724d26df0"
+    },
+    {
+      "path": "logs/20261023T020827Z-source-build-torch-assemble-check-Eq9lkz",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:08:27Z",
+      "finished_utc": "2026-10-23T02:08:29Z",
+      "command_sha256": "01be31e73383c4e17b9215ddc0656ae9680702d11817b933f595b32a4620b8dc"
+    },
+    {
+      "path": "logs/20261023T020829Z-source-build-extract-torch-pmVbFb",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:08:29Z",
+      "finished_utc": "2026-10-23T02:08:55Z",
+      "command_sha256": "0193d597414ce4548a44ba0725de2aece68753e935f73addb1df36b79f4f5b6b"
+    },
+    {
+      "path": "logs/20261023T020851Z-source-build-copy-git-isolation-ePr20l",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:08:51Z",
+      "finished_utc": "2026-10-23T02:08:52Z",
+      "command_sha256": "d4ef7e7a3e7c2f20efebb66052ce635dd8c2cecaf1a8b8f3d7431c9dcaee5eee"
+    },
+    {
+      "path": "logs/20261023T020920Z-source-build-configure-Bb0OJs",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:09:20Z",
+      "finished_utc": "2026-10-23T02:09:34Z",
+      "command_sha256": "6f8f43039d3e1960bff26951c5367d34207727028a77527e828956e8b33f1810"
+    },
+    {
+      "path": "logs/20261023T021005Z-source-build-compile-3VP8tc",
+      "exit_status": 1,
+      "started_utc": "2026-10-23T02:10:05Z",
+      "finished_utc": "2026-10-23T02:13:12Z",
+      "command_sha256": "9b0107cac68acbd1ece609632b860cedc17e31f96bfb05742a84f664eaee8f99"
+    },
+    {
+      "path": "logs/20261023T021007Z-source-build-vendor-transformations-ZRkeUa",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:10:07Z",
+      "finished_utc": "2026-10-23T02:10:07Z",
+      "command_sha256": "e13d07d0530b0e363a93d069d1912f4ee86f9fcfe3ffa06ad947713ce028bc8f"
+    },
+    {
+      "path": "logs/20261023T021024Z-source-build-vendor-patch-replay-65ephQ",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:10:24Z",
+      "finished_utc": "2026-10-23T02:10:24Z",
+      "command_sha256": "6d9acf243fc574dcfad1c1d854f6def94a54fb0f087e817dfc0596809d0e7c00"
+    },
+    {
+      "path": "logs/20261023T021429Z-source-build-extract-gcc15-qrbQ3c",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:14:29Z",
+      "finished_utc": "2026-10-23T02:14:30Z",
+      "command_sha256": "8215c147919b094acc10f642924181f0e0ceebd72efe0dd23c3acea4485a433c"
+    },
+    {
+      "path": "logs/20261023T021430Z-source-build-gcc15-header-probe-0gALek",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:14:30Z",
+      "finished_utc": "2026-10-23T02:14:31Z",
+      "command_sha256": "08d008996a8e817e9ea2bbbba335ce7b4f61384bd7eafabd158f105ef85f09b4"
+    },
+    {
+      "path": "logs/20261023T021508Z-source-build-cuda-gcc15-probe-0wBuB4",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:15:08Z",
+      "finished_utc": "2026-10-23T02:15:09Z",
+      "command_sha256": "c9340782136c6873c2b96b2ec31f5bfeb2a6150d6016573f765091c25d430f30"
+    },
+    {
+      "path": "logs/20261023T021509Z-source-build-copy-gcc15-input-U90Gr1",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:15:09Z",
+      "finished_utc": "2026-10-23T02:15:10Z",
+      "command_sha256": "85faf220be16d875422909f0c1936055a43d754f0cba53b78d280cfcd3952d6f"
+    },
+    {
+      "path": "logs/20261023T021510Z-source-build-copy-gcc15-isolation-sl8kMn",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:15:10Z",
+      "finished_utc": "2026-10-23T02:15:11Z",
+      "command_sha256": "7cd210fd91c891605737b033631894339c9dd86a394f45e2bb574a95a2232115"
+    },
+    {
+      "path": "logs/20261023T021522Z-source-build-configure-gcc15-9jeI6i",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:15:22Z",
+      "finished_utc": "2026-10-23T02:15:36Z",
+      "command_sha256": "6299d2648fc5dd0f5588323c99dcd61c04053b48e0da096afdd0c3f67455ec03"
+    },
+    {
+      "path": "logs/20261023T021552Z-source-build-compile-gcc15-bH5YBZ",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:15:52Z",
+      "finished_utc": "2026-10-23T02:24:50Z",
+      "command_sha256": "3c1344786b40aede63fb1ce341c5e300d3cb62de8253609b45db0672da0fb717"
+    },
+    {
+      "path": "logs/20261023T021552Z-source-build-gcc15-version-header-VGpzHm",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:15:52Z",
+      "finished_utc": "2026-10-23T02:15:52Z",
+      "command_sha256": "03c2ec9e62c850cad2ad8d6637f9b5cc6e021560560018816351a349db221b97"
+    },
+    {
+      "path": "logs/20261023T021647Z-source-build-all-vendor-transformations-FErTmw",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:16:47Z",
+      "finished_utc": "2026-10-23T02:16:48Z",
+      "command_sha256": "b1fb64e5f7953bdd564a728e405ee97768bd7771cd60599917e950e777472223"
+    },
+    {
+      "path": "logs/20261023T021826Z-source-build-script-check-U7LvPd",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:18:26Z",
+      "finished_utc": "2026-10-23T02:18:26Z",
+      "command_sha256": "80554b553cde11ea6b67fd0c121d4a0b570e3ce7205aa32e9a75c6753877bf31"
+    },
+    {
+      "path": "logs/20261023T021826Z-source-build-script-shellcheck-085j1W",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:18:26Z",
+      "finished_utc": "2026-10-23T02:18:26Z",
+      "command_sha256": "315c7d942579bff91a7ab279bdbcf724262d2c7851650d389813c01c0eeeb894"
+    },
+    {
+      "path": "logs/20261023T021939Z-source-build-dependency-files-3Y9mxn",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:19:39Z",
+      "finished_utc": "2026-10-23T02:19:42Z",
+      "command_sha256": "cf21e8886c337ff8c00b6a61c3478c314747ea65ceef4344d8a3c549d391aee3"
+    },
+    {
+      "path": "logs/20261023T021942Z-source-build-ccache-config-aSNPzf",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:19:42Z",
+      "finished_utc": "2026-10-23T02:19:42Z",
+      "command_sha256": "024c80e8700cbd95e03974eb86aa3950b3c96ea9261b73d7a332f24d06856756"
+    },
+    {
+      "path": "logs/20261023T022028Z-source-build-gcc15-packages-X0qcGx",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:20:28Z",
+      "finished_utc": "2026-10-23T02:20:29Z",
+      "command_sha256": "1338247f6e38bf8c3f68a35fcda7ff30ff196ffd33a838b2b26ef3ca58583022"
+    },
+    {
+      "path": "logs/20261023T022110Z-source-build-current-source-check-1l7mwW",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:21:10Z",
+      "finished_utc": "2026-10-23T02:21:10Z",
+      "command_sha256": "a2353e606e4646405056c6be97c19d8169b3696a480520604b580cf13a2eb861"
+    },
+    {
+      "path": "logs/20261023T022450Z-source-build-rerun-acceptance-bV48Ah",
+      "exit_status": 127,
+      "started_utc": "2026-10-23T02:24:50Z",
+      "finished_utc": "2026-10-23T02:24:55Z",
+      "command_sha256": "4f40d70546d140bcc44db7650f31f653d4454aea587501dfebba3ae6ad396da9"
+    },
+    {
+      "path": "logs/20261023T022452Z-source-build-dependency-pin-KuJirR",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:52Z",
+      "finished_utc": "2026-10-23T02:24:52Z",
+      "command_sha256": "c505090a499f99cd334301c0041f077eb2aba8587d87714478ad0b4b60273e0f"
+    },
+    {
+      "path": "logs/20261023T022452Z-source-build-dependency-pin-LAxj1V",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:52Z",
+      "finished_utc": "2026-10-23T02:24:52Z",
+      "command_sha256": "b0c01fa12c41c55f7c9167806138835e32ef2b44c7f5232ea84e1fc33da018c7"
+    },
+    {
+      "path": "logs/20261023T022452Z-source-build-dependency-pin-QkYVWE",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:52Z",
+      "finished_utc": "2026-10-23T02:24:54Z",
+      "command_sha256": "26ed5eac620732ea6c790900d826a8c15136d1c7e8cf1afa50cea8f64fac8404"
+    },
+    {
+      "path": "logs/20261023T022454Z-source-build-compile-JjjTo7",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:54Z",
+      "finished_utc": "2026-10-23T02:24:54Z",
+      "command_sha256": "313abbb7ccac089e90d11597ce89a74f1230aa22ad51c3d44b45c73c0662daaa"
+    },
+    {
+      "path": "logs/20261023T022454Z-source-build-dependency-pin-GzpjtA",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:54Z",
+      "finished_utc": "2026-10-23T02:24:54Z",
+      "command_sha256": "3206893806c7c384017bbf0ffbbfa7f76dda85d0b75208df73d63890a53598e7"
+    },
+    {
+      "path": "logs/20261023T022454Z-source-build-dependency-pin-fy0qlv",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:54Z",
+      "finished_utc": "2026-10-23T02:24:54Z",
+      "command_sha256": "b092fa5d86a64c88fafbfb561d4cd82aab19398e03b87aa48a5174f5324571ba"
+    },
+    {
+      "path": "logs/20261023T022454Z-source-build-version-ZU4eqW",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:54Z",
+      "finished_utc": "2026-10-23T02:24:55Z",
+      "command_sha256": "779b51a4d4514dd3c5d02bbe386e6b1f7e6d498fc8f001f0a3604f182dc3961f"
+    },
+    {
+      "path": "logs/20261023T022455Z-source-build-ctest-inventory-vlD4wk",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:55Z",
+      "finished_utc": "2026-10-23T02:24:55Z",
+      "command_sha256": "09202621c9cbd21815f10f210f0e027fdf89d7bb471ba9e5b169978c505e0ccc"
+    },
+    {
+      "path": "logs/20261023T022455Z-source-build-help-ocxGtk",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:55Z",
+      "finished_utc": "2026-10-23T02:24:55Z",
+      "command_sha256": "d4d06a255e87c85d1aba435c3c62e2c5678223c43d3af2efd96ce72739436cdb"
+    },
+    {
+      "path": "logs/20261023T022455Z-source-build-ldd-g6NZ4P",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:24:55Z",
+      "finished_utc": "2026-10-23T02:24:55Z",
+      "command_sha256": "1827af4dac53f900338b55d3e1dfcbf89819c78a5836d94508d237d1eb27e087"
+    },
+    {
+      "path": "logs/20261023T022455Z-source-build-upstream-test-inventory-e6IRjb",
+      "exit_status": 127,
+      "started_utc": "2026-10-23T02:24:55Z",
+      "finished_utc": "2026-10-23T02:24:55Z",
+      "command_sha256": "2d14a46d938babd14ad65e768257fe5136aadca978caf06216d39c5447fe4181"
+    },
+    {
+      "path": "logs/20261023T022540Z-source-build-rerun-acceptance-gpe3ZE",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:40Z",
+      "finished_utc": "2026-10-23T02:25:47Z",
+      "command_sha256": "4f40d70546d140bcc44db7650f31f653d4454aea587501dfebba3ae6ad396da9"
+    },
+    {
+      "path": "logs/20261023T022540Z-source-build-script-final-check-kdV0bG",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:40Z",
+      "finished_utc": "2026-10-23T02:25:40Z",
+      "command_sha256": "80554b553cde11ea6b67fd0c121d4a0b570e3ce7205aa32e9a75c6753877bf31"
+    },
+    {
+      "path": "logs/20261023T022540Z-source-build-script-final-shellcheck-85IYO4",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:40Z",
+      "finished_utc": "2026-10-23T02:25:40Z",
+      "command_sha256": "315c7d942579bff91a7ab279bdbcf724262d2c7851650d389813c01c0eeeb894"
+    },
+    {
+      "path": "logs/20261023T022542Z-source-build-dependency-pin-6rZyBL",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:42Z",
+      "finished_utc": "2026-10-23T02:25:42Z",
+      "command_sha256": "b0c01fa12c41c55f7c9167806138835e32ef2b44c7f5232ea84e1fc33da018c7"
+    },
+    {
+      "path": "logs/20261023T022542Z-source-build-dependency-pin-bt5u8D",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:42Z",
+      "finished_utc": "2026-10-23T02:25:44Z",
+      "command_sha256": "26ed5eac620732ea6c790900d826a8c15136d1c7e8cf1afa50cea8f64fac8404"
+    },
+    {
+      "path": "logs/20261023T022542Z-source-build-dependency-pin-vJJxrA",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:42Z",
+      "finished_utc": "2026-10-23T02:25:42Z",
+      "command_sha256": "c505090a499f99cd334301c0041f077eb2aba8587d87714478ad0b4b60273e0f"
+    },
+    {
+      "path": "logs/20261023T022544Z-source-build-compile-yXwwiK",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:44Z",
+      "finished_utc": "2026-10-23T02:25:44Z",
+      "command_sha256": "313abbb7ccac089e90d11597ce89a74f1230aa22ad51c3d44b45c73c0662daaa"
+    },
+    {
+      "path": "logs/20261023T022544Z-source-build-dependency-pin-lLHsNX",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:44Z",
+      "finished_utc": "2026-10-23T02:25:44Z",
+      "command_sha256": "3206893806c7c384017bbf0ffbbfa7f76dda85d0b75208df73d63890a53598e7"
+    },
+    {
+      "path": "logs/20261023T022544Z-source-build-dependency-pin-y0iQBn",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:44Z",
+      "finished_utc": "2026-10-23T02:25:44Z",
+      "command_sha256": "b092fa5d86a64c88fafbfb561d4cd82aab19398e03b87aa48a5174f5324571ba"
+    },
+    {
+      "path": "logs/20261023T022544Z-source-build-version-ZoSm8n",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:44Z",
+      "finished_utc": "2026-10-23T02:25:45Z",
+      "command_sha256": "779b51a4d4514dd3c5d02bbe386e6b1f7e6d498fc8f001f0a3604f182dc3961f"
+    },
+    {
+      "path": "logs/20261023T022545Z-source-build-ctest-inventory-jpUG5n",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:45Z",
+      "finished_utc": "2026-10-23T02:25:45Z",
+      "command_sha256": "09202621c9cbd21815f10f210f0e027fdf89d7bb471ba9e5b169978c505e0ccc"
+    },
+    {
+      "path": "logs/20261023T022545Z-source-build-help-LIaHCU",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:45Z",
+      "finished_utc": "2026-10-23T02:25:45Z",
+      "command_sha256": "d4d06a255e87c85d1aba435c3c62e2c5678223c43d3af2efd96ce72739436cdb"
+    },
+    {
+      "path": "logs/20261023T022545Z-source-build-ldd-8gRZRX",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:45Z",
+      "finished_utc": "2026-10-23T02:25:45Z",
+      "command_sha256": "1827af4dac53f900338b55d3e1dfcbf89819c78a5836d94508d237d1eb27e087"
+    },
+    {
+      "path": "logs/20261023T022545Z-source-build-upstream-test-inventory-FQ0Yy6",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:45Z",
+      "finished_utc": "2026-10-23T02:25:46Z",
+      "command_sha256": "dc56ac12dda8dbc90e5fa33462cebff61529a2a1d6ddba1747bc5d20b6eaddbf"
+    },
+    {
+      "path": "logs/20261023T022546Z-source-build-cpu-test-selection-qrWKxx",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:46Z",
+      "finished_utc": "2026-10-23T02:25:46Z",
+      "command_sha256": "4a3884cc04f15063d364c5565f6cd52aa70542d66b7be8d9f967271915e9b3de"
+    },
+    {
+      "path": "logs/20261023T022546Z-source-build-cpu-tests-nWePnH",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:46Z",
+      "finished_utc": "2026-10-23T02:25:47Z",
+      "command_sha256": "d77deb404308e70a383a0e346db95b1277f0785db52ffc7fa849d9e5dde0a61a"
+    },
+    {
+      "path": "logs/20261023T022547Z-source-build-final-space-3qJQCc",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:25:47Z",
+      "finished_utc": "2026-10-23T02:25:47Z",
+      "command_sha256": "a961a31268770afd0d7b4786eb94a7e096b54221a62df8fb54a0451248ba4052"
+    },
+    {
+      "path": "logs/20261023T022739Z-source-build-all-test-inventory-xml-6aRnv8",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:27:39Z",
+      "finished_utc": "2026-10-23T02:27:40Z",
+      "command_sha256": "43be87c7272199d35a84c9b4431d81b01c93f86e8c5c8ede4aaac16e3b7de32a"
+    },
+    {
+      "path": "logs/20261023T022739Z-source-build-selected-test-inventory-xml-HBKb9L",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:27:39Z",
+      "finished_utc": "2026-10-23T02:27:39Z",
+      "command_sha256": "ccec9b45ea28ac05cc54c83014c42ae1f793eb462414eebaf59d7d49a4872fad"
+    },
+    {
+      "path": "logs/20261023T022740Z-source-build-runtime-files-g2N2B1",
+      "exit_status": 0,
+      "started_utc": "2026-10-23T02:27:40Z",
+      "finished_utc": "2026-10-23T02:27:41Z",
+      "command_sha256": "8830cbf4a75244ac109df9fb993c8ca1aad3f5a1087e611d34ca1eaf5ac75eec"
+    },
+    {
+      "path": "logs/20261023T023009Z-source-build-final-metadata-zoBqeF",
+      "exit_status": 1,
+      "started_utc": "2026-10-23T02:30:09Z",
+      "finished_utc": "2026-10-23T02:30:10Z",
+      "command_sha256": "7831adc7fc3d87f0b295064399255633a33b9078ee9703462b5a9d16d789f364"
+    }
+  ]
+}
