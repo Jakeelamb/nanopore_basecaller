@@ -1,0 +1,327 @@
+{
+  "archived_cases": {
+    "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-challenge-v1/cases.jsonl",
+    "sha256": "cf44751a750b2a730404dd2156be6fca9146572f3e0af64d05ea476a134670f9",
+    "size": 55967
+  },
+  "files": {
+    "attachment": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/actual-v3-attachment/output/additional-attachment.json",
+      "sha256": "d4deb3b94c4891c726d36b24da0795560872d16ae0f37dfcc03c2c58fefb6788",
+      "size": 44829
+    },
+    "attachment_complete": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/actual-v3-attachment/complete.json",
+      "sha256": "6354bb40ddbdb3cae9dfe38d2f581e7ba199a4f3ba92a286e503ef56873905cb",
+      "size": 17044
+    },
+    "challenge_build": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-challenge-v1/challenge-build.json",
+      "sha256": "088936a1371d597070a110c7eff472142e787d3e4e2004ac3da542040e5c3d09",
+      "size": 952
+    },
+    "challenge_complete": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-challenge-v1/complete.json",
+      "sha256": "e9ddc984abf902cef59e2703265dc0b2b20868abe7a99500a0631b95a014b7e1",
+      "size": 5892
+    },
+    "challenge_sources": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-challenge-v1/source-retention.json",
+      "sha256": "a500182cb054ae4fcc3cac9827e313cf2a6d2c1edd16fba89d73209179ecf79a",
+      "size": 18439
+    },
+    "decisions": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-original-score-v2/candidates/decisions.jsonl",
+      "sha256": "2e47b22dfd68715a2c19218cb6363460f88476f84740f8e930e42e61e64924ed",
+      "size": 545683
+    },
+    "graph_complete": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-graph-v1/complete.json",
+      "sha256": "fd4901bc9b7fd228bf2dfe2276bb2998d701fb5d02b0c70e19ad6b838f2c7d96",
+      "size": 22223
+    },
+    "graph_walks": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-graph-v1/graph/walks.jsonl",
+      "sha256": "45e4cbdd342e074b57f8dfad5fb0628c567def7e38f380a084eed7a5738c362d",
+      "size": 187076
+    },
+    "packet": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/private-score-reuse-v1/packet.json",
+      "sha256": "1b1197fb0cc938be18bf7dd2b0deb06b7d7be4ffba4e8beafe786f56463f0346",
+      "size": 534169
+    },
+    "queries": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/actual-v3-attachment/output/additional-queries.tsv",
+      "sha256": "06b29f2fa3be404b17717f439003abd0ae997b64f22ee4631814a27ea9a29ebf",
+      "size": 1236
+    },
+    "scored_complete": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/additional-original-score-v2/complete.json",
+      "sha256": "92a814a5a2518dd4e14f4b60ecca64696e2ecda41ad1a147a5ba3aafaf72a302",
+      "size": 5432
+    },
+    "selection": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/actual-v3-attachment/output/additional-windows.json",
+      "sha256": "25d9a02653434cccb35b4506d64d2f0d4d60a5227d859eb43645ae8c60429ced",
+      "size": 29116
+    },
+    "windows": {
+      "path": "/home/jake/Projects/nanopore_basecaller-private/results/private-allele/actual-v3-attachment/output/additional-attached-windows.jsonl",
+      "sha256": "728e24f12dbe785d642931ad0ff16306b28b6a12a00f989e03ecea9dafd368ce",
+      "size": 17362
+    }
+  },
+  "namespace": {
+    "attached_windows_sha256": "728e24f12dbe785d642931ad0ff16306b28b6a12a00f989e03ecea9dafd368ce",
+    "dataset": "additional_original",
+    "graph_walks_sha256": "45e4cbdd342e074b57f8dfad5fb0628c567def7e38f380a084eed7a5738c362d",
+    "selection_plan_sha256": "25d9a02653434cccb35b4506d64d2f0d4d60a5227d859eb43645ae8c60429ced"
+  },
+  "schema": "private-context-registry/1",
+  "scope": "Frozen prototype inclusion extracted offline from archived cases; runtime does not open cases. Diagnostic development inputs only; no new biological qualification.",
+  "withheld_prototype_sets": [
+    {
+      "case_id": "additional_original/0",
+      "full_sequence_sha256": [
+        "0286ce10b9409150f4b1a50c195f22a7d7c39d352b576f45da8f2a8b9af8cb27",
+        "69f572b1bb57c7fe1bc826ef4380b4bcfd3935db81e5c0b64c87e4864bb39d5d",
+        "71cca700ae36145694ebcfef3bd705c31e24801a99b2543799001b97f54c6664"
+      ],
+      "query_index": 0
+    },
+    {
+      "case_id": "additional_original/1",
+      "full_sequence_sha256": [
+        "2f05635e9bd8a88676a6f55bd89c23d35eecd3d50db49aed424c4f5d01af622d",
+        "b7c045cdaa98eb8bc4ab7bf0a03459890aa222c1efb6f35046b702a9db32533e",
+        "ed608b57e6d1e46132333c74c240029619905b627b1e0857e89e64a6c98f6eaf"
+      ],
+      "query_index": 1
+    },
+    {
+      "case_id": "additional_original/2",
+      "full_sequence_sha256": [
+        "bc9b0cccd7e63e232b85b20670a5d272788b9a8ea96c70eec87f5cc17a730c1d",
+        "db86b5b297815f26a3e909f3bfa97b2c05eb2717f8cd06341bec7723bdb7dcfc"
+      ],
+      "query_index": 2
+    },
+    {
+      "case_id": "additional_original/4",
+      "full_sequence_sha256": [
+        "0713973433e67c671f2eed3a61001eef1a544f87fa45d10f9ed5733342a74cd8",
+        "1508f7cecf270c0b9be96ba0770c4b1db99964ae2e30420871de5e0b9b40c722",
+        "a56a4b5e5596e74ce5e6502f61dd95b27bcc968725f1f41e2d86a790d2ade6b9",
+        "c3c434625e8cd70d0c8eefc6d752fc1dabffea5db1b32a952abfffae84d2a89f"
+      ],
+      "query_index": 4
+    },
+    {
+      "case_id": "additional_original/6",
+      "full_sequence_sha256": [
+        "86e8d4ca5605f0e608687e80b45ded4748f64a206ac28ffe23fe1145e7fbf592"
+      ],
+      "query_index": 6
+    },
+    {
+      "case_id": "additional_original/7",
+      "full_sequence_sha256": [
+        "6e3d3952a5a21800e4bfed0058043af23545b35531a05129c030e6b5b3ed53cf",
+        "baf08cc66d9f9a080b9600b4a88eec06abd5cc2db92681d76f6a6ca036f2c75e",
+        "f13306624c73921625f52bafbdef7117f1c1846023354d828c9f8fc8eb7cf4ab"
+      ],
+      "query_index": 7
+    },
+    {
+      "case_id": "additional_original/9",
+      "full_sequence_sha256": [
+        "50e5b90beabdc2ac84678b517f4a71c20aab728411748bd804fd0fabd6da738e",
+        "5cc0be9756c730f510158b25bfe87fa4a6fd781e186e41b1d897dc26130f1c22",
+        "a0aec7c05e5ff607a8299889f2841bf8f6276a180c078414c4692488dcedcdd5",
+        "d992777587d6a30dbddcad8dee3ebfa9202a4d3c19f09dea6f7b63f497119570"
+      ],
+      "query_index": 9
+    },
+    {
+      "case_id": "additional_original/10",
+      "full_sequence_sha256": [
+        "29f38a6c30ccc7a3ad0b305f2fcddda8e6d3857de45cd528871bb0fec7b19334",
+        "7d24fce6abe5b8d0d2d966bf9bb7457e63b482945a8d343713620b481d66ddf6",
+        "87c6a778bd90dd6552c6f748fb00335c20882ba1561db83e2928f148824174bd",
+        "95f6a515d89747b7d7a0fa5313150d2f2b708045a443f2e2c751e1c3f697e5f8",
+        "bcde2a8cdfbc5f949c8c9a8cda405c801ac9a667f828595502e686f755e1004d",
+        "f1c26795692f5f9202ad1340287cafac164adcb1d2b8eb3847cba605821cc2cc"
+      ],
+      "query_index": 10
+    },
+    {
+      "case_id": "additional_original/11",
+      "full_sequence_sha256": [
+        "209bd96b3698ae5c0df3462dbd44d224dc207c98380dca54c70d9f6405114e62",
+        "45a0b8842a34b8e7072ffc4b97ca4214dcfd007efbd64ef7c353cd2f532fdfa9",
+        "5dfb667034dcf3f74dfb8dd0e143852bcf310d7d5f50575efba365e7e4ea4193",
+        "baae9500c7d5be3a85caa1db43af3b281450eb125598079fc77c71c3c802718c",
+        "c62bc59a5df2cb5625866c029c0ef25cc11c9acf8b16d5b98ae38086c0f74953"
+      ],
+      "query_index": 11
+    },
+    {
+      "case_id": "additional_original/12",
+      "full_sequence_sha256": [
+        "d2dc70c1640afcdec45e86510919a9b07db2d97ce6c1fa3a29deb9e5976af3cb"
+      ],
+      "query_index": 12
+    },
+    {
+      "case_id": "additional_original/13",
+      "full_sequence_sha256": [
+        "946cf735c7d852dce17aaa3152893d1146cfd9eb465b642b6e8d4b6fd06adf12"
+      ],
+      "query_index": 13
+    },
+    {
+      "case_id": "additional_original/14",
+      "full_sequence_sha256": [
+        "047428b9c0e78cee05a50b5238ff600118635e8d8844cc39b2a6b6daed5f1629",
+        "1aea176d20fa9a05643bc944b7539dee2a3bb7515fb7e1ff01741ab812e3cc45",
+        "2ea199fef3142607778c9c0af0c6d05c2aff4f199c3a2d30c7857fe39a5a9a9c",
+        "899e54c3e35a8800a35a879575f9c5090fe1fba8e05c852a8a119c69bda64f7d",
+        "c6db73bc19e363f5406baa755b8e83b2e4abf30a9775d43b761bafbeaadd2bab",
+        "ed6cad444f87a5a79e112094bed58a7cc5c7134130995226f38a9313811431be"
+      ],
+      "query_index": 14
+    },
+    {
+      "case_id": "additional_original/15",
+      "full_sequence_sha256": [
+        "1a7a4609a47aadba03fc2ee400500c15766cf74f63593e548c151dc23d22fca9",
+        "4630054c30c4ac29d93b36228b128c75277f1a94bfe8a24e4ac8c93dba48cdcb",
+        "4c09c12d2c5fa6621044f78e2d6ba275a61599c0284fd779dac69260b2024801"
+      ],
+      "query_index": 15
+    },
+    {
+      "case_id": "additional_original/17",
+      "full_sequence_sha256": [
+        "4f68b2bd0c7c3a865ced2fee81f0aff2e1070a0e991563437bbcfd2735f5c27a",
+        "524eb3fa38177a93f2c13bce9c75f5f5f3209b1b4af4f04d23805aa16782efb9",
+        "55079ab82e07f9040e330edebefb73d2afc503d19258a9854b1dbe80a752eede",
+        "5d1e54b220d28b4544d7a6911d3e70659301dbfcdc0dd2ad8cf10179785ad744",
+        "642ab37d9ca2ce31fa13da6d5fda672f82889eb3da683eb97f985e004b475d1c",
+        "69b741cc4fbcd659f161f6dcdd64a8744d603eba84e075066b082043ed8db188",
+        "8f778b9f3f51e399b9e227f8a4962451da0a2050873a5faee4d900b9bf7de3fe",
+        "b29f20ad7047fb54eacfe3f36138cc9af708d65894fb852c63c07c4d2112bce4",
+        "cb9da279032bc16a21de2be8d3335e51a898dcad9404801e409e06bb908ab474",
+        "d0fef2cff76d741361c682bd77281e58d25dd59db1e3a8ea86865a8edbf51526",
+        "f3cb11a25ebeb95e55550f05739e34d68b43c5618b16bf0bca21b0e7d4413849",
+        "f5b47a1434a7b9d24ae768024f70fbe63fa530478349429e4c79d4d21b4d3edc"
+      ],
+      "query_index": 17
+    },
+    {
+      "case_id": "additional_original/18",
+      "full_sequence_sha256": [
+        "1eae7d49fe30b7e0d865c062f69dd69b808abffc9506b6dc58d4552ef3213be2",
+        "263f236db61c82619727c002d60ab4ed04c5a7b429435a7004749221d3d60190",
+        "5bb13b05e0634e0d783d68025bbcb82d4f6e35315bba3a2a0d9eb118aa155ddc"
+      ],
+      "query_index": 18
+    },
+    {
+      "case_id": "additional_original/19",
+      "full_sequence_sha256": [
+        "2a0cabd909092f3ae3c57de154a0d110620a7850ee12e14a3a59e182dae04da3",
+        "e961bc64cf1c247a7533d397bfa533a1f340775fe4869b153b94b783df48faab"
+      ],
+      "query_index": 19
+    },
+    {
+      "case_id": "additional_original/21",
+      "full_sequence_sha256": [
+        "5ff9469fe4e208da3d917c6f6ac868ec7fe81366d5b2b8ef892a74bdb76f6324",
+        "d2023f8eeda8c3426a9dc89545e8859e94c48bdd30d7c4cbd954f615d7963911"
+      ],
+      "query_index": 21
+    },
+    {
+      "case_id": "additional_original/22",
+      "full_sequence_sha256": [
+        "6707e247cda7c9986b9006e6081d9614e72aeb03d83325980bcf1ef23adf2da9"
+      ],
+      "query_index": 22
+    },
+    {
+      "case_id": "additional_original/24",
+      "full_sequence_sha256": [
+        "5764e87907e70e71d767b8f0adfc7536960c4f58904eeffa1433e3bc43951e1b",
+        "a1569f6dc7aa1da8f82927452e3ffbfa219dc60792b6c786c2511cabe9a65bd0",
+        "bdf09e29d59433bbfbb5ac5e5bb90250ab95c2f792da02910b02035d2a53b59c",
+        "dcf4944489bcce53896170c41fcdfb9b6278be8b9649ac40c574adcf051a8d71",
+        "f49758d77a32d9ccee49223e713aae9c322c49bdd51e173367dfe1089acabd7d"
+      ],
+      "query_index": 24
+    },
+    {
+      "case_id": "additional_original/25",
+      "full_sequence_sha256": [
+        "06410c2b6659a8739929301c5936c42b9f57f9965d891b2749304741c7918106",
+        "1c69a95f7d03f5bd151124752346d6adc4daba96f86687bb1210ba353800ad4f",
+        "540a6066c388992574bf7dfa94cd085c539b6d532a9940cc1dee1d0352d7ecb4",
+        "74b92632c9971c703d2d487aa943eecbaee9faa2e1258c38c3a3ea8a5728c254"
+      ],
+      "query_index": 25
+    },
+    {
+      "case_id": "additional_original/32",
+      "full_sequence_sha256": [
+        "05815250c3bc3da4b56b8edad0dc2127b079f0c7c67d3c2da58b7122f2395bb5",
+        "4b9a137ed6384dc495d965a97af479e6ce1c6c4de3418242001d647e065bf1ac"
+      ],
+      "query_index": 32
+    },
+    {
+      "case_id": "additional_original/34",
+      "full_sequence_sha256": [
+        "41b3186097db020f075369ffe42a5e19f670efa07c985e3ff3127a16204cc298",
+        "af3774ec433ecff1dd0278e5a0010554c10e22bac21cf0d9b6dd32091764aa6d",
+        "b16d28f9fdb893f011e9f3e14054f85df8c8b60c29f4b380d4788634784b4a2a",
+        "e6b0383b435bdd2ffca08644ab8464906e36eca5db7a474817aa5f3dc77568cd"
+      ],
+      "query_index": 34
+    },
+    {
+      "case_id": "additional_original/36",
+      "full_sequence_sha256": [
+        "9fea352e422e0db9e7d01a71ddb5f760c11ab057fd19d909238b6dd19c93de30"
+      ],
+      "query_index": 36
+    },
+    {
+      "case_id": "additional_original/37",
+      "full_sequence_sha256": [
+        "7786a4770b4b4045c3045f94b5ee67aaf65cbbffdc620ead5a4a78dc4a2c76ed",
+        "8bc13adb587d9fb2f753c3dc7dd51d5104c4a0a9f732765f9672bfc7e74c0ee8"
+      ],
+      "query_index": 37
+    },
+    {
+      "case_id": "additional_original/38",
+      "full_sequence_sha256": [
+        "512c500931514031b57591d0cff20b5677500b19e1272551f5e39993ba6620e9"
+      ],
+      "query_index": 38
+    },
+    {
+      "case_id": "additional_original/39",
+      "full_sequence_sha256": [
+        "0e23004036807e228d5b2fefeb76a3ccb0362f132e088aac6e2ff6e348d059c0",
+        "3c6b8729c66711af897640172032314f14d25f230b0041643594fc470bd95c63",
+        "5c9ed2397f6fc5280a17f55428f817d33e02850ea93783d5f159666a04279f53",
+        "cd457cd0923152de8a32fbb9f2982099132b6491d543749beec7c3be7fb9541a",
+        "d11b6a5c7c6199568ea95013516cf8e48eeb13c796b314dc98a11cd554b1b794",
+        "f6bb3d0996140768aea41d92586c73e305e50a8d2152cfe48fe8edf2f7f7eba7"
+      ],
+      "query_index": 39
+    }
+  ]
+}

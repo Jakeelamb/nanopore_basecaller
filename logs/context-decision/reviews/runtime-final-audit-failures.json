@@ -1,0 +1,48 @@
+{
+  "final_token_guard_fix": "Require token-boundary raw-string prefix; all three actual before/after token sequences match",
+  "first": {
+    "observation": "8MiB per-file guard refused whole-stock SAM before any of its bytes were read; report runtime-final-attempt-1.json",
+    "script": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-audit-attempt-1.py",
+      "sha256": "db2f7863a227093c225ef2e8fbe12c3d6f97383d1f5d60af4863efdedfb77bb5",
+      "size": 22721
+    }
+  },
+  "metadata_continuation": {
+    "error": "Overbroad raw-literal guard matched OR at end of a normal quoted message before token comparison",
+    "exit": 1,
+    "passed_before_failure": [
+      "inference before observation",
+      "per-parent/block integer conservation",
+      "mean-parent arithmetic",
+      "912 exact private input-label joins",
+      "historical free SAM exact bytes",
+      "latest union source63/compiled37 witnesses",
+      "actual union cache/toolchain/strict flags",
+      "all1104 diagnostic choices matched historical free/native roles"
+    ],
+    "script": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-completion-attempt-2.py",
+      "sha256": "75fc301aafdad656cf7a262a57331005f510efc55b465acf7b8aeb0f09244d69",
+      "size": 12833
+    }
+  },
+  "native_continuation": {
+    "error": "KeyError: ended_utc at line81",
+    "exit": 1,
+    "native_read_once": true,
+    "passed_before_failure": [
+      "exact named native SAM stream SHA256",
+      "64 orientation-normalized native primary SEQ/Q equal disabled control",
+      "recorder/launcher linkage",
+      "phase source52"
+    ],
+    "script": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-completion-attempt-1.py",
+      "sha256": "1367473f31b72c53643137b40b42ccb514dea748e0b0dc78856c941f6fbce9f2",
+      "size": 13247
+    }
+  },
+  "schema": "independent-audit-attempt-retention/1",
+  "scientific_producers_replayed": []
+}

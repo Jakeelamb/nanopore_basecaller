@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/query0-1-audit.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/query0-1-audit.json",
+      "size": 12786,
+      "sha256": "ff55474cb5cf3427248f5a120eb241dbb119fd9248bc9bed8651fb2a87a5a6ff"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/audit-query0.py": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/audit-query0.py",
+      "size": 14933,
+      "sha256": "90f417bd3dcdb02b60f5fc076e895f7aa921bd7200423b60df93235d6409708a"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/source-inventory-post-format-2.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/source-inventory-post-format-2.json",
+      "size": 21159,
+      "sha256": "ca76b31c576334a204236dda8df093eecbd1b68cf7fb1573b7dc9d01d275b335"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/summary.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/summary.json",
+      "size": 3344,
+      "sha256": "78b2c716331d5704974d4db5f57f21b9a7e0debaaee43157258c9f0b6e800541"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/execution-complete.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/execution-complete.json",
+      "size": 4361,
+      "sha256": "c0b6b57391b0247d2583269a9cb7f0b30351dcfea59db1e25f72339476bf4f44"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/trace-archives.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/trace-archives.json",
+      "size": 2551,
+      "sha256": "d478ce71a19a482073a2aba91dc22258beac8a3e85bcfd67c62aab90801b5cc4"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/complete.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/complete.json",
+      "size": 22619,
+      "sha256": "d6aa14a28f4564363fa46647c0ecf5b1f0790c766f2f06ced985a63698726a76"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/sample-infer-00e2ea35b3a0/finish.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/sample-infer-00e2ea35b3a0/finish.json",
+      "size": 5130,
+      "sha256": "1007843803531b5ae5fdf179d9b529e35375462baa6791174324006f271db981"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/result.json": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/result.json",
+      "size": 601,
+      "sha256": "b95073062991b4354d8f1cb9b33ededeb67961463c6d7b23e7ce3f1a06f3589a"
+    },
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-prepare-1/frames.tsv": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-prepare-1/frames.tsv",
+      "size": 224738,
+      "sha256": "339de489c4f71194b5b7a220ad1e513aaf2140bee1c5b8cddbe6184bc7aaa2f7"
+    }
+  },
+  "producer_binary": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/build/context-sample-feedback",
+    "sha256": "001af437a02fcf615f78617af1fad164af0ad60f18d1beba6ce9ff2fcae1f475",
+    "size": 879968
+  },
+  "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+  "storage": [
+    {
+      "beam": "combined",
+      "raw": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/combined-trace.bin",
+        "size": 2619952,
+        "sha256": "13e5a4ba7b2191abbef5120c0efd17e10d3c8b9a0628875bc74332dce1ba0fae"
+      },
+      "archive": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/combined-trace.bin.gz",
+        "sha256": "6b0b8faf5dd82e3f9b3e18f9794ac2b8285c0db5ae188df0655e6c5d60191c0e",
+        "size": 959775
+      }
+    },
+    {
+      "beam": "free",
+      "raw": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/free-trace.bin",
+        "size": 2621581,
+        "sha256": "1f4de6ffb16e8b692619a233c0e96a600adefbd1e2c463ef42016434986e2606"
+      },
+      "archive": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/free-trace.bin.gz",
+        "sha256": "96ef2162a47d416552b0f76e7e353bfc9e071a672e91740dc6625c866cc7f628",
+        "size": 923882
+      }
+    },
+    {
+      "beam": "population",
+      "raw": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/population-trace.bin",
+        "size": 2620111,
+        "sha256": "1bbe4947049b66ce66172811d3ea53eca9dec68270d70186416a45c023362b59"
+      },
+      "archive": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/population-trace.bin.gz",
+        "sha256": "d09ae1d5cf337d195758ac206b4b7d264ffc8426d638501cb12a3f9223fca737",
+        "size": 960079
+      }
+    },
+    {
+      "beam": "sample",
+      "raw": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/sample-trace.bin",
+        "size": 2619952,
+        "sha256": "13e5a4ba7b2191abbef5120c0efd17e10d3c8b9a0628875bc74332dce1ba0fae"
+      },
+      "archive": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1/native-case/sample-trace.bin.gz",
+        "sha256": "6b0b8faf5dd82e3f9b3e18f9794ac2b8285c0db5ae188df0655e6c5d60191c0e",
+        "size": 959775
+      }
+    }
+  ],
+  "expected_steps": 103,
+  "expected_finalists": 128,
+  "parser_origin": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/audit-query0.py",
+    "size": 14933,
+    "sha256": "90f417bd3dcdb02b60f5fc076e895f7aa921bd7200423b60df93235d6409708a"
+  }
+}

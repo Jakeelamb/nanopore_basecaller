@@ -1,0 +1,7 @@
+if(NOT DEFINED FORMATTER OR NOT DEFINED EXPECTED)
+    message(FATAL_ERROR "Pinned formatter identity is required")
+endif()
+file(SHA256 "${FORMATTER}" actual)
+if(NOT actual STREQUAL EXPECTED)
+    message(FATAL_ERROR "Pinned clang-format executable changed")
+endif()

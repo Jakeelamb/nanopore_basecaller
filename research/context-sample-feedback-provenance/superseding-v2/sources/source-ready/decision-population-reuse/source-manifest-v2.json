@@ -1,0 +1,69 @@
+{
+  "schema": "context-sample-feedback-continuation-sources/1",
+  "sources": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/compare.py",
+      "size": 7434,
+      "sha256": "edf6bf3e5097aad9bc59948f18e4ee69cc9eaf2c0e68e8f8b6165185d12db5d0"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/input-pins.json",
+      "size": 7280,
+      "sha256": "859fb2803eb3f1611fae5fd8c3526af2b1100922014dbe1fc8f499bc68a1ba4a"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/prepare.py",
+      "size": 6822,
+      "sha256": "b796d0e67191353a2495cbe183c3bf298c879fb748c5ccba1c9cdb556c43e1f7"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/ready.json",
+      "size": 4965,
+      "sha256": "5c2161dc34ef98d5776d6a973e6c423b894ecce42d343208aec7b4ecc388f043"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/seal_ready.py",
+      "size": 3082,
+      "sha256": "54349ef72e4fe3df1011eab50e75b8774c32d4452df3011c8e9853a7aba6b6e1"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/test_synthetic.py",
+      "size": 1451,
+      "sha256": "fcf1d1fe6ee8e5b0cb9718f141c15f7de55f70cf902d557e708d6fb837f87a4e"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/core.py",
+      "size": 20675,
+      "sha256": "3023f3ae2d35fbd9bdc86a832be4a39c4533a8729da70f264549ae671110aa45"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/plan.json",
+      "size": 11143,
+      "sha256": "503f544039edf9b40912ddbc81ed48eda5dea46fa381ea9fe39c1747923f4d8c"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/run.py",
+      "size": 18576,
+      "sha256": "e81d6efc4fc864ffe89274e6c97cf152e8737a2f0198a5701e36a4498cc2d0c4"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/test_core.py",
+      "size": 11525,
+      "sha256": "79cc9c508f386edbb63bb23e94d75acf97d0516c2c2cb27928bf4ede7e28fda4"
+    }
+  ],
+  "sources_sha256": "fd557903760992ab8992e6ccfb42d303c09de9d743e1c380065f38170146fdfd",
+  "compiled_source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+  "compiled_source_count": 89,
+  "supersedes": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/source-manifest.json",
+    "size": 3001,
+    "sha256": "cc8fa83a1757708fe42364a4741b87423f6fcd24942351927226a502adc8a52d"
+  },
+  "changed_sources": [
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/core.py",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/run.py",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/decision-population-reuse/test_core.py"
+  ],
+  "unchanged_sources": 7
+}

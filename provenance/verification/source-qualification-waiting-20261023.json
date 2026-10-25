@@ -1,0 +1,144 @@
+{
+  "adapter": {
+    "path": "/home/jake/Projects/nanopore_basecaller/scripts/qualify-source.py",
+    "sha256": "58d38686ebec1d868d027a002fca68c7e48a724a252b43074849d05adabc3b51",
+    "size": 41381
+  },
+  "ci": {
+    "conclusion": "success",
+    "head": "f5b9ebc89a9b4029a776df7089382cbc9b9c2737",
+    "receipt": {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T031154Z-source-ci-f5b9ebc-LhYRAy/stdout",
+      "sha256": "3ada7a2eab0b2c2c6cdf4ebcf54892486178e06cc4d6fe6ee48b9ee105818049",
+      "size": 2642
+    },
+    "url": "https://github.com/Jakeelamb/nanopore_basecaller/actions/runs/39892964226"
+  },
+  "comparative_performance": "not_run",
+  "contract": {
+    "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/contract.json",
+    "sha256": "c1c0c1e3cb6850a0eb3a4d63123a2da8167ae5c4cdf0f107bc60472f05dbcfe8",
+    "size": 7788628
+  },
+  "executed_controller": {
+    "path": "/home/jake/Projects/nanopore_basecaller/logs/source-qualification-20261023/resume-held.py",
+    "sha256": "e122e64a2e3d7056ef9ef62294331b38ebb0f8f0622537c9977b8ee8920af588",
+    "size": 972
+  },
+  "full_hac_basecall": {
+    "attempt_count": 1,
+    "exit": 0,
+    "measurement_qualified": true,
+    "native_end_utc": "2026-10-23T03:19:00.870778+00:00",
+    "native_launch_utc": "2026-10-23T03:18:25.447939+00:00",
+    "receipt": {
+      "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/source/units/full-development-hac/basecall/1792725502787411884-b1a8af9f/finish.json",
+      "sha256": "1ef09669b4edcf50aa293b0765806fbdf094b9664d7acbb35d8d30a31b4684b9",
+      "size": 20929
+    },
+    "recorded_output_pin": {
+      "path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T031825Z-stock-4f91d0dfe64d451f9cef8c760f01276b-hgxUQs/stdout",
+      "sha256": "707a4cf2e534633c115977e02e1f82051d7e35044ac531646b60d9262e5adc2c",
+      "size": 45900050
+    },
+    "recorder": "/home/jake/Projects/nanopore_basecaller/logs/20261023T031825Z-stock-4f91d0dfe64d451f9cef8c760f01276b-hgxUQs",
+    "status": "finished"
+  },
+  "held_attempt": "logs/20261023T032715Z-source-qualification-performance-held-veqpNW",
+  "hold_probe": "logs/20261023T032415Z-source-profile-hold-probe-ZJYfDY",
+  "limitations": [
+    "smoke scope only; successful full HAC basecall is not a complete full observation",
+    "shared-host profile drift and foreign GPU activity rejected by retained measurement gates",
+    "the profile hold has been released; wait for other experiments before native resumption",
+    "no candidate algorithm or HG005 selection",
+    "pilot is not external donor confirmation"
+  ],
+  "official_smoke_plan": {
+    "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/official-smoke/plan.json",
+    "sha256": "0e1305c3d3aacbe0228e0cf915a8358b4180988e84391e5693b1744885656272",
+    "size": 4101174
+  },
+  "open_gates": [
+    "four full native unit observations",
+    "eight full fixed-domain scores",
+    "full canonical and accuracy equivalence",
+    "independent final pin audit",
+    "read-only final audit and completed-run zero-producer resume"
+  ],
+  "projector": {
+    "path": "/home/jake/Projects/nanopore_basecaller/logs/source-qualification-20261023/waiting-project.py",
+    "sha256": "330a81b295f60ef3e049ad8441dbe9f7b82d1f69f6cc524541d9a3807af2c66a",
+    "size": 4016
+  },
+  "resume_controller": {
+    "path": "/home/jake/Projects/nanopore_basecaller/provenance/verification/source-qualification-resume-20261023.py",
+    "sha256": "e122e64a2e3d7056ef9ef62294331b38ebb0f8f0622537c9977b8ee8920af588",
+    "size": 972
+  },
+  "schema": 1,
+  "smoke_gates": {
+    "build_custody": "verified",
+    "comparative_performance": "not_run",
+    "complete_input_processing": "verified",
+    "contract": "4bd255279f022fc0e94e29b27dc493ee612931aa3d9a530c4950de0d1eafdf72",
+    "exact_equivalence": {
+      "accuracy_smoke": "equal",
+      "smoke": "equal"
+    },
+    "fixed_domain_accuracy": "verified",
+    "full_native": "not_run",
+    "native_smoke": "verified",
+    "official_smoke_split_controls": "not_exercised: no fixture in official smoke arm",
+    "schema": 1,
+    "source_genuine_split_controls": "verified",
+    "source_index_compatibility": "verified",
+    "through": "smoke",
+    "version_eligibility": "verified"
+  },
+  "smoke_report": {
+    "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/qualification.json",
+    "sha256": "60f3c13ad4e2c7ed76306aa262b7080f813a164befdfbed336fd01a475b2312f",
+    "size": 4271
+  },
+  "source_build": {
+    "path": "/home/jake/Projects/nanopore_basecaller/provenance/source-build-20261023.json",
+    "sha256": "cc69dea84a6ab16ed68bc9f32586735e4c67f96c0b29370a7484d8b26cd47dac",
+    "size": 50085
+  },
+  "source_plan": {
+    "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/source/plan.json",
+    "sha256": "3231ac37c4fcd23f69d45ccddb444d5c846c4e619108469a95dc7db7db5692d0",
+    "size": 4620077
+  },
+  "status": "smoke_verified_full_waiting_for_shared_host",
+  "unqualified_cpu_reference_checks": [
+    {
+      "exit": -15,
+      "failure": "Measurement controls: platform_profile: required 'performance', observed 'balanced'; Measurement controls: platform_profile: required 'performance', observed 'balanced'",
+      "measurement_qualified": false,
+      "native_end_utc": null,
+      "native_launch_utc": "2026-10-23T03:19:49.887129+00:00",
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/source/units/full-development-hac/calmd/1792725589390200606-fd089fdc/finish.json",
+        "sha256": "8e9aec90757d11effaed970782738667d87dd926976ebf505152355e0ef8f0d3",
+        "size": 19766
+      },
+      "recorder": "/home/jake/Projects/nanopore_basecaller/logs/20261023T031949Z-stock-40a114ad8b30463caebec15d1f532a61-mv1h0T",
+      "status": "interrupted"
+    },
+    {
+      "exit": 0,
+      "failure": "Measurement controls: foreign_gpu_compute_pids: required [], observed [1005782]; Measurement controls: foreign_gpu_compute_pids: required [], observed [1005782]",
+      "measurement_qualified": false,
+      "native_end_utc": "2026-10-23T03:29:14.446973+00:00",
+      "native_launch_utc": "2026-10-23T03:29:10.079367+00:00",
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller/results/source-qualification/20261023-performance/source/units/full-development-hac/calmd/1792726149735693973-c2e911f7/finish.json",
+        "sha256": "0dbe57b6ac72fa99c8559013e470fdb46e9fbb9f50ae281f2e4e171add3ae4f8",
+        "size": 20365
+      },
+      "recorder": "/home/jake/Projects/nanopore_basecaller/logs/20261023T032910Z-stock-2eab83fd1db34aad8a840fc303e7ebf9-a5dsAm",
+      "status": "command_failed"
+    }
+  ]
+}

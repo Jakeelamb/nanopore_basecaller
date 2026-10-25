@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "tests": 58,
+  "skipped": 0,
+  "exit": 0,
+  "start_utc": "2026-10-22T21:59:04Z",
+  "end_utc": "2026-10-22T21:59:24Z",
+  "command": "env PYTHONPATH=tests NANOPORE_NATIVE_BAM=/home/jake/Projects/nanopore_basecaller/logs/20261022T210643Z-manual-dev32-hac-sxfbo5/stdout NANOPORE_CALMD_PLAN=/home/jake/Projects/nanopore_basecaller/results/stock/stock-20261022/plan.json uv run --locked python -m unittest discover -s tests -v",
+  "retained_receipt": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ",
+  "pins": [
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/command.sh",
+      "size": 290,
+      "sha256": "6ae8f49b35dd186a6154b93e60c8987a5977f499ef02cc9a1f87456e163fd069"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/cwd.txt",
+      "size": 40,
+      "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/end.txt",
+      "size": 21,
+      "sha256": "d161000eaf65c51426b35054fc82e9b5d4b6f88e74fe4d6565d172d6400f806e"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/exit-status.txt",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/start.txt",
+      "size": 21,
+      "sha256": "4856521b76583ecb16298b28366566e8cec3b67960b08e23cd9d1f1055ab8c71"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/stderr",
+      "size": 9071,
+      "sha256": "8d4c66e99acf9f46cd3ce95577505ff647aa8187cea32d247c0f77f80d3dcd86"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/stdout",
+      "size": 144,
+      "sha256": "a249ebcc88ad953f33c1c15b3d942f68b6d2b288908e8feadfa1091e1854f8d4"
+    },
+    {
+      "path": "logs/20261022T215904Z-md-verifier-all-local-contracts-HPyQCJ/time.txt",
+      "size": 1021,
+      "sha256": "c907452b515f5cecdb7fdfcdbbccc538d3af04020951876f4d4aaee4b4e91af3"
+    }
+  ],
+  "tested_files": [
+    {
+      "path": "scripts/benchmark.py",
+      "size": 60725,
+      "sha256": "7623a939d4dca46e64d57a2be312b37a7c84d64aac9401e22d5c5b0e4a65ca55"
+    },
+    {
+      "path": "tests/test_benchmark.py",
+      "size": 41912,
+      "sha256": "b34b0c6b11d0bce7d354d22e83e0267e006dbd57f104831fcae25f96dffa2b1e"
+    },
+    {
+      "path": "scripts/prepare-reference.py",
+      "size": 12278,
+      "sha256": "2467d465aa2bbe3ea47653d91858db235c55e3f4df775f74dda956ac20bbb84e"
+    },
+    {
+      "path": "tests/test_reference.py",
+      "size": 19436,
+      "sha256": "21e9dc3ce61008db9af6b8495cfa3d96726b6a74191ec077cb51756f9de24edd"
+    },
+    {
+      "path": "scripts/fetch.py",
+      "size": 5928,
+      "sha256": "27b7dcdd4286c77c7ad86665257861fd643746f2683e7e28083c21af3baf7b24"
+    },
+    {
+      "path": "scripts/inspect-signals.py",
+      "size": 4631,
+      "sha256": "f88be2b1379bc1b425fc93c854776d571c8d348d966f9adf89df306f6e86e0ff"
+    }
+  ]
+}

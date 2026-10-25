@@ -1,0 +1,29 @@
+{
+  "schema": "context-process-guard-provenance/1",
+  "origin": {
+    "path": "/tmp/nanopore-frontier/private-raw-case/cpu-qualification-prep-v1/process_guard.py",
+    "size": 3443,
+    "sha256": "dd90a7c50cd1b3044178e3ee248e7f5e948840496b1ad0cee3b99dadad6a14e9"
+  },
+  "snapshot": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback/tools/context_decoder/process_guard.py",
+    "size": 3443,
+    "sha256": "dd90a7c50cd1b3044178e3ee248e7f5e948840496b1ad0cee3b99dadad6a14e9"
+  },
+  "origin_controller": {
+    "path": "/tmp/nanopore-frontier/private-raw-case/cpu-qualification-prep-v1/run.py",
+    "size": 12241,
+    "sha256": "4c4cb53f0965f89914d34dc895912e05004b7750d3ff0c0776b2936df57b86a1"
+  },
+  "origin_admission": {
+    "path": "/tmp/nanopore-frontier/private-raw-case/qualification-attempt-1/admission.json",
+    "size": 1632,
+    "sha256": "2f3ffd26a4fb020e602f29dfcf3226212ec1deb0c27132f46c9b2702aa9614f6"
+  },
+  "prior_process_control_receipt": {
+    "path": "/tmp/nanopore-frontier/private-raw-case/qualification-attempt-1/process-controls.json",
+    "size": 1879,
+    "sha256": "f34edfed2d3ed41c9d17d5084ca90307773e368cc804d4050853bcfa03a8c74d"
+  },
+  "interpretation": "Exact source snapshot of the separately observed CPU subreaper/group cleanup component; no qualification claim for this adapted context controller or any GPU path"
+}

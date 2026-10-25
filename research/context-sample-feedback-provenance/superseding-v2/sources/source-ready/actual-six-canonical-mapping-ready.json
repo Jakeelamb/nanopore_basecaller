@@ -1,0 +1,444 @@
+{
+  "schema": "context-sample-feedback-actual-six-canonical-mapping-ready/1",
+  "complete": true,
+  "utc": "2026-10-25T09:35:10.087468+00:00",
+  "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+  "source_count": 89,
+  "config": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+    "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+    "size": 4185
+  },
+  "qualification": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+    "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+    "size": 4378
+  },
+  "input_emission": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+    "size": 4606,
+    "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+  },
+  "emission_pin": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/emission.json",
+    "size": 188343,
+    "sha256": "607edb0052f6a524c80d1772558569ed04bafc7bbd1910a091ae0fba4e5d984d"
+  },
+  "frozen_choices": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/all-choices.tsv",
+    "size": 1306733,
+    "sha256": "3c6a2adfbf258146e0b4e7c168b85e86781d6dd92f169b77f720b73564bccc54"
+  },
+  "full368_freeze": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/all368-frozen-inputs.json",
+    "size": 249182,
+    "sha256": "37000eff1b9a654e7d073920187314a02ffe49bfaeb8a7b1660ad0b86ebb0610"
+  },
+  "emission_audit": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/emit-all-1-audit.json",
+    "size": 7299,
+    "sha256": "97a9ee703f61237d90dbf571325d93b3cc17d3902cf9de5274a33d50efd5b1f6"
+  },
+  "observer_completion": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-observe-all-1/execution-complete.json",
+    "size": 4648,
+    "sha256": "91c0d55641168a29c8c43084b1f09c93c0669378a3a751d6244812660b15e51a"
+  },
+  "observer_audit": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/observe-all-1-audit.json",
+    "size": 14474,
+    "sha256": "800c1367a63b67d50bc69e08b886a60b61af1a5cd70b711264df4f79c23b0e0f"
+  },
+  "reviewed_conditional_command_source": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/all368-delivery-ready/ready.json",
+    "size": 236187,
+    "sha256": "4eacd143f27ef2379532f5af63a128ed48b829ac3bb260db789429422bdc1a68"
+  },
+  "canonical_count": 6,
+  "genuine_new_alignment_units": 5,
+  "historical_exact_mapping_reuse_units": 1,
+  "alias_groups": {
+    "disabled_edits": "disabled_edits",
+    "historical_free": "historical_free",
+    "nn_u": "historical_free",
+    "population": "population",
+    "sample": "sample",
+    "combined": "combined",
+    "missing_source": "historical_free",
+    "wrong_source_control": "wrong_source_control"
+  },
+  "fixed_map_order": [
+    "disabled_edits",
+    "historical_free",
+    "population",
+    "sample",
+    "combined",
+    "wrong_source_control"
+  ],
+  "units": [
+    {
+      "arm": "disabled_edits",
+      "aliases": [
+        "disabled_edits"
+      ],
+      "sam": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/disabled_edits.sam",
+        "sha256": "a2f7cdb61c14d901095f1c65dd5ed8b716bd12546feb993d9959813f411f54a6",
+        "size": 2869078
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+        "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+        "size": 12027
+      },
+      "input_pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+          "size": 4606,
+          "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+        }
+      ],
+      "command": "UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/scripts/context-sample-feedback.py map --scope all --qualification /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3 --arm disabled_edits --input /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1 --output /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-disabled_edits-1 --admission /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-disabled_edits-1.json",
+      "output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-disabled_edits-1",
+      "future_grant_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-disabled_edits-1.json",
+      "phase": "map",
+      "scope": "all",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "config": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+        "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+        "size": 4185
+      },
+      "qualification": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+        "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+        "size": 4378
+      },
+      "caps": {
+        "address_space_bytes": 25769803776,
+        "cpu_quota": 2,
+        "maximum_growth_bytes": 536870912,
+        "maximum_output_bytes": 4294967296,
+        "maximum_wall_seconds": 300,
+        "memory_bytes": 17179869184,
+        "swap_bytes": 0
+      },
+      "disk_floor_bytes": 32212254720,
+      "existing_historical_full_SAM_snapshot_mapping_reuse": false,
+      "existing_mapped_pin": null,
+      "no_aligner_when_historical_reuse": false,
+      "aligner_input_is_actual_emitted_canonical_SAM_only": true
+    },
+    {
+      "arm": "historical_free",
+      "aliases": [
+        "historical_free",
+        "nn_u",
+        "missing_source"
+      ],
+      "sam": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/historical_free.sam",
+        "sha256": "ea97a4108b9544b95ec55f1f1bd84dd8490e041a22c91e4e5251e01808499009",
+        "size": 2869094
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+        "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+        "size": 12027
+      },
+      "input_pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+          "size": 4606,
+          "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+        }
+      ],
+      "command": "UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/scripts/context-sample-feedback.py map --scope all --qualification /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3 --arm historical_free --input /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1 --output /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-historical_free-1 --admission /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-historical_free-1.json",
+      "output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-historical_free-1",
+      "future_grant_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-historical_free-1.json",
+      "phase": "map",
+      "scope": "all",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "config": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+        "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+        "size": 4185
+      },
+      "qualification": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+        "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+        "size": 4378
+      },
+      "caps": {
+        "address_space_bytes": 25769803776,
+        "cpu_quota": 2,
+        "maximum_growth_bytes": 536870912,
+        "maximum_output_bytes": 4294967296,
+        "maximum_wall_seconds": 300,
+        "memory_bytes": 17179869184,
+        "swap_bytes": 0
+      },
+      "disk_floor_bytes": 32212254720,
+      "existing_historical_full_SAM_snapshot_mapping_reuse": true,
+      "existing_mapped_pin": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/logs/context-feedback/recorder-root/logs/20261024T021117Z-biology-reference_free-mapped-sam-QbtZac/stdout",
+        "sha256": "2a679c41ad1d9730ebd0d67b93e6f87198664e70ec2cd96201a1ce8fb9949f31",
+        "size": 5346811
+      },
+      "no_aligner_when_historical_reuse": true,
+      "aligner_input_is_actual_emitted_canonical_SAM_only": true
+    },
+    {
+      "arm": "population",
+      "aliases": [
+        "population"
+      ],
+      "sam": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/population.sam",
+        "sha256": "e451d61479f5bf25205265c0a11d7ef0d8e3c3f3c7f54ffa5b5eb84604fa9ece",
+        "size": 2869110
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+        "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+        "size": 12027
+      },
+      "input_pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+          "size": 4606,
+          "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+        }
+      ],
+      "command": "UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/scripts/context-sample-feedback.py map --scope all --qualification /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3 --arm population --input /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1 --output /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-population-1 --admission /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-population-1.json",
+      "output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-population-1",
+      "future_grant_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-population-1.json",
+      "phase": "map",
+      "scope": "all",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "config": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+        "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+        "size": 4185
+      },
+      "qualification": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+        "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+        "size": 4378
+      },
+      "caps": {
+        "address_space_bytes": 25769803776,
+        "cpu_quota": 2,
+        "maximum_growth_bytes": 536870912,
+        "maximum_output_bytes": 4294967296,
+        "maximum_wall_seconds": 300,
+        "memory_bytes": 17179869184,
+        "swap_bytes": 0
+      },
+      "disk_floor_bytes": 32212254720,
+      "existing_historical_full_SAM_snapshot_mapping_reuse": false,
+      "existing_mapped_pin": null,
+      "no_aligner_when_historical_reuse": false,
+      "aligner_input_is_actual_emitted_canonical_SAM_only": true
+    },
+    {
+      "arm": "sample",
+      "aliases": [
+        "sample"
+      ],
+      "sam": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/sample.sam",
+        "sha256": "c3a5712191da1d66ac11498f7d3ce284ef1e1766d777f5c3d58b55faf4a7f5c8",
+        "size": 2869102
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+        "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+        "size": 12027
+      },
+      "input_pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+          "size": 4606,
+          "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+        }
+      ],
+      "command": "UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/scripts/context-sample-feedback.py map --scope all --qualification /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3 --arm sample --input /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1 --output /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-sample-1 --admission /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-sample-1.json",
+      "output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-sample-1",
+      "future_grant_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-sample-1.json",
+      "phase": "map",
+      "scope": "all",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "config": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+        "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+        "size": 4185
+      },
+      "qualification": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+        "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+        "size": 4378
+      },
+      "caps": {
+        "address_space_bytes": 25769803776,
+        "cpu_quota": 2,
+        "maximum_growth_bytes": 536870912,
+        "maximum_output_bytes": 4294967296,
+        "maximum_wall_seconds": 300,
+        "memory_bytes": 17179869184,
+        "swap_bytes": 0
+      },
+      "disk_floor_bytes": 32212254720,
+      "existing_historical_full_SAM_snapshot_mapping_reuse": false,
+      "existing_mapped_pin": null,
+      "no_aligner_when_historical_reuse": false,
+      "aligner_input_is_actual_emitted_canonical_SAM_only": true
+    },
+    {
+      "arm": "combined",
+      "aliases": [
+        "combined"
+      ],
+      "sam": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/combined.sam",
+        "sha256": "151c4b6fc1bba14bca9d1db231eab624c6fd228ae76ca26c12a059151de73a10",
+        "size": 2869096
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+        "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+        "size": 12027
+      },
+      "input_pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+          "size": 4606,
+          "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+        }
+      ],
+      "command": "UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/scripts/context-sample-feedback.py map --scope all --qualification /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3 --arm combined --input /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1 --output /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-combined-1 --admission /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-combined-1.json",
+      "output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-combined-1",
+      "future_grant_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-combined-1.json",
+      "phase": "map",
+      "scope": "all",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "config": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+        "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+        "size": 4185
+      },
+      "qualification": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+        "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+        "size": 4378
+      },
+      "caps": {
+        "address_space_bytes": 25769803776,
+        "cpu_quota": 2,
+        "maximum_growth_bytes": 536870912,
+        "maximum_output_bytes": 4294967296,
+        "maximum_wall_seconds": 300,
+        "memory_bytes": 17179869184,
+        "swap_bytes": 0
+      },
+      "disk_floor_bytes": 32212254720,
+      "existing_historical_full_SAM_snapshot_mapping_reuse": false,
+      "existing_mapped_pin": null,
+      "no_aligner_when_historical_reuse": false,
+      "aligner_input_is_actual_emitted_canonical_SAM_only": true
+    },
+    {
+      "arm": "wrong_source_control",
+      "aliases": [
+        "wrong_source_control"
+      ],
+      "sam": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/wrong_source_control.sam",
+        "sha256": "188b9106554e7af39a17a6a8ed414d883a2b76fc896fef2fa7d517c20f877090",
+        "size": 2869060
+      },
+      "snapshot": {
+        "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+        "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+        "size": 12027
+      },
+      "input_pins": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+          "size": 4606,
+          "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+        }
+      ],
+      "command": "UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/scripts/context-sample-feedback.py map --scope all --qualification /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3 --arm wrong_source_control --input /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1 --output /home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-wrong_source_control-1 --admission /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-wrong_source_control-1.json",
+      "output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-wrong_source_control-1",
+      "future_grant_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/admission-map-all-wrong_source_control-1.json",
+      "phase": "map",
+      "scope": "all",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "config": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+        "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+        "size": 4185
+      },
+      "qualification": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+        "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+        "size": 4378
+      },
+      "caps": {
+        "address_space_bytes": 25769803776,
+        "cpu_quota": 2,
+        "maximum_growth_bytes": 536870912,
+        "maximum_output_bytes": 4294967296,
+        "maximum_wall_seconds": 300,
+        "memory_bytes": 17179869184,
+        "swap_bytes": 0
+      },
+      "disk_floor_bytes": 32212254720,
+      "existing_historical_full_SAM_snapshot_mapping_reuse": false,
+      "existing_mapped_pin": null,
+      "no_aligner_when_historical_reuse": false,
+      "aligner_input_is_actual_emitted_canonical_SAM_only": true
+    }
+  ],
+  "historical_reuse_proof": {
+    "historical_mapping_completion": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/results/context-feedback/v2-observe-full-1/reference_free/complete.json",
+      "sha256": "b67c36e9f199b2438e4fb1738f07e13b606b8071e6b382d0437989daa4166f84",
+      "size": 10670
+    },
+    "historical_emission_manifest": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/results/context-feedback/v2-emit-full-1/complete.json",
+      "sha256": "d112c6bed558a0e2be15805f7583451f2085a12c25673aa8e3ea79ab2abe6e80",
+      "size": 361366
+    },
+    "old_reference_free_SAM": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/results/context-feedback/v2-emit-full-1/reference_free.sam",
+      "sha256": "ea97a4108b9544b95ec55f1f1bd84dd8490e041a22c91e4e5251e01808499009",
+      "size": 2869094
+    },
+    "snapshot": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json",
+      "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+      "size": 12027
+    },
+    "actual_new_and_old_full_SAM_bytes_equal": true,
+    "current_old_mapped_size_matches_pin": true,
+    "old_mapped_full_byte_and_source_revalidation_delegated_to_existing_admitted_map_unit": true
+  },
+  "canonical_full_SAM_byte_checks_passed": true,
+  "commands_unchanged_from_reviewed_conditional_surface": true,
+  "selection_uses_only_exact_full_SAM_aliases_not_observed_accuracy": true,
+  "all_native_and_actual_NN_baselines_retained": true,
+  "per_unit_fresh_root_lane_and_named_grant_required": true,
+  "canonical_lock_nonblocking": true,
+  "cumulative_output_cap_bytes": 4294967296,
+  "current_owned_results_bytes": 1451009945,
+  "all_six_unit_worst_case_growth_not_claimed_to_fit_cumulative_cap": true,
+  "no_maps_or_grants_instantiated": true,
+  "metadata_and_SAM_custody_bytes": 21151155,
+  "no_reference_truth_tensor_archive_body_read": true,
+  "source_role": "Exposed other-read source may include formerly population-withheld ALT; private ordinary/withheld role remains explicit.",
+  "physical_read_independence_qualified": false,
+  "promotion_eligible": false
+}

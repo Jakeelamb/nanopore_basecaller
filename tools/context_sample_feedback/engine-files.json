@@ -1,0 +1,11 @@
+[
+  "include/context_decoder/decoder.h", "include/context_decoder/io.h", "include/context_decoder/controls.h",
+  "include/context_decoder/guarded.h", "include/context_decoder/guarded_io.h",
+  "src/decoder.cpp", "src/io.cpp", "src/json.cpp", "src/main.cpp", "src/guarded.cpp", "src/guarded_io.cpp",
+  "tests/controls.cpp", "tests/main.cpp", "tests/guarded_controls.cpp",
+  "CMakeLists.txt", ".clang-format", "context_inputs.py", "verify_formatter.cmake", "process_guard.py",
+  "process_supervisor.py", "process-guard-provenance.json", "evidence.py", "guarded_inputs.py", "private_inputs.py",
+  "private-context-registry.json", "../../scripts/context-feedback.py", "../../config/context-feedback-dev-v1.json",
+  "../../config/context-feedback-dev-v2.json", "../../tests/test_context_feedback.py", "../../tests/test_context_feedback_v2.py",
+  "../../scripts/record-command.sh", "/home/jake/Projects/nanopore_basecaller-retrieval/tools/catalogue_bridge/verify-receipt.py"
+]
