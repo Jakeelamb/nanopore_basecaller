@@ -1,0 +1,31 @@
+{
+  "schema": "context-sample-feedback-config/1",
+  "role": "development",
+  "base_revision": "454f855f11385d27b6b54e94e64422e69486be17",
+  "toolchain": {
+    "compiler": {"path": "/usr/bin/c++", "size": 1738072, "sha256": "f04191f6a7b2cd7d9a62e1745872b8a6088791e5af6955488c69c9b2c4668bc9"},
+    "formatter": {"path": "/usr/bin/clang-format", "size": 104608, "sha256": "cd50c00c4b3475329257d717f9e778769d00d1eff5c03436ebc39b023ddd6394"}
+  },
+  "packet": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-all-1/prepared/cases.tsv", "size": 4186980, "sha256": "9cda8f2adcad2c495e300b208e85f009d924d7dd39d46dad8099310817257dd7"},
+  "inference_manifest": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-all-1/prepared/inference-manifest.json", "size": 6237100, "sha256": "436fac615184b619c24034688b0e619c349f64e00a84e966530a02288e583e8f"},
+  "truth": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v4/results/context-feedback/v4-prepare-all-1/prepared/truth.tsv", "size": 77108, "sha256": "2d3751fe91c79b6841069f2a3d063f189ad4523208c19dd97c94f9b331e93ad3"},
+  "source_handoff": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback/program-runs/sample-source-view-runtime-handoff-v1.json", "size": 34228, "sha256": "34af15fa77af94810ecaaf9711881fc9348873d83923b2038a66c8e3cf0f2ec1"},
+  "source_audit": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/logs/context-feedback-program/reviews/sample-source-view-runtime-final.json", "size": 10245, "sha256": "c8916b0014e327b121e7068f47cce2abbbe85d7dcc64e8f6abb01bd8b34f14eb"},
+  "table_completion": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/complete.json", "sha256": "6df31f85382ce08068b98b2c7af5241ea162fefcdea0172b9ee44c950dac64cf"},
+  "table_outer_sha256": "2fbbce80f40d7b4ddddf2fd067015407b14688d6d9d4fe90cdf9419649efc0a3",
+  "source_cases": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/exploratory_published_protocol/cases.tsv", "size": 95941, "sha256": "20b21c41f88e34b916b166decab550839198547eab6f531f42c7be6a8a433bd0"},
+  "contexts": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-support-v2/results/sample-context/sample-source-view-tables-1/exploratory_published_protocol/contexts.tsv", "size": 1173941, "sha256": "a5addcaa73e2eaf3496e534e6cc3fad0f481b15e796caa9e29b066ec8c8a2551"},
+  "context_weight": 0.5, "neural_deficit_limit": 0.5, "objective_margin": 0.5,
+  "arms": ["disabled_edits", "historical_free", "nn_u", "population", "sample", "combined", "missing_source", "wrong_source_control"],
+  "wrong_source_mapping": "next case with a distinct physical-window hash in cyclic lexical case-ID order; ranking-only typed negative control",
+  "trace": {"coverage": "every search, every timestep, every retained bundle, every finalist, exact IEEE754 bits", "storage": "sample-guarded-exact-trace/1 little-endian u64; lossless gzip mtime0 after each case; archive validates original byte count and SHA256", "truncate_search": false},
+  "execution": {
+    "canonical_lock": "/home/jake/Projects/nanopore_basecaller/results/stock/host.lock",
+    "maximum_wall_seconds": 300, "cpu_quota": 2, "memory_bytes": 4294967296,
+    "address_space_bytes": 8589934592, "swap_bytes": 0, "maximum_output_bytes": 4294967296,
+    "maximum_growth_bytes": 104857600, "disk_floor_bytes": 32212254720
+  },
+  "mapper_execution": {"maximum_wall_seconds": 300, "cpu_quota": 2, "memory_bytes": 17179869184, "address_space_bytes": 25769803776, "swap_bytes": 0, "maximum_growth_bytes": 536870912},
+  "snapshot_sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324",
+  "qualification_flags": {"strict_read_level_qualified": false, "consumer_ready": false, "promotion_eligible": false, "biological_qualification": false, "independent_donor_confirmation": false, "source_qualification": false, "physical_read_independence_qualified": false}
+}

@@ -1,0 +1,179 @@
+{
+  "canonical_lock_nonblocking": true,
+  "caps": {
+    "address_space_bytes": 8589934592,
+    "cpu_quota": 2,
+    "maximum_growth_bytes": 104857600,
+    "maximum_output_bytes": 4294967296,
+    "maximum_wall_seconds": 300,
+    "memory_bytes": 4294967296,
+    "swap_bytes": 0
+  },
+  "checkpoint_inputs": [
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-query0-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-1-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-2-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-4-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-5-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-6-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-8-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-9-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-10-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-11-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-12-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-13-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-15-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-16-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-20-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-22-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-23-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-24-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-25-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-27-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-30-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-31-1"
+  ],
+  "checkpoint_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-checkpoint-first32-1",
+  "config": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+    "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+    "size": 4185
+  },
+  "disk_floor_bytes": 32212254720,
+  "keep_all_original_exclusions": true,
+  "no_availability_or_outcome_filter": true,
+  "prepared": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-prepare-1/execution-complete.json",
+    "sha256": "274552e58bf492a150441494e7e6298e7d95ee25ef76a9c2161bd5b7544a64d1",
+    "size": 4378
+  },
+  "proposal": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/first32-ready-proposal.json",
+    "sha256": "27678857219ef30053562acdb7c60e93157ff319bbb79902f03b6ebca4a694f7",
+    "size": 70929
+  },
+  "qualification": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+    "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+    "size": 4378
+  },
+  "query0_checkpoint": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-checkpoint-query0-1/execution-complete.json",
+    "sha256": "e10ddc6f255277e14d03c65b0cb79ac8331a64c2b7d178e291008b5fa9e2a85a",
+    "size": 4531
+  },
+  "schema": "context-sample-feedback-first32-dispatch/1",
+  "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+  "source_inventory": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/source-inventory-post-format-2.json",
+    "sha256": "ca76b31c576334a204236dda8df093eecbd1b68cf7fb1573b7dc9d01d275b335",
+    "size": 21159
+  },
+  "units": [
+    {
+      "case_id": "ordinary/1/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-1-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-1-1"
+    },
+    {
+      "case_id": "ordinary/2/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-2-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-2-1"
+    },
+    {
+      "case_id": "ordinary/4/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-4-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-4-1"
+    },
+    {
+      "case_id": "ordinary/5/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-5-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-5-1"
+    },
+    {
+      "case_id": "ordinary/6/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-6-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-6-1"
+    },
+    {
+      "case_id": "ordinary/8/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-8-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-8-1"
+    },
+    {
+      "case_id": "ordinary/9/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-9-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-9-1"
+    },
+    {
+      "case_id": "ordinary/10/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-10-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-10-1"
+    },
+    {
+      "case_id": "ordinary/11/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-11-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-11-1"
+    },
+    {
+      "case_id": "ordinary/12/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-12-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-12-1"
+    },
+    {
+      "case_id": "ordinary/13/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-13-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-13-1"
+    },
+    {
+      "case_id": "ordinary/15/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-15-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-15-1"
+    },
+    {
+      "case_id": "ordinary/16/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-16-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-16-1"
+    },
+    {
+      "case_id": "ordinary/20/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-20-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-20-1"
+    },
+    {
+      "case_id": "ordinary/22/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-22-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-22-1"
+    },
+    {
+      "case_id": "ordinary/23/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-23-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-23-1"
+    },
+    {
+      "case_id": "ordinary/24/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-24-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-24-1"
+    },
+    {
+      "case_id": "ordinary/25/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-25-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-25-1"
+    },
+    {
+      "case_id": "ordinary/27/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-27-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-27-1"
+    },
+    {
+      "case_id": "ordinary/30/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-30-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-30-1"
+    },
+    {
+      "case_id": "ordinary/31/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-first32-ordinary-31-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-first32-ordinary-31-1"
+    }
+  ]
+}

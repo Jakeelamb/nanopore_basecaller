@@ -1,0 +1,207 @@
+{
+  "schema": "context-sample-feedback-decision-exact-reuse-plan/1",
+  "sample_compiled_source": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+  "decision_measure_source": "8e8607ebe49e9c990605777876f8657b0530138cf4a712c8ca42386103c92a1f",
+  "reuse_inputs": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+      "size": 4606,
+      "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-map-all-historical_free-1/execution-complete.json",
+      "size": 4698,
+      "sha256": "809dce22ed39696038570cf2999969800653e88477520f455ee6728c27b692e6"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/results/context-feedback/decision-measure-feasible-1/execution-complete.json",
+      "size": 3965,
+      "sha256": "f9fd250779bb702274a81362b242004b4ffb8fb55ec88b90515e49dc288bf397"
+    }
+  ],
+  "old_measurement": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/results/context-feedback/decision-measure-feasible-1/execution-complete.json",
+    "size": 3965,
+    "sha256": "f9fd250779bb702274a81362b242004b4ffb8fb55ec88b90515e49dc288bf397"
+  },
+  "old_nn_alleles": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/results/context-feedback/v2-observe-full-1/reference_free/alleles",
+  "emission": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-emit-all-1/execution-complete.json",
+    "size": 4606,
+    "sha256": "3628b55fcb4639366dca27e073e6553dc9adcc759329f26f9620e61be70354e8"
+  },
+  "configuration": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+    "size": 4185,
+    "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15"
+  },
+  "qualification": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+    "size": 4378,
+    "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47"
+  },
+  "observer": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-observe-all-1/execution-complete.json",
+    "size": 4648,
+    "sha256": "91c0d55641168a29c8c43084b1f09c93c0669378a3a751d6244812660b15e51a"
+  },
+  "partial_trace": {
+    "schema": "query0-partial-trace-source-ready/1",
+    "source_only": true,
+    "runtime_authorized": false,
+    "hypothesis": "Other context may change the DNA prefix sets actually retained at nonterminal search steps versus free search, even if no final accepted winner changes.",
+    "endpoint": "Exact set equality at every step 1..102: counts, first changed step, cardinalities, directional set differences and sorted JSON set SHA256. Step103 is parsed and validated but excluded from endpoint.",
+    "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample",
+    "environment": {
+      "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+      "UV_OFFLINE": "1",
+      "UV_PYTHON_DOWNLOADS": "never",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "argv": [
+      "uv",
+      "run",
+      "--no-sync",
+      "python",
+      "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/compare.py",
+      "--output",
+      "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/comparison.json"
+    ],
+    "files": [
+      {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/compare.py",
+        "size": 7434,
+        "sha256": "edf6bf3e5097aad9bc59948f18e4ee69cc9eaf2c0e68e8f8b6165185d12db5d0"
+      },
+      {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/input-pins.json",
+        "size": 7280,
+        "sha256": "859fb2803eb3f1611fae5fd8c3526af2b1100922014dbe1fc8f499bc68a1ba4a"
+      },
+      {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/test_synthetic.py",
+        "size": 1451,
+        "sha256": "fcf1d1fe6ee8e5b0cb9718f141c15f7de55f70cf902d557e708d6fb837f87a4e"
+      },
+      {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/prepare.py",
+        "size": 6822,
+        "sha256": "b796d0e67191353a2495cbe183c3bf298c879fb748c5ccba1c9cdb556c43e1f7"
+      },
+      {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/seal_ready.py",
+        "size": 3082,
+        "sha256": "54349ef72e4fe3df1011eab50e75b8774c32d4452df3011c8e9853a7aba6b6e1"
+      }
+    ],
+    "expected_output": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/comparison.json",
+      "schema": "query0-retained-prefix-comparison/1",
+      "complete": true,
+      "comparisons": [
+        "population",
+        "sample",
+        "combined"
+      ],
+      "nonterminal_steps_compared": 102,
+      "changed_steps": "UNOBSERVED: 0..102 per comparison",
+      "first_changed_step": "UNOBSERVED: null or 1..102",
+      "output_sha256": "UNOBSERVED until admitted execution"
+    },
+    "expected_input": {
+      "completion_sha256": "c0b6b57391b0247d2583269a9cb7f0b30351dcfea59db1e25f72339476bf4f44",
+      "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+      "binary_sha256": "001af437a02fcf615f78617af1fad164af0ad60f18d1beba6ce9ff2fcae1f475",
+      "traces": 4,
+      "steps_each": 103,
+      "finalists_each": 128,
+      "raw_bytes": 10481596,
+      "gzip_bytes": 3803511
+    },
+    "caps_proposal": {
+      "maximum_wall_seconds": 300,
+      "cpu_quota": 2,
+      "memory_bytes": 4294967296,
+      "address_space_bytes": 8589934592,
+      "swap_bytes": 0,
+      "maximum_growth_bytes": 104857600,
+      "maximum_output_bytes": 4294967296,
+      "minimum_free_bytes": 32212254720
+    },
+    "supervision": "Existing separately admitted whole-unit supervisor must cover all metadata/hash/decompression/comparison work; this helper does not acquire locks or create supervision.",
+    "validation": {
+      "command": "uv run --no-sync python /home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/test_synthetic.py",
+      "exit_status": 0,
+      "synthetic_checks": 6,
+      "genuine_trace_reads": 0
+    },
+    "source_read_budget": {
+      "maximum_total_bytes": 67108864,
+      "maximum_file_bytes": 8388608,
+      "observed_metadata_pinning_bytes": 312222,
+      "conservative_total_source_read_upper_bound_bytes": 1048576,
+      "trace_body_bytes": 0,
+      "scientific_execution": false
+    },
+    "limits": [
+      "All beams were pruned: no global optimum claim.",
+      "Producer scientific correctness remains prior producer evidence. Runtime source/binary identities are verified from sealed metadata, not rehashed source/binary payloads.",
+      "No beam, scalar, potential, native model, tensor, truth or alignment producer rerun.",
+      "No acceptance/promotion/independence claim.",
+      "Archive bodies will be read only under separate runtime admission."
+    ]
+  },
+  "partial_ready": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/query0-partial-trace-ready/ready.json",
+    "size": 4965,
+    "sha256": "5c2161dc34ef98d5776d6a973e6c423b894ecce42d343208aec7b4ecc388f043"
+  },
+  "report_math_source": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/tools/context_sample_feedback/measure.py",
+    "size": 11011,
+    "sha256": "87982ddbee842195794e0724a089540c5ce4f36eae5d216216fb919e7ac80e1d"
+  },
+  "new_scientific_producer_execution_permitted": false,
+  "source63_immutable": true,
+  "report_input_paths": [
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-reuse-population-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-observe-all-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-disabled_edits-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-historical_free-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-sample-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-combined-1",
+    "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-wrong_source_control-1"
+  ],
+  "report_existing_inputs": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-observe-all-1/execution-complete.json",
+      "size": 4648,
+      "sha256": "91c0d55641168a29c8c43084b1f09c93c0669378a3a751d6244812660b15e51a"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-disabled_edits-1/execution-complete.json",
+      "size": 4733,
+      "sha256": "abb7c314f4d68084f8958b19d71a21270653503183ae25d229fa52932a41bc66"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-historical_free-1/execution-complete.json",
+      "size": 4832,
+      "sha256": "0a6cc939be28d935f6899859fb732b1748ee07454d1d9eda93feacb6b1bf6698"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-sample-1/execution-complete.json",
+      "size": 4697,
+      "sha256": "a15a51b95627e67494901658aee9c7a51e83072abb65de693bb33623500b7f4d"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-combined-1/execution-complete.json",
+      "size": 4727,
+      "sha256": "bafdb77008cc750c6d0624728b1f3a8fb3c19be4b911caebcf66efd897b05111"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-measure-all-wrong_source_control-1/execution-complete.json",
+      "size": 4907,
+      "sha256": "27b30610c48712ae383bb3ea4cc50ff16cbec8da0f7343845a65ed9379799e6d"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  "CMakeLists.txt", ".clang-format", "verify_formatter.cmake", "source-files.json", "engine-files.json", "README.md",
+  "include/context_sample_feedback/sample.h", "include/context_sample_feedback/runtime.h",
+  "src/sample.cpp", "src/source.cpp", "src/runtime.cpp", "src/main.cpp", "src/evaluate.cpp", "tests/main.cpp", "tests/controls.cpp",
+  "boundary.py", "observe.py", "measure.py", "../../scripts/context-sample-feedback.py",
+  "../../scripts/context-feedback.py", "../../scripts/record-command.sh", "../context_decoder/context_inputs.py",
+  "../context_decoder/process_guard.py", "../context_decoder/process_supervisor.py", "../context_decoder/evidence.py",
+  "../../config/context-sample-feedback-v1.json", "../../tests/test_context_sample_feedback.py",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/observe.py",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v5/tools/context_decoder/model_measure.py",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/include/context_decoder/decoder.h",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/include/context_decoder/io.h",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/include/context_decoder/controls.h",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/include/context_decoder/guarded.h",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/include/context_decoder/guarded_io.h",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/src/decoder.cpp",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/src/io.cpp",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/src/json.cpp",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/src/guarded.cpp",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/src/guarded_io.cpp",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/tests/controls.cpp",
+  "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/tests/guarded_controls.cpp"
+]

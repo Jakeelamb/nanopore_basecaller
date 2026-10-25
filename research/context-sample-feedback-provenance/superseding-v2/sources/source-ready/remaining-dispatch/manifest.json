@@ -1,0 +1,2218 @@
+{
+  "block_size": 32,
+  "blocks": [
+    {
+      "case_ids": [
+        "ordinary/32/ordinary",
+        "ordinary/34/ordinary",
+        "ordinary/35/ordinary",
+        "ordinary/36/ordinary",
+        "ordinary/37/ordinary",
+        "ordinary/38/ordinary",
+        "ordinary/39/ordinary",
+        "ordinary/40/ordinary",
+        "ordinary/41/ordinary",
+        "ordinary/42/ordinary",
+        "ordinary/43/ordinary",
+        "ordinary/45/ordinary",
+        "ordinary/46/ordinary",
+        "ordinary/47/ordinary",
+        "ordinary/48/ordinary",
+        "ordinary/49/ordinary",
+        "ordinary/53/ordinary",
+        "ordinary/55/ordinary",
+        "ordinary/57/ordinary",
+        "ordinary/59/ordinary",
+        "ordinary/60/ordinary",
+        "ordinary/61/ordinary",
+        "ordinary/62/ordinary",
+        "ordinary/63/ordinary",
+        "ordinary/64/ordinary",
+        "ordinary/65/ordinary",
+        "ordinary/66/ordinary",
+        "ordinary/67/ordinary",
+        "ordinary/68/ordinary",
+        "ordinary/71/ordinary",
+        "ordinary/72/ordinary",
+        "ordinary/74/ordinary"
+      ],
+      "count": 32,
+      "end": 32,
+      "id": 1,
+      "start": 0
+    },
+    {
+      "case_ids": [
+        "ordinary/76/ordinary",
+        "ordinary/77/ordinary",
+        "ordinary/78/ordinary",
+        "ordinary/80/ordinary",
+        "ordinary/81/ordinary",
+        "ordinary/82/ordinary",
+        "ordinary/84/ordinary",
+        "ordinary/85/ordinary",
+        "ordinary/88/ordinary",
+        "ordinary/89/ordinary",
+        "ordinary/90/ordinary",
+        "ordinary/92/ordinary",
+        "ordinary/93/ordinary",
+        "ordinary/95/ordinary",
+        "ordinary/96/ordinary",
+        "ordinary/97/ordinary",
+        "ordinary/99/ordinary",
+        "ordinary/100/ordinary",
+        "ordinary/101/ordinary",
+        "ordinary/102/ordinary",
+        "ordinary/103/ordinary",
+        "ordinary/104/ordinary",
+        "ordinary/105/ordinary",
+        "ordinary/106/ordinary",
+        "ordinary/107/ordinary",
+        "ordinary/108/ordinary",
+        "ordinary/109/ordinary",
+        "ordinary/111/ordinary",
+        "ordinary/112/ordinary",
+        "ordinary/114/ordinary",
+        "ordinary/116/ordinary",
+        "ordinary/117/ordinary"
+      ],
+      "count": 32,
+      "end": 64,
+      "id": 2,
+      "start": 32
+    },
+    {
+      "case_ids": [
+        "ordinary/119/ordinary",
+        "ordinary/121/ordinary",
+        "ordinary/122/ordinary",
+        "ordinary/125/ordinary",
+        "ordinary/126/ordinary",
+        "ordinary/127/ordinary",
+        "ordinary/128/ordinary",
+        "ordinary/129/ordinary",
+        "ordinary/130/ordinary",
+        "ordinary/131/ordinary",
+        "ordinary/132/ordinary",
+        "ordinary/136/ordinary",
+        "ordinary/138/ordinary",
+        "ordinary/139/ordinary",
+        "ordinary/140/ordinary",
+        "ordinary/141/ordinary",
+        "ordinary/144/ordinary",
+        "ordinary/145/ordinary",
+        "ordinary/147/ordinary",
+        "ordinary/148/ordinary",
+        "ordinary/149/ordinary",
+        "ordinary/150/ordinary",
+        "ordinary/153/ordinary",
+        "ordinary/156/ordinary",
+        "ordinary/157/ordinary",
+        "ordinary/158/ordinary",
+        "ordinary/159/ordinary",
+        "ordinary/160/ordinary",
+        "ordinary/161/ordinary",
+        "ordinary/162/ordinary",
+        "ordinary/163/ordinary",
+        "ordinary/164/ordinary"
+      ],
+      "count": 32,
+      "end": 96,
+      "id": 3,
+      "start": 64
+    },
+    {
+      "case_ids": [
+        "ordinary/165/ordinary",
+        "ordinary/167/ordinary",
+        "ordinary/168/ordinary",
+        "ordinary/169/ordinary",
+        "ordinary/170/ordinary",
+        "ordinary/171/ordinary",
+        "ordinary/172/ordinary",
+        "ordinary/173/ordinary",
+        "ordinary/174/ordinary",
+        "ordinary/175/ordinary",
+        "ordinary/176/ordinary",
+        "ordinary/177/ordinary",
+        "ordinary/178/ordinary",
+        "ordinary/179/ordinary",
+        "ordinary/180/ordinary",
+        "ordinary/181/ordinary",
+        "ordinary/184/ordinary",
+        "ordinary/185/ordinary",
+        "ordinary/186/ordinary",
+        "ordinary/187/ordinary",
+        "ordinary/188/ordinary",
+        "ordinary/189/ordinary",
+        "ordinary/190/ordinary",
+        "ordinary/191/ordinary",
+        "ordinary/192/ordinary",
+        "ordinary/193/ordinary",
+        "ordinary/194/ordinary",
+        "ordinary/195/ordinary",
+        "ordinary/197/ordinary",
+        "ordinary/198/ordinary",
+        "ordinary/200/ordinary",
+        "ordinary/201/ordinary"
+      ],
+      "count": 32,
+      "end": 128,
+      "id": 4,
+      "start": 96
+    },
+    {
+      "case_ids": [
+        "ordinary/202/ordinary",
+        "ordinary/204/ordinary",
+        "ordinary/206/ordinary",
+        "ordinary/208/ordinary",
+        "ordinary/211/ordinary",
+        "ordinary/212/ordinary",
+        "ordinary/213/ordinary",
+        "ordinary/215/ordinary",
+        "ordinary/217/ordinary",
+        "ordinary/218/ordinary",
+        "ordinary/219/ordinary",
+        "ordinary/220/ordinary",
+        "ordinary/221/ordinary",
+        "ordinary/223/ordinary",
+        "ordinary/224/ordinary",
+        "ordinary/227/ordinary",
+        "ordinary/228/ordinary",
+        "ordinary/229/ordinary",
+        "ordinary/230/ordinary",
+        "ordinary/231/ordinary",
+        "ordinary/232/ordinary",
+        "ordinary/233/ordinary",
+        "ordinary/234/ordinary",
+        "ordinary/235/ordinary",
+        "ordinary/237/ordinary",
+        "ordinary/238/ordinary",
+        "ordinary/239/ordinary",
+        "ordinary/240/ordinary",
+        "ordinary/241/ordinary",
+        "ordinary/242/ordinary",
+        "ordinary/243/ordinary",
+        "ordinary/246/ordinary"
+      ],
+      "count": 32,
+      "end": 160,
+      "id": 5,
+      "start": 128
+    },
+    {
+      "case_ids": [
+        "ordinary/248/ordinary",
+        "ordinary/250/ordinary",
+        "ordinary/251/ordinary",
+        "ordinary/252/ordinary",
+        "ordinary/256/ordinary",
+        "ordinary/258/ordinary",
+        "ordinary/259/ordinary",
+        "ordinary/261/ordinary",
+        "ordinary/263/ordinary",
+        "ordinary/264/ordinary",
+        "ordinary/266/ordinary",
+        "ordinary/269/ordinary",
+        "ordinary/270/ordinary",
+        "ordinary/271/ordinary",
+        "ordinary/272/ordinary",
+        "ordinary/274/ordinary",
+        "ordinary/275/ordinary",
+        "ordinary/285/ordinary",
+        "ordinary/287/ordinary",
+        "ordinary/288/ordinary",
+        "ordinary/289/ordinary",
+        "ordinary/290/ordinary",
+        "ordinary/292/ordinary",
+        "ordinary/294/ordinary",
+        "ordinary/296/ordinary",
+        "ordinary/297/ordinary",
+        "ordinary/298/ordinary",
+        "ordinary/300/ordinary",
+        "ordinary/301/ordinary",
+        "ordinary/302/ordinary",
+        "ordinary/306/ordinary",
+        "ordinary/307/ordinary"
+      ],
+      "count": 32,
+      "end": 192,
+      "id": 6,
+      "start": 160
+    },
+    {
+      "case_ids": [
+        "ordinary/310/ordinary",
+        "ordinary/311/ordinary",
+        "ordinary/312/ordinary",
+        "ordinary/314/ordinary",
+        "ordinary/316/ordinary",
+        "ordinary/317/ordinary",
+        "ordinary/318/ordinary",
+        "ordinary/319/ordinary",
+        "ordinary/320/ordinary",
+        "ordinary/322/ordinary",
+        "ordinary/323/ordinary",
+        "ordinary/324/ordinary",
+        "ordinary/325/ordinary",
+        "ordinary/327/ordinary",
+        "ordinary/330/ordinary",
+        "ordinary/331/ordinary",
+        "ordinary/332/ordinary",
+        "ordinary/333/ordinary",
+        "ordinary/334/ordinary",
+        "ordinary/335/ordinary",
+        "ordinary/338/ordinary",
+        "ordinary/340/ordinary",
+        "ordinary/342/ordinary",
+        "ordinary/343/ordinary",
+        "ordinary/344/ordinary",
+        "ordinary/346/ordinary",
+        "ordinary/348/ordinary",
+        "ordinary/349/ordinary",
+        "ordinary/350/ordinary",
+        "ordinary/351/ordinary",
+        "ordinary/353/ordinary",
+        "ordinary/354/ordinary"
+      ],
+      "count": 32,
+      "end": 224,
+      "id": 7,
+      "start": 192
+    },
+    {
+      "case_ids": [
+        "ordinary/355/ordinary",
+        "ordinary/356/ordinary",
+        "ordinary/357/ordinary",
+        "ordinary/359/ordinary",
+        "ordinary/360/ordinary",
+        "ordinary/361/ordinary",
+        "ordinary/362/ordinary",
+        "ordinary/363/ordinary",
+        "ordinary/364/ordinary",
+        "ordinary/366/ordinary",
+        "ordinary/368/ordinary",
+        "ordinary/369/ordinary",
+        "ordinary/370/ordinary",
+        "ordinary/371/ordinary",
+        "ordinary/372/ordinary",
+        "ordinary/377/ordinary",
+        "ordinary/378/ordinary",
+        "ordinary/380/ordinary",
+        "ordinary/381/ordinary",
+        "ordinary/383/ordinary",
+        "ordinary/385/ordinary",
+        "ordinary/387/ordinary",
+        "ordinary/388/ordinary",
+        "ordinary/389/ordinary",
+        "ordinary/390/ordinary",
+        "ordinary/391/ordinary",
+        "ordinary/397/ordinary",
+        "ordinary/398/ordinary",
+        "ordinary/399/ordinary",
+        "ordinary/400/ordinary",
+        "ordinary/401/ordinary",
+        "ordinary/402/ordinary"
+      ],
+      "count": 32,
+      "end": 256,
+      "id": 8,
+      "start": 224
+    },
+    {
+      "case_ids": [
+        "ordinary/403/ordinary",
+        "ordinary/404/ordinary",
+        "ordinary/405/ordinary",
+        "ordinary/406/ordinary",
+        "ordinary/407/ordinary",
+        "ordinary/410/ordinary",
+        "ordinary/411/ordinary",
+        "ordinary/414/ordinary",
+        "ordinary/415/ordinary",
+        "ordinary/416/ordinary",
+        "ordinary/417/ordinary",
+        "ordinary/418/ordinary",
+        "ordinary/419/ordinary",
+        "ordinary/420/ordinary",
+        "ordinary/423/ordinary",
+        "ordinary/426/ordinary",
+        "ordinary/427/ordinary",
+        "ordinary/428/ordinary",
+        "ordinary/429/ordinary",
+        "ordinary/430/ordinary",
+        "ordinary/431/ordinary",
+        "ordinary/432/ordinary",
+        "ordinary/433/ordinary",
+        "ordinary/434/ordinary",
+        "ordinary/435/ordinary",
+        "ordinary/436/ordinary",
+        "ordinary/438/ordinary",
+        "ordinary/439/ordinary",
+        "ordinary/441/ordinary",
+        "ordinary/442/ordinary",
+        "ordinary/443/ordinary",
+        "ordinary/445/ordinary"
+      ],
+      "count": 32,
+      "end": 288,
+      "id": 9,
+      "start": 256
+    },
+    {
+      "case_ids": [
+        "ordinary/448/ordinary",
+        "private/0/ordinary",
+        "private/0/withheld",
+        "private/1/ordinary",
+        "private/1/withheld",
+        "private/2/ordinary",
+        "private/2/withheld",
+        "private/4/ordinary",
+        "private/4/withheld",
+        "private/6/ordinary",
+        "private/6/withheld",
+        "private/7/ordinary",
+        "private/7/withheld",
+        "private/9/ordinary",
+        "private/9/withheld",
+        "private/10/ordinary",
+        "private/10/withheld",
+        "private/11/ordinary",
+        "private/11/withheld",
+        "private/12/ordinary",
+        "private/12/withheld",
+        "private/13/ordinary",
+        "private/13/withheld",
+        "private/14/ordinary",
+        "private/14/withheld",
+        "private/15/ordinary",
+        "private/15/withheld",
+        "private/17/ordinary",
+        "private/17/withheld",
+        "private/18/ordinary",
+        "private/18/withheld",
+        "private/19/ordinary"
+      ],
+      "count": 32,
+      "end": 320,
+      "id": 10,
+      "start": 288
+    },
+    {
+      "case_ids": [
+        "private/19/withheld",
+        "private/20/ordinary",
+        "private/21/ordinary",
+        "private/21/withheld",
+        "private/22/ordinary",
+        "private/22/withheld",
+        "private/24/ordinary",
+        "private/24/withheld",
+        "private/25/ordinary",
+        "private/25/withheld",
+        "private/26/ordinary",
+        "private/30/ordinary",
+        "private/31/ordinary",
+        "private/32/ordinary",
+        "private/32/withheld",
+        "private/33/ordinary",
+        "private/34/ordinary",
+        "private/34/withheld",
+        "private/36/ordinary",
+        "private/36/withheld",
+        "private/37/ordinary",
+        "private/37/withheld",
+        "private/38/ordinary",
+        "private/38/withheld",
+        "private/39/ordinary",
+        "private/39/withheld"
+      ],
+      "count": 26,
+      "end": 346,
+      "id": 11,
+      "start": 320
+    }
+  ],
+  "canonical_lock_nonblocking": true,
+  "caps": {
+    "address_space_bytes": 8589934592,
+    "cpu_quota": 2,
+    "maximum_growth_bytes": 104857600,
+    "maximum_output_bytes": 4294967296,
+    "maximum_wall_seconds": 300,
+    "memory_bytes": 4294967296,
+    "swap_bytes": 0
+  },
+  "config": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/config/context-sample-feedback-v1.json",
+    "sha256": "be23fcfb3f38f9ad8c686ba9f7f4d4a8571088d1ed08baaa4015fcc43ef1cf15",
+    "size": 4185
+  },
+  "disk_floor_bytes": 32212254720,
+  "first32_checkpoint": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-checkpoint-first32-1/execution-complete.json",
+    "sha256": "04689aab40043d0075c70e4e52c1580e512cc48842f499553b6a91fa4e1c9673",
+    "size": 4785
+  },
+  "keep_all_original_exclusions": true,
+  "no_availability_or_outcome_filter": true,
+  "no_per_block_checkpoint": true,
+  "prepared": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-prepare-1/execution-complete.json",
+    "sha256": "274552e58bf492a150441494e7e6298e7d95ee25ef76a9c2161bd5b7544a64d1",
+    "size": 4378
+  },
+  "proposal": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/remaining-ready-proposal.json",
+    "sha256": "bf8e67988c292944727e92e75755eb43df05b92c057442b50df4451c1bba3ea1",
+    "size": 1135848
+  },
+  "qualification": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-qualify-3/execution-complete.json",
+    "sha256": "9ebecc2b9037459c51d06879ca3a6bde95aff6c03eb1b36d006d516d1609cc47",
+    "size": 4378
+  },
+  "schema": "context-sample-feedback-remaining-dispatch/1",
+  "scope": "remaining",
+  "source_identity": "63daa48719914a01c1b21ec208a1bacd2a4415b390f257798477f0cd786f2dc2",
+  "source_inventory": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/logs/context-sample-feedback/source-ready/source-inventory-post-format-2.json",
+    "sha256": "ca76b31c576334a204236dda8df093eecbd1b68cf7fb1573b7dc9d01d275b335",
+    "size": 21159
+  },
+  "units": [
+    {
+      "case_id": "ordinary/32/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-32-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-32-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/34/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-34-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-34-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/35/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-35-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-35-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/36/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-36-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-36-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/37/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-37-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-37-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/38/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-38-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-38-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/39/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-39-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-39-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/40/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-40-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-40-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/41/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-41-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-41-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/42/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-42-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-42-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/43/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-43-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-43-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/45/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-45-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-45-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/46/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-46-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-46-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/47/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-47-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-47-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/48/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-48-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-48-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/49/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-49-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-49-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/53/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-53-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-53-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/55/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-55-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-55-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/57/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-57-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-57-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/59/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-59-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-59-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/60/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-60-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-60-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/61/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-61-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-61-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/62/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-62-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-62-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/63/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-63-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-63-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/64/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-64-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-64-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/65/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-65-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-65-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/66/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-66-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-66-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/67/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-67-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-67-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/68/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-68-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-68-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/71/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-71-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-71-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/72/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-72-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-72-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/74/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-74-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-74-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/76/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-76-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-76-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/77/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-77-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-77-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/78/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-78-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-78-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/80/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-80-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-80-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/81/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-81-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-81-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/82/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-82-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-82-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/84/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-84-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-84-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/85/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-85-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-85-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/88/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-88-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-88-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/89/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-89-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-89-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/90/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-90-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-90-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/92/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-92-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-92-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/93/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-93-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-93-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/95/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-95-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-95-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/96/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-96-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-96-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/97/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-97-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-97-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/99/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-99-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-99-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/100/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-100-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-100-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/101/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-101-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-101-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/102/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-102-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-102-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/103/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-103-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-103-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/104/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-104-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-104-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/105/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-105-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-105-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/106/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-106-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-106-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/107/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-107-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-107-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/108/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-108-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-108-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/109/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-109-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-109-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/111/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-111-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-111-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/112/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-112-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-112-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/114/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-114-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-114-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/116/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-116-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-116-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/117/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-117-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-117-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/119/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-119-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-119-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/121/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-121-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-121-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/122/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-122-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-122-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/125/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-125-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-125-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/126/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-126-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-126-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/127/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-127-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-127-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/128/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-128-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-128-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/129/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-129-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-129-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/130/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-130-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-130-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/131/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-131-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-131-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/132/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-132-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-132-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/136/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-136-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-136-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/138/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-138-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-138-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/139/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-139-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-139-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/140/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-140-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-140-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/141/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-141-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-141-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/144/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-144-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-144-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/145/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-145-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-145-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/147/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-147-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-147-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/148/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-148-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-148-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/149/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-149-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-149-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/150/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-150-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-150-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/153/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-153-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-153-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/156/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-156-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-156-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/157/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-157-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-157-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/158/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-158-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-158-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/159/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-159-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-159-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/160/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-160-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-160-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/161/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-161-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-161-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/162/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-162-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-162-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/163/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-163-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-163-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/164/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-164-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-164-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/165/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-165-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-165-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/167/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-167-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-167-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/168/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-168-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-168-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/169/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-169-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-169-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/170/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-170-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-170-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/171/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-171-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-171-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/172/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-172-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-172-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/173/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-173-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-173-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/174/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-174-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-174-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/175/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-175-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-175-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/176/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-176-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-176-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/177/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-177-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-177-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/178/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-178-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-178-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/179/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-179-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-179-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/180/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-180-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-180-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/181/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-181-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-181-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/184/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-184-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-184-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/185/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-185-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-185-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/186/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-186-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-186-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/187/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-187-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-187-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/188/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-188-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-188-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/189/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-189-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-189-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/190/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-190-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-190-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/191/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-191-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-191-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/192/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-192-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-192-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/193/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-193-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-193-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/194/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-194-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-194-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/195/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-195-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-195-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/197/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-197-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-197-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/198/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-198-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-198-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/200/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-200-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-200-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/201/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-201-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-201-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/202/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-202-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-202-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/204/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-204-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-204-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/206/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-206-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-206-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/208/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-208-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-208-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/211/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-211-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-211-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/212/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-212-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-212-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/213/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-213-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-213-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/215/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-215-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-215-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/217/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-217-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-217-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/218/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-218-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-218-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/219/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-219-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-219-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/220/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-220-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-220-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/221/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-221-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-221-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/223/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-223-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-223-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/224/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-224-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-224-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/227/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-227-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-227-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/228/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-228-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-228-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/229/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-229-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-229-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/230/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-230-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-230-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/231/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-231-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-231-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/232/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-232-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-232-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/233/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-233-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-233-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/234/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-234-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-234-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/235/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-235-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-235-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/237/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-237-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-237-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/238/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-238-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-238-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/239/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-239-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-239-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/240/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-240-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-240-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/241/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-241-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-241-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/242/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-242-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-242-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/243/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-243-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-243-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/246/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-246-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-246-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/248/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-248-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-248-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/250/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-250-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-250-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/251/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-251-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-251-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/252/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-252-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-252-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/256/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-256-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-256-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/258/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-258-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-258-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/259/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-259-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-259-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/261/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-261-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-261-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/263/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-263-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-263-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/264/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-264-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-264-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/266/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-266-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-266-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/269/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-269-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-269-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/270/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-270-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-270-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/271/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-271-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-271-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/272/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-272-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-272-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/274/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-274-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-274-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/275/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-275-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-275-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/285/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-285-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-285-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/287/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-287-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-287-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/288/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-288-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-288-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/289/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-289-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-289-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/290/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-290-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-290-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/292/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-292-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-292-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/294/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-294-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-294-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/296/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-296-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-296-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/297/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-297-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-297-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/298/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-298-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-298-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/300/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-300-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-300-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/301/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-301-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-301-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/302/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-302-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-302-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/306/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-306-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-306-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/307/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-307-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-307-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/310/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-310-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-310-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/311/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-311-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-311-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/312/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-312-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-312-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/314/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-314-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-314-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/316/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-316-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-316-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/317/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-317-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-317-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/318/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-318-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-318-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/319/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-319-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-319-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/320/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-320-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-320-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/322/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-322-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-322-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/323/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-323-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-323-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/324/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-324-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-324-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/325/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-325-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-325-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/327/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-327-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-327-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/330/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-330-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-330-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/331/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-331-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-331-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/332/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-332-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-332-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/333/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-333-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-333-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/334/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-334-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-334-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/335/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-335-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-335-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/338/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-338-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-338-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/340/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-340-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-340-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/342/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-342-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-342-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/343/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-343-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-343-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/344/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-344-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-344-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/346/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-346-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-346-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/348/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-348-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-348-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/349/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-349-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-349-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/350/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-350-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-350-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/351/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-351-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-351-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/353/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-353-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-353-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/354/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-354-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-354-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/355/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-355-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-355-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/356/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-356-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-356-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/357/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-357-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-357-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/359/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-359-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-359-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/360/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-360-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-360-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/361/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-361-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-361-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/362/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-362-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-362-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/363/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-363-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-363-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/364/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-364-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-364-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/366/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-366-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-366-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/368/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-368-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-368-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/369/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-369-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-369-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/370/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-370-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-370-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/371/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-371-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-371-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/372/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-372-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-372-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/377/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-377-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-377-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/378/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-378-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-378-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/380/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-380-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-380-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/381/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-381-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-381-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/383/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-383-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-383-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/385/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-385-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-385-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/387/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-387-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-387-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/388/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-388-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-388-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/389/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-389-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-389-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/390/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-390-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-390-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/391/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-391-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-391-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/397/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-397-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-397-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/398/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-398-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-398-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/399/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-399-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-399-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/400/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-400-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-400-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/401/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-401-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-401-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/402/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-402-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-402-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/403/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-403-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-403-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/404/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-404-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-404-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/405/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-405-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-405-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/406/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-406-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-406-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/407/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-407-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-407-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/410/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-410-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-410-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/411/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-411-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-411-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/414/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-414-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-414-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/415/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-415-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-415-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/416/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-416-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-416-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/417/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-417-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-417-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/418/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-418-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-418-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/419/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-419-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-419-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/420/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-420-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-420-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/423/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-423-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-423-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/426/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-426-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-426-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/427/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-427-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-427-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/428/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-428-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-428-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/429/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-429-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-429-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/430/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-430-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-430-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/431/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-431-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-431-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/432/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-432-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-432-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/433/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-433-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-433-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/434/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-434-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-434-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/435/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-435-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-435-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/436/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-436-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-436-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/438/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-438-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-438-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/439/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-439-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-439-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/441/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-441-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-441-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/442/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-442-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-442-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/443/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-443-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-443-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/445/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-445-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-445-ordinary-1"
+    },
+    {
+      "case_id": "ordinary/448/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-ordinary-448-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-ordinary-448-ordinary-1"
+    },
+    {
+      "case_id": "private/0/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-0-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-0-ordinary-1"
+    },
+    {
+      "case_id": "private/0/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-0-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-0-withheld-1"
+    },
+    {
+      "case_id": "private/1/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-1-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-1-ordinary-1"
+    },
+    {
+      "case_id": "private/1/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-1-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-1-withheld-1"
+    },
+    {
+      "case_id": "private/2/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-2-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-2-ordinary-1"
+    },
+    {
+      "case_id": "private/2/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-2-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-2-withheld-1"
+    },
+    {
+      "case_id": "private/4/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-4-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-4-ordinary-1"
+    },
+    {
+      "case_id": "private/4/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-4-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-4-withheld-1"
+    },
+    {
+      "case_id": "private/6/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-6-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-6-ordinary-1"
+    },
+    {
+      "case_id": "private/6/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-6-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-6-withheld-1"
+    },
+    {
+      "case_id": "private/7/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-7-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-7-ordinary-1"
+    },
+    {
+      "case_id": "private/7/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-7-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-7-withheld-1"
+    },
+    {
+      "case_id": "private/9/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-9-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-9-ordinary-1"
+    },
+    {
+      "case_id": "private/9/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-9-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-9-withheld-1"
+    },
+    {
+      "case_id": "private/10/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-10-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-10-ordinary-1"
+    },
+    {
+      "case_id": "private/10/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-10-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-10-withheld-1"
+    },
+    {
+      "case_id": "private/11/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-11-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-11-ordinary-1"
+    },
+    {
+      "case_id": "private/11/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-11-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-11-withheld-1"
+    },
+    {
+      "case_id": "private/12/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-12-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-12-ordinary-1"
+    },
+    {
+      "case_id": "private/12/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-12-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-12-withheld-1"
+    },
+    {
+      "case_id": "private/13/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-13-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-13-ordinary-1"
+    },
+    {
+      "case_id": "private/13/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-13-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-13-withheld-1"
+    },
+    {
+      "case_id": "private/14/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-14-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-14-ordinary-1"
+    },
+    {
+      "case_id": "private/14/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-14-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-14-withheld-1"
+    },
+    {
+      "case_id": "private/15/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-15-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-15-ordinary-1"
+    },
+    {
+      "case_id": "private/15/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-15-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-15-withheld-1"
+    },
+    {
+      "case_id": "private/17/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-17-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-17-ordinary-1"
+    },
+    {
+      "case_id": "private/17/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-17-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-17-withheld-1"
+    },
+    {
+      "case_id": "private/18/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-18-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-18-ordinary-1"
+    },
+    {
+      "case_id": "private/18/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-18-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-18-withheld-1"
+    },
+    {
+      "case_id": "private/19/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-19-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-19-ordinary-1"
+    },
+    {
+      "case_id": "private/19/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-19-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-19-withheld-1"
+    },
+    {
+      "case_id": "private/20/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-20-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-20-ordinary-1"
+    },
+    {
+      "case_id": "private/21/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-21-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-21-ordinary-1"
+    },
+    {
+      "case_id": "private/21/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-21-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-21-withheld-1"
+    },
+    {
+      "case_id": "private/22/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-22-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-22-ordinary-1"
+    },
+    {
+      "case_id": "private/22/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-22-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-22-withheld-1"
+    },
+    {
+      "case_id": "private/24/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-24-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-24-ordinary-1"
+    },
+    {
+      "case_id": "private/24/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-24-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-24-withheld-1"
+    },
+    {
+      "case_id": "private/25/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-25-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-25-ordinary-1"
+    },
+    {
+      "case_id": "private/25/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-25-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-25-withheld-1"
+    },
+    {
+      "case_id": "private/26/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-26-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-26-ordinary-1"
+    },
+    {
+      "case_id": "private/30/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-30-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-30-ordinary-1"
+    },
+    {
+      "case_id": "private/31/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-31-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-31-ordinary-1"
+    },
+    {
+      "case_id": "private/32/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-32-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-32-ordinary-1"
+    },
+    {
+      "case_id": "private/32/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-32-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-32-withheld-1"
+    },
+    {
+      "case_id": "private/33/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-33-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-33-ordinary-1"
+    },
+    {
+      "case_id": "private/34/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-34-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-34-ordinary-1"
+    },
+    {
+      "case_id": "private/34/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-34-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-34-withheld-1"
+    },
+    {
+      "case_id": "private/36/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-36-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-36-ordinary-1"
+    },
+    {
+      "case_id": "private/36/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-36-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-36-withheld-1"
+    },
+    {
+      "case_id": "private/37/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-37-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-37-ordinary-1"
+    },
+    {
+      "case_id": "private/37/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-37-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-37-withheld-1"
+    },
+    {
+      "case_id": "private/38/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-38-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-38-ordinary-1"
+    },
+    {
+      "case_id": "private/38/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-38-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-38-withheld-1"
+    },
+    {
+      "case_id": "private/39/ordinary",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-39-ordinary-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-39-ordinary-1"
+    },
+    {
+      "case_id": "private/39/withheld",
+      "infer_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-remaining-private-39-withheld-1",
+      "price_output": "/home/jake/Projects/nanopore_basecaller-context-feedback-sample/results/context-sample-feedback/sample-price-remaining-private-39-withheld-1"
+    }
+  ]
+}
