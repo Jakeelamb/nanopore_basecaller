@@ -1,0 +1,119 @@
+{
+  "controller": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/program/run-measure-bounded.py",
+    "sha256": "e5d6812d89617f8023b753f26d8f6b1fba193a28a6c9b93fe58acdcf6316be82",
+    "size": 18524
+  },
+  "evidence": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final.md",
+      "sha256": "e62a197828a2e04343b4d7e430a969c773e08f73f798e693a015ff67fe336233",
+      "size": 12484
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-verdict.json",
+      "sha256": "37f6d22310c7901d1236c171b37d116df6d63752a4985d8cc81a2daa12e5c8af",
+      "size": 47262
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-extra-receipt.json",
+      "sha256": "3a9195a36862a45080a9f5811a5f400f661346317dfc2c54feb8dacda8874d13",
+      "size": 14588
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-audit-failures.json",
+      "sha256": "df9696bff3a26e6f798af36490db2906e3112db601d378d20d67660d2ea4bb3e",
+      "size": 2122
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-audit.py",
+      "sha256": "62f3fb972252b609dc74ac8cf3559ec4adf4a48d1b9e50fc6583ca5668482976",
+      "size": 25265
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-audit-attempt-1.py",
+      "sha256": "db2f7863a227093c225ef2e8fbe12c3d6f97383d1f5d60af4863efdedfb77bb5",
+      "size": 22721
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-completion-attempt-1.py",
+      "sha256": "1367473f31b72c53643137b40b42ccb514dea748e0b0dc78856c941f6fbce9f2",
+      "size": 13247
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-completion-attempt-2.py",
+      "sha256": "75fc301aafdad656cf7a262a57331005f510efc55b465acf7b8aeb0f09244d69",
+      "size": 12833
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-seal-check.py",
+      "sha256": "2cdf864766a2b183f317997ddf5efd3513f327cf2230ac03d2c06658a3c78e33",
+      "size": 9366
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-last-receipts.py",
+      "sha256": "9b39100b16e33d2349fa760cb175518d3541363db3519a7f00c1bbfbae1874e0",
+      "size": 4213
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-package.py",
+      "sha256": "6f32a75187f221b3d5fa3776d9ac47fe147488a767b99245ae8b4b782558825a",
+      "size": 15022
+    }
+  ],
+  "main_snapshot": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/reviews/runtime-final-snapshot.json",
+    "sha256": "ddac136b95460459a9ef86fb0f19d67b0a62d50bb794c77bd65e56b1c21ea8c2",
+    "size": 619844
+  },
+  "measurement": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/results/context-feedback/decision-measure-feasible-1/execution-complete.json",
+    "sha256": "f9fd250779bb702274a81362b242004b4ffb8fb55ec88b90515e49dc288bf397",
+    "size": 3965
+  },
+  "no_promotion": true,
+  "package_actual_read_bytes": 179123,
+  "read_limit_bytes": 104857600,
+  "read_upper_bound_bytes": 104442212,
+  "schema": "independent-final-runtime-evidence-pins/1",
+  "scientific_producers_run": [],
+  "source52": "6357128e0c6c5151001866a1f8e1fe1603807747ed38cd39919c29a42017c6ff",
+  "source55": "8e8607ebe49e9c990605777876f8657b0530138cf4a712c8ca42386103c92a1f",
+  "union": {
+    "all_retained_union_equals_historical_free": true,
+    "binary": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/results/context-feedback/decision-union-qualify-2/build/context-decision-union",
+      "sha256": "fb3c0cb01577798a22c5041604d6f93c4536a3d2af815c5d427f462b9b43e64d",
+      "size": 358224
+    },
+    "cap_empty_flags": 0,
+    "cases": 368,
+    "diagnose": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/results/context-feedback/decision-union-diagnose-1/execution-complete.json",
+      "sha256": "750f2475e0e1d70efd8a59d5f038b61583f177e7f248802e3df7ea9f0c4eac7a",
+      "size": 2384
+    },
+    "formatted_tokens_identical": [
+      "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/tools/context_decision_union/src/main.cpp",
+      "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/tools/context_decision_union/src/union.cpp",
+      "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/tools/context_decision_union/tests/controls.cpp"
+    ],
+    "lock_refusals": [
+      {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/logs/context-decision/program/union-qualify-20261025T032501Z/refused.json",
+        "sha256": "8df191385dab9c70aad968f87678f0171288d501f4d67023eccb071ea4bc59cf",
+        "size": 83
+      }
+    ],
+    "native_controls": 189,
+    "qualify": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-decision/results/context-feedback/decision-union-qualify-2/execution-complete.json",
+      "sha256": "c90866321f4785e7340bfc43fc372289475d3784aa654bf3860529ae705d121d",
+      "size": 2376
+    },
+    "source63": "2d5bc2d87edb398af03015fe36465cc2a613b64af174800ec5b0229b334b20cd",
+    "three_arm_rows": 1104
+  },
+  "utc": "2026-10-25T04:02:06.837523+00:00",
+  "verdict": "PASS_EVIDENCE_FOR_SUBTHRESHOLD_DEVELOPMENT_CANDIDATE"
+}

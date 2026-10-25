@@ -1,0 +1,11 @@
+[
+  "CMakeLists.txt", ".clang-format", "source-files.json", "README.md", "verify_formatter.cmake",
+  "boundary.py", "observe.py",
+  "../context_decoder/context_inputs.py", "../context_decoder/process_guard.py",
+  "../context_decoder/process_supervisor.py", "../context_decoder/evidence.py",
+  "../../scripts/context-feedback.py", "../../scripts/record-command.sh",
+  "include/context_decision/decision.h", "private/context_decision/runtime.h",
+  "src/decision.cpp", "src/runtime.cpp", "src/main.cpp", "tests/controls.cpp", "tests/main.cpp",
+  "../../scripts/context-decision.py", "../../config/context-decision-v1.json",
+  "../../tests/test_context_decision.py", "../../research/context-decision-experiment.md"
+]

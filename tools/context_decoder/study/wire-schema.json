@@ -1,0 +1,51 @@
+{
+  "schema": "context-study-wire/1",
+  "encoding": "ASCII TSV; literal tabs separate fields; LF terminates every record; no quoting or escapes; empty DNA is an empty field; dot denotes an unavailable score",
+  "header": ["SCHEMA", "packet_schema", "manifest_sha256"],
+  "candidate_schema": "context-candidate-case/1",
+  "truth_schema": "context-oracle-truth/1",
+  "candidate_records": {
+    "CASE": ["case_id", "domain", "parent", "contig", "strand", "read_start", "read_end", "owned_start", "owned_end", "ref_start", "ref_end", "core_start", "core_end", "future_bases", "left_guard", "right_guard", "native", "availability", "escape_capped", "conditioned_capped", "escape_empty", "conditioned_empty", "geometry_ancestry_sha256", "geometry_sha256"],
+    "PATH": ["case_id", "sequence"],
+    "REFPATH": ["case_id", "sequence"],
+    "CAND": ["case_id", "sequence", "origins", "log_mass"],
+    "BASE": ["case_id", "role", "sequence", "log_mass", "potential", "objective", "gate", "abstained"]
+  },
+  "truth_records": {
+    "TRUTH": ["case_id", "geometry_sha256", "reference_forward"],
+    "MASK": ["case_id", "name", "begin", "end"],
+    "EVENT": ["case_id", "event_id", "resolved", "reference_window", "event_start", "event_end", "alt_haplotype", "archived_native_forward", "reason"]
+  },
+  "enums": {
+    "domain": ["ordinary", "private-ordinary", "private-withheld"],
+    "strand": ["+", "-"],
+    "availability": ["usable", "missing", "ambiguous", "inconsistent"],
+    "boolean": ["0", "1"],
+    "mask_name": ["100", "500"],
+    "baseline_role": ["native", "reference_free", "final_rerank_winner", "final_rerank", "context_winner", "selected"]
+  },
+  "origins": {"native": 1, "escape": 2, "conditioned": 4, "graph": 8},
+  "geometry_recipe": {
+    "prefix": "context-geometry/1",
+    "case_fields": ["parent", "contig", "strand", "read_start", "read_end", "owned_start", "owned_end", "ref_start", "ref_end", "core_start", "core_end", "future_bases", "left_guard", "right_guard", "native", "geometry_ancestry_sha256"],
+    "serialization": "prefix followed by TAB and each listed CASE field in order, followed by LF; SHA256 of ASCII bytes; integers are canonical unsigned decimal"
+  },
+  "semantics": {
+    "coordinates": "all spans half open; read and owned spans are native-parent coordinates; reference and core spans are genomic-forward; reference includes complete future guard; core is fixed independently of candidate length",
+    "geometry_ancestry": "SHA256 of canonical sorted compact JSON bound in manifest, containing immutable native parent pin, initial_context/state, chunk, tensor pin and expanded timestep interval; excludes context-mode-specific frame and paths",
+    "reference_paths": "REFPATH is a subset of PATH, projected from graph walks independently marked is_reference, with custody in manifest; never populated from truth fragments",
+    "event_coordinates": "event_start and event_end are offsets in reference_window; the exact REF haplotype is its slice; archived_native_forward equals oriented(left_guard + native + right_guard without future_bases)",
+    "score": "finite retained guarded log mass or dot; unscored candidate must be graph-only; graph-only is never historical inference eligible even if finite",
+    "duplicates": "candidate sequence duplicates merge origin bits only when score presence and finite log mass are identical; conflicting duplicates reject; PATH duplicates deduplicate",
+    "baseline": "exactly six roles per CASE; saved top-level choices and gates; numeric replay absolute tolerance 1e-11; sequence, gate, abstention exact",
+    "ordering": "CASE precedes its PATH/CAND/BASE; TRUTH precedes its MASK/EVENT; all CASE records require unique case_id; truth has exactly the same case_id set",
+    "masks": "zero or more sorted, disjoint MASK intervals per name; clipped by evaluator to fixed core; missing name means empty exposure",
+    "events": "zero or more EVENT records; resolved=0 retains archive ambiguity and its nonempty reason; no allele call is made from an unresolved archive"
+  },
+  "limits": {"packet_bytes": 134217728, "cases": 1024, "candidates_per_case": 4096, "paths_per_case": 32, "dna_bases": 4096, "alignment_cells": 4194304},
+  "cli": {
+    "qualify": "context-atlas qualify --output NEWDIR",
+    "evaluate": "context-atlas evaluate --cases FILE --cases-sha256 SHA --truth FILE --truth-sha256 SHA --output NEWDIR",
+    "infer": "context-infer replay --cases FILE --cases-sha256 SHA --output NEWDIR"
+  }
+}

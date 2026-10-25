@@ -1,0 +1,77 @@
+{
+  "schema": "catalogue-bridge-input/1",
+  "original_cohort": {
+    "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/decision-v2/development-cohort.json",
+    "size": 2770,
+    "sha256": "ac14c13bf51865af3bb9c69ce8266694efa7e7a9e84d17454946ea3febefa814"
+  },
+  "pilot_report": {
+    "path": "/home/jake/Projects/nanopore_basecaller-reference/provenance/verification/graph-prior-v1.json",
+    "size": 492076,
+    "sha256": "e3f008ec03e56a836c6dbb07e5fbf81deae8cb1e2ac45093d88a3306055dc8b5"
+  },
+  "catalogue_completion": {
+    "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/catalogue-v1/full-roundtrip/complete.json",
+    "size": 1116,
+    "sha256": "949ad1b4528f968b77abc5bf2971e53de540ac40bf02c18d96ad094bdd871efc"
+  },
+  "catalogue_attempt": {
+    "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/catalogue-v1/full-roundtrip/attempt.json",
+    "size": 10897,
+    "sha256": "73cefe26873a7981215fb9969bd66a40f6a42a87f8008ef4858d4c97f399a748"
+  },
+  "catalogue_recorder": {
+    "command.sh": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/command.sh",
+      "size": 437,
+      "sha256": "a58cbda6954e3efe7cce333d8574039d5ce2d19950694d16a37b1ed1a440faa1"
+    },
+    "cwd.txt": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/cwd.txt",
+      "size": 50,
+      "sha256": "4969ee9fdf64dcbba9d0d63b74eb5c33b8b000e13023b0957f7343303b7f4ae1"
+    },
+    "end.txt": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/end.txt",
+      "size": 21,
+      "sha256": "0d5309479634a793aed0a82134de62c48a2f459abaabc3a5b4b279e3479f5d03"
+    },
+    "exit-status.txt": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/exit-status.txt",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "start.txt": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/start.txt",
+      "size": 21,
+      "sha256": "5cc09251e6256c1d9957b1528fe8b6ac227bff2dd85813ee84c92924782f7b1f"
+    },
+    "stderr": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/stderr",
+      "size": 1082,
+      "sha256": "fa50948e6b2006d52adc3ccfa96582b76ce43ee0cdf89bc56af2cbc4b0abf55b"
+    },
+    "stdout": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/stdout",
+      "size": 249,
+      "sha256": "b5d75fbe92130d71fb3f831f08d61f7749b1f30c0a459aed0a2c6c55c04b05c5"
+    },
+    "time.txt": {
+      "path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T153558Z-frontier-catalogue-full-roundtrip-UnfjQf/time.txt",
+      "size": 1175,
+      "sha256": "2458f433402f0c7abbd08f80b4f7d5e136b38a11b7ebd93b27d7fe520e5dbae0"
+    }
+  },
+  "catalogue_command": "flock -w 60 /home/jake/Projects/nanopore_basecaller/results/stock/host.lock /usr/bin/time -v tools/frontier_catalogue/target/release/frontier-catalogue catalogue --cohort results/reference-frontier/decision-v2/development-cohort.json --export results/graph-prior/pilot-v1/development/native-export --output results/reference-frontier/catalogue-v1/full-roundtrip --checkpoint results/reference-frontier/catalogue-v1/checkpoint-roundtrip \n",
+  "catalogue_cwd": "/home/jake/Projects/nanopore_basecaller-reference",
+  "checkpoint_completion": {
+    "path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/catalogue-v1/checkpoint-roundtrip/complete.json",
+    "size": 1143,
+    "sha256": "afe659798ff3e4ac08d06a35611771f906ab7e982e01354bec1e6dd2531913d8"
+  },
+  "prerequisites": {
+    "path": "/home/jake/Projects/nanopore_basecaller-retrieval/tools/catalogue_bridge/prerequisites.json",
+    "size": 12813,
+    "sha256": "a9ca33f67fbc0198579aaf236e08df7eeec23ddcb75b037ffc57dc639ad3c2a2"
+  }
+}

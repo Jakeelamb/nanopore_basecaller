@@ -1,0 +1,11 @@
+[
+  "CMakeLists.txt",
+  ".clang-format",
+  "source-files.json",
+  "README.md",
+  "verify_formatter.cmake",
+  "include/context_decision_union/union.h",
+  "src/union.cpp",
+  "src/main.cpp",
+  "tests/controls.cpp"
+]
