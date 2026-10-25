@@ -1,0 +1,17 @@
+[
+  ".clang-format",
+  "CMakeLists.txt",
+  "README.md",
+  "include/sample_context/context.h",
+  "pipeline.py",
+  "source-files.json",
+  "src/context.cpp",
+  "src/main.cpp",
+  "src/runtime.cpp",
+  "tests/controls.cpp",
+  "tests/main.cpp",
+  "tests/test_pipeline.py",
+  "verify_formatter.cmake",
+  "../context_decoder/study/wire-schema.json",
+  "../../research/sample-context-unit.md"
+]

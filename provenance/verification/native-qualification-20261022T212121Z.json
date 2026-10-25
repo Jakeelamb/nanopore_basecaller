@@ -1,0 +1,154 @@
+{
+  "status": "verified",
+  "plan_sha256": "fb6985a6c83e9ae2d340e0df5941883800ebc7b58ee7aead834194cdd1a68f4b",
+  "verifier_sha256": "5b0c5cd0a3fd5869cee3d545a3c4e3b0c4b5eb1dbe73addeb314c548b9233f2e",
+  "control_count": 21,
+  "controls": [
+    {
+      "unit": "smoke-1-hac",
+      "control": "foreign",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-hac",
+      "control": "duplicate",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-hac",
+      "control": "model",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-hac",
+      "control": "truncated",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-hac",
+      "control": "reference",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-hac",
+      "control": "NM",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-hac",
+      "control": "removed-parent",
+      "status": "absence recorded or empty rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "foreign",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "duplicate",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "model",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "truncated",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "reference",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "NM",
+      "status": "rejected"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "control": "removed-parent",
+      "status": "absence recorded or empty rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "foreign",
+      "status": "rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "duplicate",
+      "status": "rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "model",
+      "status": "rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "split-sp",
+      "status": "rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "split-pi",
+      "status": "rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "truncated",
+      "status": "rejected"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "control": "removed-parent",
+      "status": "absence recorded or empty rejected"
+    }
+  ],
+  "native_units": [
+    {
+      "unit": "smoke-1-hac",
+      "status": "verified",
+      "requested_parents": 32,
+      "represented_parents": 32,
+      "children": 32,
+      "split_parents": 0,
+      "complete_work_qualification": "verified",
+      "batch_selection_status": "precomputed_benchmark_unavailable"
+    },
+    {
+      "unit": "smoke-1-sup",
+      "status": "verified",
+      "requested_parents": 32,
+      "represented_parents": 32,
+      "children": 33,
+      "split_parents": 1,
+      "complete_work_qualification": "verified",
+      "batch_selection_status": "precomputed_benchmark_unavailable"
+    },
+    {
+      "unit": "split-fixture-hac",
+      "status": "verified",
+      "requested_parents": 1,
+      "represented_parents": 1,
+      "children": 2,
+      "split_parents": 1,
+      "complete_work_qualification": "verified",
+      "batch_selection_status": "precomputed_benchmark_unavailable"
+    }
+  ],
+  "full_and_timing_runs": "in progress; not established by this qualification",
+  "biological_endpoints": {
+    "biological_base_accuracy": "NOT VERIFIED",
+    "biological_quality_calibration": "NOT VERIFIED",
+    "variant_aware_accuracy": "NOT VERIFIED",
+    "variant_calling_accuracy": "NOT VERIFIED"
+  },
+  "qualification_receipt": "results/stock/stock-20261022/qualification.json",
+  "qualification_receipt_sha256": "bdb4dd6e34af438ef2ac7d0df69be20217253f38e40ebda2f7c0944d85396f24"
+}

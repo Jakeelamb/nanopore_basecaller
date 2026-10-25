@@ -1,0 +1,32 @@
+[
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01/flowcells/HG002/PAW70337/pod5/",
+    "retrieved_utc": "2026-10-22T19:39:22.709109+00:00",
+    "path": "provenance/HG002-PAW70337-pod5-listing.xml"
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01/flowcells/HG002/PAW71238/pod5/",
+    "retrieved_utc": "2026-10-22T19:39:23.339683+00:00",
+    "path": "provenance/HG002-PAW71238-pod5-listing.xml"
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01/flowcells/HG003/PAY87794/pod5/",
+    "retrieved_utc": "2026-10-22T19:39:23.948405+00:00",
+    "path": "provenance/HG003-PAY87794-pod5-listing.xml"
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01/flowcells/HG003/PAY87954/pod5/",
+    "retrieved_utc": "2026-10-22T19:39:24.693572+00:00",
+    "path": "provenance/HG003-PAY87954-pod5-listing.xml"
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01/flowcells/HG005/PAW87816/pod5/",
+    "retrieved_utc": "2026-10-22T19:39:25.206206+00:00",
+    "path": "provenance/HG005-PAW87816-pod5-listing.xml"
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/?list-type=2&prefix=giab_2025.01/flowcells/HG005/PAW88001/pod5/",
+    "retrieved_utc": "2026-10-22T19:39:26.642549+00:00",
+    "path": "provenance/HG005-PAW88001-pod5-listing.xml"
+  }
+]

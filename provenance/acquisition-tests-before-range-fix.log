@@ -1,0 +1,19 @@
+test_fetch_acquires_exact_bytes_and_reports_hashes (test_acquisition.AcquisitionTests.test_fetch_acquires_exact_bytes_and_reports_hashes) ... ok
+test_fetch_rejects_existing_wrong_size_without_downloading (test_acquisition.AcquisitionTests.test_fetch_rejects_existing_wrong_size_without_downloading) ... ok
+test_fetch_rejects_incorrect_content_range_total (test_acquisition.AcquisitionTests.test_fetch_rejects_incorrect_content_range_total) ... FAIL
+test_fetch_rejects_upstream_md5_corruption (test_acquisition.AcquisitionTests.test_fetch_rejects_upstream_md5_corruption) ... ok
+test_recorder_captures_failure_and_propagates_exit_status (test_acquisition.AcquisitionTests.test_recorder_captures_failure_and_propagates_exit_status) ... ok
+test_recorder_captures_success (test_acquisition.AcquisitionTests.test_recorder_captures_success) ... ok
+
+======================================================================
+FAIL: test_fetch_rejects_incorrect_content_range_total (test_acquisition.AcquisitionTests.test_fetch_rejects_incorrect_content_range_total)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jake/Projects/nanopore_basecaller/tests/test_acquisition.py", line 128, in test_fetch_rejects_incorrect_content_range_total
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.507s
+
+FAILED (failures=1)
