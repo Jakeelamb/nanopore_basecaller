@@ -1,0 +1,44 @@
+32c0575b4d71f4e88cf86d5fd7d60233    README_v4.2.1.txt
+
+85533ad71474146e2a4e95f10e559b68  GRCh37/HG005_GRCh37_1_22_v4.2.1_benchmark.bed
+5902ae1c99f4376c8fdced7f641c4ba0     GRCh37/HG005_GRCh37_1_22_v4.2.1_benchmark.vcf.gz
+9cde0bae05dc207c52bead16c3d05227  GRCh37/HG005_GRCh37_1_22_v4.2.1_benchmark.vcf.gz.tbi
+
+3fd3fc35f87c0c2cd2f0173c098b4b14                GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4.2.1_highconf_hifiasm_v11_phasetransfer.vcf.gz
+90de1f1f596267f84931ca857a19048e                GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4.2.1_highconf_hifiasm_v11_phasetransfer.vcf.gz.tbi
+79a1f94e115b5f92dfd3058ab5a66026    GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4_all.vcf.gz
+22e7cb78cbe60aa3c0ed0448b724d7a4  GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4_all.vcf.gz.tbi
+26a53ba3a21f4f66a32971504de4c7cc    GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4_annotated.vcf.gz
+393adf6817959a4fc0dee8d80c02b8d1   GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4_annotated.vcf.gz.tbi
+579647db41ef21113ada27a8b1988ee3                GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4_callablemultinter_gt0.bed
+261d58c24c687a4991d28f5f33fa86ff      GRCh37/SupplementaryFiles/HG005_GRCh37_1_22_v4_filteredsites.bed
+
+313675b9c6f9554eb76fa074de23154d                GRCh37/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh37_1_22_10xGenomics.vcf.gz
+cc662257c5c5bc6e52a1efab1f73f63b                GRCh37/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh37_1_22_10xGenomics_callable.bed
+8fbfbb8f2c93d9e43a6c549873b23076                GRCh37/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh37_1_22_PacBio_HiFi_DeepVariant.vcf.gz
+520a23f67ba7aad94bb07b940b8514ba                GRCh37/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh37_1_22_PacBio_HiFi_DeepVariant_callable.bed
+90a37f1eabb917308d2d96abef0a8a18                GRCh37/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh37_1_22_PacBio_HiFi_GATK4.vcf.gz
+08f2db365d7855c06dea6a6ab7cbb691                GRCh37/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh37_1_22_PacBio_HiFi_GATK4_callable.bed
+
+
+f06ec2339592168a75ad4236b87cb2a3  GRCh38/HG005_GRCh38_1_22_v4.2.1_benchmark.bed
+35fe853b7e8d979daa91033ed6863e98 GRCh38/HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz
+ffd21b44e0bfe4133b4f34fba88ea57e     GRCh38/HG005_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi
+
+05392ce5f0bad9b85f4f690b74cd964a                GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4.2.1_highconf_hifiasm_v11_phasetransfer.vcf.gz
+4788b4fb44cfcfa8fddce8d318d798c0                GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4.2.1_highconf_hifiasm_v11_phasetransfer.vcf.gz.tbi
+7a4508b1ed77fc7feb943610ba43d77b   GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4_all.vcf.gz
+1dea1d8634e894cdb31b350201343c69 GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4_all.vcf.gz.tbi
+64d4deda7e794cf6f0bb5c25c79276b2   GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4_annotated.vcf.gz
+da8436db722d9da3235c02355987558b GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4_annotated.vcf.gz.tbi
+0300d3eb7dbf732346cb3a8fbeb6861a                GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4_callablemultinter_gt0.bed
+c4d60e096a3406546a3c7c4b5fdf0c8b    GRCh38/SupplementaryFiles/HG005_GRCh38_1_22_v4_filteredsites.bed
+
+fdc364c55727c7f7963ed74c52e85870                GRCh38/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh38_1_22_10xGenomics.vcf.gz
+5b2296d30ff1938e6713e528f11c96e2                GRCh38/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh38_1_22_10xGenomics_callable.bed
+35157cb20b88e0f57988d381f35bc57f                GRCh38/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh38_1_22_PacBio_HiFi_DeepVariant.vcf.gz
+5239ab10352b0322c1fb8c28eb530b79                GRCh38/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh38_1_22_PacBio_HiFi_DeepVariant_callable.bed
+6ee90b0b0e3bfe72f24ab2ac752ddb6b                GRCh38/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh38_1_22_PacBio_HiFi_GATK4.vcf.gz
+aa13a0bdbaafe2cb5fdefea77459be91                GRCh38/SupplementaryFiles/inputvcfsandbeds/HG005_GRCh38_1_22_PacBio_HiFi_GATK4_callable.bed
+
+

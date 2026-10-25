@@ -1,0 +1,6 @@
+[project]
+name = "nanopore-basecaller-experiment"
+version = "0.1.0"
+description = "Reproducible inputs and verification for a human nanopore basecaller experiment"
+requires-python = ">=3.12,<3.14"
+dependencies = ["pod5==0.3.49"]

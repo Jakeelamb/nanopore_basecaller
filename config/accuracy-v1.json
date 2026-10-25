@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "endpoint": "GIAB confident reference-identical local-primary accuracy",
+  "sample_identity": "conditional on publisher donor labels; not independently genotyped",
+  "padding_and_confidence_erosion_bp": [100, 500],
+  "primary_padding_bp": 100,
+  "min_mapq": 30,
+  "max_mapq": 254,
+  "alternate_alignments": "score primary only; retain secondary/supplementary and clipping counts",
+  "insertions": "both existing flanks inside the same eligible interval",
+  "deletions": "each eligible reference column; retain boundary-crossing events",
+  "uncertainty": "2000 fixed-seed parent bootstrap replicates; within-pilot technical uncertainty",
+  "selection": "freeze masks before new results; HG005 stock reporting only",
+  "unsupported": ["whole-read diploid accuracy", "variant precision/recall", "population generalization", "vendor training exclusion"],
+  "reference_error_assets": [
+    {
+      "name": "GRCh38_collapsed_duplication_FP_regions.bed.gz",
+      "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/genome-stratifications/v3.5/GRCh38@all/OtherDifficult/GRCh38_collapsed_duplication_FP_regions.bed.gz",
+      "md5": "483cd58b013ff0ffb136e0700e5ee1bb",
+      "sha256": "32b6f04e25afeb12078112a771f76e3f880f3a1d1bb2f454f60c5462644bf8af"
+    },
+    {
+      "name": "GRCh38_false_duplications_correct_copy.bed.gz",
+      "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/genome-stratifications/v3.5/GRCh38@all/OtherDifficult/GRCh38_false_duplications_correct_copy.bed.gz",
+      "md5": "89e87651a0239b892170d7aad942f5fd",
+      "sha256": "44d07f373f6841a99fb85bd712e535e3e1364a033fd37cfd42e9e17988277717"
+    },
+    {
+      "name": "GRCh38_false_duplications_incorrect_copy.bed.gz",
+      "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/genome-stratifications/v3.5/GRCh38@all/OtherDifficult/GRCh38_false_duplications_incorrect_copy.bed.gz",
+      "md5": "24112e2c656aa4b610a8e7d0f9012979",
+      "sha256": "d2de1abe40a76cb1d29dfa5ae4c0a9ae05f2301641721f4a78f6b72c3a0b5bcd"
+    },
+    {
+      "name": "GCA_000001405.15_GRCh38_GRC_exclusions_T2Tv2.bed",
+      "url": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/references/GRCh38/GCA_000001405.15_GRCh38_GRC_exclusions_T2Tv2.bed",
+      "sha256": "4fce8e4cdeee61656c9c75ddce41df7caffb3d20f09c4489e17047a7a12346c5"
+    }
+  ]
+}

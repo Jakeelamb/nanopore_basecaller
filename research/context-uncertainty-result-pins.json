@@ -1,0 +1,98 @@
+{
+  "artifact_audit": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/results/context-feedback/uncertainty-v2-full-audit-1/complete.json",
+    "sha256": "a71bb5e041bdba6c4d6f095f0c36f82a94780e3565e74b42e86ac9729ba3819c",
+    "size": 40611
+  },
+  "biological_qualification": false,
+  "calibrated_error_probability": false,
+  "chunks_qualified": 1557,
+  "coordinate_set_sha256": "d122671e29e4d9c4514eb982404ec627604dbf830a1e5e86141b1bad76da4291",
+  "eligible_chunks": 1242,
+  "eligible_parents": 52,
+  "independent_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/logs/context-feedback-program/reviews/uncertainty-final-runtime.md",
+    "sha256": "942a43759a423324e306bd447b5dff82244f4a9051ec14162a810eefe67f0626",
+    "size": 11973
+  },
+  "local_proposals": 38358,
+  "parents_accounted": 64,
+  "schema": "uncertainty-result-pins/1",
+  "selected_parents": 43,
+  "selected_windows": 512,
+  "source_base": "6a8c23e8a34d37bef76f25c30cc007bf429deae5",
+  "source_guarded_old_attempts_preserved": true,
+  "source_inventory_sha256": "aed1e8b3957ac766d08c6a9719f6ffaf0d55a34dc8c57cd79438e9f0b5cc2f14",
+  "source_pins": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/CMakeLists.txt",
+      "sha256": "53dd83b8bb5cc4a21421b8ec87a4127f0bff06e6fee2e00996b62f8d969671ca",
+      "size": 3850
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/.clang-format",
+      "sha256": "d0ca2be63d1a078b9c836436f907311d7d86c45f21f0cbc0b0d393b604cf8dfe",
+      "size": 152
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/source-files.json",
+      "sha256": "447bd2cd0dafc4c92ca2e38bcaf7ee2a2f3cfbea5e8edc657312003b70971e1d",
+      "size": 361
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/verify_formatter.cmake",
+      "sha256": "f696e13586dce0dc786f8904f6de4c80addba067a337eb845c83d9c74c624902",
+      "size": 128
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/prepare.py",
+      "sha256": "e52887ac03439db363ccb5125e2d471e57b201a13f95dffd93044f9f9c22dafa",
+      "size": 39666
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/README.md",
+      "sha256": "b77dba65e83c9c9cc5bc1e0fcd16d69cc1dac3e5678a1de365ee393b0017732a",
+      "size": 17782
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/include/context_uncertainty/uncertainty.h",
+      "sha256": "22de61148855823e07aff7b0004bee00a6af8a45a9f398dcc105f6d84d5b82fd",
+      "size": 3229
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/src/posterior.cpp",
+      "sha256": "d038b628053824f64472ed67a46d65740f0bc289cbbcc7ce30956b927dfe2cc3",
+      "size": 15262
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/src/runtime.cpp",
+      "sha256": "7e4104b18c096e9faab2833feff51a8ef00450c6b920d1a7210d6585f2c1ce94",
+      "size": 38639
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/src/main.cpp",
+      "sha256": "84ff77f85c98ef661126331d2a741dcadf364d8b1918fc1d13f2764f11aa080d",
+      "size": 2129
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/tests/controls.cpp",
+      "sha256": "f80f10af9667bdd5892ac15d45bf749638b0cdadbdfa4f690560aa5d83ff148f",
+      "size": 19012
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_uncertainty/tests/main.cpp",
+      "sha256": "68e11e1eeeeb015f3a861ab719b236ef4083bb5322ed3d461794cce3b1b9d42a",
+      "size": 282
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/tools/context_decoder/evidence.py",
+      "sha256": "b0f698dbbc03f4b40576d22d3eb4ba4d79817964d3eb393fb06aca5595e58f4c",
+      "size": 8610
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/research/context-uncertainty-unit.md",
+      "sha256": "55f1e80dd6e2f527dbb21e79b05201e47e543c10d2a451e1062a6b4c1e639677",
+      "size": 6458
+    }
+  ]
+}
