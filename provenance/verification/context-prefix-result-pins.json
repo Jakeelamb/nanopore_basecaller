@@ -1,0 +1,140 @@
+{
+  "base_commit": "6a8c23e8a34d37bef76f25c30cc007bf429deae5",
+  "independent_review_original": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/logs/context-feedback-program/reviews/prefix-runtime.md",
+    "sha256": "8e9a864903babefdaf25df59d1bd81ed7c45faa3eb70cde3c32a22397f147f2a",
+    "size": 26829
+  },
+  "independent_review_repository_path": "research/context-prefix-runtime-review.md",
+  "independent_review_sha256": "a2fdd0fc5f3bcc46ad206f62300661e93a3bf63cc2e492fe9ae38a32cfe8c65c",
+  "native_binary": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-engineering-2/build/context-prefix",
+    "sha256": "7bc5f6827ac9234f54ea92367fce4715de1c75d03b05b88ff84d74a906f1e9f7",
+    "size": 201726248
+  },
+  "publication_copy_change": "Removed one extra blank line at EOF from the new publication copy only. The original independent review is unchanged at its pinned path.",
+  "publication_validation": "Source/protocol and completion metadata identity only. No producer, test, build, formatter or payload audit was rerun.",
+  "qualified_source_count": 13,
+  "qualified_sources": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/CMakeLists.txt",
+      "sha256": "a6e40b4a20e13bff58acbb86242f3dc80bcd2e3a542c259e43c380cc4f849360",
+      "size": 2762
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/.clang-format",
+      "sha256": "39cc1dcfff0d7b805a86adf5e42a4f05475a1aa1335805ab1ba52a7a57539ffe",
+      "size": 132
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/verify_formatter.cmake",
+      "sha256": "83cbaa1d9befbc7e5b406c61f66665b2bdab234c2006c7c6c11e766d86a31de9",
+      "size": 217
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/source-files.json",
+      "sha256": "ca4b025dec7166c47b80b5b1dc115431896f64940b984b2e4633dfe021a599d3",
+      "size": 274
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/derive_build.py",
+      "sha256": "77aa70d06525f945f17c82b582982a45a727ce04a8f5bed164e3ae237cd2e404",
+      "size": 9462
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/make_request.py",
+      "sha256": "082d8e406a9cf035925f30acea0fd5b6d4d0ab224cab48eaf7c18a5872a308ec",
+      "size": 6349
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/include/context_prefix/prefix.h",
+      "sha256": "17b7ed6c4cfaeb1d4f62a748867f243b5c25fe00e7c8ac0d39f399ed372f9554",
+      "size": 3012
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/src/prefix.cpp",
+      "sha256": "473a254d1ad7e3199f177f02e41ed199c423a4f840b2e1e4fa9e9ed95d9da70e",
+      "size": 14732
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/src/native.cpp",
+      "sha256": "91a4b47ffa26046bb9a826ccdf73540ce8741572645ef6835914408c52c63675",
+      "size": 13850
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/src/main.cpp",
+      "sha256": "3fd4dbc4688f321a1223f2eabd794bfb28a0e0c94a899018fbe5abc6965b292c",
+      "size": 15611
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/tests/controls.cpp",
+      "sha256": "a62ab16472b56ddc46ea1470fe85c4a79826621ee2dee6c09365f3cedcab80d2",
+      "size": 6276
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/tools/context_prefix/tests/main.cpp",
+      "sha256": "737ea3fb5a1a51879c94d9d58eca62a9b37467e77630795e6ffd6ad4295f3fd7",
+      "size": 370
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/research/context-prefix-unit.md",
+      "sha256": "9f0248f1ab17ead95bf61860852586d6109a0f1f32a7b7f4f57d80f8ec54b8a9",
+      "size": 13554
+    }
+  ],
+  "schema": "context-prefix-publication-evidence/1",
+  "scope": "One exposed HG002 development molecule, H4096 and H12288, CPU FP32 reset-prefix inference. No accuracy, throughput, stock CUDA parity or persistent streaming acceptance.",
+  "shared_base_pull_request": 6,
+  "sources_unchanged_at_publication": true,
+  "units": [
+    {
+      "completion": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-engineering-2/complete.json",
+        "sha256": "123a275c75ad59c79d6085c0a48482193713c31ded6b52b5c4938da0585329e3",
+        "size": 6958
+      },
+      "unit": "prefix-engineering-2"
+    },
+    {
+      "completion": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-q0-request-1/complete.json",
+        "sha256": "0efb7838e19ba37310defa399319fab710eb92181eb175a272a0e94d3c205a11",
+        "size": 7904
+      },
+      "unit": "prefix-q0-request-1"
+    },
+    {
+      "completion": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-q0-contracts-1/complete.json",
+        "sha256": "82c2ee7a63d142a0976cfd90c8a3b4e7b19bd92f922c6c2677ea3582571a6daa",
+        "size": 8163
+      },
+      "unit": "prefix-q0-contracts-1"
+    },
+    {
+      "completion": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-input-controls-1/complete.json",
+        "sha256": "8a2e7812702b2f18a8d058c92071dfa89571604908c42dbcd3a0794dcc2c3cf8",
+        "size": 8095
+      },
+      "unit": "prefix-input-controls-1"
+    },
+    {
+      "completion": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-forward-4096-1/complete.json",
+        "sha256": "3587736f26c0780fbe404a1d06ad3f274cc6c2b362fefe899c48d6484f23464e",
+        "size": 8425
+      },
+      "unit": "prefix-forward-4096-1"
+    },
+    {
+      "completion": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-prefix/results/context-feedback/prefix-forward-12288-1/complete.json",
+        "sha256": "8edb4e91dc5209e650cf3ddd3c1d4f52cb58ff50f0791f1dce2dd2cf3dd8bb84",
+        "size": 8429
+      },
+      "unit": "prefix-forward-12288-1"
+    }
+  ],
+  "verdict": "PASS_BOUNDED_PREFIX_CPU_RUNTIME"
+}
