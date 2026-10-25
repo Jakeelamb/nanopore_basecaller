@@ -1,0 +1,62 @@
+[
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG002/PAW70337/pod5/PAW70337_66b2eea5_de8117b1_33.pod5",
+    "retrieved_utc": "2026-10-22T19:39:53.375856+00:00",
+    "status": 200,
+    "headers": {
+      "x-amz-id-2": "GrqAtWKGpEi4GeMmDLSbpygOH7NwhLNBWGoNlD4bsVqm0fegDuPoYDp2rCw0DLZfxbM6M2gduZE=",
+      "x-amz-request-id": "KQKXH9N31Q8RW4NF",
+      "Server": "AmazonS3",
+      "Date": "Thu, 22 Oct 2026 19:39:54 GMT",
+      "Last-Modified": "Wed, 15 Jan 2025 00:23:04 GMT",
+      "ETag": "\"e5491bb43a46f9579defeff48d251065-67\"",
+      "x-amz-storage-class": "INTELLIGENT_TIERING",
+      "x-amz-server-side-encryption": "AES256",
+      "x-amz-version-id": "iMA1tdGOuDnNiJaUPfRxzzORu.ipgmhh",
+      "Accept-Ranges": "bytes",
+      "Content-Length": "555013832",
+      "Content-Type": "binary/octet-stream",
+      "Connection": "close"
+    }
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG002/PAW71238/pod5/PAW71238_a8351990_11d77535_10.pod5",
+    "retrieved_utc": "2026-10-22T19:39:53.834811+00:00",
+    "status": 200,
+    "headers": {
+      "x-amz-id-2": "abHQXAf/VoaRNsUS1LjbkTO11i3DxQhkQ819lvtKCNbHEJSu+t5y/e9T6okoE5utCcFH6i1ZtEiwwqtqdBd3HwfI+rz140t4",
+      "x-amz-request-id": "KQKKXSXN3CXH8XMX",
+      "Server": "AmazonS3",
+      "Date": "Thu, 22 Oct 2026 19:39:54 GMT",
+      "Last-Modified": "Wed, 15 Jan 2025 02:24:55 GMT",
+      "ETag": "\"02fd156f4b0d185668d8361023ade697-58\"",
+      "x-amz-storage-class": "INTELLIGENT_TIERING",
+      "x-amz-server-side-encryption": "AES256",
+      "x-amz-version-id": "tHGmIO9PfumxDIT4Niik9xlhFN7w8In9",
+      "Accept-Ranges": "bytes",
+      "Content-Length": "479362680",
+      "Content-Type": "binary/octet-stream",
+      "Connection": "close"
+    }
+  },
+  {
+    "url": "https://ont-open-data.s3.amazonaws.com/giab_2025.01/flowcells/HG005/PAW87816/pod5/PAW87816_017ec17c_cb358aeb_52.pod5",
+    "retrieved_utc": "2026-10-22T19:39:54.268995+00:00",
+    "status": 200,
+    "headers": {
+      "x-amz-id-2": "Dd7sKUJeswm2x69NTK3Kmihw+5k+t1P7xtB1kxBV5TK+2bXOWFGi5EGeUTk6elC3YVkMhVozm132OAQ6YPEHmvrU3XcSBxiu",
+      "x-amz-request-id": "QAAK32SYKGDCCTXQ",
+      "Server": "AmazonS3",
+      "Date": "Thu, 22 Oct 2026 19:39:55 GMT",
+      "Last-Modified": "Thu, 16 Jan 2025 01:53:11 GMT",
+      "ETag": "\"17dad61a6610ce9aea855441b3aca1f6-260\"",
+      "x-amz-storage-class": "INTELLIGENT_TIERING",
+      "x-amz-server-side-encryption": "AES256",
+      "x-amz-version-id": "PvloMOQmNaSBZTX8VWXrIRx3fgK638jL",
+      "Accept-Ranges": "bytes",
+      "Content-Length": "2175154136",
+      "Content-Type": "binary/octet-stream",
+      "Connection": "close"
+    }
+  }
+]

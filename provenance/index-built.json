@@ -1,0 +1,61 @@
+{
+  "status": "built; native Dorado parity pending",
+  "pins": [
+    {
+      "path": "references/GRCh38-lr-hq.mmi",
+      "size": 5756270073,
+      "sha256": "611b2a45bc41e8bbd3048ef96efebcfae4cf611360d81c3553285932de4a63aa"
+    }
+  ],
+  "producer_pins": [
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/command.sh",
+      "size": 273,
+      "sha256": "09bc7e12864d5ca06c4692c72615cc1c7e3acb90d05c52f03d0f069392fc21ea"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/cwd.txt",
+      "size": 40,
+      "sha256": "bd073809cf999aea145c499a706348860b7480951370b2d599a82a0e4d7cd8e4"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/start.txt",
+      "size": 21,
+      "sha256": "f42b76150244c676eaadf157a37fc05d191d67b24fee863cda4da5ca16f183dc"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/end.txt",
+      "size": 21,
+      "sha256": "14c8d854cc740c7b6f4ddb3bf0ad9a9395bb043c814861601d0640dd209f03ca"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/time.txt",
+      "size": 1009,
+      "sha256": "4a59e66b74b46d4c9d7a5320d5586b04aef77352cfb848cd15b0b05dcd0600c2"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/exit-status.txt",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/stdout",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "logs/20261022T203644Z-reference-minimap-index-MuzBtu/stderr",
+      "size": 784,
+      "sha256": "533ea2c1eaf1f5ef2f32465f76793807a6cb145de82d5be8bc0e88d811a8eef0"
+    },
+    {
+      "path": "software/bin/minimap2",
+      "size": 1136248,
+      "sha256": "d17e2cc99b5fcc840b6506dc884203657fdec57d92faa826f6b9dcb1d2daddba"
+    }
+  ],
+  "reference_sha256": "3c8def6d325c5d1e934b2dd530c4d1709f027677a15859467071fddf3fff2026",
+  "source_commit": "3c28777e7e2dcc90f825de1b9f17a89cca7d4452",
+  "ont_patches": "not applied; upstream nested source built separately",
+  "producer_run": "logs/20261022T203644Z-reference-minimap-index-MuzBtu"
+}

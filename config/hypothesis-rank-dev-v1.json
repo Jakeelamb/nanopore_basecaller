@@ -1,0 +1,12 @@
+{
+  "schema": "hypothesis-rank-diagnostic/1",
+  "cohort": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/decision-v2/development-cohort.json",
+  "catalogue": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/catalogue-v1/full-roundtrip/complete.json",
+  "admission": "/home/jake/Projects/nanopore_basecaller-retrieval/results/compound-frontier/20261023T160645Z-full-b2ea3920/admission/complete.json",
+  "protocol": "config/compound-frontier-v1.json",
+  "source_policy_summary": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/decision-v2/development/candidates/summary.json",
+  "scoring_baseline": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T035916Z-stock-fe30a2dbcb664128bf187fdaf8f68340-CoVGDR/stdout",
+  "endpoint": "Bit-exact inherited sequences/presence/likelihood; old/new binary-class maxima and native gaps; four registered finite policy argmax/edit/output identities; historical output differences and exact source-policy full UUID/SEQ/Q reuse matches.",
+  "limits": {"cpu_seconds": 120, "rss_bytes": 2147483648, "output_bytes": 104857600, "disk_floor_bytes": 32212254720},
+  "excluded": ["validation", "HG005", "truth outcomes", "inference", "tensor reads", "scalar rescoring", "producer replay"]
+}
