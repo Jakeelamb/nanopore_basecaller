@@ -33,3 +33,9 @@ python /home/jake/Projects/nanopore_basecaller-next-stock-compare/scripts/stock-
 ```
 
 Plan/report without supplied closures intentionally return every original parent in an unqualified matrix. A later qualified supplied-arm JSON must bind all original input/model/tool/domain pins and exact source/input/argv/cwd tuple. Prospective native SUP science remains held: before proposing basecall changes, close whether an existing compatible producer can be reused. If absent, return its exact required settings and source/native/model pins for separate Root review; no replay/download is permitted from this source cut.
+
+## Corrected outer cleanup source cut
+
+The public request API is now [stock-compare-adapter-api.md](stock-compare-adapter-api.md). It adds an explicit roles binding; Root grants must include it. The adapter's actual supervise finally path calls cleanup_outer, which always uses the checked original guard for launcher PGID cleanup independent of leader status. There is no timeout-wait path that can unwind while that group survives. Both launcher group and service cgroup must be empty before outer terminal status/projection/unlock. A fresh unit id is checked absent before launch.
+
+Three additional focused controls call supervise's actual cleanup path with a real leader-exited/TERM-ignoring descendant and unrelated process. A test-only lock proves competing flock remains excluded while terminal observations are pending. Systemd transport and canonical lock location are stand-ins in these tests; no real service qualification follows. Negative controls inject a cleanup/wait exception and a terminal-receipt write exception. The former retains a durable cleanup failure and failed outer terminal; the latter is permitted to escape only after both empty proofs. Full event JSON is printed into the retained raw test stdout. Tests executed remain0 until Root admission.

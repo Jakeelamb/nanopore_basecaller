@@ -89,6 +89,13 @@ def validate(request, now=None):
     require(request['argv'] and all(isinstance(x, str) and x for x in request['argv']), 'argv differs')
     require(Path(request['argv'][0]).is_absolute(), 'absolute executable required')
     require(request['source_pins'] and request['input_pins'] is not None, 'source/input closure missing')
+    roles = request['roles']
+    require(re.fullmatch(r'F[1-4]/[a-z][a-z0-9-]{0,40}', roles['unit']) is not None,
+            'unit role binding missing')
+    require(sorted(roles['inputs'].values()) == list(range(len(request['input_pins']))),
+            'input role binding differs')
+    require(sorted(roles['outputs'].values()) == sorted(request['expected_files']),
+            'output role binding differs')
     require(any(p['path'] == str(Path(__file__).resolve()) for p in request['source_pins']), 'adapter source pin missing')
     require(any(p['path'] == str(Path(request['argv'][0]).resolve()) for p in request['source_pins']),
             'executable pin missing')
@@ -112,10 +119,10 @@ def show(unit):
 def terminal(observed, group):
     p = observed['properties']
     path = Path('/sys/fs/cgroup') / group.lstrip('/')
+    if p.get('LoadState') == 'not-found':
+        return observed['exit'] in (0, 1) and not path.exists()
     if observed['exit'] != 0:
         return False
-    if p.get('LoadState') == 'not-found':
-        return not path.exists()
     if p.get('ActiveState') not in ('inactive', 'failed') or p.get('MainPID', '0') != '0' or p.get('ControlPID', '0') != '0':
         return False
     if p.get('ControlGroup', '') not in ('', group):
@@ -175,7 +182,8 @@ def worker(request_path, request_sha, output):
         pg = guard()
         pg.adopt_orphans()
         write(output / 'command.json', dict(argv=request['argv'], cwd=request['cwd'], env=request['env'],
-                                          source_pins=request['source_pins'], input_pins=request['input_pins']))
+                                          source_pins=request['source_pins'], input_pins=request['input_pins'],
+                                          roles=request['roles']))
         (output / 'cwd.txt').write_text(request['cwd'] + '\n')
         (output / 'start.txt').write_text(started + '\n')
         command = ['/usr/bin/time', '-v', '-o', str(output / 'time.txt'), '--', *request['argv']]
@@ -212,6 +220,37 @@ def worker(request_path, request_sha, output):
         raise
 
 
+def cleanup_outer(process, pg, unit, group, output):
+    """Single post-launch cleanup path. Caller retains flock until both proofs return."""
+    output = Path(output)
+    failures = []
+    launcher = None
+    while True:
+        # No wait/poll shortcut: the leader can be dead while its adopted group is still live.
+        try:
+            if process is not None:
+                if launcher is None or pg.group_exists(process.pid):
+                    launcher = pg.stop_group(process, process.pid)
+                require(launcher['terminal'] and not pg.group_exists(process.pid), 'launcher group still live')
+            stop = subprocess.run(['/usr/bin/systemctl', '--user', 'stop', '--no-block', unit],
+                                  capture_output=True, text=True, timeout=3)
+            if not (output / 'stop.json').exists():
+                write(output / 'stop.json', dict(exit=stop.returncode, stdout=stop.stdout, stderr=stop.stderr))
+            observed = show(unit)
+            if terminal(observed, group) and (process is None or not pg.group_exists(process.pid)):
+                return dict(launcher=launcher, service=observed, cgroup=group,
+                            launcher_group_empty=True, service_cgroup_empty=True, failures=failures)
+        except BaseException as caught:
+            # Receipt failure is not permission to unwind while either owned tree may survive.
+            if not failures:
+                failures.append(dict(error=repr(caught), utc=utc(), lock_retained=True))
+                try:
+                    write(output / 'cleanup-failure.json', failures[0])
+                except BaseException:
+                    pass
+        time.sleep(0.1)
+
+
 def supervise(request_path, request_sha, output):
     # Only bounded metadata intake precedes systemd. All full hashes and synchronous prep are inside it.
     request = read(request_path)
@@ -227,6 +266,9 @@ def supervise(request_path, request_sha, output):
     output.mkdir()
     unit = 'feedback-next-' + request['id'] + '.service'
     group = '/user.slice/user-' + str(os.getuid()) + '.slice/user@' + str(os.getuid()) + '.service/app.slice/' + unit
+    initial = show(unit)
+    require(initial['properties'].get('LoadState') == 'not-found'
+            and not (Path('/sys/fs/cgroup') / group.lstrip('/')).exists(), 'unit id already exists')
     command = ['/usr/bin/systemd-run', '--user', '--wait', '--pipe', '--unit=' + unit,
                '--working-directory=' + request['cwd'], '--property=Type=exec', '--property=ExitType=cgroup',
                '--property=KillMode=control-group', '--property=CollectMode=inactive',
@@ -239,6 +281,10 @@ def supervise(request_path, request_sha, output):
     command += ['--', sys.executable, str(Path(__file__).resolve()), 'worker', '--request', str(request_path),
                 '--request-sha256', request_sha, '--output', str(output)]
     write(output / 'outer-command.json', dict(argv=command, cwd=str(Path.cwd()), start=utc()))
+    # Checked 3443-byte original guard is the sole outer bootstrap source dependency.
+    # Every admitted workload/source/input hash still runs inside the bounded service.
+    pg = guard()
+    pg.adopt_orphans()
     with LOCK.open('r') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         # Defers interruption until cgroup terminal proof; an early Python unwind releases flock.
@@ -259,27 +305,16 @@ def supervise(request_path, request_sha, output):
                     require(size - baseline <= request['growth_bytes'] and size <= request['aggregate_bytes']
                             and shutil.disk_usage(output).free >= request['reserve_bytes'], 'whole-unit output/disk boundary')
                     time.sleep(0.1)
+                size = owned_bytes(roots)
+                require(size - baseline <= request['growth_bytes'] and size <= request['aggregate_bytes']
+                        and shutil.disk_usage(output).free >= request['reserve_bytes'], 'final output/disk boundary')
         except BaseException as caught:
             error = repr(caught)
         finally:
-            # Fail closed: lock stays held until independently observed systemd/cgroup termination.
-            while True:
-                try:
-                    stop = subprocess.run(['/usr/bin/systemctl', '--user', 'stop', '--no-block', unit],
-                                          capture_output=True, text=True, timeout=3)
-                    if not (output / 'stop.json').exists():
-                        write(output / 'stop.json', dict(exit=stop.returncode, stdout=stop.stdout, stderr=stop.stderr))
-                    observed = show(unit)
-                    if terminal(observed, group):
-                        break
-                except BaseException as caught:
-                    if not (output / 'terminal-proof-failed.json').exists():
-                        write(output / 'terminal-proof-failed.json', dict(error=repr(caught), lock_retained=True))
-                time.sleep(0.1)
-            if process is not None:
-                process.wait(timeout=3)
-            write(output / 'outer-terminal.json', dict(end=utc(), error=error, observation=observed,
-                       cgroup=group, empty_before_unlock=True, exit=None if process is None else process.returncode))
+            proof = cleanup_outer(process, pg, unit, group, output)
+            error = error or ('outer cleanup observed a failure' if proof['failures'] else None)
+            write(output / 'outer-terminal.json', dict(end=utc(), error=error, proof=proof,
+                       empty_before_unlock=True, exit=None if process is None else process.returncode))
             signal.signal(signal.SIGTERM, previous_term)
             signal.signal(signal.SIGINT, previous_int)
         require(error is None and process is not None and process.returncode == 0, 'unit failed; retained ' + str(output))
