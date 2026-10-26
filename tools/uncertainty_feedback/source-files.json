@@ -1,0 +1,7 @@
+[
+  "CMakeLists.txt", ".clang-format", "dependencies.json", "source-files.json", "driver.py",
+  "include/uncertainty_feedback/core.h",
+  "src/core.cpp", "src/plan.cpp", "src/graph.cpp", "src/frames.cpp", "src/emission.cpp", "src/exposure.cpp", "src/main.cpp", "src/controls.cpp",
+  "scalar_oracle/Cargo.toml", "scalar_oracle/Cargo.lock", "scalar_oracle/rust-toolchain.toml", "scalar_oracle/src/main.rs",
+  "../../config/uncertainty-feedback-v1.json", "../../tests/test_uncertainty_feedback.py"
+]

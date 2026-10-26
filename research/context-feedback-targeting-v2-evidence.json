@@ -1,0 +1,548 @@
+{
+  "actual_custody_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/final-custody-verdict.json",
+    "sha256": "fc001334bdd7fe1623e7f08a25d0e013328b9c86da7a8738e113b0504f84828e",
+    "size": 59789
+  },
+  "final_report": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-observation-report-3/complete.json",
+    "sha256": "446dbb7fd62d5969663571b4e2edb1ae6e22e7cbb95ef6b61653286c38c99850",
+    "size": 2252747
+  },
+  "final_report_outer": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/targeting-observation-report-v3-01/complete.json",
+    "sha256": "e95796b326ad181fe24752dfea28231d238f8723d066f1667e887f9e923e7a45",
+    "size": 5099
+  },
+  "final_report_strict": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/targeting-observation-report-v3-01/observation-strict-metadata-observation-v4.json",
+    "sha256": "fb34c75df165bcdba75c650b59942cd7b811eb8acfb2fdf1dd533dfc2d42219c",
+    "size": 9218
+  },
+  "independent_manifest": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/manifest.json",
+    "sha256": "98d7044aaa4397d61e4ee7e1eaf62a99dfa8f66f192a918ae6d203bb98d26ca2",
+    "size": 30249
+  },
+  "independent_report": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/report.md",
+    "sha256": "99ead0be5405ae3b25712902aa2848d1d42c510075c16d09a56944a81a83141a",
+    "size": 19062
+  },
+  "independent_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/verdict.json",
+    "sha256": "29836b9dda3353ab1c4954aaeda551b432106e1b14f6058d2197bef4273e3292",
+    "size": 38935
+  },
+  "matrix_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/matrix-verdict.json",
+    "sha256": "0a6b1bfaa4152ef94131a5682b3d78c3a0e65016272b6d6f67bfa89b943dca6e",
+    "size": 57083
+  },
+  "native_dorado_cmake": {
+    "path": "/home/jake/Projects/nanopore_basecaller/software/dorado-src/CMakeLists.txt",
+    "sha256": "5dfc5f68f9ab03ee8fa2f79799c7960e35dc8c22639cf944856769ed20fad589",
+    "size": 10291
+  },
+  "native_dorado_revision": "8b8fc5d36a9c0baab262a743cb175b5878e38ca6",
+  "observation_controller": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/controllers/targeting_observation_v3.py",
+    "sha256": "05501e17b569f7929d6df18207e0ae68ee8d07872e5ebfcba5c41fa0fa59f877",
+    "size": 55989
+  },
+  "observation_observer": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/controllers/targeting_observation_v3_audit_v4.py",
+    "sha256": "0f7143c36874f72351986e09fdf682dff79df4d5fc43ceea4314538fbeabd064",
+    "size": 19599
+  },
+  "observation_ready": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-targeting-observation-v3-1/review-pins.json",
+    "sha256": "481ff88fe00f18bd16efaaa96598e1a45aead36cfe28fdf833d5b8da7ad4874a",
+    "size": 8884
+  },
+  "observations": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-targeting-observation-v3-1/root-actual-observation-closure.json",
+    "sha256": "0ba0e632b6b31c446cc9dbb0e96b672c4da5be66754ee9c8dc3cc159007c67b6",
+    "size": 33746
+  },
+  "plan": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-plan-v2-1/complete.json",
+    "sha256": "63a63ba088094fe466a8db8c60609a1f6381b3f8a44967773002ddcf57328caa",
+    "size": 49783
+  },
+  "prior_report_history": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/report-history-before-final-outcomes.md",
+    "sha256": "574a5882f0932f70c2f2b205ec401e4eff9255c70eeee4c9cc633e3694af6958",
+    "size": 29922
+  },
+  "scheduling_observation_gap": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-targeting-observation-v3-1/root-scheduling-observation-gap.json",
+    "sha256": "4d7f2577e4385d787387c180ac1f30c1b2db1c8554d844b72c5b31a387d23905",
+    "size": 931
+  },
+  "schema": "context-feedback-targeting-evidence/1",
+  "scientific_source_manifest": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-native-v2-4/source-pins.json",
+    "sha256": "43b1a8c194ef9dd0fb5939382ac4b958dbd70a61fb5294d45ae98c4e36729235",
+    "size": 5229
+  },
+  "verification_commands": [
+    {
+      "argv": [
+        "/usr/bin/cmake",
+        "-S",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback",
+        "-B",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4",
+        "-G",
+        "Unix Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DCMAKE_MAKE_PROGRAM=/usr/bin/make",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DTARGETING_CLANG_FORMAT=/usr/bin/clang-format"
+      ],
+      "cleanup": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/cleanup.json",
+        "sha256": "a7fadb1bdfafeb53ab8410e368315e2473c6a297577934c18849453e60f6a99b",
+        "size": 211
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+      "environment": {
+        "HOME": "/home/jake",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_OFFLINE": "1",
+        "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+        "UV_PYTHON_DOWNLOADS": "never"
+      },
+      "exit_status": 0,
+      "raw_files": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/command.sh",
+          "sha256": "3e537bc82d22e66cd213a1fc7bcb26d21238cbe502c33c1638b248ef34956dbd",
+          "size": 453
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/cwd.txt",
+          "sha256": "45667d21c9538d3aa0c93ba75083e9081979dcaed633a8b4bd44abf686d56d2f",
+          "size": 70
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/start.txt",
+          "sha256": "1782990de2ce01f9da29c22053e4ee0bad4a9a64f7a791c34edc850c9f5e6167",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/end.txt",
+          "sha256": "46f5658a41c39efb1a03ec6f2e1f4637d307a9a679f4b826eec5891eb99f01f2",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/stdout",
+          "sha256": "5f9c7f50fdc537fd4a03959d2a71ff8a79c4ae970cebb1e3ea9ebb770f63875b",
+          "size": 575
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/time.txt",
+          "sha256": "5165d0f311db8947dc45d73c3e6fa229b0695c57f4496cc670c5257cf8f40456",
+          "size": 1175
+        }
+      ],
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/configure/complete.json",
+        "sha256": "7ebccc861dae6b024dc95c6107d30e9e6a91c65ecd1e02c7f899f0b4096a947c",
+        "size": 11268
+      },
+      "stage": "native-v2-4/configure"
+    },
+    {
+      "argv": [
+        "/usr/bin/cmake",
+        "--build",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4",
+        "--parallel",
+        "2"
+      ],
+      "cleanup": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/cleanup.json",
+        "sha256": "bd3b1d35ac9711e122979d02c1526d59a51a65a50cd6654f04fc95cf40ab3f2d",
+        "size": 211
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+      "environment": {
+        "HOME": "/home/jake",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_OFFLINE": "1",
+        "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+        "UV_PYTHON_DOWNLOADS": "never"
+      },
+      "exit_status": 0,
+      "raw_files": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/command.sh",
+          "sha256": "31e5b73e26d1c7acb2559db7c1a800d7bcab56700ea6b67e6ddc668d9edac0b1",
+          "size": 173
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/cwd.txt",
+          "sha256": "45667d21c9538d3aa0c93ba75083e9081979dcaed633a8b4bd44abf686d56d2f",
+          "size": 70
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/start.txt",
+          "sha256": "123b0380241f70bc56c47bbdedacc5d842ec3e5aa03794958abf0c47d8131b79",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/end.txt",
+          "sha256": "509d96becd919a3b19e7462b97b822e6c15b925be8448a9df2e9e715cf42ae06",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/stdout",
+          "sha256": "60137fd444607c230834b1ddfaa9dd0ea020e5357279dfc547b8471904dca621",
+          "size": 731
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/time.txt",
+          "sha256": "70fa08287e0c9898b02c75c32d55fb91cda572204e404e6671cda2106c50fa51",
+          "size": 899
+        }
+      ],
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/build/complete.json",
+        "sha256": "c8b437312f96c682c7478a89667f9aebcb67460b05b0fdd1ba6c0daeb9193e91",
+        "size": 10004
+      },
+      "stage": "native-v2-4/build"
+    },
+    {
+      "argv": [
+        "/usr/bin/cmake",
+        "--build",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4",
+        "--target",
+        "format-check"
+      ],
+      "cleanup": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/cleanup.json",
+        "sha256": "ebf940c05c6150630811b10d968ea0183d611e7a4842add7861e55f46da3c1b0",
+        "size": 211
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+      "environment": {
+        "HOME": "/home/jake",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_OFFLINE": "1",
+        "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+        "UV_PYTHON_DOWNLOADS": "never"
+      },
+      "exit_status": 0,
+      "raw_files": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/command.sh",
+          "sha256": "b28d6300786648795ea7f6e739940dfad4e0bc74e425a5ef962a4b5b526f0135",
+          "size": 182
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/cwd.txt",
+          "sha256": "45667d21c9538d3aa0c93ba75083e9081979dcaed633a8b4bd44abf686d56d2f",
+          "size": 70
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/start.txt",
+          "sha256": "f74794f1295fd9b9ae4dff4a6eaef45c290bf1a0f4bd6a16fa85357eeeed438b",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/end.txt",
+          "sha256": "67860ab32445b5e253678185d1dc8893c6cb06a7f329064842d36a7b5f1ebbc0",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/stdout",
+          "sha256": "b9db6aada3ca26715baeaf5788148edd4419a5fb5b8eedf4ff8b9611bf8fb7ac",
+          "size": 26
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/time.txt",
+          "sha256": "b5083e605e3eb516b512f7a1a7ba0e4b3091b72f254f37938f4d3cd31b76732f",
+          "size": 900
+        }
+      ],
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/format-check/complete.json",
+        "sha256": "31926fe15c8862294cad941270768e889ed45bc04c5f38b32bfa3cdcdbf9b5db",
+        "size": 9619
+      },
+      "stage": "native-v2-4/format-check"
+    },
+    {
+      "argv": [
+        "/usr/bin/ctest",
+        "--test-dir",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4",
+        "--parallel",
+        "1",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest.xml"
+      ],
+      "cleanup": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/cleanup.json",
+        "sha256": "dca8ca0c040d391eda613b6abf8e6ce852b1fdb59b6b583dbf6dde528d51fef4",
+        "size": 211
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+      "environment": {
+        "HOME": "/home/jake",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_OFFLINE": "1",
+        "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+        "UV_PYTHON_DOWNLOADS": "never"
+      },
+      "exit_status": 0,
+      "raw_files": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/command.sh",
+          "sha256": "99035226e0fd9d1431eb42e45f170f46b9838c3cbcdb437cb76e0f4bef8ba1f2",
+          "size": 369
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/cwd.txt",
+          "sha256": "45667d21c9538d3aa0c93ba75083e9081979dcaed633a8b4bd44abf686d56d2f",
+          "size": 70
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/start.txt",
+          "sha256": "afded9c78cbbd7aa6bdb20bca8220ea8864d50a4d0aaf1eb9db4971654f02a76",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/end.txt",
+          "sha256": "4dcc7c0cfab88cfb865290c61eab3c65c0c12ef50c54f00b645efe4ee0974a5e",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/stdout",
+          "sha256": "a18ab1427a791b1712b63d2cf7e132343f02eaf0a076ffd5ac34c48c7b049ae2",
+          "size": 326
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/time.txt",
+          "sha256": "f3fabf7faaed70d63a1de388d22bc88e891b8847ea4d4f93bd2a11e2ea369c36",
+          "size": 1089
+        }
+      ],
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/ctest/complete.json",
+        "sha256": "48b1a81b79cad4feb7973f965a141641bc98c7456f3d71af6835fda92388db61",
+        "size": 10192
+      },
+      "stage": "native-v2-4/ctest"
+    },
+    {
+      "argv": [
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4/uncertainty-feedback",
+        "controls"
+      ],
+      "cleanup": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/cleanup.json",
+        "sha256": "6fbe162d18f787dfacaaa38a90a2aea8bb13cf9dd49abd357c62829b4ce4b778",
+        "size": 211
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+      "environment": {
+        "HOME": "/home/jake",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_OFFLINE": "1",
+        "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+        "UV_PYTHON_DOWNLOADS": "never"
+      },
+      "exit_status": 0,
+      "raw_files": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/command.sh",
+          "sha256": "63db54fb70f2f9550e88f5c96a61a1b2b1deabc11e2e764274b7462533a5ade4",
+          "size": 167
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/cwd.txt",
+          "sha256": "45667d21c9538d3aa0c93ba75083e9081979dcaed633a8b4bd44abf686d56d2f",
+          "size": 70
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/start.txt",
+          "sha256": "f9999a570059fd1060c686e26f66d0bd60853b955f78d71bcbd64cddf4104ae3",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/end.txt",
+          "sha256": "d34a547fcfb3f09b22148fc8d5f02b44b7badd7c680532ec1842247ad8d6c2a2",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/stdout",
+          "sha256": "f0e800dc28c08687e331bea579d590bfd10de970de8ccca5357b370139b0db5a",
+          "size": 5590
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/time.txt",
+          "sha256": "54aeed6d3c73691e6617e9fd28117cf9206df2d64369866002757139d48940c5",
+          "size": 880
+        }
+      ],
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/complete.json",
+        "sha256": "9580c00d6b99bdcbbb5171dac1fb4b3b825647168f9119fa6217c01788f334c9",
+        "size": 9687
+      },
+      "stage": "native-v2-4/controls"
+    },
+    {
+      "argv": [
+        "/home/jake/.local/bin/uv",
+        "run",
+        "--project",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+        "--no-sync",
+        "python",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/controllers/newruntime_python_tests_v2.py",
+        "--qualification",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/prerequisites.json",
+        "--qualification-sha256",
+        "5270d44b86cebe94f8c03f98ef6fe93246a467dedbe201ac216aa49919d99247",
+        "--output",
+        "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/tests.json"
+      ],
+      "cleanup": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/cleanup.json",
+        "sha256": "35d272b565d9bc85e4b351c5e9a5906bf8926c9999f4687d617add4ab00d3cd4",
+        "size": 211
+      },
+      "cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+      "environment": {
+        "HOME": "/home/jake",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/tmp",
+        "UNCERTAINTY_FEEDBACK_BINARY": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4/uncertainty-feedback",
+        "UNCERTAINTY_SCALAR_BINARY": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/scalar-build/release/context-scalar-oracle",
+        "UV_OFFLINE": "1",
+        "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+        "UV_PYTHON_DOWNLOADS": "never"
+      },
+      "exit_status": 0,
+      "raw_files": [
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/command.sh",
+          "sha256": "a66f8812c86929d0f4cd845129b9252296584bddb834f15db01024ccc4a583d4",
+          "size": 675
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/cwd.txt",
+          "sha256": "45667d21c9538d3aa0c93ba75083e9081979dcaed633a8b4bd44abf686d56d2f",
+          "size": 70
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/start.txt",
+          "sha256": "67d3e991cb81d1aba2b46b56db6a8c3fddaf99a60cbc0c7039e825904c3bb2ac",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/end.txt",
+          "sha256": "b0f08000e1e7fbfdad06539f997ad1ab0747870ff7c1fcc1f16ad90aa0219f63",
+          "size": 33
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/exit-status.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/stderr",
+          "sha256": "058476a898b542b91dee6cc09ddf3bbd2de963d2c2ec195513136cd629142b29",
+          "size": 2711
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/time.txt",
+          "sha256": "95cc308c196f5b148c9ca2b82f419b4d13c97401b0605a8ad33f13bc503c1728",
+          "size": 1396
+        }
+      ],
+      "receipt": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/python-v2-1/executable-tests/complete.json",
+        "sha256": "1a0e684808a7c6dda9c2262710f5cf4bb541d232a6ceb4b099e52806ae6a229d",
+        "size": 12340
+      },
+      "stage": "python-v2-1/executable-tests"
+    }
+  ]
+}

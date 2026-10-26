@@ -1,0 +1,74 @@
+{
+  "schema": "uncertainty-feedback-archive-consumer-source-provenance/1",
+  "status": "source-only-uncompiled",
+  "legacy_source_manifest": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-native-v2-4/source-pins.json",
+    "size": 5229,
+    "sha256": "43b1a8c194ef9dd0fb5939382ac4b958dbd70a61fb5294d45ae98c4e36729235"
+  },
+  "independent_contract": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/archive-consumer-contract-independent.md",
+    "size": 23716,
+    "sha256": "5d019e1163e0d08979b9e58a20c36ab075e3318363d4785867ac3b60226fc6a0"
+  },
+  "readonly_origin": [
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/CMakeLists.txt",
+      "size": 4045,
+      "sha256": "fd02ecece53c2a4c0731bc84c187b8a38e867b7b871cfc747844dd44618cd8d1"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/include/uncertainty_feedback/core.h",
+      "size": 3275,
+      "sha256": "fc617af4eb990defcef8b2ccf66aad185c366e428837180e80fde896ef9f375e"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/core.cpp",
+      "size": 30997,
+      "sha256": "0989d3e5eaaddb0a5a4cba4c60bb58e92dedcfa3b9774f836d5dcced2b96ad41"
+    },
+    {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/emission.cpp",
+      "size": 13673,
+      "sha256": "64d7278e8c04c36657aa33c3fea9cd4e668e539bc3ae88ec377566c9fe2fd3a1"
+    }
+  ],
+  "own_emission_delta": [
+    "Distinct namespace and own completion schema/source/binary witness.",
+    "Explicit frozen legacy witness validates old PLAN, parts, receipts and runtime; no new producer witness substituted.",
+    "New trace resolver validates exact native3/producer4/stdout/result/attempt32 joins.",
+    "Original frame-construction joins added.",
+    "Existing SEQ/Q edit reconstruction extracted into edits.cpp with same forward/reverse behavior.",
+    "Internal decoded-row aggregation is not exported as a native completion.",
+    "Five-arm policy, union diagnostic tie ordering and SAM header/row serialization unchanged."
+  ],
+  "not_executed": [
+    "configure",
+    "compile",
+    "formatter",
+    "CTest",
+    "native apply",
+    "compression",
+    "decompression",
+    "model/GPU",
+    "scientific payload reads"
+  ],
+  "libraries": "Historical accepted native runtime pins only; new compiled/runtime closure unqualified.",
+  "normalization_review_fix": {
+    "previous_ordered_own_pin_json_sha256": "47f309a11e605c9c61a5fb8d94bc29b9303be76d58e9ffe054f55d3dc662faa2",
+    "review": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/archive-consumer-cpp-independent-20261025-source1/REVIEW.md",
+      "size": 9674,
+      "sha256": "fb46596199b8227e7f853f2fe1db093f466a395445e00f56fd5f160efc8a8332"
+    },
+    "change": "Central pin() rejects non-normalized paths before file hashing; two correctly repinned synthetic dot/dotdot aliases require that semantic guard.",
+    "scientific_algorithm_changed": false,
+    "request_schema_changed": false,
+    "cpp_controls_declared": {
+      "accept": 7,
+      "reject": 40,
+      "total": 47,
+      "executed": 0
+    }
+  }
+}
