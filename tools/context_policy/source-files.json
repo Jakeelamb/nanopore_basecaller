@@ -1,0 +1,16 @@
+[
+  "tools/context_policy/CMakeLists.txt",
+  "tools/context_policy/.clang-format",
+  "tools/context_policy/source-files.json",
+  "tools/context_policy/qualify.py",
+  "tools/context_policy/include/context_policy/policy.h",
+  "tools/context_policy/include/context_policy/protocol.h",
+  "tools/context_policy/src/policy.cpp",
+  "tools/context_policy/src/protocol.cpp",
+  "tools/context_policy/src/main.cpp",
+  "tools/context_policy/tests/fixtures.h",
+  "tools/context_policy/tests/controls.cpp",
+  "scripts/context-policy.py",
+  "config/context-policy-dev-v1.json",
+  "tests/test_context_policy.py"
+]

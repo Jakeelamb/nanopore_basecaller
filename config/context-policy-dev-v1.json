@@ -1,0 +1,56 @@
+{
+  "schema": "context-policy-development/1",
+  "interface": "feedback-next/1",
+  "hypothesis": "A bounded context weight that decreases with declared location support and a predeclared zero adaptive margin can admit small signal-compatible corrections; examining all eligible alternatives can recover a runner-up rejected by fixed top-only selection.",
+  "adaptive_policy": {
+    "mode": "adaptive",
+    "maximum_context_weight": 0.5,
+    "maximum_neural_deficit": 0.5,
+    "minimum_objective_margin": 0.0,
+    "parameter_status": "predeclared_unfitted",
+    "quality_status": "uncalibrated"
+  },
+  "fixed_policy": {
+    "mode": "fixed",
+    "maximum_context_weight": 0.5,
+    "maximum_neural_deficit": 0.5,
+    "minimum_objective_margin": 0.5,
+    "parameter_status": "predeclared_unfitted",
+    "quality_status": "uncalibrated"
+  },
+  "arms": ["disabled", "prior-none", "fixed", "adaptive"],
+  "baseline": "genuine independently advancing reference-free producer; never replaced by union neural argmax",
+  "matched_ablation": {
+    "candidate_generation": "freeze identical external batch FilePins for fixed/adaptive; no generation change",
+    "neural_scores": "same genuine marginalized likelihoods from the producer",
+    "evaluation_domains": [100, 500],
+    "accounting": "all original parents including zero exposure; retain exclusions and separate S/I/D",
+    "variants": "changed-footprint ALT per SNV/INS/DEL, no off-edit substitution for productive evidence",
+    "technical_bounds": ["parent", "genomic_1Mb_block"],
+    "old_productive_ALT_gate": "100 per class remains unchanged"
+  },
+  "calibration": {
+    "status": "not_fitted_no_qualified_labels",
+    "development": "HG002 existing64 parents are exposed; parent-hash five-way folds would be development diagnostics only",
+    "split_rule": "SHA256 UTF-8 parent_id interpreted as a big-endian integer modulo 5; fold0 diagnostic validation, folds1-4 fitting only after separate qualified-label input freeze",
+    "evaluation": "freeze parameters and label/sample manifests before evaluation; no HG005 input or selection",
+    "quality": "changed sequences receive ! throughout; no empirical Q calibration or calibrated location probability claimed"
+  },
+  "pilot": {
+    "status": "held_pending_genuine_F1_batch_and_Root_slot",
+    "maximum_parents": 4,
+    "maximum_batches": 16,
+    "maximum_candidates_per_batch": 4096,
+    "maximum_locations_per_batch": 64,
+    "maximum_input_bytes_per_file": 8388608,
+    "wall_seconds": 300,
+    "cpus": 2,
+    "ram_gib": 4,
+    "address_space_gib": 8,
+    "swap_bytes": 0,
+    "growth_mib": 100,
+    "free_reserve_gib": 30
+  },
+  "development_input_pins": [],
+  "input_pin_limit": "No genuine F1 producer batch exists at initial source cut. Empty pins prohibit development execution; engineering fixtures are synthetic and do not qualify science."
+}
