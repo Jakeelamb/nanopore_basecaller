@@ -1,0 +1,63 @@
+{
+  "schema": "uncertainty-feedback-config/1",
+  "role": "development",
+  "scope": "offline uncertainty-targeted guarded decoding of fixed HG002 retained exports",
+  "protocol_path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/research/uncertainty-feedback-experiment.md",
+  "nomination_source_id": "aed1e8b3957ac766d08c6a9719f6ffaf0d55a34dc8c57cd79438e9f0b5cc2f14",
+  "inputs": {
+    "audit": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/results/context-feedback/uncertainty-v2-full-audit-1/complete.json",
+    "audit_sha256": "a71bb5e041bdba6c4d6f095f0c36f82a94780e3565e74b42e86ac9729ba3819c",
+    "full_run_sha256": "e32671210d5b51213720e3c8e5af50babba9f9c7a96ad84516d3075bd38fafaf",
+    "prepared_sha256": "be4959049d175fb414ac2b5477bc5a142cf391f6cb1b315fb1b7aee4ebb3868d",
+    "manifest_sha256": "bee4f1640c2691e6bd1490d558274d8d547c12c1e7719a30fea55d17ca290be2",
+    "native_merge_sha256": "ab9bd90bbc426ec6164e175e06991db01a365ad7710ff7a0ce7c3c0d6eb6cb43",
+    "nominations_sha256": "986a937dcefc434638950fa1f4002c20e06255fa0f02b2fddcf2b1c730d70f9b"
+  },
+  "policy": {
+    "anchor_bases": 10,
+    "future_bases": 10,
+    "beam_width": 128,
+    "min_center": 0,
+    "max_center": 108,
+    "context_weight": 0.5,
+    "maximum_signal_deficit": 0.5,
+    "minimum_objective_margin": 0.5,
+    "minimum_mapq": 30,
+    "maximum_paths": 32
+  },
+  "population": {"parents": 64, "chunks": 1557, "nominations": 512, "refill": false},
+  "graph": {
+    "resource": {"path": "/home/jake/Projects/nanopore_basecaller-reference/software/graph-prior/graph-resource/hprc-v2.1-mc-grch38-eval.gbz", "size": 5458243184, "sha256": "84dcfc6c71efceedb38a9971e1472ed125ce268fa684f7a0607e73050f555ed9"},
+    "binary": {"path": "/home/jake/Projects/nanopore_basecaller-reference/software/graph-prior/graph-resource/gbz-base-source/target/release/hprc-interval-extract", "size": 3801232, "sha256": "36ce0f55a768483690420936b42da897a595897c4f667d34b5e9dba2a640a58d"},
+    "source_manifest": "/home/jake/Projects/nanopore_basecaller-reference/provenance/verification/graph-resource.json",
+    "reference": {"path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout", "sha256": "9cce8b926416dd96b152deea85188495b75f7ac8d634cc723a017067be8702b7"}
+  },
+  "execution": {
+    "canonical_lock": "/home/jake/Projects/nanopore_basecaller/results/stock/host.lock",
+    "lock_wait_seconds": 0,
+    "cpu_quota": 2,
+    "memory_bytes": 4294967296,
+    "address_space_bytes": 8589934592,
+    "graph_memory_bytes": 17179869184,
+    "graph_address_space_bytes": 51539607552,
+    "swap_bytes": 0,
+    "unit_wall_seconds": 300,
+    "unit_output_growth_bytes": 104857600,
+    "aggregate_output_bytes": 4294967296,
+    "disk_floor_bytes": 32212254720,
+    "first_queries": [0],
+    "checkpoint_queries": [0,1,2,3,4,5,6,7],
+    "requires_root_queue_grant": true
+  },
+  "endpoints": {
+    "masks": [100,500],
+    "accuracy_population": "all original 64 paired parents, invariant frozen domains",
+    "promotion_relative_improvement_lower_bound": 0.01,
+    "uncertainty": "Point relative error reduction >=1 percent in both frozen domains; parent and genomic block candidate-minus-native error-fraction 95 percent upper bounds each strictly <0; productive ALT minimum100 per class and private26 retention remain unchanged",
+    "productive_alt_minimum_each_class": 100,
+    "private_alt_witnesses": 26,
+    "private_alt_retention_required": 1.0,
+    "selector_comparison": "error exposure only against fixed old nominal 311 centers; no attainable gain claim",
+    "hg005_selection": false
+  }
+}

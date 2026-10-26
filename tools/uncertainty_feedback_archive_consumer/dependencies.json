@@ -1,0 +1,201 @@
+{
+  "schema": "uncertainty-feedback-archive-dependencies/1",
+  "legacy_source_binding": {
+    "source_manifest": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-native-v2-4/source-pins.json",
+      "size": 5229,
+      "sha256": "43b1a8c194ef9dd0fb5939382ac4b958dbd70a61fb5294d45ae98c4e36729235"
+    },
+    "qualification": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/targeting-native-v2-4-01/complete.json",
+      "size": 4892,
+      "sha256": "efd8ec5eeccf8b3a9f9232fc23dd6f2c903ebaf9bad9dcaa6b275ab11adc558a"
+    },
+    "native_result": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/complete.json",
+      "size": 23735,
+      "sha256": "f76974b056741b2b693f0a319de8d9c6f9b8375a2bd5f701552237f631042520"
+    },
+    "controls": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/controls/stdout",
+      "size": 5590,
+      "sha256": "f0e800dc28c08687e331bea579d590bfd10de970de8ccca5357b370139b0db5a"
+    },
+    "binary": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/build-native-v2-4/uncertainty-feedback",
+      "sha256": "cb4801050abcbc38765cdbc3c5dc9890150f8c386c9f455f3f0ae05bd8cea376",
+      "size": 1087752
+    },
+    "runtime": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-engineering-1/native-v2-4/runtime-native/complete.json",
+      "sha256": "699167f820e9569b3e83f61f6436a98e52e88cffbc9b477a860f6b01eca08fd9",
+      "size": 8102
+    },
+    "source_witness": {
+      "compiled_sources": [
+        {
+          "path": "/home/jake/Projects/tools/clang-uml-src/thirdparty/nlohmann/json.hpp",
+          "sha256": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+          "size": 919975
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/CMakeLists.txt",
+          "sha256": "fd02ecece53c2a4c0731bc84c187b8a38e867b7b871cfc747844dd44618cd8d1",
+          "size": 4045
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/.clang-format",
+          "sha256": "645bc190cb3512908d47b1ebf53f31da633c0398908bf5c2099e5f282204dea6",
+          "size": 778
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/dependencies.json",
+          "sha256": "f9a7bb78dfa8d5da15dc40541a2097f31ab9619d77602a62cbb3a2921a49ffd9",
+          "size": 8142
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/source-files.json",
+          "sha256": "e1c3b3f8b6fcc63c05aea5e4f7554e671f481c7716d3826416aa5c7dd06aa9f6",
+          "size": 496
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/driver.py",
+          "sha256": "928308f44fd19fae168947c840bdab25ab0b676b468b9bfecf41c9a1d85ea0ad",
+          "size": 31076
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/include/uncertainty_feedback/core.h",
+          "sha256": "fc617af4eb990defcef8b2ccf66aad185c366e428837180e80fde896ef9f375e",
+          "size": 3275
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/core.cpp",
+          "sha256": "0989d3e5eaaddb0a5a4cba4c60bb58e92dedcfa3b9774f836d5dcced2b96ad41",
+          "size": 30997
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/plan.cpp",
+          "sha256": "25195e23aeab0bcdb06a3d3a755bda47d76c0d64331bd728692f4f066eed0485",
+          "size": 28323
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/graph.cpp",
+          "sha256": "138e525e4693187ee82a3e6baa7a67e084b84cf1487d70f0fbb7b496583e13d5",
+          "size": 16990
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/frames.cpp",
+          "sha256": "5db0e2d50ba594361b6f4fda9d45a2918ebfcf0966ca126003a9bdb373d47270",
+          "size": 17755
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/emission.cpp",
+          "sha256": "64d7278e8c04c36657aa33c3fea9cd4e668e539bc3ae88ec377566c9fe2fd3a1",
+          "size": 13673
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/exposure.cpp",
+          "sha256": "a0fa32b1576ebb90c42d6e9d8bde9887f3ca75d0af9813765feab62910f7e62a",
+          "size": 5168
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/main.cpp",
+          "sha256": "34ba2e895806384e112984d0a7db8ab1bf61c603b21f4f13607d220ac58db9a8",
+          "size": 4671
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/src/controls.cpp",
+          "sha256": "07477bcc5571155e820b2ece25b2ed6d40a57615269082267aab0aea92da9295",
+          "size": 6622
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/scalar_oracle/Cargo.toml",
+          "sha256": "b862527d14a587f82e054589ee0baa9395d55459fe68eeba3d262c6b81005c2a",
+          "size": 187
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/scalar_oracle/Cargo.lock",
+          "sha256": "8bd5cb1dbe6cdda172e8e120f0dad5de25b7a7faf495222f570cf1ab03ed19f2",
+          "size": 360
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/scalar_oracle/rust-toolchain.toml",
+          "sha256": "2089dac3041ca1feaa8fdbc73276715808da7c349a09ba19141f706b878a3236",
+          "size": 76
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/scalar_oracle/src/main.rs",
+          "sha256": "a1b5e358c1e71de35440e6b24f9e57eb3f00765a024b1b9cea6060055e43f12e",
+          "size": 7671
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/config/uncertainty-feedback-v1.json",
+          "sha256": "3a972d47e52c90c5c589f77e57c2c8e59faf80af494b528585630c185a1bc719",
+          "size": 3661
+        },
+        {
+          "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tests/test_uncertainty_feedback.py",
+          "sha256": "3f3e99a51d7e44cbce11fc1d0708fd788545dc137200f64a0f85974ad344aa1c",
+          "size": 19232
+        }
+      ],
+      "compiler": {
+        "path": "/usr/bin/c++",
+        "sha256": "f04191f6a7b2cd7d9a62e1745872b8a6088791e5af6955488c69c9b2c4668bc9",
+        "size": 1738072
+      }
+    }
+  },
+  "legacy_dependencies": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/tools/uncertainty_feedback/dependencies.json",
+    "size": 8142,
+    "sha256": "f9a7bb78dfa8d5da15dc40541a2097f31ab9619d77602a62cbb3a2921a49ffd9"
+  },
+  "nlohmann_json": {
+    "path": "/home/jake/Projects/tools/clang-uml-src/thirdparty/nlohmann/json.hpp",
+    "size": 919975,
+    "sha256": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+    "version": "3.11.3",
+    "license": "MIT",
+    "use": "Read-only SYSTEM header, no distribution committed or downloaded"
+  },
+  "cxx_compiler": {
+    "path": "/usr/bin/c++",
+    "size": 1738072,
+    "sha256": "f04191f6a7b2cd7d9a62e1745872b8a6088791e5af6955488c69c9b2c4668bc9"
+  },
+  "runtime_inspector": {
+    "path": "/usr/bin/ldd",
+    "size": 5440,
+    "sha256": "94f332c23cf00596d0387d6f54693664f9a53334d65953b2ff308057cc8530b1"
+  },
+  "zlib_version": "1.3.2",
+  "zlib_headers": [
+    {
+      "path": "/usr/include/zlib.h",
+      "size": 103848,
+      "sha256": "818667d6ab6a37fe7469cb06a7f0cb2c2cb2f2c948a03e5accf1a4a74bf3020a"
+    },
+    {
+      "path": "/usr/include/zconf.h",
+      "size": 16921,
+      "sha256": "0718a11beb3295b345fb29a63b44b654b282d82c4cd0513f6225587f2b29b8bb"
+    }
+  ],
+  "formatter": {
+    "path": "/usr/bin/clang-format",
+    "sha256": "cd50c00c4b3475329257d717f9e778769d00d1eff5c03436ebc39b023ddd6394",
+    "size": 104608
+  },
+  "zlib_library": {
+    "path": "/usr/lib/libz.so.1.3.2",
+    "sha256": "6c78c5e58c3bb49a1cd151a95cdf1a17fe07a91a57a59e0279b984c533075ca9",
+    "size": 108560
+  },
+  "crypto_library": {
+    "path": "/usr/lib/libcrypto.so.3",
+    "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+    "size": 5926392
+  },
+  "library_pin_provenance": "Retained accepted native runtime699167 metadata; no library body read during source preparation. Fresh qualification must check bytes and runtime."
+}

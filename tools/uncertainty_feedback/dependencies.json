@@ -1,0 +1,104 @@
+{
+  "schema": "uncertainty-feedback-dependencies/1",
+  "nlohmann_json": {
+    "path": "/home/jake/Projects/tools/clang-uml-src/thirdparty/nlohmann/json.hpp",
+    "size": 919975,
+    "sha256": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+    "version": "3.11.3",
+    "license": "MIT",
+    "use": "Read-only SYSTEM header, no distribution committed or downloaded"
+  },
+  "independent_scalar_sources": [
+    {"path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/crf.rs", "size": 4878, "sha256": "3171343d81477d4d967e300466e9ba3e3d770164f34438dcedd0867ca5ea8a99"},
+    {"path": "/home/jake/Projects/nanopore_basecaller-reference/tools/graph_prior/src/scores.rs", "size": 3626, "sha256": "2122831be9c1fad80e953268cf2138909665f703b697b5f803604b9450f0fa2e"}
+  ],
+  "unchanged_decoder_manifest": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/guarded-evidence-manifest.json",
+  "unchanged_decoder_manifest_pin":{"path":"/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/guarded-evidence-manifest.json","size":37093,"sha256":"a4eb963b21f88866634c89aefea67344c37d0092bc3f7ab29f4fa014cd498bf3"},
+  "graph_source_manifest":{"path":"/home/jake/Projects/nanopore_basecaller-reference/provenance/verification/graph-resource.json","size":9122,"sha256":"588acb9e22e6cf465a63fb7f039f1e0bd080df33f42313df3fa38e85d79999f7"},
+  "unchanged_decoder": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/results/context-feedback/v2-engineering-3/context-decoder", "size": 533040, "sha256": "41c45b2d459291cb4d0375b5163f522bb2f6fd7467761e8b294f8099226177cb"},
+  "projection_oracle": "/home/jake/Projects/nanopore_basecaller-context-feedback-v2/tools/context_decoder/guarded_inputs.py",
+  "observation_snapshot": {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json", "size":12027,"sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324"},
+  "cxx_compiler": {"path":"/usr/bin/c++","size":1738072,"sha256":"f04191f6a7b2cd7d9a62e1745872b8a6088791e5af6955488c69c9b2c4668bc9"},
+  "python_runtime": {"path":"/home/jake/.local/share/uv/python/cpython-3.12.8-linux-x86_64-gnu/bin/python3.12","size":2123240,"sha256":"efd84018e2568d7338abc5cf086f7d6b9f5245ab63433f349259d833162b50c8"},
+  "runtime_inspector": {"path":"/usr/bin/ldd","size":5440,"sha256":"94f332c23cf00596d0387d6f54693664f9a53334d65953b2ff308057cc8530b1"},
+  "recorder_time":{"path":"/usr/bin/time","size":23056,"sha256":"ccc576561484fe2c3f83bbceabfeba78408e59ac9c9a8161ad2a017b1037663d"},
+  "scalar_toolchain": {
+    "cargo":{"path":"/home/jake/.rustup/toolchains/1.96.0-x86_64-unknown-linux-gnu/bin/cargo","size":42865872,"sha256":"f30f9fd1b1d0b8fd10dc33219eb4cd4bec3543f40e434ac71f5a03fd0359063f"},
+    "rustc":{"path":"/home/jake/.rustup/toolchains/1.96.0-x86_64-unknown-linux-gnu/bin/rustc","size":646032,"sha256":"ba4b837efb6612dfa8d941c5a72b8a50d1d03a0f36216743b173949aa8d9eb75"},
+    "sha256":{"path":"/usr/bin/sha256sum","size":51512,"sha256":"e0a612dbb527eccb83bdb1b5aacfc23a99e40054e1f60e63ce6be779eefc2ea6"},
+    "linker":{"path":"/usr/bin/gcc","size":1733976,"sha256":"8aac907d6fbf40394b424b5fa4a2ad1aa291dac7d3a0315c5b415c1f5ace1287"},
+    "anyhow_archive":{"path":"/home/jake/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/anyhow-1.0.104.crate","size":48819,"sha256":"330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470"},
+    "anyhow_source_directory":"/home/jake/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anyhow-1.0.104",
+    "sysroot_library_directory":"/home/jake/.rustup/toolchains/1.96.0-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib",
+    "target_directory":"/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/scalar-build",
+    "rustc_version_prefix":"rustc 1.96.0 ",
+    "build_environment":{"RUSTC":"/home/jake/.rustup/toolchains/1.96.0-x86_64-unknown-linux-gnu/bin/rustc","RUSTUP_TOOLCHAIN":"1.96.0-x86_64-unknown-linux-gnu","CARGO_HOME":"/home/jake/.cargo","CARGO_NET_OFFLINE":"true","RUSTC_WRAPPER":"","RUSTC_WORKSPACE_WRAPPER":"","RUSTFLAGS":"","CARGO_ENCODED_RUSTFLAGS":"","CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER":"/usr/bin/gcc"}
+  },
+  "original_scalar": {
+    "source_root": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting",
+    "source_manifest": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/logs/context-feedback-targeting/ready-engineering3/source-pins.json",
+      "size": 5163,
+      "sha256": "53d4b35c74a10498a2f7e1c27abfcf999ed946ebd18baeac263afdcabd2b2e9a"
+    },
+    "connector_witness": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/native-compilefix2/controls/stdout",
+      "sha256": "a4080dac1c4a9e22094765e5a14e86b3be2aa08af1303bc243102d67e2b2fca2",
+      "size": 4670
+    },
+    "binary": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/scalar-build/release/context-scalar-oracle",
+      "sha256": "b3fe0e6446c39a954e8017be7e599a2b0ca5a27d1dbbcf3fb72c5e338898a486",
+      "size": 653752
+    },
+    "build_receipt": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/cargo-build/raw/complete.json",
+      "sha256": "1320e9f2521c5d945f7e415d9b13fdb428788d1b4bc623dc7d808d9a410ed112",
+      "size": 48859
+    },
+    "compiler_version": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/rustc-version/raw/complete.json",
+      "sha256": "aa5d691735d10c54abd17ddcca6ae7037eceb7562aa4bf196a1cc7ad5b44605b",
+      "size": 15110
+    },
+    "runtimes": {
+      "cargo": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/runtime-cargo/complete.json",
+        "sha256": "6b8ff8987d3f7d8d9656389252280706812009753a852db0a468579c41146ca0",
+        "size": 7269
+      },
+      "rustc": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/runtime-rustc/complete.json",
+        "sha256": "db84c7b57f029d69aed4f1894a9cacdead63c8eb2f5ed11c6a665bc78fd14a4d",
+        "size": 7904
+      },
+      "linker": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/runtime-linker/complete.json",
+        "sha256": "babd3c10e3000ec35379d36265b3aef8519257b3b90ca8daebb74cb6db22e3ff",
+        "size": 6430
+      },
+      "scalar": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/runtime-scalar/complete.json",
+        "sha256": "88bfd912414122bbf9db6e9a1776fa32e78206acc8e7aa0ac25c70adc1b68ae8",
+        "size": 6888
+      },
+      "sha256": {
+        "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting/results/context-feedback/targeting-engineering-1/rust/runtime-sha256/complete.json",
+        "sha256": "7925e39a4f7db178c6e28b31d91a0ada593aabdfa4d5b47344c165cdfa740280",
+        "size": 7568
+      }
+    }
+  },
+  "nomination_worker_fixtures": {
+    "collect": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/logs/context-feedback/program-runs/worker-uncertainty-v2-full-collect-1/complete.json",
+      "size": 5402,
+      "sha256": "5928a70907aa17f10baa4bafee043ea6ee5bbe626ede203534c3c735dcf77b31"
+    },
+    "merge": {
+      "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/logs/context-feedback/program-runs/worker-uncertainty-v2-full-merge-1/complete.json",
+      "size": 5972,
+      "sha256": "ba185b75b677c0eeeaefeb0672a1eae7cde1df16b59370c79ed48879e09c1fe4"
+    }
+  }
+}

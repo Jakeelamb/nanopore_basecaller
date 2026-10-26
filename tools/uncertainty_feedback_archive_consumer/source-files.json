@@ -1,0 +1,17 @@
+[
+  "include/archive_consumer/core.h",
+  "src/core.cpp",
+  "src/archive.cpp",
+  "src/request.cpp",
+  "src/emission.cpp",
+  "src/edits.cpp",
+  "src/main.cpp",
+  "src/controls.cpp",
+  "CMakeLists.txt",
+  ".clang-format",
+  "dependencies.json",
+  "source-files.json",
+  "provenance.json",
+  "README.md",
+  "qualification-plan.md"
+]
