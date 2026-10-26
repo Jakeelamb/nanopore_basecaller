@@ -595,10 +595,13 @@ int controls() {
         Schedule schedule;
         advance(session, block(0, 1, 0, 2), std::nullopt);
         advance(free_only, block(0, 1, 0, 2), std::nullopt);
+        const std::vector<Choice> initial_locations{{100, "ATTA"}, {200, "TAAT", "-"}};
+        const std::vector<Choice> revised_locations{{300, "CGTA"}};
+        const std::vector<Choice> no_locations;
         for (std::size_t row = 1; row < 4; ++row) {
-            const auto choices = row == 1   ? std::vector<Choice>{{100, "ATTA"}, {200, "TAAT", "-"}}
-                                 : row == 2 ? std::vector<Choice>{{300, "CGTA"}}
-                                            : std::vector<Choice>{};
+            const auto& choices = row == 1   ? initial_locations
+                                  : row == 2 ? revised_locations
+                                             : no_locations;
             const auto update = fixture.update(session, choices);
             schedule[row] = oracle_locations(update);
             advance(session, block(row, 1, row, 2), update);

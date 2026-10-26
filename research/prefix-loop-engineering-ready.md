@@ -1,6 +1,8 @@
 # F1 public-CLI and engineering source cut
 
-Source preparation is complete for the next bounded engineering attempt. No new execution grant was consumed. Formatting has one retained Root execution at `results/prefix-feedback/format-01`, exit0. Compilation, CTest, Python controls, mapper, full-parent disabled control, reference-body verification and genuine pilot executions remain0. The six formatted C++ files are preserved byte-for-byte from the isolated formatting commit.
+Root's first engineering unit at `1a90d3e3f4cb13c9b22eb268a157fd373902ce57` configured successfully, then failed the strict Release build with three `-Werror=dangling-pointer=` diagnostics in the accepted-rebind test fixture. CTest and Python controls did not run. The fixture now selects among named vectors that outlive the loop; the decoder, oracle and acceptance gates are unchanged. The retained failure and exact next format/engineering commands are recorded in `research/prefix-loop-qualification-01-failure.md`.
+
+Formatting has one retained Root execution at `results/prefix-feedback/format-01`, exit0. Only `tests/controls.cpp` has a source change after that formatting cut; the other five C++ files remain identical. This source fix has not been formatted or executed. Mapper, full-parent disabled control, reference-body verification and genuine pilot executions remain0.
 
 The R1/R2/R3 exact-delta review is SOURCE_PASS_RUNTIME_PENDING at prior implementation `8187e2045862fd0832f210b3eb9f2e1a3f26aea3`. Review SHA256 is `38d8684c449703bf0f069851cc10b5063c0cc4aba8263f5cd13b7cff6443da0a`. The new Python integration and controls still need exact-delta review and actual qualification. This report does not restamp the earlier review as covering new code.
 
@@ -27,7 +29,7 @@ Prepared hermetic controls cover both strands, exact population, nonempty-edit r
 Cwd is `/home/jake/Projects/nanopore_basecaller-next-prefix-loop`. Root must create a fresh F4 grant and use the frozen public CLI. No science role or human input body is included.
 
 ```sh
-env UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 /home/jake/.local/bin/uv run --project /home/jake/Projects/nanopore_basecaller-retrieval --no-sync python /home/jake/Projects/nanopore_basecaller-next-prefix-loop/scripts/prefix-feedback.py qualify --output /home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/qualification-01
+env UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 /home/jake/.local/bin/uv run --project /home/jake/Projects/nanopore_basecaller-retrieval --no-sync python /home/jake/Projects/nanopore_basecaller-next-prefix-loop/scripts/prefix-feedback.py qualify --output /home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/qualification-02
 ```
 
 The non-authorizing exact plan is `tools/prefix_feedback/engineering-plan.json`. Root must bind all current F1 source files, the read-only PR15 dependency manifest/header, frozen F4/original guard, UV/interpreter, time/systemd and registered build/runtime closure. The registered79-pin/18-ldd tool metadata is `/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/tool-intake-01/tool-pins.json`,28357bytes, SHA256 `86c5bb903ac070b703a406816fbfd309168619052d2f616851d5190e8d6c73bb`. It is metadata, not permission to hash executable bodies outside the worker.
@@ -38,7 +40,7 @@ Stages are configure, Release build with parallel2, owned format-check, CTest pa
 
 Qualification requires at least one clean JUnit test, all13 actual C++ control groups from LastTest.log and all15 actual Python tests, with skips0. It writes complete.json last. The old standalone fixed-UV unittest command remains valid; the new qualifier supplies the binary and TMPDIR explicitly. No inference of native/GPU/biological acceptance is permitted from engineering success.
 
-Expected success files relative to the payload root are `complete.json`, `ctest.xml`, `build/prefix-feedback`, `build/Testing/Temporary/LastTest.log` and every `stage-N/{command.json,stdout,stderr,time.txt,terminal.json}` for N0..4. The outer F4 attempt is a distinct fresh `results/prefix-feedback/engineering-01`, with its own full recorder/complete/worker/outer terminal files. Root must list absolute expected files and semantic roles in its grant. Missing projection after a successful producer is an observation failure and must not trigger producer replay.
+Expected success files relative to the payload root are `complete.json`, `ctest.xml`, `build/prefix-feedback`, `build/Testing/Temporary/LastTest.log` and every `stage-N/{command.json,stdout,stderr,time.txt,terminal.json}` for N0..4. The outer F4 attempt is a distinct fresh `results/prefix-feedback/qualification-02-outer`, with its own full recorder/complete/worker/outer terminal files. Root must list absolute expected files and semantic roles in its grant. Missing projection after a successful producer is an observation failure and must not trigger producer replay. The failed `qualification-01` attempt remains immutable.
 
 ## Later custody verification proposal
 

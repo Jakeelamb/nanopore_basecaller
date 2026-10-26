@@ -1,6 +1,6 @@
 # Prefix feedback source candidate
 
-This is F1's source review candidate for draft PR16. Root completed one retained six-file formatting unit. Compilation, tests, mapper and genuine pilot execution remain unrun. Root must admit the exact next unit. No native neural replay or GPU work is included.
+This is F1's source review candidate for draft PR16. Root completed one retained six-file formatting unit. The first engineering unit configured, then failed strict compilation in a test fixture; its named-storage fix awaits a fresh format and qualification unit. CTest, Python controls, mapper and genuine pilot execution remain unrun. Root must admit the exact next unit. No native neural replay or GPU work is included.
 
 The R1-R3 correction candidate is described in `research/prefix-loop-review-fixes.md`. A pinned resource manifest now binds current mapper/index/reference/FAI/tool identities and their build lineage. Prepared controls compare actual retained search state/location masses with exhaustive enumeration and enter successful synthetic location rebinds. Zero-base output is explicit abstention. These corrections have no execution evidence yet.
 
