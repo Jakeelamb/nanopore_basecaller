@@ -460,6 +460,8 @@ class PrefixBridgeTests(unittest.TestCase):
 
     def test_resealed_wrong_producer_outputs_reach_producer_guard(self):
         request, _, _ = self.fixture()
+        original_request = copy.deepcopy(request)
+        original_receipt = DRIVER.read(request["producer"]["path"])
         wrong = DRIVER.read(request["producer"]["path"])
         wrong["outputs"] = wrong["outputs"][1:]
         path = self.directory / "wrong-producer.json"
@@ -467,6 +469,40 @@ class PrefixBridgeTests(unittest.TestCase):
         request["producer"] = request["expected_producer"] = DRIVER.pin(path)
         _, record = self.stages.f1(self.binary_pin, "normalize", request, self.directory / "bad", (), False)
         self.assertIn("actual producer binary/output census differs", Path(record["stderr"]["path"]).read_text())
+        original_command = DRIVER.read(original_receipt["command"]["path"])
+        original_terminal = DRIVER.read(original_receipt["terminal"]["path"])
+        complete = DRIVER.read(Path(original_request["emission"]["path"]).parent / "complete.json")
+        foreign_request = self.directory / "foreign-emit-request.json"
+        DRIVER.fresh(foreign_request, DRIVER.read(complete["request"]["path"]))
+        foreign_output = self.directory / "foreign-emit-output"
+        foreign_output.mkdir()
+        for label in ("request", "hash", "output", "argc"):
+            command = copy.deepcopy(original_command)
+            if label == "request":
+                command["argv"][3] = str(foreign_request)
+            elif label == "hash":
+                command["argv"][5] = "0" * 64
+            elif label == "output":
+                command["argv"][7] = str(foreign_output)
+            else:
+                command["argv"] = command["argv"][:2]
+            command_path = self.directory / ("resealed-command-" + label + ".json")
+            DRIVER.fresh(command_path, command)
+            terminal = copy.deepcopy(original_terminal)
+            terminal["command"] = DRIVER.pin(command_path)
+            terminal_path = self.directory / ("resealed-terminal-" + label + ".json")
+            DRIVER.fresh(terminal_path, terminal)
+            receipt = copy.deepcopy(original_receipt)
+            receipt["command"] = DRIVER.pin(command_path)
+            receipt["terminal"] = DRIVER.pin(terminal_path)
+            receipt_path = self.directory / ("resealed-receipt-" + label + ".json")
+            DRIVER.fresh(receipt_path, receipt)
+            bad = copy.deepcopy(original_request)
+            bad["producer"] = bad["expected_producer"] = DRIVER.pin(receipt_path)
+            _, record = self.stages.f1(self.binary_pin, "normalize", bad,
+                self.directory / ("reject-resealed-" + label), (), False)
+            self.assertIn("free emission request/cwd/output provenance differs",
+                Path(record["stderr"]["path"]).read_text())
 
     def test_foreign_current_prefix_and_unavailable_endpoint_reject(self):
         request, _, _ = self.fixture()

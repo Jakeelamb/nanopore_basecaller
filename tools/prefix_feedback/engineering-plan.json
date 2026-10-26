@@ -19,7 +19,7 @@
   "aggregate_bytes": 4294967296,
   "reserve_bytes": 32212254720,
   "expected_payload": ["complete.json", "ctest.xml", "build/prefix-feedback", "build/Testing/Temporary/LastTest.log", "stage-0/terminal.json", "stage-1/terminal.json", "stage-2/terminal.json", "stage-3/terminal.json", "stage-4/terminal.json", "stage-4/stderr"],
-  "required_actual_controls": {"cpp_groups": 13, "bridge_groups": 8, "python_tests": 20, "ctest_tests": 2, "skipped": 0},
+  "required_actual_controls": {"cpp_groups": 13, "bridge_groups": 8, "python_tests": 20, "ctest_tests": 2, "bridge_stage_receipts": 26, "skipped": 0},
   "f4_attempt": "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/bridge-qualification-01-outer",
   "output_roots": ["/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback"],
   "grant_rule": "Root authors a fresh bounded-command/1 grant with full source/tool closure, clocks and semantic roles; this file never authorizes execution"

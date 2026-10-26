@@ -104,7 +104,7 @@ def qualify(output):
                    and "skipped=" not in python_log and "FAILED" not in python_log,
                    "consumed Python tests did not execute clean skipped-zero tests")
         bridge_receipts = [io.pin(path) for path in sorted(Path(env["TMPDIR"]).glob("bridge-control-*/records/stage-*/receipt.json"))]
-        io.require(len(bridge_receipts) == 22, "actual retained F1 bridge stage census differs")
+        io.require(len(bridge_receipts) == 26, "actual retained F1 bridge stage census differs")
         io.fresh(output / "complete.json", dict(schema="prefix-engineering/1", complete=True,
             stages=stages, binary=io.pin(build / "prefix-feedback"), ctest=io.pin(output / "ctest.xml"),
             actual_cpp_controls=counters[0], actual_bridge_controls=bridge[0], actual_python_tests=int(count[1]), skipped=0,

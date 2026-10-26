@@ -241,8 +241,14 @@ Emission load_emission(const Json& request) {
             own_binary(), "emit-free-input", Json::array({value.at("binding").at("input_tensor"),
                     value.at("binding").at("location_producer"), value.at("identity"),
                     request.at("emission"), complete}));
-    require(invocation.at("cwd") == source_witness().at("root"), "free emission cwd differs");
-    const auto producer_request = consumed(consumed(complete).at("request"));
+    const auto request_pin = consumed(complete).at("request");
+    const auto& argv = invocation.at("argv");
+    require(argv.size() == 8 && argv.at(2) == "--request" && argv.at(3) == request_pin.at("path") &&
+                    argv.at(4) == "--request-sha256" && argv.at(5) == request_pin.at("sha256") &&
+                    argv.at(6) == "--output" && fs::path(argv.at(7).get<std::string>()) == root &&
+                    invocation.at("cwd") == source_witness().at("root"),
+            "free emission request/cwd/output provenance differs");
+    const auto producer_request = consumed(request_pin);
     require(producer_request.at("state") == value.at("state") &&
                     producer_request.at("snapshot") == value.at("snapshot") &&
                     producer_request.at("producer") == value.at("producer") &&
@@ -360,7 +366,7 @@ Json normalize_candidates(const Session& session, const Json& snapshot,
             "empty/absent free prefix is explicit normalization abstention");
     const auto& free = candidate(snapshot, snapshot.at("reference_free_candidate_id"));
     const auto native = identity.at("sequence").get<std::string>();
-    require(!native.empty() && native == free.at("sequence") &&
+    require(!native.empty() && native == free.at("sequence").get<std::string>() &&
                     identity.at("quality") == std::string(native.size(), '!') &&
                     binding.at("prefix_sha256") == digest(native) && index(binding.at("prefix_length")) == native.size(),
             "available free input identity differs");

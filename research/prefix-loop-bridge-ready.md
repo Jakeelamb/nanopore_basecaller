@@ -12,13 +12,13 @@ F3 replacements are validated in full-prefix coordinates. New scores use F1's ex
 
 ## First Root unit: format only
 
-The explicit C++ census is9 files. The old `src/location.cpp` and `tests/controls.cpp` are unchanged; the other7 are changed/new. Exact full-census formatter argv, cwd `/home/jake/Projects/nanopore_basecaller-next-prefix-loop`:
+The explicit C++ census is9 files. Only `src/location.cpp` is unchanged from the old qualified cut; the other8 are changed/new. The old control fixture's storage moved under declared monitored TMPDIR; its oracle assertions are unchanged. Exact full-census formatter argv, cwd `/home/jake/Projects/nanopore_basecaller-next-prefix-loop`:
 
 ```sh
 /usr/bin/clang-format -i tools/prefix_feedback/include/prefix_feedback/session.h tools/prefix_feedback/include/prefix_feedback/bridge.h tools/prefix_feedback/src/io.cpp tools/prefix_feedback/src/session.cpp tools/prefix_feedback/src/location.cpp tools/prefix_feedback/src/main.cpp tools/prefix_feedback/src/bridge.cpp tools/prefix_feedback/tests/controls.cpp tools/prefix_feedback/tests/bridge_controls.cpp
 ```
 
-Root must pin the actual nine source bytes, style file and registered formatter/runtime closure, retain actual format output and refreeze before compiling. Proposed fresh attempt `results/prefix-feedback/bridge-format-01`; caps30s/2CPU/RAM4GiB/AS8GiB/swap0, growth100MiB, aggregate4GiB, reserve30GiB. No formatter ran during source preparation.
+Root must pin the actual nine source bytes, style file and registered formatter/runtime closure, retain actual format output and refreeze before compiling. Proposed new attempt after the retained refusal is `results/prefix-feedback/bridge-format-02`; caps30s/2CPU/RAM4GiB/AS8GiB/swap0, growth100MiB, aggregate4GiB, reserve30GiB. No formatter ran during source preparation.
 
 ## Component qualifier, independent of sibling artifacts
 
@@ -28,7 +28,7 @@ After format freeze, through a fresh Root F4 grant, exact payload cwd is F1:
 env UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 /home/jake/.local/bin/uv run --project /home/jake/Projects/nanopore_basecaller-retrieval --no-sync python /home/jake/Projects/nanopore_basecaller-next-prefix-loop/scripts/prefix-feedback.py qualify --output /home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/bridge-qualification-01
 ```
 
-`tools/prefix_feedback/engineering-plan.json` supplies the non-authorizing plan. Root pins the full current source closure and the existing registered tool/PR15 dependency closure. Hermetic input pins are empty. Full unit caps300s/2CPU/RAM4GiB/AS8GiB/swap0/growth100MiB/aggregate4GiB/reserve30GiB. Expected outputs retain configure/build/format-check/CTest/UV raw stages, binary, JUnit, LastTest.log and complete written last. Required actual census is2 CTests, the old13 C++ groups plus8 bridge groups, all old15 Python methods plus5 new producer/consumer methods, skipped0, and22 retained new F1 subprocess receipts/inputs. No dependency absence becomes a skip.
+`tools/prefix_feedback/engineering-plan.json` supplies the non-authorizing plan. Root pins the full current source closure and the existing registered tool/PR15 dependency closure. Hermetic input pins are empty. Full unit caps300s/2CPU/RAM4GiB/AS8GiB/swap0/growth100MiB/aggregate4GiB/reserve30GiB. Expected outputs retain configure/build/format-check/CTest/UV raw stages, binary, JUnit, LastTest.log and complete written last. Required actual census is2 CTests, the old13 C++ groups plus8 bridge groups, all old15 Python methods plus5 new producer/consumer methods, skipped0, and26 retained new F1 subprocess receipts/inputs. No dependency absence becomes a skip.
 
 ## Separate later actual cross-lane unit
 
@@ -48,3 +48,9 @@ The actual positive must add a previously absent indel, preserve H and produce H
 There is no measured runtime capacity. For a fixed string length L and k<=4, the existing scalar visits at most `T * (sum_{j=0}^{k-1} 4^(k-j) + max(0,L+1-k))` state cells. At k4/T2048/L514, this is1,744,896 cells per call;512 such calls admit an upper bound893,386,752 cell visits, with up to two map updates per cell. Normalization/base verification adds its own scalar calls. This is a source loop bound, not a speed estimate or permission for that workload. The tiny joint fixture is four rows/k1. The512 proposal guard is not claimed reachable or executed under F3's32-base grammar.
 
 Source-root corruption qualification, general revision projection, current human first-chunk T, reference/index/FAI custody, genuine native/mapping inputs, three genuine prefix-derived location updates, full-parent stock identity, accuracy, private-variant safety and latency remain separately held. No streaming/raw-causality, calibration, speed or biological claim follows from this source cut.
+
+## Narrow source-review corrections
+
+The de10 review `S/reviews/F1-bridge-source-v1/REPORT.md`, SHA256 `91f15e8e5afc3660587d37e4a7931f64f5dabf21a9bd0763ed39515f5180136e`, found three source issues. The free/native comparison now explicitly consumes a string. Emission consumption binds all eight actual argv operands to its consumed complete.request FilePin/hash and output directory, mirroring the existing advance guard. Four prepared resealed-metadata negatives change request path, command hash, output directory or argc, while resealing command/terminal/receipt and the independently expected receipt operand; each must hit that relationship guard. They add four actual normalizer-rejection stages without replaying the successful emission, bringing the component stage census to26. Old C++ fixture files now require canonical TMPDIR within the monitored `results/prefix-feedback` tree, print their retained path and remain available for review. No oracle assertions or decoder mathematics changed.
+
+Root's refused bridge-format01 at `2026-10-26T21:44:46Z` remains retained; no worker or formatter ran. No retry, format, build or test was performed during these source corrections. Fresh admission remains required.

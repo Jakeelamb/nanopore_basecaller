@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -196,9 +197,21 @@ struct Fixture {
     Json manifest;
     Fixture() {
         static std::size_t count{};
-        root = fs::current_path() / ("prefix-control-fixtures-" + std::to_string(::getpid()) + "-" +
+        const auto* declared = std::getenv("TMPDIR");
+        require(declared != nullptr && *declared != '\0', "declared result TMPDIR required");
+        const fs::path temporary(declared);
+        const auto owned = fs::canonical(fs::path(source_witness().at("root").get<std::string>()) /
+                                         "results/prefix-feedback");
+        require(temporary.is_absolute() && fs::is_directory(temporary) &&
+                        fs::canonical(temporary) == temporary,
+                "canonical existing result TMPDIR required");
+        const auto relative = temporary.lexically_relative(owned);
+        require(!relative.empty() && !relative.is_absolute() && *relative.begin() != "..",
+                "control TMPDIR outside monitored prefix results");
+        root = temporary / ("prefix-control-fixtures-" + std::to_string(::getpid()) + "-" +
                                      std::to_string(count++));
         require(fs::create_directory(root), "fresh control fixture directory required");
+        std::cout << Json{{"fixture_root", root.string()}, {"retained", true}}.dump() << '\n';
         auto file = [&](const std::string& name, const std::string& bytes) {
             const auto path = root / name;
             text(path, bytes);
