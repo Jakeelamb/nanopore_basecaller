@@ -45,6 +45,6 @@ struct Decision {
     double context_weight{};
     std::vector<Assessment> assessments;
 };
-void validate(const Batch& batch, const Policy& policy);
-Decision decide(const Batch& batch, const Policy& policy);
+void validate(const Batch &batch, const Policy &policy);
+Decision decide(const Batch &batch, const Policy &policy);
 }

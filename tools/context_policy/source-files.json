@@ -2,6 +2,7 @@
   "tools/context_policy/CMakeLists.txt",
   "tools/context_policy/.clang-format",
   "tools/context_policy/source-files.json",
+  "tools/context_policy/qualify.py",
   "tools/context_policy/include/context_policy/policy.h",
   "tools/context_policy/include/context_policy/protocol.h",
   "tools/context_policy/src/policy.cpp",

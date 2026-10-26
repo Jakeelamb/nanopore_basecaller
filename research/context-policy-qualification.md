@@ -1,5 +1,23 @@
 # F2 source-ready qualification request
 
+## Formatted engineering handoff, 2026-10-26
+
+Root's format-only attempt `results/context-policy/format-01` completed with exit0. Its admission SHA256 is `7a63728f7bcdb9730d9293f3cecb787c9cf72d925b621e0e4175c9d312fa09b1`. `terminal.json` retains the actual exit and cleanup, and `outer-terminal.json` records both groups empty before unlock with no error. The raw wrapper receipt is `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T193529Z-feedback-f2-format-01-f7UELD`. Seven owned C++ files changed. Independent whitespace, comment and include-order normalized comparison against the reviewed head passed. No numerical change was made.
+
+`tools/context_policy/qualify.py` now runs the five existing stages sequentially. It writes each stage's eight raw command, cwd, start, end, exit-status, stdout, stderr and GNU time files, then its terminal record, before projecting success. A failure stops the chain and preserves its directory. This runner adds no lock, process-group manager, kernel limit or timeout. Root must launch it through frozen F4 `bounded.py` SHA256 `8adfc5a212061cfc079bb2e47cae12546c5d5bb9aba2adf0a6073e9d62710fc4` at F4 revision `d190ab3f8175f1af7b5d4057b893ef6424b9d41f`.
+
+The next exact child command, with this worktree as cwd, is:
+
+```sh
+UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 /home/jake/.local/bin/uv run --project /home/jake/Projects/nanopore_basecaller-retrieval --no-sync python tools/context_policy/qualify.py --output /home/jake/Projects/nanopore_basecaller-next-context-policy/results/context-policy/qualification-01
+```
+
+The fresh build is `qualification-01/build`. Configure explicitly selects `/usr/bin/c++`, `/usr/bin/make`, Release and compile-command export. The UV test stage sets `CONTEXT_POLICY_BINARY` to that exact new binary. Acceptance requires the exact12 CTest names with no failure/error/skip and exactly10 successful UV unittest methods with no skips or expected failures. The unit retains `ctest.xml`, `unittest.json`, `build/compile_commands.json`, each stage's raw files and `terminal.json`; it writes `complete.json` last and syncs it. F4's separate terminal-tree proof remains required.
+
+Requested whole-unit caps remain wall300s, CPU2, RAM4GiB, AS8GiB, swap0, growth100MiB, aggregate4GiB and reserve30GiB. Use the canonical NONBLOCK lock once, without retries. Only Root admits and launches this command. Tests actually run at this source handoff remain0. The qualifier is included in `source-files.json`, so compiled source validation binds its exact bytes. Registered tool/header pins come from `ready-native-v2-4/tools.json` under targeting-v2 and PR15's `tools/uncertainty_feedback/dependencies.json`; executable bodies remain stat-only during preparation. Dynamic compiler/system-header/OpenSSL dependency closure requires separate retained evidence and is not inferred from these entries.
+
+Everything below records the original unformatted source request. Genuine F1 integration, calibration, biological accuracy and performance remain held.
+
 Status: SOURCE-READY, execution not admitted. Tests actually run: 0. Build, format-check, CTest, UV tests, genuine producer integration, calibration, and scientific pilot have not run. This report is preparation evidence, not PASS.
 
 The first source cut adds the pure C++23 policy, strict raw-FilePin consumer, synthetic independent candidate-map oracle, CLI controls, UV coordinator, and predeclared development configuration. The initial candidate-map oracle enumerates 150 exact quarter-unit cases and checks objectives, full eligibility reasons, decisions, and candidate permutations. Twelve CTests and ten UV unittest methods are prepared without skip paths. Execution will establish their actual outcome.

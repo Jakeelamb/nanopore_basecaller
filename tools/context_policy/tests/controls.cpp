@@ -4,9 +4,9 @@
 
 #include <algorithm>
 #include <cmath>
-#include <functional>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <map>
@@ -14,22 +14,26 @@
 
 namespace cp = context_policy;
 namespace {
-void check(bool value, const char* message) {
+void check(bool value, const char *message) {
     if (!value) {
         throw std::runtime_error(message);
     }
 }
-void rejects(const std::function<void()>& action) {
+void rejects(const std::function<void()> &action) {
     bool rejected = false;
     try {
         action();
-    } catch (const std::invalid_argument&) {
+    } catch (const std::invalid_argument &) {
         rejected = true;
     }
     check(rejected, "expected invalid input rejection");
 }
 cp::Batch base() {
-    return {"AAAA", "IIII", "free", "free", {{"L0", 1.0}},
+    return {"AAAA",
+            "IIII",
+            "free",
+            "free",
+            {{"L0", 1.0}},
             {{"native", "AAAA", -2.0, 4.0, {"L0"}, {}},
              {"free", "AAAC", 0.0, 4.0, {"L0"}, {}},
              {"ref", "AAAT", -0.25, 0.0, {"L0"}, {}}}};
@@ -47,12 +51,13 @@ void separation() {
     distinct.candidates.back().neural_log_likelihood = 0.25;
     distinct.union_nn_candidate_id = "ref";
     distinct.locations.clear();
-    for (auto& item : distinct.candidates) {
+    for (auto &item : distinct.candidates) {
         item.context_cost = 0.0;
         item.location_ids.clear();
     }
     check(cp::decide(distinct, {}).selected_candidate_id == "free", "empty context genuine escape");
-    check(cp::decide(distinct, {cp::Mode::prior_none, 0.5, 0.5, 0.0}).selected_candidate_id == "ref",
+    check(cp::decide(distinct, {cp::Mode::prior_none, 0.5, 0.5, 0.0}).selected_candidate_id ==
+              "ref",
           "union neural diagnostic distinct from genuine escape");
 }
 void runner_up() {
@@ -63,7 +68,8 @@ void runner_up() {
     check(cp::decide(batch, {cp::Mode::fixed, 0.5, 0.5, 0.5}).selected_candidate_id == "free",
           "fixed top candidate fallback unchanged");
     batch.candidates.back().eligibility_reasons = {"producer_rejected"};
-    check(cp::decide(batch, {}).selected_candidate_id == "free", "no eligible contextual candidate");
+    check(cp::decide(batch, {}).selected_candidate_id == "free",
+          "no eligible contextual candidate");
 }
 void fixed() {
     auto batch = base();
@@ -91,11 +97,12 @@ void monotonic() {
     check(cp::decide(batch, {}).selected_candidate_id == "ref", "inclusive neural budget");
 }
 void novel() {
-    for (const auto& sequence : {"AAAC", "AAAAC", "AAC"}) {
+    for (const auto &sequence : {"AAAC", "AAAAC", "AAC"}) {
         auto batch = base();
         batch.candidates[1].sequence = sequence;
         batch.candidates.back().neural_log_likelihood = -0.75;
-        check(cp::decide(batch, {}).sequence == sequence, "private SNV INS DEL strong signal survival");
+        check(cp::decide(batch, {}).sequence == sequence,
+              "private SNV INS DEL strong signal survival");
     }
 }
 void wrong_inside_budget() {
@@ -111,13 +118,14 @@ void ties() {
     check(cp::decide(batch, {}).selected_candidate_id == "free", "permuted exact tie");
     batch.candidates[2].neural_log_likelihood = 0.0;
     batch.union_nn_candidate_id = "native";
-    check(cp::decide(batch, {cp::Mode::prior_none, 0.5, 0.5, 0.0}).selected_candidate_id == "native",
+    check(cp::decide(batch, {cp::Mode::prior_none, 0.5, 0.5, 0.0}).selected_candidate_id ==
+              "native",
           "native wins neural tie");
 }
 void empty_context() {
     auto batch = base();
     batch.locations.clear();
-    for (auto& candidate : batch.candidates) {
+    for (auto &candidate : batch.candidates) {
         candidate.location_ids.clear();
         candidate.context_cost = 0.0;
     }
@@ -159,32 +167,38 @@ void map_oracle() {
                         batch.candidates[2].eligibility_reasons = {"blocked"};
                     }
                     std::map<std::string, cp::Candidate> candidates;
-                    for (const auto& item : batch.candidates) {
+                    for (const auto &item : batch.candidates) {
                         candidates.emplace(item.id, item);
                     }
                     const double weight = static_cast<double>(support) / 4.0;
                     const double baseline = -weight * 4.0;
                     std::string expected = "free";
                     double best_score = baseline;
-                    for (const auto& [id, item] : candidates) {
-                        const double score = item.neural_log_likelihood - weight * item.context_cost;
+                    for (const auto &[id, item] : candidates) {
+                        const double score =
+                            item.neural_log_likelihood - weight * item.context_cost;
                         const bool eligible = item.eligibility_reasons.empty() &&
-                            item.neural_log_likelihood >= -0.5 && score > baseline && weight > 0.0;
+                                              item.neural_log_likelihood >= -0.5 &&
+                                              score > baseline && weight > 0.0;
                         if (eligible && (score > best_score ||
-                            (score == best_score && item.sequence < candidates.at(expected).sequence))) {
+                                         (score == best_score &&
+                                          item.sequence < candidates.at(expected).sequence))) {
                             best_score = score;
                             expected = id;
                         }
                     }
                     const auto decision = cp::decide(batch, {});
                     check(decision.selected_candidate_id == expected, "independent map decision");
-                    for (const auto& assessment : decision.assessments) {
-                        const auto& item = candidates.at(assessment.candidate_id);
-                        check(assessment.objective == item.neural_log_likelihood - weight * item.context_cost,
+                    for (const auto &assessment : decision.assessments) {
+                        const auto &item = candidates.at(assessment.candidate_id);
+                        check(assessment.objective ==
+                                  item.neural_log_likelihood - weight * item.context_cost,
                               "independent map objective");
-                        const bool budget = std::find(assessment.reasons.begin(), assessment.reasons.end(),
-                                                      "neural_budget_exceeded") != assessment.reasons.end();
-                        check(budget == (item.neural_log_likelihood < -0.5), "independent map budget");
+                        const bool budget =
+                            std::find(assessment.reasons.begin(), assessment.reasons.end(),
+                                      "neural_budget_exceeded") != assessment.reasons.end();
+                        check(budget == (item.neural_log_likelihood < -0.5),
+                              "independent map budget");
                         std::vector<std::string> reasons = item.eligibility_reasons;
                         if (item.neural_log_likelihood < -0.5) {
                             reasons.push_back("neural_budget_exceeded");
@@ -197,7 +211,8 @@ void map_oracle() {
                         check(assessment.reasons == reasons, "independent complete eligibility");
                     }
                     std::reverse(batch.candidates.begin(), batch.candidates.end());
-                    check(cp::decide(batch, {}).selected_candidate_id == expected, "map permutation");
+                    check(cp::decide(batch, {}).selected_candidate_id == expected,
+                          "map permutation");
                     ++checked;
                 }
             }
@@ -210,7 +225,8 @@ void protocol_controls() {
     check(cp::test::run(request).at("selected_candidate_id") == "ref", "protocol producer fixture");
     std::reverse(request["batch"]["candidates"].begin(), request["batch"]["candidates"].end());
     cp::test::reseal(request);
-    check(cp::test::run(request).at("selected_candidate_id") == "ref", "candidate order invariance");
+    check(cp::test::run(request).at("selected_candidate_id") == "ref",
+          "candidate order invariance");
     request["batch"]["candidates"][0]["context_cost"] = 3.0;
     rejects([&] { static_cast<void>(cp::test::run(request)); });
     request = cp::test::fixture();
@@ -239,25 +255,39 @@ void protocol_controls() {
 void source_guard() {
     const auto path = std::filesystem::current_path() / "source-guard-fixture.txt";
     check(!std::filesystem::exists(path), "source guard fixture is not fresh");
-    { std::ofstream file(path); file << "original"; }
+    {
+        std::ofstream file(path);
+        file << "original";
+    }
     cp::verify_source_file(path.string(), 8, cp::digest("original"));
-    { std::ofstream file(path); file << "mutated!"; }
+    {
+        std::ofstream file(path);
+        file << "mutated!";
+    }
     rejects([&] { cp::verify_source_file(path.string(), 8, cp::digest("original")); });
     std::filesystem::remove(path);
 }
 }
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     const std::map<std::string, std::function<void()>> tests{
-        {"separation", separation}, {"runner_up", runner_up}, {"fixed", fixed},
-        {"monotonic", monotonic}, {"novel", novel}, {"wrong_inside_budget", wrong_inside_budget},
-        {"ties", ties}, {"empty_context", empty_context}, {"numerical_rejections", numerical_rejections},
-        {"map_oracle", map_oracle}, {"protocol", protocol_controls}, {"source_guard", source_guard}};
+        {"separation", separation},
+        {"runner_up", runner_up},
+        {"fixed", fixed},
+        {"monotonic", monotonic},
+        {"novel", novel},
+        {"wrong_inside_budget", wrong_inside_budget},
+        {"ties", ties},
+        {"empty_context", empty_context},
+        {"numerical_rejections", numerical_rejections},
+        {"map_oracle", map_oracle},
+        {"protocol", protocol_controls},
+        {"source_guard", source_guard}};
     try {
         check(argc == 2 && tests.contains(argv[1]), "unknown test name");
         tests.at(argv[1])();
         std::cout << argv[1] << " passed\n";
         return 0;
-    } catch (const std::exception& error) {
+    } catch (const std::exception &error) {
         std::cerr << error.what() << '\n';
         return 1;
     }
