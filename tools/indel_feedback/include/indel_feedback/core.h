@@ -90,8 +90,8 @@ struct PrefixNomination {
       duplicate{}, excluded{}, original_duplicates{};
 };
 PrefixNomination nominate_prefix(const std::string &available_prefix,
-                                std::size_t consumed_rows,
-                                const std::vector<std::string> &originals);
+                                 std::size_t consumed_rows,
+                                 const std::vector<std::string> &originals);
 Json nominate_prefix_request(const Json &request);
 void prefix_controls();
 std::vector<Proposal> proposals(const Frame &frame,
