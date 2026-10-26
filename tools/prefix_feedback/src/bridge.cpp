@@ -107,7 +107,7 @@ Json stage_evidence(const Json& receipt_pin,
         check_pin(value);
     }
     const auto& argv = invocation.at("argv");
-    require(argv.size() >= 2 && argv.at(0) == binary.at("path") && argv.at(1) == command,
+    require(argv.size() >= 2 && argv.at(0) == binary.at("path") && argv.at(1).get<std::string>() == command,
             "actual producer command differs");
     for (const auto& value : outputs) {
         check_pin(value);
@@ -129,7 +129,7 @@ Json own_binary() { return pin(fs::canonical("/proc/self/exe")); }
 void check_complete(const Json& value) {
     const auto complete = consumed(value);
     require(complete.at("schema") == "prefix-complete/1" && complete.at("complete") == true &&
-                    complete.at("source_sha256") == source_id() &&
+                    complete.at("source_sha256").get<std::string>() == source_id() &&
                     complete.at("source") == source_witness(),
             "compiled producer source differs");
     check_pin(complete.at("request"));
@@ -194,7 +194,7 @@ Json panels(const Session& session, const std::string& identity) {
         const auto& update = session.updates.back();
         const auto old = update.at("query_sequence").get<std::string>();
         require(old.size() <= identity.size() && identity.starts_with(old) &&
-                        update.at("query_sha256") == digest(old) &&
+                        update.at("query_sha256").get<std::string>() == digest(old) &&
                         index(update.at("query_length")) == old.size() &&
                         index(update.at("available_score_end")) <= session.consumed_rows &&
                         update.at("locations") == state_json(session).at("locations"),
@@ -427,8 +427,8 @@ Json normalize_candidates(const Session& session,
     const auto& free = candidate(snapshot, snapshot.at("reference_free_candidate_id"));
     const auto native = identity.at("sequence").get<std::string>();
     require(!native.empty() && native == free.at("sequence").get<std::string>() &&
-                    identity.at("quality") == std::string(native.size(), '!') &&
-                    binding.at("prefix_sha256") == digest(native) &&
+                    identity.at("quality").get<std::string>() == std::string(native.size(), '!') &&
+                    binding.at("prefix_sha256").get<std::string>() == digest(native) &&
                     index(binding.at("prefix_length")) == native.size(),
             "available free input identity differs");
     std::set<std::string> sequences;
@@ -460,7 +460,7 @@ Json normalize_candidates(const Session& session,
     std::sort(locations.begin(), locations.end(), [](const Json& a, const Json& b) {
         return a.at("id").get<std::string>() < b.at("id").get<std::string>();
     });
-    require(free.at("id") == digest(native), "genuine H ID differs from sequence identity");
+    require(free.at("id").get<std::string>() == digest(native), "genuine H ID differs from sequence identity");
     return {{"schema", "feedback-next/1"},
             {"kind", "candidate-batch"},
             {"binding", binding},
@@ -504,9 +504,9 @@ Json merge_candidates(const Session& session,
         dna(alternate);
         require(begin <= end && end <= native.size() &&
                         begin >= (native.size() > 32 ? native.size() - 32 : 0) &&
-                        edit.at("reference") == native.substr(begin, end - begin) &&
+                        edit.at("reference").get<std::string>() == native.substr(begin, end - begin) &&
                         native.substr(0, begin) + alternate + native.substr(end) == sequence &&
-                        proposal.at("id") == "prefix-indel-" + digest(sequence) &&
+                        proposal.at("id").get<std::string>() == "prefix-indel-" + digest(sequence) &&
                         (previous.empty() || previous < sequence) &&
                         sequences.insert(sequence).second,
                 "sidecar replacement/order/dedup/tail differs");
@@ -589,7 +589,7 @@ Json merge_candidates(const Session& session,
     return result;
 }
 void bridge_command(const std::string& command, const Json& request, const fs::path& output) {
-    require(request.at("source_sha256") == source_id(), "bridge source differs");
+    require(request.at("source_sha256").get<std::string>() == source_id(), "bridge source differs");
     if (command == "emit-free-input") {
         keys(request, {"schema", "source_sha256", "state", "snapshot", "advance_complete",
                        "producer", "expected_producer", "parent_index"});
@@ -686,7 +686,7 @@ void bridge_command(const std::string& command, const Json& request, const fs::p
                             argv.at(4) == request.at("sidecar").at("path"),
                     "sidecar actual request/output differs");
             const auto sidecar_request = consumed(pin(argv.at(2).get<std::string>()));
-            require(file_digest(argv.at(2).get<std::string>()) == sidecar.at("request_sha256") &&
+            require(file_digest(argv.at(2).get<std::string>()) == sidecar.at("request_sha256").get<std::string>() &&
                             sidecar_request.at("batch_pin") == request.at("batch") &&
                             sidecar_request.at("expected_binding") ==
                                     request.at("expected_binding") &&
