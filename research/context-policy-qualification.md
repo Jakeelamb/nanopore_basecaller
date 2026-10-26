@@ -1,5 +1,11 @@
 # F2 source-ready qualification request
 
+## Explicit JSON string extraction, 2026-10-26
+
+The actual `qualification-03` unit passed the namespace control and configure, then failed strict compilation at `protocol.cpp`'s two hash comparisons between `std::string` and JSON values. The retained build errors are `results/context-policy/qualification-03/stages/build/stderr`; the failed attempt remains unchanged. Tests did not start.
+
+All JSON string comparisons in the F2 boundary now extract strings through the existing `str()` validator, which calls `get<std::string>()`. The two C++ fixture assertions also extract their selected ID explicitly. JSON-to-JSON whole-binding equality stays intact. Policy algorithms, constants and gates are unchanged. Root must first admit formatting of exactly `tools/context_policy/src/protocol.cpp` and `tools/context_policy/tests/controls.cpp`, then refreeze the source before a fresh full engineering unit. No formatter or build was run by this source fix.
+
 ## Stage directory correction, 2026-10-26
 
 The admitted `qualification-02` attempt failed after configure succeeded with exit0. Its build receipt directory collided with CMake's existing `build/` directory, so compilation and tests did not start. The failed attempt remains at `results/context-policy/qualification-02`, its outer receipt at `qualification-02-outer`, and its macro receipt at `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T195129Z-feedback-f2-qualification-02-TIDkPo`. The earlier `qualification-01` outer attempt also remains failed; its tool-metadata path rejection occurred before the qualifier launched.

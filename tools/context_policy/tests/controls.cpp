@@ -222,10 +222,10 @@ void map_oracle() {
 }
 void protocol_controls() {
     auto request = cp::test::fixture();
-    check(cp::test::run(request).at("selected_candidate_id") == "ref", "protocol producer fixture");
+    check(cp::test::run(request).at("selected_candidate_id").get<std::string>() == "ref", "protocol producer fixture");
     std::reverse(request["batch"]["candidates"].begin(), request["batch"]["candidates"].end());
     cp::test::reseal(request);
-    check(cp::test::run(request).at("selected_candidate_id") == "ref",
+    check(cp::test::run(request).at("selected_candidate_id").get<std::string>() == "ref",
           "candidate order invariance");
     request["batch"]["candidates"][0]["context_cost"] = 3.0;
     rejects([&] { static_cast<void>(cp::test::run(request)); });

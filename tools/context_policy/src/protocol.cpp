@@ -91,8 +91,8 @@ void binding(const Json &value) {
     const auto &available = value.at("availability");
     keys(available, {"kind", "row_begin", "row_end", "available_row_end", "chunk_lookahead",
                      "signal_geometry"});
-    require(available.at("kind") == "released-score-block" &&
-                available.at("chunk_lookahead") == "whole_chunk" &&
+    require(str(available.at("kind")) == "released-score-block" &&
+                str(available.at("chunk_lookahead")) == "whole_chunk" &&
                 available.at("signal_geometry").is_null(),
             "unsupported availability kind");
     require(natural(available.at("row_begin")) <= natural(available.at("row_end")) &&
@@ -102,11 +102,12 @@ void binding(const Json &value) {
 Batch batch_from(const Json &value) {
     keys(value, {"schema", "kind", "binding", "native", "reference_free_candidate_id",
                  "union_nn_candidate_id", "locations", "candidates"});
-    require(value.at("schema") == "feedback-next/1" && value.at("kind") == "candidate-batch",
+    require(str(value.at("schema")) == "feedback-next/1" &&
+                str(value.at("kind")) == "candidate-batch",
             "foreign candidate schema");
     binding(value.at("binding"));
     keys(value.at("native"), {"sequence", "quality", "scope"});
-    require(value.at("native").at("scope") == "available_input_segment",
+    require(str(value.at("native").at("scope")) == "available_input_segment",
             "unavailable identity input");
     Batch result;
     result.native_sequence = value.at("native").at("sequence").get<std::string>();
@@ -119,11 +120,11 @@ Batch batch_from(const Json &value) {
         keys(location, {"id", "contig", "strand", "query_begin", "query_end", "reference_begin",
                         "reference_end", "confidence"});
         keys(location.at("confidence"), {"feature", "value", "meaning"});
-        require(location.at("confidence").at("feature") == "declared-location-support" &&
-                    location.at("confidence").at("meaning") == "bounded_support_not_probability",
+        require(str(location.at("confidence").at("feature")) == "declared-location-support" &&
+                    str(location.at("confidence").at("meaning")) == "bounded_support_not_probability",
                 "unknown location confidence semantics");
         static_cast<void>(str(location.at("contig")));
-        require(location.at("strand") == "+" || location.at("strand") == "-", "invalid strand");
+        require(str(location.at("strand")) == "+" || str(location.at("strand")) == "-", "invalid strand");
         require(natural(location.at("query_begin")) <= natural(location.at("query_end")) &&
                     natural(location.at("query_end")) <=
                         natural(value.at("binding").at("prefix_length")),
@@ -185,8 +186,8 @@ Batch batch_from(const Json &value) {
 Policy policy_from(const Json &value) {
     keys(value, {"mode", "maximum_context_weight", "maximum_neural_deficit",
                  "minimum_objective_margin", "parameter_status", "quality_status"});
-    require(value.at("parameter_status") == "predeclared_unfitted" &&
-                value.at("quality_status") == "uncalibrated",
+    require(str(value.at("parameter_status")) == "predeclared_unfitted" &&
+                str(value.at("quality_status")) == "uncalibrated",
             "unsupported calibration claim");
     const auto mode = str(value.at("mode"));
     require(mode == "disabled" || mode == "prior-none" || mode == "fixed" || mode == "adaptive",
@@ -226,14 +227,14 @@ std::string digest(const std::string &bytes) {
 }
 Json decide_request(const Json &request, const std::string &batch_bytes) {
     keys(request, {"schema", "batch_pin", "expected_binding", "expected_batch_sha256", "policy"});
-    require(request.at("schema") == "feedback-next/1", "foreign request schema");
+    require(str(request.at("schema")) == "feedback-next/1", "foreign request schema");
     pin(request.at("batch_pin"));
     hash_value(request.at("expected_batch_sha256"));
     const auto hash = digest(batch_bytes);
     require(batch_bytes.size() <= 8388608 &&
                 batch_bytes.size() == natural(request.at("batch_pin").at("size")) &&
-                hash == request.at("batch_pin").at("sha256") &&
-                hash == request.at("expected_batch_sha256"),
+                hash == str(request.at("batch_pin").at("sha256")) &&
+                hash == str(request.at("expected_batch_sha256")),
             "foreign or stale candidate batch hash");
     const auto input = parse(batch_bytes);
     const auto batch = batch_from(input);
