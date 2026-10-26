@@ -1,5 +1,11 @@
 # F3 source-ready cut and qualification request
 
+## CTest source-root working directory, 2026-10-26
+
+The actual `qualification-02` unit passed its namespace control, configure, strict Release build and format-check. CTest then exited8 because its default build-directory cwd failed the executable's compiled source-root guard before the control groups ran. The failure remains at `results/indel-feedback/qualification-02/stages/ctest/{stdout,stderr}` and its top-level terminal; the macro receipt is `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T200318Z-feedback-f3-qualification-02-0JaAcp`. UV tests did not start.
+
+The `indel_controls` CTest now sets `WORKING_DIRECTORY` to the existing canonical `source_root` variable. The source guard stays intact. No C++ or qualifier source changed. The next fixed-UV qualifier command uses `--output /home/jake/Projects/nanopore_basecaller-next-indel-decoder/results/indel-feedback/qualification-03` under the same fresh Root grant and caps. Fresh configure will bind the changed CMake bytes into the source witness. No formatter, build or test was run by this fix.
+
 ## Explicit JSON scalar extraction, 2026-10-26
 
 The actual `qualification-01` unit passed the namespace control and configure, then failed strict compilation at `core.cpp`'s FilePin hash comparison between `std::string` and JSON. The retained build errors are `results/indel-feedback/qualification-01/stages/build/stderr`; its failed terminal and outer receipts remain unchanged. Tests did not start.
