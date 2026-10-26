@@ -121,10 +121,12 @@ Batch batch_from(const Json &value) {
                         "reference_end", "confidence"});
         keys(location.at("confidence"), {"feature", "value", "meaning"});
         require(str(location.at("confidence").at("feature")) == "declared-location-support" &&
-                    str(location.at("confidence").at("meaning")) == "bounded_support_not_probability",
+                    str(location.at("confidence").at("meaning")) ==
+                        "bounded_support_not_probability",
                 "unknown location confidence semantics");
         static_cast<void>(str(location.at("contig")));
-        require(str(location.at("strand")) == "+" || str(location.at("strand")) == "-", "invalid strand");
+        require(str(location.at("strand")) == "+" || str(location.at("strand")) == "-",
+                "invalid strand");
         require(natural(location.at("query_begin")) <= natural(location.at("query_end")) &&
                     natural(location.at("query_end")) <=
                         natural(value.at("binding").at("prefix_length")),
