@@ -50,14 +50,15 @@ def pin(path):
 
 
 def stage(output, name, argv, env):
-    directory = output / name
-    directory.mkdir()
+    directory = output / "stages" / name
     actual = ["/usr/bin/time", "--verbose", "--output", str(directory / "time.txt"), *argv]
-    write(directory / "command.json", dict(argv=argv, recorder_argv=actual, cwd=str(ROOT), env=env))
-    write(directory / "cwd.txt", str(ROOT) + "\n")
-    write(directory / "start.txt", utc() + "\n")
-    code, error = None, None
+    code, error, created = None, None, False
     try:
+        directory.mkdir(parents=True)
+        created = True
+        write(directory / "command.json", dict(argv=argv, recorder_argv=actual, cwd=str(ROOT), env=env))
+        write(directory / "cwd.txt", str(ROOT) + "\n")
+        write(directory / "start.txt", utc() + "\n")
         with (directory / "stdout").open("xb") as stdout, (directory / "stderr").open("xb") as stderr:
             try:
                 code = subprocess.run(actual, cwd=ROOT, env=env, stdout=stdout, stderr=stderr,
@@ -70,17 +71,41 @@ def stage(output, name, argv, env):
         error = repr(caught)
         raise
     finally:
-        write(directory / "end.txt", utc() + "\n")
-        write(directory / "exit-status.txt", ("unknown" if code is None else str(code)) + "\n")
-        write(directory / "terminal.json", dict(exit_code=code, error=error,
-              missing_raw=[name for name in RAW if not (directory / name).is_file()],
-              outer_process_cleanup_required=True))
+        if created:
+            write(directory / "end.txt", utc() + "\n")
+            write(directory / "exit-status.txt", ("unknown" if code is None else str(code)) + "\n")
+            write(directory / "terminal.json", dict(exit_code=code, error=error,
+                  missing_raw=[name for name in RAW if not (directory / name).is_file()],
+                  outer_process_cleanup_required=True))
     if code != 0:
         raise RuntimeError(f"{name} failed with exit {code}; retained {directory}")
     missing = [name for name in RAW if not (directory / name).is_file()]
     if missing or not (directory / "time.txt").stat().st_size:
         raise RuntimeError(f"{name} recorder incomplete: {missing}")
     write(directory / "complete.json", dict(raw=[pin(directory / name) for name in RAW]))
+
+
+def namespace_control(output, env):
+    control = output / "namespace-control"
+    control.mkdir()
+    (control / "build").mkdir()
+    argv = [UV, "run", "--project", PROJECT, "--no-sync", "python", "-c", "pass"]
+    stage(control, "build", argv, env)
+    directory = control / "stages" / "build"
+    before = [pin(directory / name) for name in (*RAW, "terminal.json", "complete.json")]
+    try:
+        stage(control, "build", argv, env)
+    except FileExistsError:
+        pass
+    else:
+        raise ValueError("existing stage directory was accepted")
+    after = [pin(directory / name) for name in (*RAW, "terminal.json", "complete.json")]
+    if not (control / "build").is_dir() or before != after:
+        raise ValueError("build directory or retained stage evidence changed")
+    report = dict(build_directory_preserved=True, stage_exit=0,
+                  duplicate_stage_rejected_before_launch=True, retained_raw=after)
+    write(output / "namespace-control.json", report)
+    return report
 
 
 def unittest_report(path):
@@ -142,12 +167,16 @@ def qualify(output):
                       "--unittest-report", str(output / "unittest.json")]),
     )
     error, completed = None, []
+    attempted_stage = dict(name="namespace-control", directory=str(output / "namespace-control"))
     for signum in (signal.SIGTERM, signal.SIGINT):
         signal.signal(signum, interrupted)
     try:
+        namespace = namespace_control(output, env)
         for name, argv in stages:
+            attempted_stage = dict(name=name, argv=argv, directory=str(output / "stages" / name))
             stage(output, name, argv, env)
             completed.append(name)
+        attempted_stage = dict(name="projection", directory=str(output))
         ctest = junit_report(output / "ctest.xml")
         python = json.loads((output / "unittest.json").read_text())
         if python["tests"] != TEST_COUNT or any(python[key] for key in
@@ -155,12 +184,14 @@ def qualify(output):
             raise ValueError("UV unittest execution census/failure/skip differs")
         result = dict(schema="context-policy-engineering/1", engineering_only=True, ctest=ctest, python=python,
                       binary=pin(build / TOOL), compile_commands=pin(build / "compile_commands.json"),
-                      outer_f4_terminal_proof_required=True, scientific_integration_qualified=False)
+                      namespace_control=namespace, outer_f4_terminal_proof_required=True,
+                      scientific_integration_qualified=False)
     except BaseException as caught:
         error = repr(caught)
         raise
     finally:
-        write(output / "terminal.json", dict(end=utc(), error=error, completed_stages=completed))
+        write(output / "terminal.json", dict(end=utc(), error=error, completed_stages=completed,
+              attempted_stage=attempted_stage))
     write(output / "complete.json", result)
 
 

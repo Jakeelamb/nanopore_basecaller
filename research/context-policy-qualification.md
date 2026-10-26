@@ -1,5 +1,15 @@
 # F2 source-ready qualification request
 
+## Stage directory correction, 2026-10-26
+
+The admitted `qualification-02` attempt failed after configure succeeded with exit0. Its build receipt directory collided with CMake's existing `build/` directory, so compilation and tests did not start. The failed attempt remains at `results/context-policy/qualification-02`, its outer receipt at `qualification-02-outer`, and its macro receipt at `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T195129Z-feedback-f2-qualification-02-TIDkPo`. The earlier `qualification-01` outer attempt also remains failed; its tool-metadata path rejection occurred before the qualifier launched.
+
+Stage receipts now use `stages/<name>/`, separate from CMake's `build/` artifacts. Stage setup is inside the error handler. The top-level terminal record identifies the attempted stage, argv and directory even when setup fails. Existing receipt directories are rejected without modifying their contents.
+
+Before configure, an admitted local namespace control creates a build directory and runs one empty Python child through the production stage recorder. It then rejects an attempted duplicate stage before launching another child and checks that all retained records are unchanged. Its evidence is `namespace-control.json` and `namespace-control/stages/build/`. This control is prepared and has not run at this source handoff.
+
+The next child command is the fixed-UV command below with `--output /home/jake/Projects/nanopore_basecaller-next-context-policy/results/context-policy/qualification-03`. Expected links now include `namespace-control.json`, `stages/{configure,build,format-check,ctest,uv-tests}/{command.json,cwd.txt,start.txt,end.txt,exit-status.txt,stdout,stderr,time.txt,terminal.json,complete.json}`, plus the existing top-level terminal, completion, JUnit, unittest and compile-command files. Root supplies a fresh in-root `TMPDIR`. Caps and the frozen F4 boundary are unchanged. A fresh configure binds the corrected qualifier into the compiled source witness. No formatter or numerical source changed in this correction.
+
 ## Formatted engineering handoff, 2026-10-26
 
 Root's format-only attempt `results/context-policy/format-01` completed with exit0. Its admission SHA256 is `7a63728f7bcdb9730d9293f3cecb787c9cf72d925b621e0e4175c9d312fa09b1`. `terminal.json` retains the actual exit and cleanup, and `outer-terminal.json` records both groups empty before unlock with no error. The raw wrapper receipt is `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T193529Z-feedback-f2-format-01-f7UELD`. Seven owned C++ files changed. Independent whitespace, comment and include-order normalized comparison against the reviewed head passed. No numerical change was made.
