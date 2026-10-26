@@ -1,0 +1,7 @@
+[
+  ".clang-format",
+  "CMakeLists.txt",
+  "controls.cpp",
+  "main.cpp",
+  "mechanism.h"
+]

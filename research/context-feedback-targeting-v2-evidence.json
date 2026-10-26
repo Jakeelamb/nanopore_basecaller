@@ -1,0 +1,89 @@
+{
+  "actual_custody_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/final-custody-verdict.json",
+    "sha256": "fc001334bdd7fe1623e7f08a25d0e013328b9c86da7a8738e113b0504f84828e",
+    "size": 59789
+  },
+  "final_report": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-observation-report-3/complete.json",
+    "sha256": "446dbb7fd62d5969663571b4e2edb1ae6e22e7cbb95ef6b61653286c38c99850",
+    "size": 2252747
+  },
+  "final_report_outer": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/targeting-observation-report-v3-01/complete.json",
+    "sha256": "e95796b326ad181fe24752dfea28231d238f8723d066f1667e887f9e923e7a45",
+    "size": 5099
+  },
+  "final_report_strict": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/targeting-observation-report-v3-01/observation-strict-metadata-observation-v4.json",
+    "sha256": "fb34c75df165bcdba75c650b59942cd7b811eb8acfb2fdf1dd533dfc2d42219c",
+    "size": 9218
+  },
+  "independent_manifest": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/manifest.json",
+    "sha256": "98d7044aaa4397d61e4ee7e1eaf62a99dfa8f66f192a918ae6d203bb98d26ca2",
+    "size": 30249
+  },
+  "independent_report": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/report.md",
+    "sha256": "99ead0be5405ae3b25712902aa2848d1d42c510075c16d09a56944a81a83141a",
+    "size": 19062
+  },
+  "independent_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/verdict.json",
+    "sha256": "29836b9dda3353ab1c4954aaeda551b432106e1b14f6058d2197bef4273e3292",
+    "size": 38935
+  },
+  "matrix_review": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/reviews/full512-accuracy-actual-independent-01/matrix-verdict.json",
+    "sha256": "0a6b1bfaa4152ef94131a5682b3d78c3a0e65016272b6d6f67bfa89b943dca6e",
+    "size": 57083
+  },
+  "native_dorado_cmake": {
+    "path": "/home/jake/Projects/nanopore_basecaller/software/dorado-src/CMakeLists.txt",
+    "sha256": "5dfc5f68f9ab03ee8fa2f79799c7960e35dc8c22639cf944856769ed20fad589",
+    "size": 10291
+  },
+  "native_dorado_revision": "8b8fc5d36a9c0baab262a743cb175b5878e38ca6",
+  "observation_controller": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/controllers/targeting_observation_v3.py",
+    "sha256": "05501e17b569f7929d6df18207e0ae68ee8d07872e5ebfcba5c41fa0fa59f877",
+    "size": 55989
+  },
+  "observation_observer": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/controllers/targeting_observation_v3_audit_v4.py",
+    "sha256": "0f7143c36874f72351986e09fdf682dff79df4d5fc43ceea4314538fbeabd064",
+    "size": 19599
+  },
+  "observation_ready": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-targeting-observation-v3-1/review-pins.json",
+    "sha256": "481ff88fe00f18bd16efaaa96598e1a45aead36cfe28fdf833d5b8da7ad4874a",
+    "size": 8884
+  },
+  "observations": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-targeting-observation-v3-1/root-actual-observation-closure.json",
+    "sha256": "0ba0e632b6b31c446cc9dbb0e96b672c4da5be66754ee9c8dc3cc159007c67b6",
+    "size": 33746
+  },
+  "plan": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-plan-v2-1/complete.json",
+    "sha256": "63a63ba088094fe466a8db8c60609a1f6381b3f8a44967773002ddcf57328caa",
+    "size": 49783
+  },
+  "prior_report_history": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/report-history-before-final-outcomes.md",
+    "sha256": "574a5882f0932f70c2f2b205ec401e4eff9255c70eeee4c9cc633e3694af6958",
+    "size": 29922
+  },
+  "scheduling_observation_gap": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-targeting-observation-v3-1/root-scheduling-observation-gap.json",
+    "sha256": "4d7f2577e4385d787387c180ac1f30c1b2db1c8554d844b72c5b31a387d23905",
+    "size": 931
+  },
+  "schema": "context-feedback-targeting-evidence/1",
+  "scientific_source_manifest": {
+    "path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/logs/context-feedback-targeting/ready-native-v2-4/source-pins.json",
+    "sha256": "43b1a8c194ef9dd0fb5939382ac4b958dbd70a61fb5294d45ae98c4e36729235",
+    "size": 5229
+  }
+}
