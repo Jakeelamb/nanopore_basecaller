@@ -1,4 +1,4 @@
-#include "prefix_feedback/session.h"
+#include "prefix_feedback/bridge.h"
 
 #include <iostream>
 
@@ -25,6 +25,9 @@ int main(int argc, char** argv) {
         if (argc == 2 && std::string(argv[1]) == "controls") {
             return controls();
         }
+        if (argc == 2 && std::string(argv[1]) == "bridge-controls") {
+            return bridge_controls();
+        }
         if (argc == 2 && std::string(argv[1]) == "witness") {
             std::cout << Json{{"source_sha256", source_id()}, {"source", source_witness()}}.dump(2)
                       << '\n';
@@ -47,6 +50,8 @@ int main(int argc, char** argv) {
             auto result = parse_paf(read_text(request.at("paf").at("path").get<std::string>()),
                                     request.at("query"));
             fresh(output / "locations.json", result);
+        } else if (std::string(argv[1]) != "advance") {
+            bridge_command(argv[1], request, output);
         } else {
             require(std::string(argv[1]) == "advance" &&
                             request.at("schema") == "prefix-advance/1" &&
@@ -72,7 +77,7 @@ int main(int argc, char** argv) {
                                         : std::optional<Json>{request.at("update")};
             advance(session, block, update);
             fresh(output / "state.json", state_json(session));
-            fresh(output / "batch.json", batch(session, previous));
+            fresh(output / "snapshot.json", batch(session, previous));
         }
         verify_sources();
         require(file_digest(request_path) == expected, "request changed during consumption");

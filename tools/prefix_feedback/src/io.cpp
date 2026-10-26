@@ -113,7 +113,9 @@ std::string read_text(const fs::path& path, std::size_t maximum) {
 }
 Json read_json(const fs::path& path) { return Json::parse(read_text(path)); }
 void fresh(const fs::path& path, const Json& value) {
-    const auto bytes = value.dump(2) + '\n';
+    fresh_bytes(path, value.dump(2) + '\n');
+}
+void fresh_bytes(const fs::path& path, const std::string& bytes) {
     const int descriptor = ::open(path.c_str(), O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW, 0600);
     require(descriptor >= 0, "fresh output required");
     std::size_t offset{};
@@ -137,6 +139,7 @@ Json source_witness() {
     return {{"root", compiled_root}, {"sources", sources}};
 }
 void verify_sources() {
+    require(fs::current_path() == fs::path(compiled_root), "compiled source cwd differs");
     for (const auto& source : compiled_sources) {
         require(file_digest(source.path) == source.sha256, "compiled source-root corruption");
     }

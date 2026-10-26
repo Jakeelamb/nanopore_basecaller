@@ -2,6 +2,7 @@
 import copy
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import struct
@@ -50,7 +51,7 @@ class PrefixFeedbackTests(unittest.TestCase):
         return binding
 
     def request(self, block=None, state=None, update=None):
-        previous = None if state is None else DRIVER.read(Path(state["path"]).parent / "batch.json")["state_sha256"]
+        previous = None if state is None else DRIVER.read(Path(state["path"]).parent / "snapshot.json")["state_sha256"]
         return dict(schema="prefix-advance/1", source_sha256=self.witness["source_sha256"], spec=self.spec,
                     state=state, update=update, block=block or self.block(), expected_previous_state_sha256=previous)
 
@@ -65,7 +66,7 @@ class PrefixFeedbackTests(unittest.TestCase):
                                 capture_output=True, text=True, timeout=30)
         self.assertEqual(result.returncode, 0 if accepted else 2, result.stderr)
         if accepted:
-            return output, DRIVER.read(output / "batch.json")
+            return output, DRIVER.read(output / "snapshot.json")
         self.assertFalse((output / "complete.json").exists())
         return result.stderr
 
@@ -243,8 +244,8 @@ class PrefixFeedbackTests(unittest.TestCase):
 
     def test_raw_batch_pin_is_external_contract(self):
         output, batch = self.invoke(self.request())
-        raw = DRIVER.pin(output / "batch.json")
-        self.assertEqual(raw["size"], (output / "batch.json").stat().st_size)
+        raw = DRIVER.pin(output / "snapshot.json")
+        self.assertEqual(raw["size"], (output / "snapshot.json").stat().st_size)
         self.assertNotEqual(raw["sha256"], batch["batch_sha256"])
         self.assertNotEqual(batch["reference_free_candidate_id"], None)
         self.assertIn(batch["union_nn_candidate_id"], {item["id"] for item in batch["candidates"]})
@@ -381,6 +382,118 @@ class PrefixFeedbackTests(unittest.TestCase):
             changed["request"]["argv"][1] = "foreign"
             with self.assertRaisesRegex(ValueError, "proposed exact command"):
                 bounded.normalize(DRIVER.pin(attempt / "complete.json"), changed, [bounded.F4], self.directory / "bad-projection")
+
+
+class PrefixBridgeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.binary = Path(os.environ["PREFIX_FEEDBACK_BINARY"]).resolve(strict=True)
+        result = subprocess.run([str(cls.binary), "witness"], capture_output=True, text=True, check=True, timeout=10)
+        cls.witness = json.loads(result.stdout)
+
+    def setUp(self):
+        import joint
+        self.joint = joint
+        self.directory = Path(tempfile.mkdtemp(prefix="bridge-control-"))
+        self.binary_pin = DRIVER.pin(self.binary)
+        self.sources = [DRIVER.pin(value["path"]) for value in self.witness["source"]["sources"]]
+        self.stages = joint.Stages(self.directory / "records", self.sources)
+
+    def tearDown(self):
+        # Retain actual stage receipts and their inputs on success and failure.
+        pass
+
+    def fixture(self):
+        return self.joint.free_fixture(self.stages, self.binary_pin,
+            self.witness["source_sha256"], self.directory / "fixture")
+
+    def test_actual_advance_free_emission_and_strict_normalizer(self):
+        request, output, emission = self.fixture()
+        value = DRIVER.read(output / "batch.json")
+        self.assertEqual(set(value), {"schema", "kind", "binding", "native", "reference_free_candidate_id",
+            "union_nn_candidate_id", "locations", "candidates"})
+        self.assertEqual(value["native"], dict(sequence="AAAA", quality="!!!!", scope="available_input_segment"))
+        self.assertEqual(value["binding"], emission["binding"])
+        self.assertEqual(value["binding"]["prefix_sha256"], DRIVER.digest(b"AAAA"))
+        self.assertEqual(DRIVER.read(Path(request["emission"]["path"]).parent / "identity.json")["kind"], "pipeline-free-input")
+        self.assertTrue(all(item["context_cost"] == 0 and item["location_ids"] == [] for item in value["candidates"]))
+
+    def test_actual_nonempty_panel_normalization_both_strands(self):
+        harness = PrefixFeedbackTests()
+        harness.binary = self.binary
+        harness.witness = self.witness
+        harness.setUp()
+        harness.directory = self.directory / "location-inputs"
+        harness.directory.mkdir()
+        try:
+            harness.resource_fixture()
+            first = self.directory / "first"
+            self.stages.f1(self.binary_pin, "advance", harness.request(), first,
+                ("state.json", "snapshot.json", "complete.json"))
+            snapshot = DRIVER.read(first / "snapshot.json")
+            update = harness.update_fixture(snapshot, [(100, "AAAA", "+"), (200, "TTTT", "-")])
+            second = self.directory / "second"
+            producer, _ = self.stages.f1(self.binary_pin, "advance",
+                harness.request(harness.block(1, 2), DRIVER.pin(first / "state.json"), update), second,
+                ("state.json", "snapshot.json", "complete.json"))
+            emitted = self.directory / "emitted"
+            producer, _ = self.stages.f1(self.binary_pin, "emit-free-input",
+                dict(schema="prefix-emit-free-input/1", source_sha256=self.witness["source_sha256"],
+                    state=DRIVER.pin(second / "state.json"), snapshot=DRIVER.pin(second / "snapshot.json"),
+                    advance_complete=DRIVER.pin(second / "complete.json"), producer=producer,
+                    expected_producer=producer, parent_index=0), emitted,
+                ("tensor.dgs", "panels.json", "identity.json", "emission.json", "complete.json"))
+            emission = DRIVER.read(emitted / "emission.json")
+            output = self.directory / "normalized"
+            self.stages.f1(self.binary_pin, "normalize", dict(schema="prefix-normalize/1",
+                source_sha256=self.witness["source_sha256"], emission=DRIVER.pin(emitted / "emission.json"),
+                producer=producer, expected_producer=producer, expected_binding=emission["binding"]), output,
+                ("batch.json", "descriptor.json", "report.json", "complete.json"))
+            batch = DRIVER.read(output / "batch.json")
+            ids = {item["id"] for item in batch["locations"]}
+            self.assertEqual({item["strand"] for item in batch["locations"]}, {"+", "-"})
+            self.assertTrue(all(set(item["location_ids"]) == ids and math.isfinite(item["context_cost"])
+                and item["context_cost"] >= 0 for item in batch["candidates"]))
+            self.assertTrue(all(len(item["panels"]) == 2 for item in DRIVER.read(output / "report.json")["coverage"]))
+        finally:
+            harness.tearDown()
+
+    def test_resealed_wrong_producer_outputs_reach_producer_guard(self):
+        request, _, _ = self.fixture()
+        wrong = DRIVER.read(request["producer"]["path"])
+        wrong["outputs"] = wrong["outputs"][1:]
+        path = self.directory / "wrong-producer.json"
+        DRIVER.fresh(path, wrong)
+        request["producer"] = request["expected_producer"] = DRIVER.pin(path)
+        _, record = self.stages.f1(self.binary_pin, "normalize", request, self.directory / "bad", (), False)
+        self.assertIn("actual producer binary/output census differs", Path(record["stderr"]["path"]).read_text())
+
+    def test_foreign_current_prefix_and_unavailable_endpoint_reject(self):
+        request, _, _ = self.fixture()
+        for field, value in (("prefix_sha256", "0" * 64), ("availability", dict(request["expected_binding"]["availability"], row_end=5))):
+            bad = copy.deepcopy(request)
+            bad["expected_binding"][field] = value
+            self.stages.f1(self.binary_pin, "normalize", bad, self.directory / ("bad-" + field), (), False)
+        bad = copy.deepcopy(request); bad["whole_native_SEQ"] = "AAAAFUTURE"
+        self.stages.f1(self.binary_pin, "normalize", bad, self.directory / "future", (), False)
+
+    def test_actual_abstained_free_branch_cannot_emit_identity(self):
+        harness = PrefixFeedbackTests(); harness.binary = self.binary; harness.witness = self.witness
+        harness.setUp()
+        harness.directory = self.directory / "empty-inputs"
+        harness.directory.mkdir()
+        try:
+            harness.spec["policy"]["maximum_symbols"] = 0
+            harness.spec["policy"]["minimum_symbols"] = 0
+            output = self.directory / "empty"
+            producer, _ = self.stages.f1(self.binary_pin, "advance", harness.request(), output,
+                ("state.json", "snapshot.json", "complete.json"))
+            self.stages.f1(self.binary_pin, "emit-free-input", dict(schema="prefix-emit-free-input/1",
+                source_sha256=self.witness["source_sha256"], state=DRIVER.pin(output / "state.json"),
+                snapshot=DRIVER.pin(output / "snapshot.json"), advance_complete=DRIVER.pin(output / "complete.json"),
+                producer=producer, expected_producer=producer, parent_index=0), self.directory / "identity", (), False)
+        finally:
+            harness.tearDown()
 
 
 if __name__ == "__main__":

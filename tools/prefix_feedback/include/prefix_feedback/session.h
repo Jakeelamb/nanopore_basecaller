@@ -78,6 +78,7 @@ void check_pin(const Json& value);
 std::string read_text(const fs::path& path, std::size_t maximum = 8388608);
 Json read_json(const fs::path& path);
 void fresh(const fs::path& path, const Json& value);
+void fresh_bytes(const fs::path& path, const std::string& bytes);
 Json source_witness();
 void verify_sources();
 std::string source_id();

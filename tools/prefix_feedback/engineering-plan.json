@@ -3,7 +3,7 @@
   "authorization": false,
   "root": "/home/jake/Projects/nanopore_basecaller-next-prefix-loop",
   "cwd": "/home/jake/Projects/nanopore_basecaller-next-prefix-loop",
-  "argv": ["/home/jake/.local/bin/uv", "run", "--project", "/home/jake/Projects/nanopore_basecaller-retrieval", "--no-sync", "python", "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/scripts/prefix-feedback.py", "qualify", "--output", "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/qualification-02"],
+  "argv": ["/home/jake/.local/bin/uv", "run", "--project", "/home/jake/Projects/nanopore_basecaller-retrieval", "--no-sync", "python", "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/scripts/prefix-feedback.py", "qualify", "--output", "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/bridge-qualification-01"],
   "adapter": {"path": "/home/jake/Projects/nanopore_basecaller-next-stock-compare/tools/stock_feedback/bounded.py", "size": 18293, "sha256": "8adfc5a212061cfc079bb2e47cae12546c5d5bb9aba2adf0a6073e9d62710fc4"},
   "registered_tool_metadata": {"path": "/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/tool-intake-01/tool-pins.json", "size": 28357, "sha256": "86c5bb903ac070b703a406816fbfd309168619052d2f616851d5190e8d6c73bb"},
   "input_pins": [],
@@ -19,8 +19,8 @@
   "aggregate_bytes": 4294967296,
   "reserve_bytes": 32212254720,
   "expected_payload": ["complete.json", "ctest.xml", "build/prefix-feedback", "build/Testing/Temporary/LastTest.log", "stage-0/terminal.json", "stage-1/terminal.json", "stage-2/terminal.json", "stage-3/terminal.json", "stage-4/terminal.json", "stage-4/stderr"],
-  "required_actual_controls": {"cpp_groups": 13, "python_tests": 15, "ctest_tests_minimum": 1, "skipped": 0},
-  "f4_attempt": "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/qualification-02-outer",
+  "required_actual_controls": {"cpp_groups": 13, "bridge_groups": 8, "python_tests": 20, "ctest_tests": 2, "skipped": 0},
+  "f4_attempt": "/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback/bridge-qualification-01-outer",
   "output_roots": ["/home/jake/Projects/nanopore_basecaller-next-prefix-loop/results/prefix-feedback"],
   "grant_rule": "Root authors a fresh bounded-command/1 grant with full source/tool closure, clocks and semantic roles; this file never authorizes execution"
 }

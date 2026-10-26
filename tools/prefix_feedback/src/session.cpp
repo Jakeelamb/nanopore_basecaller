@@ -517,7 +517,7 @@ Json batch(const Session& session, const std::string& previous_state) {
                  {"eligibility_reasons",
                   Json::array({"finite-consumed-row-neural-mass", "provisional-prefix-only"})}});
     }
-    Json result{{"schema", "feedback-next/1"},
+    Json result{{"schema", "prefix-snapshot/1"},
                 {"source_sha256", source_id()},
                 {"plan_sha256", session.spec.plan_sha256},
                 {"read_id", session.spec.read_id},

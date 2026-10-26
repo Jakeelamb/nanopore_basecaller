@@ -209,7 +209,7 @@ def native(executor, binary, mode, request, output):
     argv = [binary["path"], mode, "--request", str(request_path), "--request-sha256",
             pin(request_path)["sha256"], "--output", str(output)]
     expected_files = [str(output / name) for name in
-                      (("state.json", "batch.json", "complete.json") if mode == "advance" else ("locations.json", "complete.json"))]
+                      (("state.json", "snapshot.json", "complete.json") if mode == "advance" else ("locations.json", "complete.json"))]
     return executor.run(argv, [binary, pin(request_path)], output.parent / (output.name + "-command"),
                         "prefix-decoder", dict(request=pin(request_path)), expected_files)
 
@@ -284,10 +284,10 @@ def pilot(plan_path, binary, executor, source_sha256, output):
                        expected_previous_state_sha256=previous_state_sha256)
         directory = output / ("block-" + str(index))
         native(executor, binary, "advance", request, directory)
-        batch = read(directory / "batch.json")
+        batch = read(directory / "snapshot.json")
         previous_state_sha256 = batch["state_sha256"]
         state = pin(directory / "state.json")
-        batches.append(pin(directory / "batch.json"))
+        batches.append(pin(directory / "snapshot.json"))
         if batch["abstained"] or not batch["mapper_request_eligible"]:
             fresh(output / "complete.json", dict(schema="prefix-pilot/1", complete=True, plan=pin(plan_path),
                 binary=binary, batches=batches, final_state=state, abstained=True,
@@ -332,6 +332,10 @@ def main():
     launch.add_argument("--output", type=Path, required=True)
     qualify = sub.add_parser("qualify")
     qualify.add_argument("--output", type=Path, required=True)
+    joint = sub.add_parser("joint-controls")
+    joint.add_argument("--spec", type=Path, required=True)
+    joint.add_argument("--spec-sha256", required=True)
+    joint.add_argument("--output", type=Path, required=True)
     identity = sub.add_parser("disabled-identity")
     identity.add_argument("--request", type=Path, required=True)
     identity.add_argument("--request-sha256", required=True)
@@ -346,6 +350,9 @@ def main():
     elif args.command == "qualify":
         import qualification
         qualification.qualify(args.output.resolve())
+    elif args.command == "joint-controls":
+        import joint
+        joint.run(args.spec.resolve(), args.spec_sha256, args.output.resolve())
     elif args.command == "disabled-identity":
         import identity_control
         identity_control.run(args.request.resolve(), args.request_sha256, args.output.resolve())
