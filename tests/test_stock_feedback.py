@@ -16,6 +16,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools/stock_feedback'))
 import bounded as b
 import compare as c
+import legacy as l
 
 
 class StockFeedback(unittest.TestCase):
@@ -94,6 +95,76 @@ class StockFeedback(unittest.TestCase):
         self.ids.write_text('changed')
         with self.assertRaisesRegex(ValueError, 'pin differs'):
             b.check(before)
+
+    def legacy_fixture(self):
+        directory = self.root / 'legacy-raw'
+        directory.mkdir()
+        values = {'command.sh': '/usr/bin/true \n', 'cwd.txt': str(self.root) + '\n',
+                  'start.txt': '2026-01-01T00:00:00Z\n', 'end.txt': '2026-01-01T00:00:01Z\n',
+                  'exit-status.txt': '0\n', 'stdout': 'synthetic-scientific-body', 'stderr': '', 'time.txt': 'Exit status: 0\n'}
+        for name, value in values.items():
+            (directory / name).write_text(value)
+        raw = {name: b.pin(directory / name) for name in l.RAW}
+        receipt = dict(status='finished', exit=0, failure=None, native_launch_monotonic_ns=1,
+                       native_end_monotonic_ns=2, argv=['/usr/bin/true'], recorder=str(directory),
+                       stdout=raw['stdout']['path'], pins=list(raw.values()),
+                       context=dict(experiment='fixture-experiment', sources=[], executables=[]))
+        path = self.root / 'finish.json'
+        b.write(path, receipt)
+        manifest = self.root / 'experiment.json'
+        b.write(manifest, dict(identity='fixture-experiment', model_pins=[],
+                cohorts={'development': dict(ids=b.pin(self.ids), raw=raw['stdout'])}))
+        return b.pin(path), b.pin(manifest), raw
+
+    def test_legacy_finish_reads_metadata_and_never_scientific_stdout(self):
+        receipt, _manifest, raw = self.legacy_fixture()
+        actual = Path.read_bytes
+        def guarded_read(path):
+            self.assertNotEqual(str(path), raw['stdout']['path'], 'scientific body was opened')
+            return actual(path)
+        with patch.object(Path, 'read_bytes', guarded_read):
+            imported = l.stock_finish(l.Metadata(), receipt, str(self.root))
+        self.assertEqual(imported['result'], raw['stdout'])
+        self.assertFalse(imported['scientific_bodies_read'])
+
+    def test_legacy_missing_recorder_and_changed_metadata_reject_at_distinct_guards(self):
+        receipt, _manifest, raw = self.legacy_fixture()
+        Path(raw['time.txt']['path']).unlink()
+        with self.assertRaisesRegex(ValueError, 'missing or size-changed linked artifact'):
+            l.stock_finish(l.Metadata(), receipt, str(self.root))
+        Path(receipt['path']).write_text('x' * receipt['size'])
+        with self.assertRaisesRegex(ValueError, 'metadata hash differs'):
+            l.stock_finish(l.Metadata(), receipt, str(self.root))
+
+    def test_actual_legacy_producer_alias_binds_whole_source_input_argv_tuple(self):
+        receipt, manifest, raw = self.legacy_fixture()
+        item = dict(receipt=receipt, experiment_manifest=manifest, role='development',
+                    cwd=str(self.root), argv=['/usr/bin/true'], result=raw['stdout'],
+                    source=dict(sources=[], executables=[]), input_pins=[b.pin(self.ids), raw['stdout']])
+        self.assertEqual(c.producer(item), c.producer(copy.deepcopy(item)))
+        changed = copy.deepcopy(item)
+        changed['input_pins'] = []
+        with self.assertRaisesRegex(ValueError, 'source/input tuple differs'):
+            c.producer(changed)
+        changed = copy.deepcopy(item)
+        changed['argv'] = ['/usr/bin/false']
+        with self.assertRaisesRegex(ValueError, 'argv/result differs'):
+            c.producer(changed)
+
+    def test_genuine_retained_inventory_preserves_incompatible_SUP_and_all64(self):
+        # Requires Root's separately pinned metadata-only admission; it never launches a producer.
+        config = b.read(Path(__file__).resolve().parents[1] / 'config/stock-feedback-compare-v1.json')
+        inventory = l.inventory(config)
+        self.assertEqual([arm['status'] for arm in inventory['arms']],
+                         ['retained-reuse-available', 'retained-reuse-available', 'incompatible-retained-control'])
+        self.assertTrue(all(len(arm['parents']) == 64 for arm in inventory['arms']))
+        self.assertFalse(inventory['scientific_bodies_read'] or inventory['producer_replayed'])
+        self.assertFalse(inventory['matched_three_arm_comparison'])
+        self.assertLessEqual(inventory['metadata_bytes'], 32 * 1024**2)
+        self.assertIn('trim differs', inventory['arms'][2]['gaps'])
+        print(json.dumps(dict(control='genuine-retained-metadata-inventory', metadata_bytes=inventory['metadata_bytes'],
+                              statuses=[arm['status'] for arm in inventory['arms']], population=64,
+                              scientific_bodies_read=False, producer_replayed=False)))
 
     def test_unloaded_service_exit_one_is_terminal_only_with_absent_cgroup(self):
         self.assertTrue(b.terminal(dict(exit=1, properties={'LoadState': 'not-found'}),

@@ -3,7 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 
-from bounded import check, linked_files, pin, read, require
+from bounded import pin, require
+import legacy
 
 ARMS = ('native-hac', 'hac-context', 'stock-sup')
 CONTRACT_KEYS = ('parents_pin', 'pod5_pin', 'chemistry', 'settings', 'mapper', 'masks', 'truth_domains')
@@ -29,26 +30,29 @@ def inspect(config):
         result.append(dict(id=item['id'], declared=item['pin'], exists=path.is_file(),
                            observed_size=path.stat().st_size if path.is_file() else None,
                            status='unqualified', gaps=item['gaps']))
-    return dict(schema='stock-feedback-inventory/1', evidence=result, scientific_bodies_read=False)
+    return dict(schema='stock-feedback-inventory/1', evidence=result, scientific_bodies_read=False,
+                retained_closure=legacy.inventory(config) if 'legacy' in config else None)
 
 
 def producer(item):
-    """Validate a linked producer closure without rerunning it. Caller must be in admitted worker."""
-    check(item['receipt'])
-    receipt = read(item['receipt']['path'])
-    require(receipt['argv'] == item['argv'] and receipt['cwd'] == item['cwd'], 'producer argv/cwd differs')
-    require(receipt['exit'] == 0 and receipt['complete'] is True, 'producer did not complete')
-    require(receipt['source_pins'] == item['source_pins'] and receipt['input_pins'] == item['input_pins'],
-            'producer source/input tuple differs')
-    for value in receipt['source_pins'] + receipt['input_pins'] + receipt['files']:
-        check(value)
-    names = {Path(value['path']).name for value in receipt['files']}
-    require({'command.json', 'cwd.txt', 'start.txt', 'end.txt', 'exit-status.txt', 'stdout', 'stderr', 'time.txt'} <= names,
-            'incomplete producer raw recorder')
-    require(receipt['start'] < receipt['end'] and receipt['terminal_tree_empty'] is True, 'producer clocks/tree incomplete')
-    require(receipt['result'] == item['result'], 'linked producer result differs')
-    check(receipt['result'])
-    return identity(dict(source=item['source_pins'], inputs=item['input_pins'], argv=item['argv'], cwd=item['cwd']))
+    """Consume the original receipt schemas; no fresh scientific body verification is implied."""
+    reader = legacy.Metadata()
+    receipt = reader.read(item['receipt'])
+    if receipt.get('schema') == 'uncertainty-feedback-command/1':
+        imported = legacy.uncertainty_command(reader, item['receipt'], item['cwd'])
+        inputs = receipt['inputs']
+        source = dict(witness=receipt['source_witness'], sources=receipt['sources'],
+                      binary=receipt['binary'], runtime=receipt['runtime'], dependency=receipt['dependency_manifest'])
+    else:
+        imported = legacy.stock_finish(reader, item['receipt'], item['cwd'])
+        manifest = reader.read(item['experiment_manifest'])
+        require(receipt['context']['experiment'] == manifest['identity'], 'stock experiment closure differs')
+        cohort = manifest['cohorts'][item['role']]
+        inputs = [cohort['ids'], cohort['raw'], *manifest['model_pins']]
+        source = dict(sources=receipt['context']['sources'], executables=receipt['context']['executables'])
+    require(imported['argv'] == item['argv'] and imported['result'] == item['result'], 'producer argv/result differs')
+    require(source == item['source'] and inputs == item['input_pins'], 'producer source/input tuple differs')
+    return identity(dict(source=source, inputs=inputs, argv=item['argv'], cwd=item['cwd']))
 
 
 def plan(config, supplied):
@@ -72,9 +76,14 @@ def plan(config, supplied):
                 gaps.append('missing, reordered or extra original parent identities')
             if not item.get('model', {}).get('name') or not item.get('model', {}).get('config_pin'):
                 gaps.append('model/config declaration missing')
+            elif 'legacy' in config:
+                kind = 'sup' if arm == 'stock-sup' else 'hac'
+                if (item['model']['name'] != Path(config['legacy'][kind + '_model']).name
+                        or item['model']['config_pin'] != config['legacy'][kind + '_config']):
+                    gaps.append('model identity does not match declared arm')
             if not gaps:
                 try:
-                    check(item['model']['config_pin'])
+                    legacy.stat_artifact(item['model']['config_pin'])
                     key = producer(item['producer'])
                     if key in aliases:
                         alias = aliases[key]
@@ -83,15 +92,20 @@ def plan(config, supplied):
                         alias = None
                 except (ValueError, KeyError, OSError) as caught:
                     gaps.append(str(caught))
-        arms.append(dict(arm=arm, status='unqualified' if gaps else 'qualified', gaps=gaps,
+        arms.append(dict(arm=arm, status='unqualified' if gaps else 'retained-metadata-valid', gaps=gaps,
                          alias_of=alias if not gaps else None,
-                         parents=[dict(parent=p, status='unqualified' if gaps else 'qualified') for p in universe]))
+                         parents=[dict(parent=p, status='unqualified' if gaps else 'retained-metadata-valid') for p in universe]))
     return dict(schema='stock-feedback-plan/1', config_hash=identity(config), arms=arms,
-                population=64, masks=[100, 500], no_parent_dropped=True, native_replay=False)
+                population=64, masks=[100, 500], no_parent_dropped=True, native_replay=False,
+                retained_closure=legacy.inventory(config) if 'legacy' in config else None,
+                scientific_content_reverified=False)
 
 
 def report(config, planned, observations):
     require(planned['config_hash'] == identity(config), 'stale comparison plan')
+    keys = [(row['arm'], row['mask']) for row in observations]
+    require(len(keys) == len(set(keys)) and all(arm in ARMS and mask in config['masks'] for arm, mask in keys),
+            'duplicate or unknown observation arm/domain')
     matrix = []
     universe = parents(config['parents_pin']['path'])
     for arm in planned['arms']:
@@ -111,7 +125,8 @@ def report(config, planned, observations):
                 require(set(observation['strata']) == {'target43', 'nontarget21'}, 'target strata missing')
                 require(set(observation['changed_footprint_alt']) == {'SNV', 'INS', 'DEL'}, 'actual changed-footprint ALT missing')
                 producer(observation['producer'])
-            matrix.append(dict(arm=arm['arm'], mask=mask, status='unqualified' if gaps else 'qualified', gaps=gaps,
+            matrix.append(dict(arm=arm['arm'], mask=mask, status='unqualified' if gaps else 'retained-metadata-valid', gaps=gaps,
                                parent_rows=arm['parents'], native_observation=observation if not gaps else None))
     return dict(schema='stock-feedback-report/1', matrix=matrix, biological_promotion=False,
-                model_winner=None, hg005_selection=False, no_parent_dropped=True)
+                model_winner=None, hg005_selection=False, no_parent_dropped=True,
+                retained_closure=planned.get('retained_closure'), scientific_content_reverified=False)

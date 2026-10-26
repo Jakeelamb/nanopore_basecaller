@@ -13,15 +13,23 @@
   },
   "chemistry": {"flowcell": "R10.4.1", "pore": "E8.2", "speed_bps": 400, "sample_rate_hz": 5000, "kit": "SQK-LSK114"},
   "settings": {"trim": "none", "disable_read_splitting": true, "emit_moves": true, "min_qscore": 0, "batchsize": 32},
-  "mapper": {"command": "dorado aligner", "reference": "GRCh38-lr-hq.mmi", "mm2_opts": "-x lr:hq -I 16G --eqx -Y", "qualification": "requires full frozen tool/reference pins"},
+  "mapper": {"command": "dorado aligner", "mm2_opts": "-x lr:hq -I 16G --eqx -Y", "native_threads": 4, "context_threads": 2, "binary": {"path": "/home/jake/Projects/nanopore_basecaller/software/dorado-2.1.2-linux-x64/bin/dorado", "size": 429253440, "sha256": "08fef6060d9672f1e7b1772470b93ff0750d28d15f2e64cef1d02533a03ebb49"}, "index": {"path": "/home/jake/Projects/nanopore_basecaller/references/GRCh38-lr-hq.mmi", "size": 5756270073, "sha256": "611b2a45bc41e8bbd3048ef96efebcfae4cf611360d81c3553285932de4a63aa"}},
   "masks": [100, 500],
-  "truth_domains": {"identity": "PR15 unchanged paired invariant100/500 domains", "qualification": "requires original fixed mask/truth pins; never recompute positive-only domains"},
+  "truth_domains": {
+    "eligible": {
+      "100": {"path": "/home/jake/Projects/nanopore_basecaller/results/accuracy/controlled-20261022-v1.1-frozen/truth/HG002-100/eligible.bed", "size": 61549741, "sha256": "3ec3eebb0a208e838f0374db3b3254fe047d3107eb7558e7d5e2c3f95cbc003e"},
+      "500": {"path": "/home/jake/Projects/nanopore_basecaller/results/accuracy/controlled-20261022-v1.1-frozen/truth/HG002-500/eligible.bed", "size": 16320065, "sha256": "ec2b6ebf95752bdf49dfa26e98921fde0a673594b706866ab15903da67b137d0"}
+    },
+    "reference": {"path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout", "size": 3144230986, "sha256": "9cce8b926416dd96b152deea85188495b75f7ac8d634cc723a017067be8702b7"},
+    "truth": {"path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T042901Z-stock-9712101b70df45a9ab4ff06dda2e0af0-OTPtAz/stdout", "size": 1100871, "sha256": "de417f7e7cbb361b3622c7b47d1e684e237ffec97442771462bad39de946af68"},
+    "confident": {"path": "/home/jake/Projects/nanopore_basecaller/truth/HG002/HG002_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed", "size": 11494021, "sha256": "fba9a57c36ec88e5d14ea3e259c8866c7935f4998d3ec0fa2d6c3962da5b5575"}
+  },
   "hg005_selection": false,
   "retained": [
     {
       "id": "scored-native-hac-sam",
       "pin": {"path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T035916Z-stock-fe30a2dbcb664128bf187fdaf8f68340-CoVGDR/stdout", "size": 16085465, "sha256": "db01733a1847c37b3e30da8839af233728b7bc00421828f291b3da3c3bf2c6fe"},
-      "gaps": ["metadata traced to HACv6 no-trim/no-split/moves producer; current closure not executed by F4", "full original mask/truth/tool/source and parent closure still required"]
+      "gaps": ["retained source/raw/mask/truth/tool closure is implemented; new metadata importer awaits fresh admission", "scientific bodies are STAT-only; no new content qualification"]
     },
     {
       "id": "stock-sup-v5.2-basecall",
@@ -31,7 +39,28 @@
     {
       "id": "hac-context-pr15-report",
       "pin": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-observation-report-3/complete.json", "size": 2252747, "sha256": "446dbb7fd62d5969663571b4e2edb1ae6e22e7cbb95ef6b61653286c38c99850"},
-      "gaps": ["accepted prior results; no fresh F4 scientific closure executed", "selected equals rerank; context/free 500-domain1percent gate fails; zero productive edited ALT"]
+      "gaps": ["accepted prior results and strict outer linkage are retained; new metadata importer awaits fresh admission", "selected equals rerank; context/free 500-domain1percent gate fails; zero productive edited ALT"]
     }
-  ]
+  ],
+  "legacy": {
+    "snapshot": {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-frontier/flank-seam-v1/input-snapshot-v2.json", "size": 12027, "sha256": "f975ce48f4abde771809985dd6c67c19bd440c534984331388bf8d7639c21324"},
+    "experiment": {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/experiment.json", "size": 15156, "sha256": "201250e2187ac2bc8da27b4c59f97275e5e19a65d2ac899fcde177432ae5636b"},
+    "stock_inputs": {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/reference-assisted/inputs-native-frozen-v1.json", "size": 70396, "sha256": "2a9b1be8c2013ae9e7c5499f6161888c076fd8674b3aaebd8e673907fd7dfc55"},
+    "targeting_evidence": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/research/context-feedback-targeting-v2-evidence.json", "size": 29678, "sha256": "03b6b1da61c8decb335f2addd69402dd1da369d8dc8c044e77406424dfe2b76c"},
+    "native_cwd": "/home/jake/Projects/nanopore_basecaller-reference",
+    "context_cwd": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2",
+    "stock_cwd": "/home/jake/Projects/nanopore_basecaller",
+    "native_receipts": [
+      {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/development/stages/native-call/1792727565988902543-35ec027c/finish.json", "size": 14976, "sha256": "d258f6da2d55de2bcd92721969cad78e07be8e651ffdcf40ace1cb6648ba58fb"},
+      {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/development/stages/native-align/1792727944450795524-59fe7c39/finish.json", "size": 14470, "sha256": "46c8a21dae946c634cd3a70d2b16eed3dabdfcd81ab87a858c16d18782667f08"},
+      {"path": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/development/stages/native-sam/1792727956586205678-a76a1b54/finish.json", "size": 14161, "sha256": "6b7650233fe72054347ea360af8e0be65b53b226249dc6b0ee689131d8c453ee"}
+    ],
+    "native_sam": {"path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T035916Z-stock-fe30a2dbcb664128bf187fdaf8f68340-CoVGDR/stdout", "size": 16085465, "sha256": "db01733a1847c37b3e30da8839af233728b7bc00421828f291b3da3c3bf2c6fe"},
+    "hac_model": "/home/jake/Projects/nanopore_basecaller/models/dna_r10.4.1_e8.2_400bps_hac@v6.0.0",
+    "hac_config": {"path": "/home/jake/Projects/nanopore_basecaller/models/dna_r10.4.1_e8.2_400bps_hac@v6.0.0/config.toml", "size": 1924, "sha256": "e550ccbedb68ed74d6ee88e2f510adf33c52a1c868bd5e3a2bfbb7dfe6154c3f"},
+    "sup_model": "/home/jake/Projects/nanopore_basecaller/models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+    "sup_config": {"path": "/home/jake/Projects/nanopore_basecaller/models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0/config.toml", "size": 1944, "sha256": "ad82d7c369deddc0d1e69367302b8e002c306a9770ae4304a3cbb70715fcce49"},
+    "context_map": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-observation-map-rerank-3/complete.json", "size": 12703, "sha256": "24f87560b69c680ab797074095535b17c8695a9ae5842dd5b9163dd08c69e621"},
+    "prior_report": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-observation-report-3/complete.json", "size": 2252747, "sha256": "446dbb7fd62d5969663571b4e2edb1ae6e22e7cbb95ef6b61653286c38c99850"}
+  }
 }

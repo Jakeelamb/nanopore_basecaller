@@ -1,6 +1,6 @@
 # Public bounded-command/1 API
 
-Source contract for F1/F2/F3 consumers. NOT QUALIFIED. Root must relay an exact reviewed F4 commit and grant a fresh unit before use. Do not copy the adapter or import/modify the old fixed-ROOT supervisor.
+Source contract for F1/F2/F3 consumers. The unchanged d190 adapter is qualified for exactly admitted low-impact engineering under4/8GiB after16tests/0skip and68independent metadata checks. Mapping16/24GiB, deadline/KILL behavior and scientific use remain separate holds. Root must relay the exact reviewed source pin and grant a fresh unit before use. Do not copy the adapter or import/modify the old fixed-ROOT supervisor.
 
 CLI, from the exact admitted cwd:
 
@@ -35,7 +35,7 @@ A fixed UV Python orchestration argv begins with `/home/jake/.local/bin/uv`, `ru
 
 The worker first validates the externally supplied request hash, request freshness/cwd/profile, actual memory.max/memory.swap.max/cpu.max/RLIMIT_AS and service cgroup identity. It then validates full source/input pins before the command. Child process groups are cleaned through the original pinned process_guard. Worker terminal.json retains clocks/exit/error before successful-output projection. Missing expected_files writes projection-failed.json with producer_replay_permitted=false. A producer that succeeded must not be repeated to repair observation.
 
-The outer imports only the checked3443-byte original guard as its bootstrap source dependency and becomes a subreaper before launch. Workload source/input hashes and synchronous preparation stay inside the service. Outer owns the canonical NONBLOCK host.lock, independently cleans/reaps the launcher PGID using original stop_group even if the leader exited, stops the systemd service, and requires launcher-group-empty plus service-cgroup-empty before writing outer-terminal.json and permitting unlock. A cleanup observation failure retains the lock and retries cleanup/proof; it cannot become permission to unwind. No runtime qualification is claimed for this source.
+The outer imports only the checked3443-byte original guard as its bootstrap source dependency and becomes a subreaper before launch. Workload source/input hashes and synchronous preparation stay inside the service. Outer owns the canonical NONBLOCK host.lock, independently cleans/reaps the launcher PGID using original stop_group even if the leader exited, stops the systemd service, and requires launcher-group-empty plus service-cgroup-empty before writing outer-terminal.json and permitting unlock. A cleanup observation failure retains the lock and retries cleanup/proof; it cannot become permission to unwind. Runtime qualification is limited to the engineering result described above; actual deadline/KILL behavior remains unproven.
 
 Successful worker `complete.json` links admission, full raw command/cwd/start/end/exit/stdout/stderr/time, terminal and expected outputs. `outer-terminal.json` separately binds launcher cleanup events and cgroup proof. Consumers must retain both; worker completion alone does not establish the whole-unit boundary. Failed attempts stay immutable. Current tests use a test-only lock and systemd transport stand-ins for direct outer-path controls, alongside real original-guard child processes; those do not establish the canonical lock or actual service caps. Root's real canary does.
 
