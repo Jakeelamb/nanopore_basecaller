@@ -201,10 +201,20 @@ def worker(request_path, request_sha, output):
                 cleanup = pg.stop_group(process, process.pid)
             except BaseException as caught:
                 error = error or repr(caught)
+        if process is not None:
+            try:
+                observed_exit = process.poll()
+                if observed_exit is not None:
+                    exit_code = observed_exit
+            except BaseException as caught:
+                error = error or repr(caught)
+            if exit_code is None:
+                error = error or 'child return code unavailable after cleanup'
         ended = utc()
         (output / 'end.txt').write_text(ended + '\n')
         (output / 'exit-status.txt').write_text(str(exit_code) + '\n')
         write(output / 'terminal.json', dict(start=started, end=ended, exit=exit_code, error=error,
+                                            exit_known=exit_code is not None,
                                             cleanup=cleanup, projection_pending=error is None))
     if error is not None:
         raise ValueError(error)
@@ -313,8 +323,15 @@ def supervise(request_path, request_sha, output):
         finally:
             proof = cleanup_outer(process, pg, unit, group, output)
             error = error or ('outer cleanup observed a failure' if proof['failures'] else None)
+            missing = [name for name in (*RAW, 'terminal.json', 'complete.json')
+                       if not (output / name).is_file()]
+            if process is None or process.returncode != 0 or proof['service']['properties'].get('Result', 'success') != 'success':
+                error = error or 'worker service failed; inner records may be incomplete'
+            if missing:
+                error = error or 'worker records missing; native clocks/status are not reconstructed'
             write(output / 'outer-terminal.json', dict(end=utc(), error=error, proof=proof,
-                       empty_before_unlock=True, exit=None if process is None else process.returncode))
+                       empty_before_unlock=True, exit=None if process is None else process.returncode,
+                       missing_worker_records=missing, worker_complete=not missing and error is None))
             signal.signal(signal.SIGTERM, previous_term)
             signal.signal(signal.SIGINT, previous_int)
         require(error is None and process is not None and process.returncode == 0, 'unit failed; retained ' + str(output))

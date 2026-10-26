@@ -38,3 +38,56 @@ The worker first validates the externally supplied request hash, request freshne
 The outer imports only the checked3443-byte original guard as its bootstrap source dependency and becomes a subreaper before launch. Workload source/input hashes and synchronous preparation stay inside the service. Outer owns the canonical NONBLOCK host.lock, independently cleans/reaps the launcher PGID using original stop_group even if the leader exited, stops the systemd service, and requires launcher-group-empty plus service-cgroup-empty before writing outer-terminal.json and permitting unlock. A cleanup observation failure retains the lock and retries cleanup/proof; it cannot become permission to unwind. No runtime qualification is claimed for this source.
 
 Successful worker `complete.json` links admission, full raw command/cwd/start/end/exit/stdout/stderr/time, terminal and expected outputs. `outer-terminal.json` separately binds launcher cleanup events and cgroup proof. Consumers must retain both; worker completion alone does not establish the whole-unit boundary. Failed attempts stay immutable. Current tests use a test-only lock and systemd transport stand-ins for direct outer-path controls, alongside real original-guard child processes; those do not establish the canonical lock or actual service caps. Root's real canary does.
+
+## Root-authored request example (not an admission)
+
+This complete keyset is a documentation template. Its expired dates and placeholder pins deliberately fail validation. Root replaces every placeholder, freezes the exact request/digest and assigns a fresh output attempt after independent source review. A lane must not turn this template into its own admission.
+
+```json
+{
+  "schema": "bounded-command/1",
+  "id": "example-not-admission",
+  "not_before_utc": "2000-01-01T00:00:00+00:00",
+  "expires_utc": "2000-01-01T00:01:00+00:00",
+  "root": "/home/jake/Projects/nanopore_basecaller-next-stock-compare",
+  "cwd": "/home/jake/Projects/nanopore_basecaller-next-stock-compare",
+  "argv": ["/home/jake/.local/bin/uv", "run", "--project", "/home/jake/Projects/nanopore_basecaller-retrieval", "--no-sync", "python", "-m", "unittest", "discover", "-s", "/home/jake/Projects/nanopore_basecaller-next-stock-compare/tests", "-p", "test_stock_feedback.py", "-v"],
+  "env": {
+    "UV_PROJECT_ENVIRONMENT": "/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
+    "UV_OFFLINE": "1",
+    "UV_PYTHON_DOWNLOADS": "never",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "LC_ALL": "C",
+    "HOME": "/home/jake",
+    "PATH": "<Root-observed-exact-PATH>",
+    "XDG_RUNTIME_DIR": "<Root-observed-runtime-directory>",
+    "DBUS_SESSION_BUS_ADDRESS": "<Root-observed-user-bus-address>"
+  },
+  "source_pins": [{"path": "<Root-pinned-absolute-source-path>", "size": 0, "sha256": "<Root-verified-SHA256>"}],
+  "input_pins": [],
+  "expected_files": ["/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/qualification-02/stdout", "/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/qualification-02/stderr", "/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/qualification-02/time.txt"],
+  "roles": {
+    "unit": "F4/engineering",
+    "inputs": {},
+    "outputs": {
+      "test-stdout": "/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/qualification-02/stdout",
+      "test-stderr": "/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/qualification-02/stderr",
+      "test-time": "/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback/qualification-02/time.txt"
+    }
+  },
+  "output_roots": ["/home/jake/Projects/nanopore_basecaller-next-stock-compare/results/stock-feedback"],
+  "profile": "engineering",
+  "wall_seconds": 300,
+  "cpus": 2,
+  "memory_bytes": 4294967296,
+  "address_space_bytes": 8589934592,
+  "swap_bytes": 0,
+  "growth_bytes": 104857600,
+  "aggregate_bytes": 4294967296,
+  "reserve_bytes": 32212254720
+}
+```
+
+F1 uses the same complete keyset with its own canonical root/cwd/output roots, frozen exact native argv and full dependency/input pins. Concrete role examples are `{"unit":"F1/mapper","inputs":{"query-bam":0,"reference-index":1},"outputs":{"mapped-sam":"<exact-success-file>"}}`, `{"unit":"F1/samtools","inputs":{"mapped-bam":0},"outputs":{"sam":"<exact-success-file>"}}`, and `{"unit":"F1/decoder","inputs":{"tensor":0,"candidate-batch":1},"outputs":{"decision":"<exact-success-file>"}}`. These roles do not prescribe or authorize native commands. Root must copy the exact argv from F1's separately frozen source plan and bind each named input to its corresponding input_pins index. A whole-reference mapper may require the separately admitted mapping16/24GiB profile; changing only the profile label while retaining4/8GiB is rejected.
+
+If TERM interrupts the worker's wait, terminal.json records the actual return code observed after original-guard cleanup and `exit_known:true`. A genuinely unavailable return code stays null with `exit_known:false` and a failed status. If manager KILL prevents worker receipts, outer-terminal.json records failure and the exact missing_worker_records list; missing native clocks/status are not reconstructed and no completion is accepted.

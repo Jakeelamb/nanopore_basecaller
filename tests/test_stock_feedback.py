@@ -3,6 +3,7 @@ import copy
 from datetime import datetime, timedelta, timezone
 import json
 import os
+import signal
 from pathlib import Path
 import subprocess
 import sys
@@ -144,7 +145,55 @@ class StockFeedback(unittest.TestCase):
         self.assertFalse(b.read(out / 'projection-failed.json')['producer_replay_permitted'])
         self.assertFalse((out / 'complete.json').exists())
 
-    def outer_fixture(self, inject_cleanup_failure=False, inject_projection_failure=False):
+    def test_worker_interrupted_wait_retains_actual_reaped_exit_status(self):
+        request = self.request()
+        marker = self.root / 'worker-started'
+        request['argv'] = [sys.executable, '-c',
+                           'from pathlib import Path; import time; Path(' + repr(str(marker)) +
+                           ').write_text("started"); time.sleep(60)']
+        request['source_pins'].append(b.pin(sys.executable))
+        request_path = self.root / 'interrupted-request.json'
+        b.write(request_path, request)
+        output = self.root / 'interrupted-attempt'
+        output.mkdir()
+        original_popen = subprocess.Popen
+        launched = []
+        original_term = signal.getsignal(signal.SIGTERM)
+
+        def interrupted_wait(*_args, **_kwargs):
+            deadline = time.monotonic() + 3
+            while not marker.exists() and time.monotonic() < deadline:
+                time.sleep(0.01)
+            self.assertTrue(marker.exists(), 'actual child did not initialize before interrupted wait')
+            os.kill(os.getpid(), signal.SIGTERM)
+            raise AssertionError('worker TERM handler did not interrupt wait')
+
+        def spawn(argv, **kwargs):
+            process = original_popen(argv, **kwargs)
+            process.wait = interrupted_wait
+            launched.append(process)
+            return process
+
+        try:
+            with patch.object(b, 'kernel_check', return_value={'test_only': True}), \
+                    patch.object(b.subprocess, 'Popen', side_effect=spawn):
+                with self.assertRaisesRegex(ValueError, 'whole-unit termination requested'):
+                    b.worker(request_path, b.pin(request_path)['sha256'], output)
+            terminal = b.read(output / 'terminal.json')
+            self.assertIsNotNone(launched[0].returncode)
+            self.assertNotEqual(launched[0].returncode, 0)
+            self.assertEqual(terminal['exit'], launched[0].returncode)
+            self.assertEqual((output / 'exit-status.txt').read_text().strip(), str(launched[0].returncode))
+            self.assertTrue(terminal['exit_known'] and terminal['cleanup']['terminal'])
+            self.assertIsNotNone(terminal['error'])
+            self.assertFalse((output / 'complete.json').exists())
+            print(json.dumps(dict(control='worker-interrupted-wait', terminal=terminal)))
+        finally:
+            signal.signal(signal.SIGTERM, original_term)
+            for process in launched:
+                b.guard().stop_group(process, process.pid)
+
+    def outer_fixture(self, inject_cleanup_failure=False, inject_projection_failure=False, inject_manager_kill=False):
         """Exercise supervise's actual finally path; only systemd transport/canonical lock are stand-ins."""
         pg = b.guard()
         pg.adopt_orphans()
@@ -157,9 +206,12 @@ class StockFeedback(unittest.TestCase):
         child_marker = self.root / 'outer-child.json'
         child = ('import json,os,signal,time; signal.signal(signal.SIGTERM,signal.SIG_IGN); '
                  'open(' + repr(str(child_marker)) + ',"w").write(json.dumps({"pid":os.getpid()})); time.sleep(60)')
+        finish = ('import os,signal; os.kill(os.getpid(),signal.SIGKILL)' if inject_manager_kill else
+                  '[Path(' + repr(str(output)) + ',name).write_text("test-only-inner-record") for name in ' +
+                  repr((*b.RAW, 'terminal.json', 'complete.json')) + ']')
         parent = ('import subprocess,sys,time; from pathlib import Path; '
                   'subprocess.Popen([sys.executable,"-c",' + repr(child) + ']); time.sleep(0.2); '
-                  'Path(' + repr(str(output / 'complete.json')) + ').write_text("{}")')
+                  + finish)
         original_popen = subprocess.Popen
         unrelated = original_popen([sys.executable, '-c', 'import time; time.sleep(60)'], start_new_session=True)
         launched = []
@@ -189,7 +241,8 @@ class StockFeedback(unittest.TestCase):
             self.assertIsNone(unrelated.poll())
             observations.append(True)
             return dict(exit=0, properties={'ActiveState': 'active' if len(observations) == 1 else 'inactive',
-                                          'MainPID': '0', 'ControlPID': '0', 'ControlGroup': ''})
+                                          'MainPID': '0', 'ControlPID': '0', 'ControlGroup': '',
+                                          'Result': 'timeout' if inject_manager_kill else 'success'})
 
         def writing(path, value):
             if inject_projection_failure and Path(path).name == 'outer-terminal.json':
@@ -207,7 +260,7 @@ class StockFeedback(unittest.TestCase):
                 if inject_projection_failure:
                     with self.assertRaisesRegex(OSError, 'terminal receipt write failure'):
                         b.supervise(request_path, b.pin(request_path)['sha256'], output)
-                elif inject_cleanup_failure:
+                elif inject_cleanup_failure or inject_manager_kill:
                     with self.assertRaisesRegex(ValueError, 'unit failed'):
                         b.supervise(request_path, b.pin(request_path)['sha256'], output)
                 else:
@@ -222,6 +275,17 @@ class StockFeedback(unittest.TestCase):
                 self.assertTrue(proof['launcher']['reaped'])
                 self.assertTrue(proof['launcher_group_empty'] and proof['service_cgroup_empty'])
                 self.assertEqual(bool(proof['failures']), inject_cleanup_failure)
+                if inject_manager_kill:
+                    terminal = b.read(output / 'outer-terminal.json')
+                    self.assertIsNotNone(terminal['error'])
+                    self.assertEqual(terminal['exit'], -signal.SIGKILL)
+                    self.assertFalse(terminal['worker_complete'])
+                    self.assertIn('time.txt', terminal['missing_worker_records'])
+                    self.assertIn('terminal.json', terminal['missing_worker_records'])
+                    self.assertIn('complete.json', terminal['missing_worker_records'])
+                    self.assertFalse((output / 'time.txt').exists())
+                    self.assertFalse((output / 'terminal.json').exists())
+                    self.assertFalse((output / 'complete.json').exists())
                 print(json.dumps(dict(control='actual-outer-cleanup', injected_failure=inject_cleanup_failure,
                                       proof=proof, unrelated_pid=unrelated.pid, unrelated_survived=True)))
             child_pid = json.loads(child_marker.read_text())['pid']
@@ -242,6 +306,9 @@ class StockFeedback(unittest.TestCase):
 
     def test_actual_outer_receipt_failure_occurs_only_after_both_trees_empty(self):
         self.outer_fixture(inject_projection_failure=True)
+
+    def test_outer_manager_kill_records_failure_and_missing_inner_clocks(self):
+        self.outer_fixture(inject_manager_kill=True)
 
     def test_original_guard_ignored_TERM_descendant_after_leader_exit(self):
         pg = b.guard()
