@@ -1,4 +1,5 @@
 #include "prefix_feedback/session.h"
+#include "prefix_feedback/resource_evidence.h"
 
 #include <unistd.h>
 
@@ -797,6 +798,7 @@ int controls() {
                          {"read_id", "tiny"}});
         });
     });
+    executed += resource_controls();
     std::cout << Json{{"executed", executed},
                       {"failed", 0},
                       {"skipped", 0},

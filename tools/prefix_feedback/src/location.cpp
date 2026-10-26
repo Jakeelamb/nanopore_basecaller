@@ -1,4 +1,5 @@
 #include "prefix_feedback/session.h"
+#include "prefix_feedback/resource_evidence.h"
 
 #include <algorithm>
 #include <cctype>
@@ -133,6 +134,13 @@ Json validate_resources(const Json& manifest, const std::string& plan_sha256) {
         check_pin(resources.at(key));
     }
     const auto lineage = read_json(resources.at("index_provenance").at("path").get<std::string>());
+    if (lineage.at("schema") == "prefix-legacy-resource-evidence/1") {
+        for (const auto& source : resources.at("producer_sources")) {
+            check_pin(source);
+        }
+        resource_evidence::validate(resources, lineage, resource_evidence::frozen_trust());
+        return resources;
+    }
     require(lineage.at("schema") == "prefix-reference-lineage/1" && lineage.at("complete") == true,
             "reference/index lineage absent");
     for (const auto& key :

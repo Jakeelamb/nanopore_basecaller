@@ -92,7 +92,7 @@ def qualify(output):
                 counters.append(value)
             if isinstance(value, dict) and "bridge_executed" in value:
                 bridge.append(value)
-        io.require(len(counters) == 1 and counters[0]["executed"] == 13
+        io.require(len(counters) == 1 and counters[0]["executed"] == 18
                    and counters[0]["failed"] == 0 and counters[0]["skipped"] == 0,
                    "actual C++ control census/skip count differs")
         io.require(len(bridge) == 1 and bridge[0]["bridge_executed"] == 8
