@@ -75,6 +75,25 @@ struct Proposal {
   Edit edit;
   std::string mechanism;
 };
+struct UnscoredProposal {
+  std::string sequence;
+  Edit edit;
+  std::string mechanism;
+};
+enum class PrefixNominationStatus { ready, excluded };
+struct PrefixNomination {
+  PrefixNominationStatus status{PrefixNominationStatus::ready};
+  std::vector<UnscoredProposal> proposals;
+  std::vector<std::string> arm_exclusions;
+  Json exclusions = Json::array();
+  std::size_t tail_begin{}, tail_end{}, visited{}, eligible{}, unique{},
+      duplicate{}, excluded{}, original_duplicates{};
+};
+PrefixNomination nominate_prefix(const std::string &available_prefix,
+                                std::size_t consumed_rows,
+                                const std::vector<std::string> &originals);
+Json nominate_prefix_request(const Json &request);
+void prefix_controls();
 std::vector<Proposal> proposals(const Frame &frame,
                                 const std::string &available_segment);
 std::pair<std::string, std::string> apply_edits(const std::string &sequence,

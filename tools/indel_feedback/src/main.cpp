@@ -10,7 +10,11 @@ int main(int argc, char **argv) {
       controls();
       return 0;
     }
-    require(argc == 5, "usage: indel-feedback classify|propose REQUEST "
+    if (argc == 2 && std::string(argv[1]) == "prefix-controls") {
+      prefix_controls();
+      return 0;
+    }
+    require(argc == 5, "usage: indel-feedback classify|propose|nominate-prefix REQUEST "
                        "EXPECTED_REQUEST_SHA256 NEW_OUTPUT");
     const fs::path request_path(argv[2]), output_path(argv[4]);
     require(request_path.is_absolute() && output_path.is_absolute() &&
@@ -20,9 +24,10 @@ int main(int argc, char **argv) {
             "independent request hash differs");
     const auto request = read_json(request_path);
     const std::string command(argv[1]);
-    require(command == "classify" || command == "propose", "unknown command");
+    require(command == "classify" || command == "propose" || command == "nominate-prefix", "unknown command");
     auto result = command == "classify" ? classify_request(request)
-                                        : propose_request(request);
+                  : command == "propose" ? propose_request(request)
+                                         : nominate_prefix_request(request);
     require(file_digest(request_path) == argv[3],
             "request changed during consumption");
     verify_sources();

@@ -18,9 +18,10 @@ PROJECT = "/home/jake/Projects/nanopore_basecaller-retrieval"
 UV = "/home/jake/.local/bin/uv"
 TOOL = "indel-feedback"
 BINARY_ENV = "INDEL_FEEDBACK_BINARY"
-TEST_COUNT = 7
-CTEST_NAMES = ["indel_controls"]
+TEST_COUNT = 17
+CTEST_NAMES = ["indel_controls", "indel_prefix_controls"]
 CONTROL_NAMES = ["tiny exhaustive census and total marginal mass","repeated paths aggregate instead of Viterbi","known run lengths two three four","nonrepeat insertion ambiguity","bounded deterministic nomination without truth","both terminal insertions excluded","two flank insertion and gap rejection","deletion boundaries and event base separation","adjacent insertion deletion","repeat annotation and chunk overlap are not partitions","zero exposure preserves no counted events","reverse SAM uses alignment oriented SEQ","full forward reverse and disabled SEQ Q","invalid score geometry alphabet CIGAR rejects"]
+PREFIX_CONTROL_NAMES = ["prefix deterministic full sequence edits", "prefix exact full and row bounds", "prefix empty result and tail open run exclusions", "prefix tail preserves every earlier base", "prefix enumeration counts without hidden clipping", "prefix noncanonical sequence rejects"]
 RAW = ("command.json", "cwd.txt", "start.txt", "end.txt", "exit-status.txt",
        "stdout", "stderr", "time.txt")
 
@@ -129,12 +130,14 @@ def junit_report(path):
             case.find(tag) is not None for case in cases for tag in ("skipped", "failure", "error")):
         raise ValueError("CTest execution census/failure/skip differs")
     controls = []
-    if CONTROL_NAMES:
-        lines = [line.strip() for case in cases
-                 for line in (case.findtext("system-out") or "").splitlines()]
-        controls = [line[5:] for line in lines if line.startswith("PASS ")]
-        if sorted(controls) != sorted(CONTROL_NAMES) or "controls_executed=14 skipped=0" not in lines:
+    for case in cases:
+        expected = CONTROL_NAMES if case.attrib["name"] == "indel_controls" else PREFIX_CONTROL_NAMES
+        summary = "controls_executed=14 skipped=0" if case.attrib["name"] == "indel_controls" else "prefix_controls_executed=6 skipped=0"
+        lines = [line.strip() for line in (case.findtext("system-out") or "").splitlines()]
+        actual = [line[5:] for line in lines if line.startswith("PASS ")]
+        if sorted(actual) != sorted(expected) or summary not in lines:
             raise ValueError("F3 named control execution census differs")
+        controls.extend(actual)
     return dict(tests=len(cases), skipped=0, names=names, control_groups=controls)
 
 
