@@ -1,0 +1,37 @@
+{
+  "schema": "stock-feedback-config/1",
+  "role": "development",
+  "parents_pin": {
+    "path": "/home/jake/Projects/nanopore_basecaller-reference/results/graph-prior/pilot-v1/development/parents.ids",
+    "size": 2368,
+    "sha256": "c8c0522c01a446b35517cee773f5e7d8014d390796c650b394fa4562a83a9d4a"
+  },
+  "pod5_pin": {
+    "path": "/home/jake/Projects/nanopore_basecaller/data/raw/HG002/PAW70337/PAW70337_66b2eea5_de8117b1_33.pod5",
+    "size": 555013832,
+    "sha256": "6146625e08d8628cef8474ac6782a1f1c4843c2f499784b803ab64b58e5ecc8e"
+  },
+  "chemistry": {"flowcell": "R10.4.1", "pore": "E8.2", "speed_bps": 400, "sample_rate_hz": 5000, "kit": "SQK-LSK114"},
+  "settings": {"trim": "none", "disable_read_splitting": true, "emit_moves": true, "min_qscore": 0, "batchsize": 32},
+  "mapper": {"command": "dorado aligner", "reference": "GRCh38-lr-hq.mmi", "mm2_opts": "-x lr:hq -I 16G --eqx -Y", "qualification": "requires full frozen tool/reference pins"},
+  "masks": [100, 500],
+  "truth_domains": {"identity": "PR15 unchanged paired invariant100/500 domains", "qualification": "requires original fixed mask/truth pins; never recompute positive-only domains"},
+  "hg005_selection": false,
+  "retained": [
+    {
+      "id": "scored-native-hac-sam",
+      "pin": {"path": "/home/jake/Projects/nanopore_basecaller-reference/logs/20261023T035916Z-stock-fe30a2dbcb664128bf187fdaf8f68340-CoVGDR/stdout", "size": 16085465, "sha256": "db01733a1847c37b3e30da8839af233728b7bc00421828f291b3da3c3bf2c6fe"},
+      "gaps": ["metadata traced to HACv6 no-trim/no-split/moves producer; current closure not executed by F4", "full original mask/truth/tool/source and parent closure still required"]
+    },
+    {
+      "id": "stock-sup-v5.2-basecall",
+      "pin": {"path": "/home/jake/Projects/nanopore_basecaller/logs/20261023T000317Z-stock-1b0b4ab820334fa8b2836201b7218f50-Mc7Ss6/stdout", "size": 37796323, "sha256": "ba5e86e135d15072e5493db3fdfde50c6f410cb607316be6875a13c1e3f74fab"},
+      "gaps": ["full development cohort differs from exact64 original parent universe", "trim all/default splitting/move declaration differs", "SUPv5.2 is not generation-matched to HACv6", "no matched paired masks/changed-footprint ALT closure admitted"]
+    },
+    {
+      "id": "hac-context-pr15-report",
+      "pin": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/targeting-observation-report-3/complete.json", "size": 2252747, "sha256": "446dbb7fd62d5969663571b4e2edb1ae6e22e7cbb95ef6b61653286c38c99850"},
+      "gaps": ["accepted prior results; no fresh F4 scientific closure executed", "selected equals rerank; context/free 500-domain1percent gate fails; zero productive edited ALT"]
+    }
+  ]
+}
