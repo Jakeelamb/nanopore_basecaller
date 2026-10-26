@@ -107,7 +107,8 @@ Json stage_evidence(const Json& receipt_pin,
         check_pin(value);
     }
     const auto& argv = invocation.at("argv");
-    require(argv.size() >= 2 && argv.at(0) == binary.at("path") && argv.at(1).get<std::string>() == command,
+    require(argv.size() >= 2 && argv.at(0) == binary.at("path") &&
+                    argv.at(1).get<std::string>() == command,
             "actual producer command differs");
     for (const auto& value : outputs) {
         check_pin(value);
@@ -460,7 +461,8 @@ Json normalize_candidates(const Session& session,
     std::sort(locations.begin(), locations.end(), [](const Json& a, const Json& b) {
         return a.at("id").get<std::string>() < b.at("id").get<std::string>();
     });
-    require(free.at("id").get<std::string>() == digest(native), "genuine H ID differs from sequence identity");
+    require(free.at("id").get<std::string>() == digest(native),
+            "genuine H ID differs from sequence identity");
     return {{"schema", "feedback-next/1"},
             {"kind", "candidate-batch"},
             {"binding", binding},
@@ -504,9 +506,11 @@ Json merge_candidates(const Session& session,
         dna(alternate);
         require(begin <= end && end <= native.size() &&
                         begin >= (native.size() > 32 ? native.size() - 32 : 0) &&
-                        edit.at("reference").get<std::string>() == native.substr(begin, end - begin) &&
+                        edit.at("reference").get<std::string>() ==
+                                native.substr(begin, end - begin) &&
                         native.substr(0, begin) + alternate + native.substr(end) == sequence &&
-                        proposal.at("id").get<std::string>() == "prefix-indel-" + digest(sequence) &&
+                        proposal.at("id").get<std::string>() ==
+                                "prefix-indel-" + digest(sequence) &&
                         (previous.empty() || previous < sequence) &&
                         sequences.insert(sequence).second,
                 "sidecar replacement/order/dedup/tail differs");
@@ -686,7 +690,8 @@ void bridge_command(const std::string& command, const Json& request, const fs::p
                             argv.at(4) == request.at("sidecar").at("path"),
                     "sidecar actual request/output differs");
             const auto sidecar_request = consumed(pin(argv.at(2).get<std::string>()));
-            require(file_digest(argv.at(2).get<std::string>()) == sidecar.at("request_sha256").get<std::string>() &&
+            require(file_digest(argv.at(2).get<std::string>()) ==
+                                    sidecar.at("request_sha256").get<std::string>() &&
                             sidecar_request.at("batch_pin") == request.at("batch") &&
                             sidecar_request.at("expected_binding") ==
                                     request.at("expected_binding") &&
