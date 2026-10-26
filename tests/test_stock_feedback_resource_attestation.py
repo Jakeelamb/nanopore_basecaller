@@ -1,6 +1,7 @@
 """Hermetic native gzip/SHA controls. Execute only under Root's fresh bounded engineering grant."""
 import gzip
 import json
+import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import shlex
@@ -16,10 +17,19 @@ import resource_attestation as r
 
 class ResourceAttestation(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory()
-        self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        retained = Path(os.environ['TMPDIR']).resolve(strict=True) / 'results'
+        retained.mkdir(exist_ok=True)
+        self.root = Path(tempfile.mkdtemp(prefix=self._testMethodName + '-', dir=retained))
+        self.addCleanup(self.retain_index)
         self.tools = b.read(Path(r.__file__).parent / 'resource-attestation-hg002-v1.json')['tools']
+
+    def retain_index(self):
+        native = [b.pin(path) for path in sorted((self.root / 'attestation').glob('*/*')) if path.is_file()]
+        case = [b.pin(path) for path in sorted(self.root.glob('*.json'))]
+        case += [b.pin(path) for path in sorted((self.root / 'attestation').glob('*.json'))]
+        index = self.root / 'native-record-index.json'
+        b.write(index, dict(control=self.id(), retained_path=str(self.root), native_records=native, case_records=case))
+        print(json.dumps(dict(control=self.id(), retained_path=str(self.root), native_record_index=b.pin(index))), flush=True)
 
     def raw(self, name, argv, stdout=b'', stderr=b''):
         directory = self.root / name
@@ -75,6 +85,7 @@ class ResourceAttestation(unittest.TestCase):
                         fai_finish=self.save('fai-finish.json', fai)))
 
     def run_case(self, spec, name='attestation'):
+        b.write(self.root / 'case-request.json', spec)
         return r.verify(spec, self.root / name)
 
     def cli_grant(self, spec):
@@ -103,17 +114,26 @@ class ResourceAttestation(unittest.TestCase):
                      roles=dict(unit='F4/resource-attestation', inputs={str(i): i for i in range(len(inputs))},
                                 outputs={'attestation': expected}))
         # This is a boundary fixture, never a Root execution authorization or kernel receipt.
+        b.write(grant_path, grant)
         b.validate(grant)
         r.require_admitted_sources(grant, spec)
         return argv, grant_path, grant
 
     def assert_main_source_rejection(self, argv, grant_path, grant, path):
-        grant_path.write_text(json.dumps(grant))
+        grant_path = grant_path.with_name('grant-rejected-' + Path(path).stem + '.json')
+        argv = list(argv)
+        argv[argv.index('--grant') + 1] = str(grant_path)
+        command = list(grant['argv'])
+        command[command.index('--grant') + 1] = str(grant_path)
+        b.write(grant_path, dict(grant, argv=command))
         # No kernel predicate is mocked: the real source guard must reject before that boundary.
         with patch.object(sys, 'argv', argv), patch.object(r, 'verify') as verify:
-            with self.assertRaisesRegex(ValueError, 'attestation source is not admitted: ' + path):
+            with self.assertRaisesRegex(ValueError, 'attestation source is not admitted: ' + path) as caught:
                 r.main()
             verify.assert_not_called()
+        b.write(self.root / ('source-rejection-' + Path(path).stem + '.json'),
+                dict(argv=argv, grant=b.pin(grant_path), rejected_source=path,
+                     error=str(caught.exception), verify_called=False))
         self.assertFalse((self.root / 'attestation').exists())
 
     def test_root_shaped_source_closure_positive(self):
