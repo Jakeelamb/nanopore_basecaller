@@ -80,8 +80,10 @@ Frame frame(const Json &request, const Json &binding) {
   const auto &availability = binding.at("availability");
   exact(availability, {"kind", "row_begin", "row_end", "available_row_end",
                        "chunk_lookahead", "signal_geometry"});
-  require(availability.at("kind").get<std::string>() == "released-score-block" &&
-              availability.at("chunk_lookahead").get<std::string>() == "whole_chunk" &&
+  require(availability.at("kind").get<std::string>() ==
+                  "released-score-block" &&
+              availability.at("chunk_lookahead").get<std::string>() ==
+                  "whole_chunk" &&
               availability.at("signal_geometry").is_null(),
           "replay availability differs");
   const auto begin = availability.at("row_begin").get<std::size_t>(),
@@ -156,12 +158,14 @@ Json propose_request(const Json &request) {
   }
   const auto native = batch.at("native").at("sequence").get<std::string>();
   const auto quality = batch.at("native").at("quality").get<std::string>();
-  require(batch.at("native").at("scope").get<std::string>() == "available_input_segment" &&
+  require(batch.at("native").at("scope").get<std::string>() ==
+                  "available_input_segment" &&
               native.size() == quality.size(),
           "available native identity differs");
   const auto identity =
       read_json(binding.at("identity_input").at("path").get<std::string>());
-  require(identity.at("read_id").get<std::string>() == binding.at("read_id").get<std::string>() &&
+  require(identity.at("read_id").get<std::string>() ==
+                  binding.at("read_id").get<std::string>() &&
               identity.at("chunk_index") == binding.at("chunk_index") &&
               identity.at("sequence").get<std::string>() == native &&
               identity.at("quality").get<std::string>() == quality &&

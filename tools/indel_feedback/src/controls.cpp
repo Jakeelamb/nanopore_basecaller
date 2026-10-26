@@ -194,7 +194,10 @@ void controls() {
     const auto other =
         classify_alignment("CATGT", "12345", "CAGT", 0, "2=1I2=", {{0, 4}});
     expect(
-        other.events.at(0).at("annotations").at("unknown_mechanism").get<bool>() &&
+        other.events.at(0)
+                .at("annotations")
+                .at("unknown_mechanism")
+                .get<bool>() &&
             other.events.at(0).at("annotations").at("chunk_overlap").is_null(),
         "unknown/missing geometry lost");
   });

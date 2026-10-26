@@ -209,7 +209,8 @@ Classified classify_alignment(const std::string &sequence,
   return result;
 }
 Json classify_request(const Json &request) {
-  require(request.at("schema").get<std::string>() == "indel-classification-request/1",
+  require(request.at("schema").get<std::string>() ==
+              "indel-classification-request/1",
           "classifier schema differs");
   const auto side = request.at("side").get<std::string>();
   require(side == "left" || side == "right", "pairer side differs");
