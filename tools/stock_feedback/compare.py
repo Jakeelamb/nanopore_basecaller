@@ -38,6 +38,7 @@ def producer(item):
     """Consume the original receipt schemas; no fresh scientific body verification is implied."""
     reader = legacy.Metadata()
     receipt = reader.read(item['receipt'])
+    custody = None
     if receipt.get('schema') == 'uncertainty-feedback-command/1':
         imported = legacy.uncertainty_command(reader, item['receipt'], item['cwd'])
         inputs = receipt['inputs']
@@ -50,9 +51,78 @@ def producer(item):
         cohort = manifest['cohorts'][item['role']]
         inputs = [cohort['ids'], cohort['raw'], *manifest['model_pins']]
         source = dict(sources=receipt['context']['sources'], executables=receipt['context']['executables'])
+        custody = dict(model=manifest.get('model'), parents_pin=cohort['ids'], pod5_pin=cohort['raw'],
+                       model_config=next((p for p in manifest['model_pins'] if p['path'].endswith('/config.toml')), None),
+                       settings=legacy.comparable_settings(receipt['argv']) if 'basecaller' in receipt['argv'] else None)
     require(imported['argv'] == item['argv'] and imported['result'] == item['result'], 'producer argv/result differs')
     require(source == item['source'] and inputs == item['input_pins'], 'producer source/input tuple differs')
-    return identity(dict(source=source, inputs=inputs, argv=item['argv'], cwd=item['cwd']))
+    return dict(identity=identity(dict(source=source, inputs=inputs, argv=item['argv'], cwd=item['cwd'])),
+                receipt=item['receipt'], argv=imported['argv'], result=imported['result'], inputs=inputs,
+                custody=custody, binary=receipt.get('binary'), produced_files=receipt.get('produced_files', []))
+
+
+def arm_custody(config, arm, retained):
+    """The accepted native lineage supplies model/settings for its exact mapped arm result."""
+    rows = {row['arm']: row for row in retained['arms']}
+    row = rows[arm]
+    require(row['status'] == 'retained-reuse-available', 'no compatible retained producer for claimed arm')
+    native = rows['native-hac']
+    require(native['status'] == 'retained-reuse-available', 'native model/read-set lineage unavailable')
+    stage = row['receipt'][-1] if arm == 'native-hac' else row['receipt']['mapped-sam']
+    return dict(model=dict(name=Path(config['legacy']['hac_model']).name,
+                           config_pin=retained['model_configs']['hac']),
+                parents_pin=retained['domains']['parents'], pod5_pin=config['pod5_pin'],
+                settings={key: native['settings'][key] for key in config['settings']},
+                receipt=stage['receipt'], result=stage['result'])
+
+
+def bind_arm(config, declaration, validated, retained):
+    actual = validated['custody']
+    if actual is not None:
+        require(actual['model'] is not None
+                and Path(actual['model']).name == declaration['model']['name']
+                and actual['model_config'] == declaration['model']['config_pin'],
+                'actual producer model/config differs from arm declaration')
+        require(actual['parents_pin'] == declaration['parents_pin'] and actual['pod5_pin'] == declaration['pod5_pin'],
+                'actual producer read-set/POD5 differs from arm declaration')
+        if actual['settings'] is not None:
+            require(all(str(actual['settings'][key]) == str(value) for key, value in declaration['settings'].items()),
+                    'actual producer settings differ from arm declaration')
+    bound = arm_custody(config, declaration['arm'], retained)
+    require(declaration['model'] == bound['model'] and declaration['parents_pin'] == bound['parents_pin']
+            and declaration['pod5_pin'] == bound['pod5_pin']
+            and all(str(bound['settings'][key]) == str(value) for key, value in declaration['settings'].items()),
+            'validated native lineage differs from arm declaration')
+    require(validated['receipt'] == bound['receipt'] and validated['result'] == bound['result'],
+            'actual producer result does not belong to claimed arm')
+    return bound
+
+
+def bind_observation(config, observation, validated, bound, retained):
+    """Only the authenticated score command/result can attribute an arm and fixed mask."""
+    domain = retained['domains']
+    eligible = domain['eligible'][str(observation['mask'])]
+    left = config['legacy']['native_sam']
+    right = bound['result']
+    argv = validated['argv']
+    require('--output' in argv, 'observation is not an attributed paired-score producer')
+    output = argv[argv.index('--output') + 1]
+    expected = [domain['pairer']['path'], 'score', '--reference', domain['reference']['path'],
+                '--eligible', eligible['path'], '--left', left['path'], '--right', right['path'],
+                '--parents', domain['parents']['path'], '--output', output]
+    require(argv == expected and validated['binary'] == domain['pairer']
+            and validated['inputs'] == [domain['reference'], eligible, left, right, domain['parents']],
+            'observation actual arm/mask/observer input tuple differs')
+    expected_tuple = dict(arm=observation['arm'], mask=observation['mask'], observer=domain['pairer'],
+                          reference=domain['reference'], eligible=eligible, baseline=left,
+                          candidate=right, parents=domain['parents'])
+    require(observation['observer_tuple'] == expected_tuple, 'declared observation tuple differs')
+    result = observation['result']
+    require(result in validated['produced_files'] and Path(result['path']) == Path(output) / 'summary.json',
+            'observation result is not linked to actual arm/mask producer')
+    legacy.stat_artifact(result)
+    return dict(result=result, producer_receipt=validated['receipt'], observer_tuple=expected_tuple,
+                numeric_payload_verified=False)
 
 
 def plan(config, supplied):
@@ -63,9 +133,11 @@ def plan(config, supplied):
     require({x['arm'] for x in supplied} <= set(ARMS), 'unknown arm')
     arms = []
     aliases = {}
+    retained = legacy.inventory(config) if 'legacy' in config else None
     for arm in ARMS:
         item = next((x for x in supplied if x['arm'] == arm), None)
         gaps = []
+        bound = None
         if item is None:
             gaps.append('no qualified same-molecule producer closure supplied')
         else:
@@ -84,7 +156,10 @@ def plan(config, supplied):
             if not gaps:
                 try:
                     legacy.stat_artifact(item['model']['config_pin'])
-                    key = producer(item['producer'])
+                    validated = producer(item['producer'])
+                    require(retained is not None, 'retained arm lineage is required')
+                    bound = bind_arm(config, item, validated, retained)
+                    key = validated['identity']
                     if key in aliases:
                         alias = aliases[key]
                     else:
@@ -93,11 +168,11 @@ def plan(config, supplied):
                 except (ValueError, KeyError, OSError) as caught:
                     gaps.append(str(caught))
         arms.append(dict(arm=arm, status='unqualified' if gaps else 'retained-metadata-valid', gaps=gaps,
-                         alias_of=alias if not gaps else None,
+                         alias_of=alias if not gaps else None, custody=bound if not gaps else None,
                          parents=[dict(parent=p, status='unqualified' if gaps else 'retained-metadata-valid') for p in universe]))
     return dict(schema='stock-feedback-plan/1', config_hash=identity(config), arms=arms,
                 population=64, masks=[100, 500], no_parent_dropped=True, native_replay=False,
-                retained_closure=legacy.inventory(config) if 'legacy' in config else None,
+                retained_closure=retained,
                 scientific_content_reverified=False)
 
 
@@ -108,10 +183,12 @@ def report(config, planned, observations):
             'duplicate or unknown observation arm/domain')
     matrix = []
     universe = parents(config['parents_pin']['path'])
+    retained = legacy.inventory(config) if 'legacy' in config else None
     for arm in planned['arms']:
         for mask in config['masks']:
             observation = next((x for x in observations if x['arm'] == arm['arm'] and x['mask'] == mask), None)
             gaps = list(arm['gaps'])
+            attributed = None
             if observation is None:
                 gaps.append('native paired observation unavailable')
             elif not gaps:
@@ -124,9 +201,12 @@ def report(config, planned, observations):
                 require(set(observation['technical_bounds']) == {'parent', 'genomic_block'}, 'technical bounds missing')
                 require(set(observation['strata']) == {'target43', 'nontarget21'}, 'target strata missing')
                 require(set(observation['changed_footprint_alt']) == {'SNV', 'INS', 'DEL'}, 'actual changed-footprint ALT missing')
-                producer(observation['producer'])
+                require(retained is not None, 'retained observation lineage is required')
+                bound = arm_custody(config, arm['arm'], retained)
+                require(arm['custody'] == bound, 'planned arm producer/result custody differs')
+                attributed = bind_observation(config, observation, producer(observation['producer']), bound, retained)
             matrix.append(dict(arm=arm['arm'], mask=mask, status='unqualified' if gaps else 'retained-metadata-valid', gaps=gaps,
-                               parent_rows=arm['parents'], native_observation=observation if not gaps else None))
+                               parent_rows=arm['parents'], native_observation=attributed))
     return dict(schema='stock-feedback-report/1', matrix=matrix, biological_promotion=False,
                 model_winner=None, hg005_selection=False, no_parent_dropped=True,
-                retained_closure=planned.get('retained_closure'), scientific_content_reverified=False)
+                retained_closure=retained, scientific_content_reverified=False)

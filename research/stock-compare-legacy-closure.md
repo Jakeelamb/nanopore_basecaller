@@ -24,7 +24,7 @@ The final accepted targeting report remains `446dbb7fd62d5969663571b4e2edb1ae6e2
 
 ## Fresh execution proposal
 
-First run the new focused20test unit, including the genuine retained metadata inventory plus distinct corrupted-metadata-hash and missing-recorder negatives. Exact cwd is F4 and exact argv is the existing fixed UV unittest command in source-ready. Root must newly pin the changed compare.py, legacy.py, config and tests, and author a new request/digest. The prior16test grant cannot be reused. Inputs include the exact metadata roots below; the admitted importer follows only their full-pin metadata/raw-recorder links within its32MiB bound and STAT-checks scientific bodies.
+First run the corrected focused23test unit, including the genuine retained metadata inventory, distinct corrupted-metadata-hash/missing-recorder negatives and the attribution controls below. Exact cwd is F4 and exact argv is the existing fixed UV unittest command in source-ready. Root must newly pin the changed compare.py, legacy.py, config and tests, and author a new request/digest. The prior16test grant cannot be reused. Inputs include the exact metadata roots below; the admitted importer follows only their full-pin metadata/raw-recorder links within its32MiB bound and STAT-checks scientific bodies.
 
 | Input role | Exact pin source |
 |---|---|
@@ -59,3 +59,18 @@ Exact prospective basecall argv, HELD and not authorized by the engineering or m
 ```
 
 It would write a fresh separate F4 output, leaving stock controls unchanged. Proposed per-unit ceilings are300s,CPU2,RAM16GiB/AS24GiB,swap0,growth100MiB,aggregate4GiB,reserve30GiB. GPU admission/VRAM fit, power/thermal/foreign-process prerequisites and full source/model/POD5 content pins still require Root's separate decision; those caps are a proposal, not current qualification. The native HAC graph-export binary differs from the distributed SUP binary, so producer/source parity must remain explicit. Do not launch this command, replace it with a download, or infer it fits merely because a metadata or engineering unit passed. Subsequent unchanged mapper/pairer/ALT units would each need their own exact fresh command/pins/caps and cannot be inferred from basecall success.
+
+## Arm and observation attribution correction
+
+Independent review of3b488b3 found a P2: an authentic HAC receipt could validate its own nested producer object while an unrelated outer declaration called it SUP. The retained inert counterexample and source review remain at `next-four-lanes/reviews/F4-legacy-delta-v2/` in Root's store. That source cut was not executed or accepted for comparison custody.
+
+The corrected producer reader returns authenticated provenance, not only an alias key. Plan checks the actual manifest model/config, parent/POD5 pins and basecaller settings against the outer declaration. It also binds the exact validated receipt/result to the sealed accepted native or context mapped arm. An authentic basecall or unrelated mapped result cannot stand in for the arm's mapped result. The broader SUP source remains incompatible; copying the expected declarations cannot repair its actual provenance.
+
+Observation attribution now binds the actual native pairer binary, exact score argv and ordered full input pins to the claimed arm's mapped candidate, native baseline, fixed mask/reference/parents and declared observer tuple. The claimed result must be the authenticated produced summary.json under that exact command's output directory. A valid100-mask result cannot support500, nor can a context result support the native arm. Numeric bodies remain unopened; the metadata report emits the sourced result/receipt/tuple with numeric_payload_verified=false instead of copying caller-supplied numerical payloads.
+
+Three additional source controls make the proposed suite23tests: a real retained HAC receipt falsely declared SUP, a genuine native mapped-arm positive, and a real paired-score positive followed by wrong-arm/wrong-mask/wrong-result substitutions. The latter control reads two full-pin native-command metadata leaves of the accepted-context-map role:
+
+- `.../targeting-engineering-1/observation-selected-native-3/score-100/raw/complete.json`,19384bytes,SHA256 `a22169b174febc25938bd8bca11837c59ee6d999226f2c6c09b6196ecb08ad3e`.
+- `.../targeting-engineering-1/observation-selected-native-3/score-500/raw/complete.json`,19384bytes,SHA256 `4710fd7efc1c70cf2b8fd632e1386abff6ef8d8124ecfeebaf2beb9083877190`.
+
+The absolute prefix is `/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback`. These are metadata-only control leaves, with scientific produced summaries STAT-only; no new Root input root or scientific body permission is inferred. Root's fresh request must explicitly include these source-pinned leaves in the accepted-context-map metadata read scope. The nine root metadata roles, exact fixed UV unittest argv and300s/CPU2/4GiB/AS8GiB/swap0/output caps remain unchanged. New tests executed:0. The qualified adapter and old16test receipts remain unchanged.

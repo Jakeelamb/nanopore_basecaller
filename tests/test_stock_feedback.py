@@ -166,6 +166,97 @@ class StockFeedback(unittest.TestCase):
                               statuses=[arm['status'] for arm in inventory['arms']], population=64,
                               scientific_bodies_read=False, producer_replayed=False)))
 
+    def retained_stock_producer(self, config, index):
+        reader = l.Metadata()
+        receipt_pin = config['legacy']['native_receipts'][index]
+        receipt = reader.read(receipt_pin)
+        manifest = reader.read(config['legacy']['experiment'])
+        imported = l.stock_finish(reader, receipt_pin, config['legacy']['native_cwd'])
+        cohort = manifest['cohorts']['development']
+        return dict(receipt=receipt_pin, experiment_manifest=config['legacy']['experiment'], role='development',
+                    cwd=config['legacy']['native_cwd'], argv=receipt['argv'], result=imported['result'],
+                    source=dict(sources=receipt['context']['sources'], executables=receipt['context']['executables']),
+                    input_pins=[cohort['ids'], cohort['raw'], *manifest['model_pins']])
+
+    def retained_uncertainty_producer(self, config, receipt_pin):
+        reader = l.Metadata()
+        receipt = reader.read(receipt_pin)
+        imported = l.uncertainty_command(reader, receipt_pin, config['legacy']['context_cwd'])
+        return dict(receipt=receipt_pin, cwd=config['legacy']['context_cwd'], argv=receipt['argv'],
+                    result=imported['result'], input_pins=receipt['inputs'],
+                    source=dict(witness=receipt['source_witness'], sources=receipt['sources'],
+                                binary=receipt['binary'], runtime=receipt['runtime'], dependency=receipt['dependency_manifest']))
+
+    def retained_declaration(self, config, arm, producer):
+        kind = 'sup' if arm == 'stock-sup' else 'hac'
+        return dict(arm=arm, **{key: config[key] for key in c.CONTRACT_KEYS},
+                    parents=c.parents(config['parents_pin']['path']), producer=producer,
+                    model=dict(name=Path(config['legacy'][kind + '_model']).name,
+                               config_pin=config['legacy'][kind + '_config']))
+
+    def test_real_retained_HAC_receipt_cannot_be_declared_SUP(self):
+        config = b.read(Path(__file__).resolve().parents[1] / 'config/stock-feedback-compare-v1.json')
+        genuine_hac = self.retained_stock_producer(config, 0)
+        self.assertEqual(Path(c.producer(genuine_hac)['custody']['model']).name,
+                         Path(config['legacy']['hac_model']).name)
+        # Same actual HAC tuple as the independent retained counterexample; only the arm declares SUP.
+        declared_sup = self.retained_declaration(config, 'stock-sup', genuine_hac)
+        planned = c.plan(config, [declared_sup])
+        row = next(arm for arm in planned['arms'] if arm['arm'] == 'stock-sup')
+        self.assertEqual(row['status'], 'unqualified')
+        self.assertIn('actual producer model/config differs from arm declaration', row['gaps'])
+        self.assertEqual(len(row['parents']), 64)
+
+    def test_real_retained_native_mapped_result_binds_native_arm(self):
+        config = b.read(Path(__file__).resolve().parents[1] / 'config/stock-feedback-compare-v1.json')
+        declaration = self.retained_declaration(config, 'native-hac', self.retained_stock_producer(config, 2))
+        row = c.plan(config, [declaration])['arms'][0]
+        self.assertEqual(row['status'], 'retained-metadata-valid')
+        self.assertEqual(row['custody']['result'], config['legacy']['native_sam'])
+
+    def test_real_observation_rejects_wrong_result_arm_and_mask(self):
+        config = b.read(Path(__file__).resolve().parents[1] / 'config/stock-feedback-compare-v1.json')
+        context_map = l.Metadata().read(config['legacy']['context_map'])
+        context = self.retained_declaration(config, 'hac-context', self.retained_uncertainty_producer(
+            config, context_map['records']['mapped-sam']))
+        native = self.retained_declaration(config, 'native-hac', self.retained_stock_producer(config, 2))
+        planned = c.plan(config, [native, context])
+        base = ('/home/jake/Projects/nanopore_basecaller-context-feedback-targeting-v2/results/context-feedback/'
+                'targeting-engineering-1/observation-selected-native-3/')
+        # Source-pinned command-metadata leaves of the accepted-context-map role; no result body is opened.
+        score_pins = {100: dict(path=base + 'score-100/raw/complete.json', size=19384,
+                               sha256='a22169b174febc25938bd8bca11837c59ee6d999226f2c6c09b6196ecb08ad3e'),
+                      500: dict(path=base + 'score-500/raw/complete.json', size=19384,
+                                sha256='4710fd7efc1c70cf2b8fd632e1386abff6ef8d8124ecfeebaf2beb9083877190')}
+        receipts = {mask: l.Metadata().read(value) for mask, value in score_pins.items()}
+        results = {mask: next(p for p in value['produced_files'] if p['path'].endswith('/summary.json'))
+                   for mask, value in receipts.items()}
+        domain = planned['retained_closure']['domains']
+        observation = dict(arm='hac-context', mask=100, parents=context['parents'], domains=config['truth_domains'],
+                masks=config['masks'], zero_exposure_preserved=True, denominator='M+X+I+D', errors='X+I+D',
+                technical_bounds=dict(parent=None, genomic_block=None), strata=dict(target43=None, nontarget21=None),
+                changed_footprint_alt=dict(SNV=None, INS=None, DEL=None), result=results[100],
+                producer=self.retained_uncertainty_producer(config, score_pins[100]),
+                observer_tuple=dict(arm='hac-context', mask=100, observer=domain['pairer'],
+                    reference=domain['reference'], eligible=domain['eligible']['100'],
+                    baseline=config['legacy']['native_sam'], candidate=context_map['mapped'], parents=domain['parents']))
+        valid = c.report(config, planned, [observation])
+        observed = next(row for row in valid['matrix'] if row['arm'] == 'hac-context' and row['mask'] == 100)
+        self.assertEqual(observed['status'], 'retained-metadata-valid')
+        self.assertFalse(observed['native_observation']['numeric_payload_verified'])
+        for case in ('arm', 'mask', 'result'):
+            changed = copy.deepcopy(observation)
+            if case == 'arm':
+                changed['arm'] = changed['observer_tuple']['arm'] = 'native-hac'
+                changed['observer_tuple']['candidate'] = config['legacy']['native_sam']
+            elif case == 'mask':
+                changed['mask'] = changed['observer_tuple']['mask'] = 500
+                changed['observer_tuple']['eligible'] = domain['eligible']['500']
+            else:
+                changed['result'] = results[500]
+            with self.subTest(case=case), self.assertRaisesRegex(ValueError, 'observation actual arm/mask/observer|observation result is not linked'):
+                c.report(config, planned, [changed])
+
     def test_unloaded_service_exit_one_is_terminal_only_with_absent_cgroup(self):
         self.assertTrue(b.terminal(dict(exit=1, properties={'LoadState': 'not-found'}),
                                    '/feedback-next-nonexistent-hermetic-control'))
