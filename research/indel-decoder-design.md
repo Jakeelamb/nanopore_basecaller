@@ -1,0 +1,18 @@
+# F3 indel classification and bounded proposal design
+
+Status: source preparation. Tests executed: 0. No runtime admission is implied.
+
+Two alternatives were considered before changing numerical/search behavior.
+
+1. Build another joint beam decoder with indel context. Rejected: duplicates F1's persistent decoder, entangles F2 policy, and makes a candidate-set ablation difficult to identify.
+2. Consume the frozen pairer's parent-specific `matched.bed` and `parents.tsv` for classification; separately expand available sequence segments with bounded indel edits and compute exact CRF sequence masses on the supplied score rows. Selected: classification and nomination have separate input types and entry points. Truth-derived classification cannot nominate candidates. F1 retains independent reference-free search; F2 retains all selection policy.
+
+The read-only pairer `reference/tools/reference_pair/src/lib.rs` constructs unique sibling coverage per arm, intersects both arms with the frozen mask, and emits the resulting domain in `matched.bed` (contig/start/end/parent). The classifier consumes that domain, not its union or observer prefilter, and reconciles m/x/i/d and reference exposure for every original parent against `parents.tsv`. SAM SEQ/Q are already in alignment orientation, including flag16. Insertions require two existing flanks in one matched interval; deletion positions are independently eligible. A CIGAR operation is one event even when it crosses several eligible intervals; base counts and event counts are separate. Attributes overlap and are explicitly not a partition.
+
+Classifier labels are conservative sequence-context annotations, not causal diagnoses: compatible homopolymer, short tandem context (period2..6), other/unknown, and separately native chunk-boundary proximity/overlap when a pinned query-coordinate annotation is supplied. A homopolymer label requires the complete inserted/deleted word to agree with the adjacent run base; adjacency alone is insufficient. Missing geometry remains unknown. The old guarded arm and all original exclusions remain unchanged.
+
+The proposal arm is `available-segment-indel-v1`. It is predeclared independently of old guarded eligibility. From an available native segment of at most32 bases, enumerate each single deletion, each A/C/G/T single insertion, and maximal native homopolymer lengths within ±2 and1..6. Deduplicate identical strings before scoring. Preserve all original candidates. Cap new unique strings at512; reject rather than truncate. No reference, truth, CIGAR error location, calibrated dwell time, or context prior is accepted by nomination. Scores are exact marginalized stay/emission mass conditional on a supplied initial CRF state and released row interval; they are not calibrated probabilities. The supplied genuine independent free ID remains distinct from the argmax over the union.
+
+F3 does not implement a streaming decoder, localization, policy or process supervisor. The batch adapter must bind the final Root-relayed feedback-next/1 schema. Initial controls are independently implementable before that relay. Genuine pilots must freeze parent/window IDs and immutable tensor/metadata pins before scoring, and compare original candidates, union candidates with prior none, and union candidates under the unchanged F2 fixed policy. No pilot has run.
+
+Native scores can contain within-chunk future recurrence. Replay availability is `released-score-block`, with row_begin/row_end/available_row_end and declared whole_chunk_lookahead; signal_geometry is null. Frame counts are not measured raw-current dwell. No invented sample coordinates are permitted.
