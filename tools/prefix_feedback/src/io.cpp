@@ -112,9 +112,7 @@ std::string read_text(const fs::path& path, std::size_t maximum) {
     return bytes.str();
 }
 Json read_json(const fs::path& path) { return Json::parse(read_text(path)); }
-void fresh(const fs::path& path, const Json& value) {
-    fresh_bytes(path, value.dump(2) + '\n');
-}
+void fresh(const fs::path& path, const Json& value) { fresh_bytes(path, value.dump(2) + '\n'); }
 void fresh_bytes(const fs::path& path, const std::string& bytes) {
     const int descriptor = ::open(path.c_str(), O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW, 0600);
     require(descriptor >= 0, "fresh output required");

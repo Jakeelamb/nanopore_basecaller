@@ -209,7 +209,7 @@ struct Fixture {
         require(!relative.empty() && !relative.is_absolute() && *relative.begin() != "..",
                 "control TMPDIR outside monitored prefix results");
         root = temporary / ("prefix-control-fixtures-" + std::to_string(::getpid()) + "-" +
-                                     std::to_string(count++));
+                            std::to_string(count++));
         require(fs::create_directory(root), "fresh control fixture directory required");
         std::cout << Json{{"fixture_root", root.string()}, {"retained", true}}.dump() << '\n';
         auto file = [&](const std::string& name, const std::string& bytes) {
