@@ -18,6 +18,15 @@ def absolute(item, root):
     return dict(item, path=str((Path(root) / item['path']).resolve()))
 
 
+def require_admitted_sources(grant, spec):
+    """Bind the code actually imported and tools actually used to Root's source closure."""
+    required = [b.pin(__file__), b.pin(legacy.__file__), b.pin(b.__file__),
+                b.check(b.GUARD), b.pin(sys.executable),
+                *(b.check(item) for item in spec['tools'].values())]
+    for item in required:
+        b.require(item in grant['source_pins'], 'attestation source is not admitted: ' + item['path'])
+
+
 def admitted_inputs(spec):
     """Exact full pins, deduplicated across current resource and old raw aliases."""
     reader = legacy.Metadata()
@@ -258,12 +267,13 @@ def main():
     args = parser.parse_args()
     grant = b.read(args.grant)
     b.validate(grant)
+    spec = b.read(args.spec)
+    require_admitted_sources(grant, spec)
     b.kernel_check(grant)
     expected = ['/home/jake/.local/bin/uv', 'run', '--project', '/home/jake/Projects/nanopore_basecaller-retrieval',
                 '--no-sync', 'python', str(Path(__file__).resolve()), *sys.argv[1:]]
     b.require(grant['argv'] == expected and grant['roles']['unit'] == 'F4/resource-attestation',
               'verifier command/role differs from admitted unit')
-    spec = b.read(args.spec)
     for item in [b.pin(args.spec), *admitted_inputs(spec)]:
         b.require(item in grant['input_pins'], 'attestation input is not admitted: ' + item['path'])
     b.require(str(args.output.resolve()).startswith(grant['root'] + '/')

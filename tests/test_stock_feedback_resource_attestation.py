@@ -1,11 +1,13 @@
 """Hermetic native gzip/SHA controls. Execute only under Root's fresh bounded engineering grant."""
 import gzip
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import shlex
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools/stock_feedback'))
 import bounded as b
@@ -74,6 +76,63 @@ class ResourceAttestation(unittest.TestCase):
 
     def run_case(self, spec, name='attestation'):
         return r.verify(spec, self.root / name)
+
+    def cli_grant(self, spec):
+        spec_pin = self.save('request.json', spec)
+        grant_path = self.root / 'grant.json'
+        argv = [str(Path(r.__file__).resolve()), 'verify', '--spec', spec_pin['path'],
+                '--grant', str(grant_path), '--output', str(self.root / 'attestation')]
+        now = datetime.now(timezone.utc)
+        sources = [b.pin(path) for path in (r.__file__, r.legacy.__file__, b.__file__, b.GUARD['path'],
+                                            sys.executable, '/home/jake/.local/bin/uv')]
+        sources += list(spec['tools'].values())
+        inputs = [spec_pin, *r.admitted_inputs(spec)]
+        expected = str(self.root / 'attestation/complete.json')
+        grant = dict(schema='bounded-command/1', id='synthetic-source-admission',
+                     not_before_utc=(now - timedelta(seconds=1)).isoformat(),
+                     expires_utc=(now + timedelta(seconds=299)).isoformat(), wall_seconds=300,
+                     profile='engineering', memory_bytes=4 * 1024**3, address_space_bytes=8 * 1024**3,
+                     cpus=2, swap_bytes=0, growth_bytes=100 * 1024**2, aggregate_bytes=4 * 1024**3,
+                     reserve_bytes=30 * 1024**3, root=str(Path.cwd()), cwd=str(Path.cwd()),
+                     argv=['/home/jake/.local/bin/uv', 'run', '--project',
+                           '/home/jake/Projects/nanopore_basecaller-retrieval', '--no-sync', 'python', *argv],
+                     env=dict(UV_PROJECT_ENVIRONMENT='/home/jake/Projects/nanopore_basecaller-retrieval/.venv',
+                              UV_OFFLINE='1', UV_PYTHON_DOWNLOADS='never', PYTHONDONTWRITEBYTECODE='1',
+                              LC_ALL='C', TMPDIR=str(self.root)), output_roots=[str(self.root)],
+                     source_pins=sources, input_pins=inputs, expected_files=[expected],
+                     roles=dict(unit='F4/resource-attestation', inputs={str(i): i for i in range(len(inputs))},
+                                outputs={'attestation': expected}))
+        # This is a boundary fixture, never a Root execution authorization or kernel receipt.
+        b.validate(grant)
+        r.require_admitted_sources(grant, spec)
+        return argv, grant_path, grant
+
+    def assert_main_source_rejection(self, argv, grant_path, grant, path):
+        grant_path.write_text(json.dumps(grant))
+        # No kernel predicate is mocked: the real source guard must reject before that boundary.
+        with patch.object(sys, 'argv', argv), patch.object(r, 'verify') as verify:
+            with self.assertRaisesRegex(ValueError, 'attestation source is not admitted: ' + path):
+                r.main()
+            verify.assert_not_called()
+        self.assertFalse((self.root / 'attestation').exists())
+
+    def test_root_shaped_source_closure_positive(self):
+        self.cli_grant(self.fixture())
+
+    def test_main_rejects_missing_actual_verifier_or_imported_legacy_source(self):
+        argv, grant_path, grant = self.cli_grant(self.fixture())
+        for path in (r.__file__, r.legacy.__file__):
+            with self.subTest(source=path):
+                changed = dict(grant, source_pins=[p for p in grant['source_pins'] if p['path'] != path])
+                self.assert_main_source_rejection(argv, grant_path, changed, path)
+
+    def test_main_rejects_declared_source_hash_corruption(self):
+        argv, grant_path, grant = self.cli_grant(self.fixture())
+        for path in (r.__file__, r.legacy.__file__):
+            with self.subTest(source=path):
+                changed = dict(grant, source_pins=[dict(p, sha256='0' * 64) if p['path'] == path else p
+                                                  for p in grant['source_pins']])
+                self.assert_main_source_rejection(argv, grant_path, changed, path)
 
     def test_genuine_native_pipeline_positive_keeps_old_terminal_unqualified(self):
         spec = self.fixture()
