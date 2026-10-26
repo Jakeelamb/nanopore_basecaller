@@ -12,6 +12,8 @@
   "reference_index": {"path": "/home/jake/Projects/nanopore_basecaller/references/GRCh38-lr-hq.mmi", "size": 5756270073, "sha256": "611b2a45bc41e8bbd3048ef96efebcfae4cf611360d81c3553285932de4a63aa"},
   "reference_fai_path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout.fai",
   "mapper_path": "/home/jake/Projects/nanopore_basecaller/software/bin/minimap2",
+  "index_provenance": null,
+  "producer_sources": [],
   "samtools": {"path": "/usr/bin/samtools", "size": 779616, "sha256": "e839773cc27090fa109588cae8b8240b0d48de816a25b962045867a4c3b7e1ff"},
   "execution": {"cpu": 2, "wall_seconds": 300, "ram_bytes": 4294967296, "address_space_bytes": 8589934592, "mapping_ram_bytes": 17179869184, "mapping_address_space_bytes": 25769803776, "swap_bytes": 0, "growth_bytes": 104857600, "cumulative_bytes": 4294967296, "free_reserve_bytes": 32212254720, "root_fresh_unit_required": true},
   "hg005_selection": false,

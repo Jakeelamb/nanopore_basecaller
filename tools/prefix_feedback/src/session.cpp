@@ -52,32 +52,38 @@ std::map<std::string, double> masses(const std::vector<Node>& beam) {
     }
     return result;
 }
-std::string winner(const std::vector<Node>& beam, std::size_t minimum) {
-    std::string sequence;
+std::optional<std::string> winner(const std::vector<Node>& beam, std::size_t minimum) {
+    std::optional<std::string> sequence;
     double best = impossible;
     for (const auto& [candidate, mass] : masses(beam)) {
-        if (candidate.size() >= minimum && mass > best) { sequence = candidate; best = mass; }
+        if (!candidate.empty() && candidate.size() >= minimum && mass > best) { sequence = candidate; best = mass; }
     }
     return sequence;
 }
 void relocate(Session& session, const Json& update) {
     require(update.at("schema") == "prefix-location/1" && update.at("source_sha256") == source_id() && update.at("plan_sha256") == session.spec.plan_sha256 && update.at("read_id") == session.spec.read_id, "location source/plan/read differs");
-    const auto expected = winner(session.conditioned, session.spec.policy.minimum_symbols);
+    const auto chosen = winner(session.conditioned, session.spec.policy.minimum_symbols);
+    require(chosen.has_value(), "empty/absent prefix is mapper abstention");
+    const auto& expected = *chosen;
     require(update.at("state_sha256") == state_id(session) && update.at("query_sequence") == expected && update.at("query_sha256") == digest(expected) && update.at("query_length") == expected.size(), "missing/foreign provisional prefix/state");
     require(update.at("available_score_end") == session.consumed_rows && update.at("available_signal_end") == session.last_binding.at("available_signal_end") && update.at("orientation") == "signal-forward", "location endpoint/orientation differs");
     check_pin(update.at("query"));
     require(read_text(update.at("query").at("path").get<std::string>()) == ">prefix\n" + expected + "\n", "mapper query file differs");
     check_pin(update.at("producer_receipt"));
     check_pin(update.at("paf"));
+    check_pin(update.at("mapper"));
+    check_pin(update.at("reference_index"));
+    const auto resources = validate_resources(session.spec.resource_manifest, session.spec.plan_sha256);
+    require(update.at("resource_manifest") == session.spec.resource_manifest && update.at("mapper") == resources.at("mapper") && update.at("reference_index") == resources.at("reference_index"), "mapper/index frozen resource identity differs");
     const auto receipt = read_json(update.at("producer_receipt").at("path").get<std::string>());
     require(receipt.at("complete") == true && receipt.at("exit_status") == 0 && receipt.at("role") == "prefix-location" && receipt.at("inputs").at(0) == update.at("query") && receipt.at("stdout") == update.at("paf") && receipt.at("terminal") == true, "mapper receipt linkage differs");
     require(receipt.at("binding") == Json{{"state_sha256", update.at("state_sha256")}, {"query_sha256", update.at("query_sha256")}, {"available_score_end", update.at("available_score_end")}, {"available_signal_end", update.at("available_signal_end")}}, "mapper receipt endpoint/state differs");
     require(receipt.at("argv") == Json::array({update.at("mapper").at("path"), "-x", "map-ont", "-c", "--secondary=yes", "-N", "7", "-t", "2", update.at("reference_index").at("path"), update.at("query").at("path")}), "mapper exact argv differs");
     require(receipt.at("inputs") == Json::array({update.at("query"), update.at("mapper"), update.at("reference_index")}), "mapper exact input census differs");
     require(receipt.at("cwd") == source_witness().at("root") && receipt.at("environment").at("LC_ALL") == "C", "mapper cwd/environment differs");
-    for (const auto& key : {"stderr", "time"}) { check_pin(receipt.at(key)); }
+    validate_command_evidence(receipt, resources.at("producer_sources"));
     auto parsed = parse_paf(read_text(update.at("paf").at("path").get<std::string>()), {{"length", expected.size()}});
-    auto locations = parse_locations(update);
+    auto locations = parse_locations(update, resources);
     require(locations.size() <= session.spec.policy.maximum_locations && parsed.size() == locations.size(), "location cap/census differs");
     for (std::size_t index = 0; index < locations.size(); ++index) {
         auto actual = location_json(locations[index]);
@@ -185,16 +191,17 @@ Session start(const Spec& spec) {
 Json state_json(const Session& session) {
     Json blocks = Json::array();
     for (const auto& block : session.consumed) { blocks.push_back(block.binding); }
-    return {{"schema", "prefix-session/1"}, {"source_sha256", source_id()}, {"spec", {{"read_id", session.spec.read_id}, {"plan_sha256", session.spec.plan_sha256}, {"state_length", session.spec.state_length}, {"stay_score", session.spec.stay_score}, {"policy", policy_json(session.spec.policy)}}}, {"consumed_rows", session.consumed_rows}, {"next_block", session.next_block}, {"signal", nodes_json(session.signal)}, {"conditioned", nodes_json(session.conditioned)}, {"locations", locations_json(session.locations)}, {"first_locations", locations_json(session.first_locations)}, {"consumed", blocks}, {"updates", session.updates}, {"last_binding", session.last_binding}, {"signal_pruned", session.signal_pruned}, {"conditioned_pruned", session.conditioned_pruned}, {"symbol_bound", session.symbol_bound}, {"context_bound", session.context_bound}};
+    return {{"schema", "prefix-session/1"}, {"source_sha256", source_id()}, {"spec", {{"read_id", session.spec.read_id}, {"plan_sha256", session.spec.plan_sha256}, {"state_length", session.spec.state_length}, {"stay_score", session.spec.stay_score}, {"policy", policy_json(session.spec.policy)}, {"resource_manifest", session.spec.resource_manifest}}}, {"consumed_rows", session.consumed_rows}, {"next_block", session.next_block}, {"signal", nodes_json(session.signal)}, {"conditioned", nodes_json(session.conditioned)}, {"locations", locations_json(session.locations)}, {"first_locations", locations_json(session.first_locations)}, {"consumed", blocks}, {"updates", session.updates}, {"last_binding", session.last_binding}, {"signal_pruned", session.signal_pruned}, {"conditioned_pruned", session.conditioned_pruned}, {"symbol_bound", session.symbol_bound}, {"context_bound", session.context_bound}};
 }
 Session restore(const Json& state) {
     require(state.at("schema") == "prefix-session/1" && state.at("source_sha256") == source_id() && state.size() == 16, "session source/schema/fields differ");
     const auto& value = state.at("spec");
-    auto result = start({value.at("read_id"), value.at("plan_sha256"), value.at("state_length"), value.at("stay_score"), parse_policy(value.at("policy"))});
+    auto result = start({value.at("read_id"), value.at("plan_sha256"), value.at("state_length"), value.at("stay_score"), parse_policy(value.at("policy")), value.at("resource_manifest")});
     result.consumed_rows = state.at("consumed_rows");
     result.next_block = state.at("next_block");
-    result.locations = parse_locations({{"locations", state.at("locations")}});
-    result.first_locations = parse_locations({{"locations", state.at("first_locations")}});
+    const auto resources = result.spec.resource_manifest.is_null() ? Json::object() : validate_resources(result.spec.resource_manifest, result.spec.plan_sha256);
+    result.locations = parse_locations({{"locations", state.at("locations")}}, resources);
+    result.first_locations = parse_locations({{"locations", state.at("first_locations")}}, resources);
     const auto states = std::size_t{1} << (2 * result.spec.state_length);
     result.signal = nodes(state.at("signal"), states, 0);
     result.conditioned = nodes(state.at("conditioned"), states, result.locations.size());
@@ -272,11 +279,13 @@ double likelihood(const Session& session, const std::string& sequence) {
 Json batch(const Session& session, const std::string& previous_state) {
     const auto free = masses(session.signal);
     const auto guided = masses(session.conditioned);
-    const auto free_sequence = winner(session.signal, session.spec.policy.minimum_symbols);
-    const auto provisional = winner(session.conditioned, session.spec.policy.minimum_symbols);
+    const auto free_winner = winner(session.signal, session.spec.policy.minimum_symbols);
+    const auto conditioned_winner = winner(session.conditioned, session.spec.policy.minimum_symbols);
+    const auto free_sequence = free_winner.value_or("");
+    const auto provisional = conditioned_winner.value_or("");
     std::set<std::string> sequences;
-    for (const auto& [sequence, mass] : free) { static_cast<void>(mass); if (sequence.size() >= session.spec.policy.minimum_symbols) { sequences.insert(sequence); } }
-    for (const auto& [sequence, mass] : guided) { static_cast<void>(mass); if (sequence.size() >= session.spec.policy.minimum_symbols) { sequences.insert(sequence); } }
+    for (const auto& [sequence, mass] : free) { static_cast<void>(mass); if (!sequence.empty() && sequence.size() >= session.spec.policy.minimum_symbols) { sequences.insert(sequence); } }
+    for (const auto& [sequence, mass] : guided) { static_cast<void>(mass); if (!sequence.empty() && sequence.size() >= session.spec.policy.minimum_symbols) { sequences.insert(sequence); } }
     Json candidates = Json::array();
     std::string union_id;
     double union_mass = impossible;
@@ -284,6 +293,7 @@ Json batch(const Session& session, const std::string& previous_state) {
     double best_rerank = impossible;
     for (const auto& sequence : sequences) {
         const auto neural = likelihood(session, sequence);
+        require(std::isfinite(neural), "eligible candidate has impossible neural mass");
         const auto id = digest(sequence);
         if (neural > union_mass) { union_mass = neural; union_id = id; }
         const auto cost = guided.contains(sequence) ? Json(std::max(0.0, neural - guided.at(sequence))) : Json(nullptr);
@@ -291,8 +301,10 @@ Json batch(const Session& session, const std::string& previous_state) {
         if (free.contains(sequence) && rerank > best_rerank) { best_rerank = rerank; rerank_id = id; }
         candidates.push_back({{"id", id}, {"sequence", sequence}, {"neural_log_likelihood", neural}, {"context_cost", cost}, {"partial_rank", guided.contains(sequence) ? Json(guided.at(sequence)) : Json(nullptr)}, {"fixed_policy_rerank", rerank}, {"signal_only_member", free.contains(sequence)}, {"conditioned_member", guided.contains(sequence)}, {"edits", edits(free_sequence, sequence)}, {"eligibility_reasons", Json::array({"finite-consumed-row-neural-mass", "provisional-prefix-only"})}});
     }
-    Json result{{"schema", "feedback-next/1"}, {"source_sha256", source_id()}, {"plan_sha256", session.spec.plan_sha256}, {"read_id", session.spec.read_id}, {"parent_id", session.spec.read_id}, {"binding", session.last_binding}, {"previous_state_sha256", previous_state}, {"state_sha256", state_id(session)}, {"orientation", "signal-forward"}, {"initial_prior", "uniform-all-CRF-states"}, {"location_prior", "uniform-retained-locations-at-each-update"}, {"locations", locations_json(session.locations)}, {"location_updates", session.updates}, {"candidates", candidates}, {"signal_only_candidate_id", free_sequence.empty() ? Json(nullptr) : Json(digest(free_sequence))}, {"provisional_candidate_id", provisional.empty() ? Json(nullptr) : Json(digest(provisional))}, {"provisional_prefix", provisional}, {"fixed_policy_rerank_candidate_id", rerank_id.empty() ? Json(nullptr) : Json(rerank_id)}, {"policy", policy_json(session.spec.policy)}, {"search", {{"signal_pruned", session.signal_pruned}, {"conditioned_pruned", session.conditioned_pruned}, {"symbol_bound", session.symbol_bound}, {"context_bound", session.context_bound}, {"neural_mass", "exact-forward-marginal-over-consumed-rows"}, {"partial_rank", "retained-path-location-marginal-with-emission-cost"}}}, {"abstained", sequences.empty()}, {"causality", "chunk-delayed-saved-score-replay"}, {"confidence", {{"kind", "uncalibrated"}, {"posterior_probability", nullptr}}}};
+    Json result{{"schema", "feedback-next/1"}, {"source_sha256", source_id()}, {"plan_sha256", session.spec.plan_sha256}, {"read_id", session.spec.read_id}, {"parent_id", session.spec.read_id}, {"binding", session.last_binding}, {"previous_state_sha256", previous_state}, {"state_sha256", state_id(session)}, {"orientation", "signal-forward"}, {"initial_prior", "uniform-all-CRF-states"}, {"location_prior", "uniform-retained-locations-at-each-update"}, {"locations", locations_json(session.locations)}, {"location_updates", session.updates}, {"candidates", candidates}, {"signal_only_candidate_id", !free_winner.has_value() ? Json(nullptr) : Json(digest(free_sequence))}, {"provisional_candidate_id", !conditioned_winner.has_value() ? Json(nullptr) : Json(digest(provisional))}, {"provisional_prefix", provisional}, {"fixed_policy_rerank_candidate_id", rerank_id.empty() ? Json(nullptr) : Json(rerank_id)}, {"policy", policy_json(session.spec.policy)}, {"search", {{"signal_pruned", session.signal_pruned}, {"conditioned_pruned", session.conditioned_pruned}, {"symbol_bound", session.symbol_bound}, {"context_bound", session.context_bound}, {"neural_mass", "exact-forward-marginal-over-consumed-rows"}, {"partial_rank", "retained-path-location-marginal-with-emission-cost"}}}, {"abstained", sequences.empty()}, {"causality", "chunk-delayed-saved-score-replay"}, {"confidence", {{"kind", "uncalibrated"}, {"posterior_probability", nullptr}}}};
     result["reference_free_candidate_id"] = result.at("signal_only_candidate_id");
+    result["empty_prefix_contract"] = "zero-base-output-is-explicit-abstention-and-is-not-an-eligible-candidate";
+    result["mapper_request_eligible"] = conditioned_winner.has_value();
     result["immutable_prefix"] = "";
     result["revision_semantics"] = "entire-prefix-provisional-zero-irreversible-commits";
     result["available_native_passthrough"] = nullptr;
@@ -300,6 +312,7 @@ Json batch(const Session& session, const std::string& previous_state) {
     result["binding"]["prefix_length"] = provisional.size();
     result["binding"]["source_sha256"] = source_id();
     result["binding"]["plan_sha256"] = session.spec.plan_sha256;
+    result["binding"]["resource_manifest"] = session.spec.resource_manifest;
     result["binding"]["previous_state_sha256"] = previous_state;
     result["binding"]["location_producer_receipt"] = session.updates.empty() ? Json(nullptr) : session.updates.back().at("producer_receipt");
     result["binding"]["availability"] = {{"kind", "released-score-block"}, {"row_begin", session.consumed.back().row_begin}, {"row_end", session.consumed_rows}, {"available_row_end", session.consumed_rows}, {"whole_chunk_lookahead", true}, {"signal_geometry", nullptr}};

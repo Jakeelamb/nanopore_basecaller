@@ -57,9 +57,47 @@ Json parse_paf(const std::string& paf, const Json& query) {
     }
     return result;
 }
-std::vector<Location> parse_locations(const Json& update) {
+void validate_command_evidence(const Json& receipt, const Json& expected_sources) {
+    require(expected_sources.is_array() && !expected_sources.empty() && receipt.at("source_pins") == expected_sources, "producer source census differs");
+    for (const auto& source : expected_sources) { check_pin(source); }
+    for (const auto& key : {"stdout", "stderr", "time", "terminal_proof"}) { check_pin(receipt.at(key)); }
+    const auto terminal = read_json(receipt.at("terminal_proof").at("path").get<std::string>());
+    require(receipt.at("complete") == true && receipt.at("exit_status") == 0 && receipt.at("terminal") == true && terminal.at("group_empty") == true && terminal.at("cgroup_empty") == true && terminal.at("reaped") == true, "producer terminal proof differs");
+    const auto expected_command = Json{{"role", receipt.at("role")}, {"argv", receipt.at("argv")}, {"cwd", receipt.at("cwd")}, {"environment", receipt.at("environment")}, {"inputs", receipt.at("inputs")}, {"binding", receipt.at("binding")}, {"source_pins", receipt.at("source_pins")}, {"stdout", receipt.at("stdout")}, {"produced_files", receipt.at("produced_files")}};
+    require(terminal.at("command") == expected_command, "producer terminal command binding differs");
+}
+Json validate_resources(const Json& manifest, const std::string& plan_sha256) {
+    require(!manifest.is_null(), "frozen resource manifest required for localization");
+    check_pin(manifest);
+    const auto declared = read_json(manifest.at("path").get<std::string>());
+    require(declared.at("schema") == "prefix-resources/1" && declared.at("plan_sha256") == plan_sha256, "frozen resource plan differs");
+    const auto resources = declared.at("resources");
+    require(resources.size() == 7, "frozen resource census differs");
+    require(resources.at("producer_sources").is_array() && !resources.at("producer_sources").empty(), "frozen producer source census is empty");
+    for (const auto& key : {"mapper", "reference_index", "reference", "reference_fai", "samtools", "index_provenance"}) { check_pin(resources.at(key)); }
+    const auto lineage = read_json(resources.at("index_provenance").at("path").get<std::string>());
+    require(lineage.at("schema") == "prefix-reference-lineage/1" && lineage.at("complete") == true, "reference/index lineage absent");
+    for (const auto& key : {"mapper", "reference_index", "reference", "reference_fai", "samtools"}) { require(lineage.at(key) == resources.at(key), "reference/index lineage identity differs"); }
+    for (const auto& source : resources.at("producer_sources")) { check_pin(source); }
+    for (const auto& role : {"index_build", "fai_build"}) {
+        check_pin(lineage.at(role).at("receipt"));
+        const auto receipt = read_json(lineage.at(role).at("receipt").at("path").get<std::string>());
+        validate_command_evidence(receipt, lineage.at(role).at("producer_sources"));
+        require(receipt.at("argv") == lineage.at(role).at("argv") && receipt.at("cwd") == lineage.at(role).at("cwd") && receipt.at("environment") == lineage.at(role).at("environment"), "reference/index build command custody differs");
+        if (std::string(role) == "index_build") {
+            const auto& argv = receipt.at("argv");
+            require(argv.size() >= 4 && argv.at(0) == resources.at("mapper").at("path") && argv.at(argv.size() - 3) == "-d" && argv.at(argv.size() - 2) == resources.at("reference_index").at("path") && argv.back() == resources.at("reference").at("path"), "reference/index build relationship differs");
+            require(receipt.at("role") == "reference-index-build" && receipt.at("inputs") == Json::array({resources.at("mapper"), resources.at("reference")}) && receipt.at("produced_files") == Json::array({resources.at("reference_index")}), "reference/index build input/output census differs");
+        } else {
+            require(receipt.at("role") == "reference-fai-build" && receipt.at("argv") == Json::array({resources.at("samtools").at("path"), "faidx", resources.at("reference").at("path")}) && receipt.at("inputs") == Json::array({resources.at("samtools"), resources.at("reference")}) && receipt.at("produced_files") == Json::array({resources.at("reference_fai")}), "reference/FAI build input/output relationship differs");
+        }
+    }
+    return resources;
+}
+std::vector<Location> parse_locations(const Json& update, const Json& resources) {
     std::vector<Location> result;
     std::set<std::string> ids;
+    require(update.at("locations").empty() || !resources.empty(), "frozen resources required for retained positions");
     for (const auto& value : update.at("locations")) {
         require(value.size() == 13, "location fields differ");
         Location item{value.at("id"), value.at("contig"), value.at("strand"), value.at("query_begin"), value.at("query_end"), value.at("query_length"), value.at("reference_begin"), value.at("reference_end"), value.at("reference_length"), value.at("mapq"), value.at("cigar"), value.at("continuation"), value.at("evidence")};
@@ -69,10 +107,14 @@ std::vector<Location> parse_locations(const Json& update) {
         require(query == item.query_end - item.query_begin && reference == item.reference_end - item.reference_begin, "location CIGAR extent differs");
         require(item.evidence.at("confidence_feature") == "minimap2-MAPQ-not-posterior" && item.evidence.at("continuation_orientation") == "signal-forward", "location confidence/orientation meaning differs");
         if (!item.continuation.empty()) {
+            for (const auto& key : {"reference", "reference_fai", "samtools"}) { check_pin(item.evidence.at(key)); }
+            for (const auto& key : {"reference", "reference_fai", "samtools"}) { require(item.evidence.at(key) == resources.at(key), "continuation frozen resource identity differs"); }
+            require(item.evidence.at("index_provenance") == resources.at("index_provenance"), "continuation index/reference lineage differs");
             check_pin(item.evidence.at("reference_receipt"));
             check_pin(item.evidence.at("fasta"));
             const auto receipt = read_json(item.evidence.at("reference_receipt").at("path").get<std::string>());
             require(receipt.at("role") == "reference-continuation" && receipt.at("complete") == true && receipt.at("exit_status") == 0 && receipt.at("terminal") == true && receipt.at("stdout") == item.evidence.at("fasta"), "reference continuation receipt differs");
+            require(receipt.at("inputs") == Json::array({resources.at("reference"), resources.at("reference_fai"), resources.at("samtools")}), "reference continuation exact input census differs");
             auto fasta = read_text(item.evidence.at("fasta").at("path").get<std::string>());
             const auto newline = fasta.find('\n');
             require(newline != std::string::npos && fasta[0] == '>', "reference FASTA header absent");
@@ -87,7 +129,7 @@ std::vector<Location> parse_locations(const Json& update) {
             const auto region = item.contig + ":" + std::to_string(begin + 1) + "-" + std::to_string(end);
             require(receipt.at("argv") == Json::array({item.evidence.at("samtools").at("path"), "faidx", item.evidence.at("reference").at("path"), region}), "reference continuation exact argv differs");
             require(receipt.at("cwd") == source_witness().at("root") && receipt.at("environment").at("LC_ALL") == "C", "reference continuation cwd/environment differs");
-            for (const auto& key : {"stderr", "time"}) { check_pin(receipt.at(key)); }
+            validate_command_evidence(receipt, resources.at("producer_sources"));
             require(item.continuation == (item.strand == "+" ? sequence : reverse_complement(sequence)), "reference continuation strand differs");
         }
         result.push_back(std::move(item));

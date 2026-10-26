@@ -4,9 +4,9 @@
 namespace prefix_feedback {
 namespace {
 Spec spec(const Json& value) {
-    require(value.size() == 5 && value.at("policy").size() == 5, "session specification fields differ");
+    require(value.size() == 6 && value.at("policy").size() == 5, "session specification fields differ");
     const auto& policy = value.at("policy");
-    return {value.at("read_id"), value.at("plan_sha256"), value.at("state_length"), value.at("stay_score"), {policy.at("beam_width"), policy.at("maximum_symbols"), policy.at("minimum_symbols"), policy.at("maximum_locations"), policy.at("context_weight")}};
+    return {value.at("read_id"), value.at("plan_sha256"), value.at("state_length"), value.at("stay_score"), {policy.at("beam_width"), policy.at("maximum_symbols"), policy.at("minimum_symbols"), policy.at("maximum_locations"), policy.at("context_weight")}, value.at("resource_manifest")};
 }
 }
 }

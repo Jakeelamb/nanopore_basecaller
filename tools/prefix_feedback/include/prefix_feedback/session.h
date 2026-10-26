@@ -23,6 +23,7 @@ struct Spec {
     std::size_t state_length{4};
     double stay_score{2.0};
     Policy policy;
+    Json resource_manifest = nullptr;
 };
 struct Block {
     Json binding;
@@ -90,7 +91,9 @@ std::string state_id(const Session& session);
 Json batch(const Session& session, const std::string& previous_state);
 void advance(Session& session, const Block& block, const std::optional<Json>& update);
 Block load_block(const Json& request, const Spec& spec);
-std::vector<Location> parse_locations(const Json& update);
+Json validate_resources(const Json& manifest, const std::string& plan_sha256);
+void validate_command_evidence(const Json& receipt, const Json& expected_sources);
+std::vector<Location> parse_locations(const Json& update, const Json& resources = Json::object());
 Json parse_paf(const std::string& paf, const Json& query);
 double likelihood(const Session& session, const std::string& sequence);
 Json edits(const std::string& source, const std::string& target);

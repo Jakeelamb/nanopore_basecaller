@@ -103,6 +103,8 @@ def prepare(config_path, output):
     config = read(config_path)
     require(config["schema"] == "prefix-feedback-config/1" and config["role"] == "development-HG002"
             and config["hg005_selection"] is False and config["truth_input"] is None, "development source contract")
+    require(config["index_provenance"] is not None and config["producer_sources"],
+            "qualified index/reference build lineage and producer source pins are required before preparation")
     check(config["manifest"])
     groups = {}
     for line in Path(config["manifest"]["path"]).read_text().splitlines():
@@ -155,7 +157,7 @@ def prepare(config_path, output):
                 and cells[2:5] == ["1024", "4", "6"] and cells[13] == meta["token"]
                 and int(cells[12]) == int(meta["time_offset"]), "DGS/DGM tensor association differs")
         spec = dict(read_id=selected["parent"], plan_sha256=pin(config_path)["sha256"],
-                    state_length=4, stay_score=float(cells[5]), policy=config["policy"])
+                    state_length=4, stay_score=float(cells[5]), policy=config["policy"], resource_manifest=None)
         blocks = []
         cursor = 0
         for index, (begin, end) in enumerate(zip(selected["cutoffs"], selected["cutoffs"][1:])):
@@ -186,15 +188,22 @@ def prepare(config_path, output):
     check(config["reference"])
     check(config["reference_index"])
     check(config["samtools"])
+    check(config["index_provenance"])
+    for source in config["producer_sources"]:
+        check(source)
+    resources = dict(mapper=pin(config["mapper_path"]), samtools=config["samtools"], reference=config["reference"],
+        reference_index=config["reference_index"], reference_fai=pin(config["reference_fai_path"]),
+        index_provenance=config["index_provenance"], producer_sources=config["producer_sources"])
+    fresh(output / "resources.json", dict(schema="prefix-resources/1", plan_sha256=spec["plan_sha256"], resources=resources))
+    spec["resource_manifest"] = pin(output / "resources.json")
     fresh(output / "plan.json", dict(schema="prefix-pilot-plan/1", config=pin(config_path), spec=spec,
         blocks=blocks, selected=selected, exclusions=exclusions,
-        mapper=pin(config["mapper_path"]), samtools=config["samtools"], reference=config["reference"],
-        reference_index=config["reference_index"], reference_fai=pin(config["reference_fai_path"]),
+        **resources,
         truth_opened=False, allow_refill=False, available_native_passthrough=None))
 
 
 class Executor:
-    """The frozen F4 adapter supplies run_command; it owns process supervision."""
+    """Proposed callback only. Integration with F4's public CLI is still held."""
     def __init__(self, adapter, adapter_sha256, intake):
         require(pin(adapter)["sha256"] == adapter_sha256, "frozen process adapter source differs")
         module_spec = importlib.util.spec_from_file_location("prefix_process_adapter", adapter)
@@ -271,14 +280,15 @@ def locate(executor, binary, plan, batch, directory):
                 continuation = continuation.translate(str.maketrans("ACGT", "TGCA"))[::-1]
             require(set(continuation) <= set("ACGT"), "ambiguous reference continuation requires explicit exclusion")
             evidence.update(reference_receipt=ref_receipt, fasta=ref_command["stdout"], reference_begin=begin,
-                            reference_end=end, reference=plan["reference"], samtools=plan["samtools"])
+                            reference_end=end, reference=plan["reference"], reference_fai=plan["reference_fai"],
+                            index_provenance=plan["index_provenance"], samtools=plan["samtools"])
         location.update(continuation=continuation, evidence=evidence)
     return dict(schema="prefix-location/1", source_sha256=batch["source_sha256"], plan_sha256=batch["plan_sha256"],
         read_id=batch["read_id"], state_sha256=batch["state_sha256"], query_sequence=prefix,
         query_sha256=digest(prefix.encode()), query_length=len(prefix), query=pin(query),
         available_score_end=binding["available_score_end"], available_signal_end=binding["available_signal_end"],
         orientation="signal-forward", producer_receipt=producer, paf=command["stdout"], locations=locations,
-        mapper=plan["mapper"], reference_index=plan["reference_index"])
+        mapper=plan["mapper"], reference_index=plan["reference_index"], resource_manifest=plan["spec"]["resource_manifest"])
 
 
 def pilot(plan_path, binary, executor, source_sha256, output):
@@ -302,6 +312,15 @@ def pilot(plan_path, binary, executor, source_sha256, output):
         previous_state_sha256 = batch["state_sha256"]
         state = pin(directory / "state.json")
         batches.append(pin(directory / "batch.json"))
+        if batch["abstained"] or not batch["mapper_request_eligible"]:
+            fresh(output / "complete.json", dict(schema="prefix-pilot/1", complete=True, plan=pin(plan_path),
+                binary=binary, batches=batches, final_state=state, abstained=True,
+                mapper_updates=len(batch["location_updates"]),
+                usable_update_count=sum(any(location["continuation"] for location in item["locations"]) for item in batch["location_updates"]),
+                selected_parent=plan["selected"]["parent"], mechanism_qualified=False,
+                accuracy_qualified=False, latency_qualified=False,
+                reason="no-eligible-provisional-prefix; mapper and downstream decision are not requested"))
+            return
         if index + 1 < len(plan["blocks"]):
             update = locate(executor, binary, plan, batch, output / ("location-" + str(index)))
             fresh(output / ("location-" + str(index) + ".json"), update)

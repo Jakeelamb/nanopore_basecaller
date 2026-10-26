@@ -2,6 +2,8 @@
 
 This is F1's source review candidate for draft PR16. Tests, compilation, formatting, mapper execution and genuine pilot execution are all unrun. Root must admit the exact next unit. No native neural replay or GPU work is included.
 
+The R1-R3 correction candidate is described in `research/prefix-loop-review-fixes.md`. A pinned resource manifest now binds current mapper/index/reference/FAI/tool identities and their build lineage. Prepared controls compare actual retained search state/location masses with exhaustive enumeration and enter successful synthetic location rebinds. Zero-base output is explicit abstention. These corrections have no execution evidence yet.
+
 `Session` owns a persistent forward sequence/location beam and an independent signal-only beam. It starts with a uniform prior over all CRF states. It consumes each explicitly owned row once. The contextual beam may revise its entire provisional prefix. Its irreversible committed prefix is always empty.
 
 A real current prefix is the only mapper query. PAF query length, all retained positions, CIGAR, strand, query hash, available endpoint and producer receipt bind the next block. The contextual beam replaces old location channels with the new retained positions under a uniform location prior. A reference continuation penalizes mismatching emissions at or after the mapped prefix endpoint. Stays receive no context penalty. Missing locations and exhausted continuations are neutral. This is a shared proposal prior from the actual mapped provisional prefix, not a claim that every beam sequence was independently aligned or that MAPQ is a posterior.
