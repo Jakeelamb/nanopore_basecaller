@@ -6,13 +6,14 @@ this process, including synchronous preparation/hashing. This file owns no lock.
 """
 import argparse
 import hashlib
-import importlib.util
 import json
 import os
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools/prefix_feedback"))
+import bounded_cli as bounded
 ENVIRONMENT = dict(LC_ALL="C", PATH="/usr/bin:/bin", HOME="/home/jake",
                    UV_OFFLINE="1", UV_PYTHON_DOWNLOADS="never",
                    UV_PROJECT_ENVIRONMENT="/home/jake/Projects/nanopore_basecaller-retrieval/.venv",
@@ -202,48 +203,23 @@ def prepare(config_path, output):
         truth_opened=False, allow_refill=False, available_native_passthrough=None))
 
 
-class Executor:
-    """Proposed callback only. Integration with F4's public CLI is still held."""
-    def __init__(self, adapter, adapter_sha256, intake):
-        require(pin(adapter)["sha256"] == adapter_sha256, "frozen process adapter source differs")
-        module_spec = importlib.util.spec_from_file_location("prefix_process_adapter", adapter)
-        self.module = importlib.util.module_from_spec(module_spec)
-        module_spec.loader.exec_module(self.module)
-        self.intake = intake
-
-    def run(self, argv, inputs, output, role, binding):
-        request = dict(schema="prefix-command-request/1", argv=argv, cwd=str(ROOT),
-                       environment=ENVIRONMENT, inputs=inputs, role=role, binding=binding)
-        # A local stub cannot qualify the real path. The adapter is externally
-        # pinned and independently qualified before Root admits a genuine run.
-        result = self.module.run_command(request, str(output), self.intake)
-        check(result)
-        receipt = read(result["path"])
-        require(receipt["argv"] == argv and receipt["cwd"] == str(ROOT)
-                and receipt["environment"] == ENVIRONMENT and receipt["inputs"] == inputs
-                and receipt["role"] == role and receipt["binding"] == binding
-                and receipt["complete"] is True and receipt["exit_status"] == 0
-                and receipt["terminal"] is True, "command custody/terminal receipt differs")
-        for key in ("stdout", "stderr", "time"):
-            check(receipt[key])
-        return result, receipt
-
-
 def native(executor, binary, mode, request, output):
     request_path = output.parent / (output.name + "-request.json")
-    fresh(request_path, request)
+    bounded.same_json(request_path, request)
     argv = [binary["path"], mode, "--request", str(request_path), "--request-sha256",
             pin(request_path)["sha256"], "--output", str(output)]
+    expected_files = [str(output / name) for name in
+                      (("state.json", "batch.json", "complete.json") if mode == "advance" else ("locations.json", "complete.json"))]
     return executor.run(argv, [binary, pin(request_path)], output.parent / (output.name + "-command"),
-                        "prefix-decoder", dict(request=pin(request_path)))
+                        "prefix-decoder", dict(request=pin(request_path)), expected_files)
 
 
 def locate(executor, binary, plan, batch, directory):
-    directory.mkdir()
+    directory.mkdir(exist_ok=True)
     prefix = batch["provisional_prefix"]
     require(prefix, "no provisional finalist; explicit abstention")
     query = directory / "query.fasta"
-    fresh_bytes(query, (">prefix\n" + prefix + "\n").encode())
+    bounded.same_bytes(query, (">prefix\n" + prefix + "\n").encode())
     binding = dict(state_sha256=batch["state_sha256"], query_sha256=digest(prefix.encode()),
                    available_score_end=batch["binding"]["row_end"],
                    available_signal_end=batch["binding"]["available_signal_end"])
@@ -297,7 +273,7 @@ def pilot(plan_path, binary, executor, source_sha256, output):
             "frozen pilot plan differs")
     check(plan["config"])
     output = Path(output)
-    output.mkdir()
+    output.mkdir(exist_ok=True)
     state = None
     previous_state_sha256 = None
     update = None
@@ -323,7 +299,7 @@ def pilot(plan_path, binary, executor, source_sha256, output):
             return
         if index + 1 < len(plan["blocks"]):
             update = locate(executor, binary, plan, batch, output / ("location-" + str(index)))
-            fresh(output / ("location-" + str(index) + ".json"), update)
+            bounded.same_json(output / ("location-" + str(index) + ".json"), update)
     final = read(batches[-1]["path"])
     updates = final["location_updates"]
     require(len(updates) >= 3, "fewer than three genuine prefix-derived mapper updates")
@@ -346,16 +322,43 @@ def main():
     run.add_argument("--plan", type=Path, required=True)
     run.add_argument("--binary", type=Path, required=True)
     run.add_argument("--source-sha256", required=True)
-    run.add_argument("--adapter", type=Path, required=True)
-    run.add_argument("--adapter-sha256", required=True)
-    run.add_argument("--intake", type=Path, required=True)
+    run.add_argument("--execution-index", type=Path, required=True)
+    run.add_argument("--execution-index-sha256", required=True)
+    run.add_argument("--result", type=Path, required=True)
     run.add_argument("--output", type=Path, required=True)
+    launch = sub.add_parser("launch")
+    launch.add_argument("--request", type=Path, required=True)
+    launch.add_argument("--request-sha256", required=True)
+    launch.add_argument("--output", type=Path, required=True)
+    qualify = sub.add_parser("qualify")
+    qualify.add_argument("--output", type=Path, required=True)
+    identity = sub.add_parser("disabled-identity")
+    identity.add_argument("--request", type=Path, required=True)
+    identity.add_argument("--request-sha256", required=True)
+    identity.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.command == "launch":
+        argv = bounded.launch_argv(args.request.resolve(), args.request_sha256, args.output.resolve())
+        os.execv(argv[0], argv)
+    bounded.admitted_worker()
     if args.command == "prepare":
         prepare(args.config.resolve(), args.output.resolve())
+    elif args.command == "qualify":
+        import qualification
+        qualification.qualify(args.output.resolve())
+    elif args.command == "disabled-identity":
+        import identity_control
+        identity_control.run(args.request.resolve(), args.request_sha256, args.output.resolve())
     else:
-        executor = Executor(args.adapter.resolve(), args.adapter_sha256, str(args.intake.resolve()))
-        pilot(args.plan.resolve(), pin(args.binary.resolve()), executor, args.source_sha256, args.output.resolve())
+        require(pin(args.execution_index.resolve())["sha256"] == args.execution_index_sha256, "execution index root differs")
+        plan = read(args.plan.resolve())
+        executor = bounded.RetainedCommands(read(args.execution_index.resolve()), plan["producer_sources"])
+        try:
+            pilot(args.plan.resolve(), pin(args.binary.resolve()), executor, args.source_sha256, args.output.resolve())
+            fresh(args.result.resolve(), dict(status="completed-unqualified-pilot", complete=pin(args.output.resolve() / "complete.json")))
+        except bounded.PendingCommand as pending:
+            fresh(args.result.resolve(), dict(status="awaiting-fresh-Root-grant", proposal=pending.proposal,
+                                              native_command_executed=False, producer_replay_permitted=False))
 
 
 if __name__ == "__main__":

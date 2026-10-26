@@ -8,6 +8,7 @@ import struct
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("prefix_feedback_driver", ROOT / "scripts/prefix-feedback.py")
@@ -283,6 +284,103 @@ class PrefixFeedbackTests(unittest.TestCase):
         self.assertTrue(absent["abstained"])
         self.assertEqual(absent["candidates"], [])
         self.assertFalse(absent["mapper_request_eligible"])
+
+    def identity_request(self):
+        parents = []
+        manifest = ""
+        sam = "@HD\tVN:1.6\tSO:unknown\n"
+        for name, sequence, quality, flag, observed, observed_q in (
+                ("parent-plus", "ACGA", "!#$%", 0, "ACGA", "!#$%"),
+                ("parent-minus", "ACGA", "&'()", 16, "TCGT", ")('&")):
+            parent = self.literal(name + ".parent.tsv", f"format\tDGP1\nread_id\t{name}\nSEQ\t{sequence}\nQ\t{quality}\nMOVES\t1111\n")
+            parents.append(parent)
+            manifest += f"PARENT\t{name}\t{parent['path']}\t{parent['size']}\t{parent['sha256']}\n"
+            sam += f"{name}\t{flag}\tchr1\t1\t60\t4M\t*\t0\t0\t{observed}\t{observed_q}\n"
+        return dict(schema="prefix-disabled-identity/1", mode="disabled", edits=[], expected_parents=2,
+                    manifest=self.literal("manifest.tsv", manifest), aligned_sam=self.literal("native.sam", sam))
+
+    def test_disabled_full_parent_both_strands_and_exact_population(self):
+        import identity_control
+        request = self.identity_request()
+        path = self.directory / "disabled-request.json"
+        DRIVER.fresh(path, request)
+        output = self.directory / "disabled"
+        identity_control.run(path, DRIVER.pin(path)["sha256"], output)
+        result = DRIVER.read(output / "complete.json")
+        self.assertEqual(result["parent_count"], 2)
+        self.assertTrue(result["full_seq_q_identity"] and result["full_sam_byte_identity"])
+        self.assertEqual(result["output"]["sha256"], request["aligned_sam"]["sha256"])
+        self.assertFalse(result["inference_inputs_exposed"])
+
+    def test_disabled_rejects_edits_and_missing_population(self):
+        import identity_control
+        request = self.identity_request()
+        for index, changed in enumerate((dict(request, edits=[dict(offset=0, ref="A", alt="T")]),
+                                         dict(request, expected_parents=3))):
+            path = self.directory / ("disabled-bad-" + str(index) + ".json")
+            DRIVER.fresh(path, changed)
+            with self.assertRaises(ValueError):
+                identity_control.run(path, DRIVER.pin(path)["sha256"], self.directory / ("disabled-bad-" + str(index)))
+
+    def test_frozen_public_cli_and_missing_stage_proposal(self):
+        bounded = DRIVER.bounded
+        request = dict(schema="bounded-command/1", root=str(ROOT), cwd=str(ROOT), source_pins=[bounded.F4])
+        path = self.directory / "root-grant.json"
+        DRIVER.fresh(path, request)
+        argv = bounded.launch_argv(path, DRIVER.pin(path)["sha256"], ROOT / "results/prefix-feedback/future-attempt")
+        self.assertEqual(argv[:6], [bounded.UV, "run", "--project", bounded.RETRIEVAL, "--no-sync", "python"])
+        self.assertEqual(argv[6:8], [bounded.F4["path"], "run"])
+        self.assertIn("--request-sha256", argv)
+        with self.assertRaises(ValueError):
+            bounded.launch_argv(path, "f" * 64, ROOT / "results/prefix-feedback/future-attempt")
+        tool = self.literal("tool", "literal decoder, never executed\n")
+        incoming = self.literal("request", "{}\n")
+        with patch.object(bounded, "ROOT", self.directory):
+            executor = bounded.RetainedCommands(dict(schema="prefix-command-index/1", source_pins=[bounded.F4, tool], commands=[]), [bounded.F4])
+            with self.assertRaises(bounded.PendingCommand) as pending:
+                executor.run([tool["path"], "literal"], [tool, incoming], self.directory / "attempt",
+                             "prefix-decoder", dict(request=incoming), [str(self.directory / "payload.json")])
+            proposal = DRIVER.read(pending.exception.proposal["path"])
+            self.assertFalse(proposal["authorization"])
+            self.assertEqual(proposal["request"]["roles"]["unit"], "F1/decoder")
+            self.assertEqual(proposal["request"]["roles"]["inputs"], {"decoder-executable": 0, "decoder-request": 1})
+            self.assertFalse((self.directory / "attempt").exists())
+
+    def test_retained_f4_projection_and_foreign_grant_rejection(self):
+        bounded = DRIVER.bounded
+        tool = self.literal("tool", "literal decoder, never executed\n")
+        incoming = self.literal("request", "{}\n")
+        attempt = self.directory / "attempt"
+        payload = self.literal("payload.json", "{}\n")
+        with patch.object(bounded, "ROOT", self.directory):
+            expected = bounded.proposal([tool["path"], "literal"], [tool, incoming], attempt, "prefix-decoder",
+                                        dict(request=incoming), [bounded.F4, tool], [payload["path"]])
+            grant = dict(expected["request"], schema="bounded-command/1", id="literal-not-executed")
+            grant_path = self.directory / "grant.json"
+            DRIVER.fresh(grant_path, grant)
+            attempt.mkdir()
+            command = {key: grant[key] for key in ("argv", "cwd", "env", "source_pins", "input_pins", "roles")}
+            DRIVER.fresh(attempt / "command.json", command)
+            for name in bounded.RAW[1:]:
+                DRIVER.fresh_bytes(attempt / name, ("0\n" if name == "exit-status.txt" else "literal fixture\n").encode())
+            terminal = dict(exit_known=True, exit=0, error=None, cleanup=dict(terminal=True))
+            DRIVER.fresh(attempt / "terminal.json", terminal)
+            DRIVER.fresh(attempt / "outer-terminal.json", dict(exit=0, error=None, worker_complete=True,
+                missing_worker_records=[], empty_before_unlock=True,
+                proof=dict(launcher_group_empty=True, service_cgroup_empty=True, launcher=dict(terminal=True), failures=[])))
+            complete = dict(schema="bounded-command-result/1", complete=True, admission=DRIVER.pin(grant_path),
+                terminal=DRIVER.pin(attempt / "terminal.json"),
+                linked=[DRIVER.pin(path) for path in grant["expected_files"]],
+                raw=[DRIVER.pin(attempt / name) for name in bounded.RAW])
+            DRIVER.fresh(attempt / "complete.json", complete)
+            receipt_pin, receipt = bounded.normalize(DRIVER.pin(attempt / "complete.json"), expected, [bounded.F4], self.directory / "projection")
+            self.assertEqual(receipt["inputs"], [tool, incoming])
+            self.assertTrue(DRIVER.read(receipt["terminal_proof"]["path"])["cgroup_empty"])
+            self.assertEqual(DRIVER.read(receipt_pin["path"])["f4_complete"], DRIVER.pin(attempt / "complete.json"))
+            changed = copy.deepcopy(expected)
+            changed["request"]["argv"][1] = "foreign"
+            with self.assertRaisesRegex(ValueError, "proposed exact command"):
+                bounded.normalize(DRIVER.pin(attempt / "complete.json"), changed, [bounded.F4], self.directory / "bad-projection")
 
 
 if __name__ == "__main__":
