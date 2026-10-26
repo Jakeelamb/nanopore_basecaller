@@ -1,5 +1,13 @@
 # F3 source-ready cut and qualification request
 
+## Stage directory correction, 2026-10-26
+
+F2's first launched qualifier exposed a receipt/artifact collision before compilation. F3 shared that recorder structure and is corrected before its first launch. Stage receipts now use `stages/<name>/`, separate from CMake's `build/` artifacts. Stage setup is inside the error handler. The top-level terminal record identifies the attempted stage, argv and directory even when setup fails. Existing receipt directories are rejected without modifying their contents.
+
+Before configure, an admitted local namespace control creates a build directory and runs one empty Python child through the production stage recorder. It then rejects an attempted duplicate stage before launching another child and checks that all retained records are unchanged. Its evidence is `namespace-control.json` and `namespace-control/stages/build/`. This control is prepared and has not run at this source handoff.
+
+The next child command remains the fixed-UV command below with `--output /home/jake/Projects/nanopore_basecaller-next-indel-decoder/results/indel-feedback/qualification-01`. Expected links now include `namespace-control.json`, `stages/{configure,build,format-check,ctest,uv-tests}/{command.json,cwd.txt,start.txt,end.txt,exit-status.txt,stdout,stderr,time.txt,terminal.json,complete.json}`, plus the existing top-level terminal, completion, JUnit, unittest and compile-command files. Root supplies a fresh in-root `TMPDIR`. Caps and the frozen F4 boundary are unchanged. A fresh configure binds the corrected qualifier into the compiled source witness. No formatter or numerical source changed in this correction.
+
 ## Formatted engineering handoff, 2026-10-26
 
 Root's format-only attempt `results/indel-feedback/format-01` completed with exit0. Its admission SHA256 is `ba6b7d8099d9109c4224f71d07a1775fecb12ebfa18f17104b59376522ea48e2`. `terminal.json` retains the actual exit and cleanup, and `outer-terminal.json` records both groups empty before unlock with no error. The raw wrapper receipt is `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T193536Z-feedback-f3-format-01-K5gzz6`. Seven owned C++ files changed. Independent comparison against the reviewed head passed after normalizing whitespace, comments, include order and adjacent string-literal splitting. The first comparison omitted string-literal joining and failed on `io.cpp` and `main.cpp`; inspection traced both differences to formatter splitting, and the corrected comparison passed. No numerical change was made.
