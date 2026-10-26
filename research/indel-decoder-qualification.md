@@ -1,5 +1,23 @@
 # F3 source-ready cut and qualification request
 
+## Formatted engineering handoff, 2026-10-26
+
+Root's format-only attempt `results/indel-feedback/format-01` completed with exit0. Its admission SHA256 is `ba6b7d8099d9109c4224f71d07a1775fecb12ebfa18f17104b59376522ea48e2`. `terminal.json` retains the actual exit and cleanup, and `outer-terminal.json` records both groups empty before unlock with no error. The raw wrapper receipt is `/home/jake/Projects/nanopore_basecaller-retrieval/logs/20261026T193536Z-feedback-f3-format-01-K5gzz6`. Seven owned C++ files changed. Independent comparison against the reviewed head passed after normalizing whitespace, comments, include order and adjacent string-literal splitting. The first comparison omitted string-literal joining and failed on `io.cpp` and `main.cpp`; inspection traced both differences to formatter splitting, and the corrected comparison passed. No numerical change was made.
+
+`tools/indel_feedback/qualify.py` now runs the five existing stages sequentially. Each stage retains eight raw command, cwd, start, end, exit-status, stdout, stderr and GNU time files plus its terminal record before projecting success. A failure stops the chain and preserves its directory. This runner adds no lock, process-group manager, kernel limit or timeout. Root must launch it through frozen F4 `bounded.py` SHA256 `8adfc5a212061cfc079bb2e47cae12546c5d5bb9aba2adf0a6073e9d62710fc4` at F4 revision `d190ab3f8175f1af7b5d4057b893ef6424b9d41f`.
+
+The next exact child command, with this worktree as cwd, is:
+
+```sh
+UV_PROJECT_ENVIRONMENT=/home/jake/Projects/nanopore_basecaller-retrieval/.venv UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 /home/jake/.local/bin/uv run --project /home/jake/Projects/nanopore_basecaller-retrieval --no-sync python tools/indel_feedback/qualify.py --output /home/jake/Projects/nanopore_basecaller-next-indel-decoder/results/indel-feedback/qualification-01
+```
+
+The fresh build is `qualification-01/build`. Configure explicitly selects `/usr/bin/c++`, `/usr/bin/make`, Release and compile-command export. The UV test stage sets `INDEL_FEEDBACK_BINARY` to that exact new binary. Acceptance requires one successful CTest `indel_controls` with skipped0, its exact14 named `PASS` groups and `controls_executed=14 skipped=0` retained in JUnit, and exactly7 successful UV unittest methods with no skips or expected failures. Fourteen control groups are not fourteen CTests. The unit retains `ctest.xml`, `unittest.json`, `build/compile_commands.json`, each stage's raw files and `terminal.json`; it writes `complete.json` last and syncs it. F4's separate terminal-tree proof remains required.
+
+Requested whole-unit caps remain wall300s, CPU2, RAM4GiB, AS8GiB, swap0, growth100MiB, aggregate4GiB and reserve30GiB. Use the canonical NONBLOCK lock once, without retries. Only Root admits and launches this command. Tests actually run at this source handoff remain0. The CMake source witness now includes this qualifier, the existing wrapper, UV tests and predeclared config. Registered tool/header pins come from `ready-native-v2-4/tools.json` under targeting-v2 and PR15's `tools/uncertainty_feedback/dependencies.json`; executable bodies remain stat-only during preparation. Dynamic compiler/system-header/OpenSSL dependency closure requires separate retained evidence and is not inferred from these entries.
+
+Everything below records the original unformatted source request. Genuine64-parent reconciliation, original native Rust scalar parity, F1/F2 integration, biological accuracy and performance remain held.
+
 Status: SOURCE-READY UNFORMATTED; tests actually executed0. No PASS is claimed. This source cut is an implementation handoff, not runtime/science qualification.
 
 Worktree `/home/jake/Projects/nanopore_basecaller-next-indel-decoder`; branch `experiment/next-indel-decoder`; initial head `c62b8c16c59fbeadffe56fff67d78a9f4ba35296`. Draft PR17: https://github.com/Jakeelamb/nanopore_basecaller/pull/17. The immutable delivery head is the commit containing this file, to be relayed separately by its actual Git ID. No merge, rebase, force push, retarget or ready transition is authorized.

@@ -26,7 +26,9 @@ if(NOT actual_cpp STREQUAL expected_cpp)
     message(FATAL_ERROR "Owned source census differs")
 endif()
 set(witness "#pragma once\n#include <cstdint>\nnamespace indel_feedback {\nstruct Source { const char* path; std::uintmax_t size; const char* sha256; };\ninline constexpr Source compiled_sources[] = {\n")
-set(source_closure ${owned_cpp} CMakeLists.txt)
+set(source_closure ${owned_cpp} CMakeLists.txt qualify.py
+    ../../scripts/indel-feedback.py ../../tests/test_indel_feedback.py
+    ../../config/indel-feedback-dev-v1.json)
 foreach(relative IN LISTS source_closure)
     get_filename_component(path "${CMAKE_CURRENT_SOURCE_DIR}/${relative}" ABSOLUTE)
     file(SHA256 "${path}" hash)
