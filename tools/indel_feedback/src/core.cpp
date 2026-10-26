@@ -143,7 +143,7 @@ void check_pin(const Json &value) {
   require(path.is_absolute() && !fs::is_symlink(path) &&
               fs::is_regular_file(path) &&
               fs::file_size(path) == value.at("size").get<std::uintmax_t>() &&
-              file_digest(path) == value.at("sha256"),
+              file_digest(path) == value.at("sha256").get<std::string>(),
           "consumed FilePin differs");
 }
 Json read_json(const fs::path &path, std::uintmax_t maximum) {

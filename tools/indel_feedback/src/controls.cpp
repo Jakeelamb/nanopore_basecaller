@@ -170,7 +170,7 @@ void controls() {
     expect(crossing.counts == Counts{1, 0, 0, 1} &&
                crossing.deletion_events == 1 &&
                crossing.excluded_deletion_bases == 2 &&
-               crossing.events.at(0).at("crossing_domain") == true,
+               crossing.events.at(0).at("crossing_domain").get<bool>(),
            "crossing deletion split/double-count");
   });
   check("adjacent insertion deletion", [] {
@@ -186,15 +186,15 @@ void controls() {
                                            "4=1I2=", {{0, 6}}, &geometry);
     const auto &annotation = result.events.at(0).at("annotations");
     expect(result.counts.i == 1 &&
-               annotation.at("homopolymer_compatible") == true &&
-               annotation.at("chunk_overlap") == true &&
-               annotation.at("chunk_boundary_near") == true &&
+               annotation.at("homopolymer_compatible").get<bool>() &&
+               annotation.at("chunk_overlap").get<bool>() &&
+               annotation.at("chunk_boundary_near").get<bool>() &&
                result.insertion_events == 1,
            "overlapping annotations changed totals");
     const auto other =
         classify_alignment("CATGT", "12345", "CAGT", 0, "2=1I2=", {{0, 4}});
     expect(
-        other.events.at(0).at("annotations").at("unknown_mechanism") == true &&
+        other.events.at(0).at("annotations").at("unknown_mechanism").get<bool>() &&
             other.events.at(0).at("annotations").at("chunk_overlap").is_null(),
         "unknown/missing geometry lost");
   });

@@ -52,7 +52,7 @@ Frame frame(const Json &request, const Json &binding) {
   check_pin(request.at("tensor_metadata"));
   const auto meta =
       metadata(request.at("tensor_metadata").at("path").get<std::string>());
-  require(meta.at("read_id") == binding.at("read_id") &&
+  require(meta.at("read_id") == binding.at("read_id").get<std::string>() &&
               natural(meta.at("chunk_index")) ==
                   binding.at("chunk_index").get<std::size_t>(),
           "foreign metadata parent/chunk");
@@ -80,8 +80,8 @@ Frame frame(const Json &request, const Json &binding) {
   const auto &availability = binding.at("availability");
   exact(availability, {"kind", "row_begin", "row_end", "available_row_end",
                        "chunk_lookahead", "signal_geometry"});
-  require(availability.at("kind") == "released-score-block" &&
-              availability.at("chunk_lookahead") == "whole_chunk" &&
+  require(availability.at("kind").get<std::string>() == "released-score-block" &&
+              availability.at("chunk_lookahead").get<std::string>() == "whole_chunk" &&
               availability.at("signal_geometry").is_null(),
           "replay availability differs");
   const auto begin = availability.at("row_begin").get<std::size_t>(),
@@ -134,21 +134,21 @@ Json propose_request(const Json &request) {
   exact(request, {"schema", "batch_pin", "expected_batch_sha256",
                   "expected_binding", "tensor_metadata", "initial_context",
                   "native_query_begin", "native_query_end"});
-  require(request.at("schema") == "indel-proposal-request/1",
+  require(request.at("schema").get<std::string>() == "indel-proposal-request/1",
           "proposal request schema differs");
   check_pin(request.at("batch_pin"));
-  require(request.at("batch_pin").at("sha256") ==
-              request.at("expected_batch_sha256"),
+  require(request.at("batch_pin").at("sha256").get<std::string>() ==
+              request.at("expected_batch_sha256").get<std::string>(),
           "independent batch hash differs");
   const auto batch =
       read_json(request.at("batch_pin").at("path").get<std::string>());
-  require(batch.at("schema") == "feedback-next/1" &&
-              batch.at("kind") == "candidate-batch" &&
+  require(batch.at("schema").get<std::string>() == "feedback-next/1" &&
+              batch.at("kind").get<std::string>() == "candidate-batch" &&
               batch.at("binding") == request.at("expected_binding"),
           "foreign/stale expected binding");
   const auto &binding = batch.at("binding");
-  require(binding.at("orientation") == "forward" ||
-              binding.at("orientation") == "reverse",
+  require(binding.at("orientation").get<std::string>() == "forward" ||
+              binding.at("orientation").get<std::string>() == "reverse",
           "orientation differs");
   for (const auto &field :
        {"location_producer", "reference_free_producer", "identity_input"}) {
@@ -156,15 +156,15 @@ Json propose_request(const Json &request) {
   }
   const auto native = batch.at("native").at("sequence").get<std::string>();
   const auto quality = batch.at("native").at("quality").get<std::string>();
-  require(batch.at("native").at("scope") == "available_input_segment" &&
+  require(batch.at("native").at("scope").get<std::string>() == "available_input_segment" &&
               native.size() == quality.size(),
           "available native identity differs");
   const auto identity =
       read_json(binding.at("identity_input").at("path").get<std::string>());
-  require(identity.at("read_id") == binding.at("read_id") &&
+  require(identity.at("read_id").get<std::string>() == binding.at("read_id").get<std::string>() &&
               identity.at("chunk_index") == binding.at("chunk_index") &&
-              identity.at("sequence") == native &&
-              identity.at("quality") == quality &&
+              identity.at("sequence").get<std::string>() == native &&
+              identity.at("quality").get<std::string>() == quality &&
               identity.at("query_begin") == request.at("native_query_begin") &&
               identity.at("query_end") == request.at("native_query_end"),
           "identity input parent/chunk/segment differs");
@@ -178,7 +178,7 @@ Json propose_request(const Json &request) {
               query_end <= meta.at("SEQ").size() &&
               meta.at("SEQ").substr(query_begin, native.size()) == native &&
               meta.at("SEQ").substr(query_begin - 4, 4) ==
-                  request.at("initial_context"),
+                  request.at("initial_context").get<std::string>(),
           "DGM available native segment/context differs");
   std::vector<std::size_t> emissions;
   const auto &moves = meta.at("MOVES");

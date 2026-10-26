@@ -1,5 +1,11 @@
 # F3 source-ready cut and qualification request
 
+## Explicit JSON scalar extraction, 2026-10-26
+
+The actual `qualification-01` unit passed the namespace control and configure, then failed strict compilation at `core.cpp`'s FilePin hash comparison between `std::string` and JSON. The retained build errors are `results/indel-feedback/qualification-01/stages/build/stderr`; its failed terminal and outer receipts remain unchanged. Tests did not start.
+
+The FilePin guard, classifier schema and proposal boundary now extract JSON strings explicitly before comparisons, including metadata read ID, availability, independent batch hashes, native identity and initial context. DGM metadata already uses a string map and keeps its existing string comparisons. Whole-binding JSON equality and numeric JSON comparisons stay intact. C++ fixture assertions extract boolean annotations with `get<bool>()`. No nomination, scoring, counting or edit algorithm changes. Root must first admit formatting of exactly `tools/indel_feedback/src/core.cpp`, `src/classifier.cpp`, `src/io.cpp` and `src/controls.cpp`, then refreeze the source before a fresh full engineering unit. No formatter or build was run by this source fix.
+
 ## Stage directory correction, 2026-10-26
 
 F2's first launched qualifier exposed a receipt/artifact collision before compilation. F3 shared that recorder structure and is corrected before its first launch. Stage receipts now use `stages/<name>/`, separate from CMake's `build/` artifacts. Stage setup is inside the error handler. The top-level terminal record identifies the attempted stage, argv and directory even when setup fails. Existing receipt directories are rejected without modifying their contents.
