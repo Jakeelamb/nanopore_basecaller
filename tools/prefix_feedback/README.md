@@ -1,0 +1,23 @@
+# Prefix feedback source candidate
+
+This is F1's source review candidate for draft PR16. Tests, compilation, formatting, mapper execution and genuine pilot execution are all unrun. Root must admit the exact next unit. No native neural replay or GPU work is included.
+
+`Session` owns a persistent forward sequence/location beam and an independent signal-only beam. It starts with a uniform prior over all CRF states. It consumes each explicitly owned row once. The contextual beam may revise its entire provisional prefix. Its irreversible committed prefix is always empty.
+
+A real current prefix is the only mapper query. PAF query length, all retained positions, CIGAR, strand, query hash, available endpoint and producer receipt bind the next block. The contextual beam replaces old location channels with the new retained positions under a uniform location prior. A reference continuation penalizes mismatching emissions at or after the mapped prefix endpoint. Stays receive no context penalty. Missing locations and exhausted continuations are neutral. This is a shared proposal prior from the actual mapped provisional prefix, not a claim that every beam sequence was independently aligned or that MAPQ is a posterior.
+
+The signal-only beam never reads locations. `reference_free_candidate_id` names that branch's own winner. `union_nn_candidate_id` separately names the greatest exact neural likelihood in the expanded union. The fixed-policy diagnostic reranks the signal-only panel against the first available location snapshot. F2 owns scientific trust decisions and calibration. No F2 sibling commit is linked into this cut.
+
+The decoder reports exact marginalized neural likelihoods for its finalist strings over all consumed rows. Contextual rank is the location-weighted mass of retained paths after pruning. These are different quantities. Beam width, symbol bounds, context exhaustion and pruning are explicit. The tiny control independently enumerates stay/emission paths in the probability domain, including every initial CRF state. It compares complete finalist census, masses and final rank at tolerance 1e-10. These controls are prepared and have not run.
+
+`advance --request ABS --request-sha256 SHA --output NEW_ABS_DIR` consumes a `prefix-advance/1` request. It binds the compiled source witness, specification, released block, optional mapper update, prior state pin and independently expected prior state digest. `locations` with the same flags parses a pinned real PAF into location records. `witness` emits compiled source closure. Unknown inference block fields, including native SEQ/MOVES and guards, reject.
+
+The wire batch uses `feedback-next/1`. Consumers pin the raw `batch.json` file. Its internal JSON digest is a local diagnostic and is not a cross-language float codec. Typed availability describes released score rows and explicitly leaves qualified acquisition signal geometry null. Original sample endpoints are static export metadata. They do not prove acquisition timing. All released rows in the first pilot have complete-chunk neural lookahead.
+
+The UV preparation worker chooses the lexical first parent satisfying the metadata-only first-chunk row bounds, then freezes four quarter-chunk releases before mapper or truth access. Native metadata sanitization only copies geometry fields. It does not use SEQ, Q or MOVES to choose a prefix, state or row. Overlap midpoint ownership uses offsets, raw sizes and stride. First-chunk candidate selection is not allowed to refill after a mapping failure. The actual first chunk T is not yet opened or qualified. Manifest size suggests approximately2037 rows, which is only an inference.
+
+The source pilot runner is blocked at a provisional process adapter callback. F4's actual public API is the `bounded-command/1` CLI and does not currently expose that callback. Root will relay the qualified frozen adapter and an integration design before any pilot invocation. This cut does not copy a supervisor or acquire the canonical lock. All hashing and metadata preparation also need whole-unit supervision through the eventual adapter.
+
+A full-parent disabled SEQ/Q passthrough control is not yet implemented as a separate admitted consumer. Available native passthrough is null. The first prefix pilot cannot establish complete-parent identity or biological accuracy. C++ edit reconstruction has prepared insertion/deletion/substitution controls on both strands. Full original-parent outputs must remain separate from inference when that control is added.
+
+Read `research/prefix-loop-design.md` and `research/prefix-loop-source-ready.md` for the source boundaries, rejected rolling-suffix design, exact commands and current gaps.
