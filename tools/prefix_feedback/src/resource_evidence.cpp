@@ -276,8 +276,12 @@ void validate(const Json& resources, const Json& evidence, const Trust& trust) {
                 "resource evidence semantic input role differs");
     };
     role("resource-spec", evidence.at("spec"));
-    for (const auto& entry : current.items()) {
-        role("resource-" + entry.key(), entry.value());
+    const std::map<std::string, std::string> resource_roles{
+            {"compressed", "resource-compressed"}, {"reference", "resource-reference"},
+            {"mmi", "resource-mmi"}, {"fai", "resource-fai"},
+            {"publisher_fai", "resource-publisher-fai"}, {"registered_fai", "resource-registered-fai"}};
+    for (const auto& [key, name] : resource_roles) {
+        role(name, current.at(key));
     }
     for (const auto& entry : spec.at("registries").items()) {
         auto name = entry.key();

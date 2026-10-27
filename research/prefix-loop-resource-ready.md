@@ -2,6 +2,8 @@
 
 New-source tests/build/formatter executions: **0**. Source whitespace check: `git diff --check`, exit0. Root's preceding e6b7ce40 component and joint passes remain historical evidence for that cut. This change does not alter decoding, scoring, policy, proposal, bridge or stock behavior. Genuine F1 consumption of this new branch remains held pending independent source review, formatting, qualification and a separately admitted real-proof input unit.
 
+R1 correction after independent review of formatted523e202: the exact six resource roles now explicitly map the spec's `publisher_fai`/`registered_fai` keys to the actual F4 grant's `resource-publisher-fai`/`resource-registered-fai`. The tiny fixture spells and orders those six role entries independently as the actual grant does. Two resealed negatives retain each former underscore spelling, preserve input-index bijection/full raw Pin links, and require rejection at the missing exact role key. This is a semantic-role parser rejection, not a root-hash failure. Group/stage census and all other guards remain unchanged. R1-fix tests/build/formatter executions:0. Next format-only census is exactly `src/resource_evidence.cpp` and `tests/resource_controls.cpp`; the component command/caps below remain unchanged.
+
 `validate_resources` retains its existing seven-resource census and full current mapper/index/reference/FAI/samtools/pin checks. The existing `prefix-reference-lineage/1` modern build-receipt block is unchanged. The default committed config still has `index_provenance:null` and remains unqualified.
 
 The alternative is selected only when the independently pinned `resources.index_provenance` file has this exact seven-field shape; each capitalized value below is a full `{path,size,sha256}` FilePin:

@@ -177,9 +177,12 @@ struct ResourceFixture {
             inputs.push_back(value);
         };
         add("resource-spec", trust.spec);
-        for (const auto& entry : current.items()) {
-            add("resource-" + entry.key(), entry.value());
-        }
+        add("resource-compressed", current.at("compressed"));
+        add("resource-reference", current.at("reference"));
+        add("resource-mmi", current.at("mmi"));
+        add("resource-fai", current.at("fai"));
+        add("resource-publisher-fai", current.at("publisher_fai"));
+        add("resource-registered-fai", current.at("registered_fai"));
         for (const auto& entry : registries.items()) {
             auto role = entry.key();
             std::replace(role.begin(), role.end(), '_', '-');
@@ -475,6 +478,16 @@ std::size_t resource_controls() {
         mutate(fixture);
         fixture.seal();
         rejection([&] { fixture.validate(); }, "resource evidence " + message);
+    }
+    for (const auto& name : {"publisher", "registered"}) {
+        ResourceFixture fixture;
+        const auto correct = "resource-" + std::string(name) + "-fai";
+        const auto wrong = "resource-" + std::string(name) + "_fai";
+        auto& roles = fixture.admission["roles"]["inputs"];
+        roles[wrong] = roles.at(correct);
+        roles.erase(correct);
+        fixture.seal();
+        rejection([&] { fixture.validate(); }, correct);
     }
     std::cout << "PASS resource-proof-resealed-admission-source-request-negatives\n";
     for (const auto& key : {"worker_complete", "empty_before_unlock"}) {
