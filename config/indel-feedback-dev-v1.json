@@ -1,0 +1,30 @@
+{
+  "schema": "indel-feedback-development-plan/1",
+  "arm": "available-segment-indel-v1",
+  "hypothesis": "Available CRF stay/emission mass can rank additional variable-length sequences absent from the original retained candidate set.",
+  "nomination": {
+    "source": "available native segment only; no truth or mapped-error nomination",
+    "maximum_segment_bases": 32,
+    "single_insertions": "all positions A/C/G/T",
+    "single_deletions": "all native segment bases",
+    "homopolymer_minimum_native_run": 2,
+    "run_length_minimum": 1,
+    "run_length_maximum": 6,
+    "run_length_delta_maximum": 2,
+    "maximum_unique_candidates": 512,
+    "maximum_score_rows": 256,
+    "overflow": "reject; no truncation or adaptive expansion"
+  },
+  "matched_arms": ["original-candidates", "added-indel-prior-none", "added-indel-fixed-policy"],
+  "fixed_policy": {"context_weight": 0.5, "maximum_neural_deficit": 0.5, "minimum_objective_margin": 0.5},
+  "identity_control": "disabled complete SEQ/Q exact identity, distinct from prior-none signal ranking",
+  "domains": [100, 500],
+  "parents": "all original 64; zero exposure retained; no refill",
+  "old_guard_exclusions": "unchanged in original arm",
+  "pilot_window_list": null,
+  "pilot_status": "held: exact genuine window list and immutable sibling/producer pins required before scoring",
+  "endpoint": "matched invariant-domain m/x/i/d, edited variants, regression parents, abstention, candidate counts and runtime",
+  "hg005_selection": false,
+  "raw_current_dwell_claim": false,
+  "promotion": false
+}

@@ -1,0 +1,15 @@
+# F3 classifier and indel proposals
+
+C++23 owns classification, CRF marginalization, nomination and edit reconstruction. Python launches commands and builds tiny test fixtures. The read-only original Rust scalar and stock tools are unchanged.
+
+`indel-feedback classify REQUEST EXPECTED_REQUEST_SHA256 NEW_OUTPUT` consumes an `indel-classification-request/1` with FilePins for SAM, FASTA, frozen parent IDs, the native pairer's `matched.bed` and `parents.tsv`, plus `side=left|right` and `expected_parent_count`. It retains the entire parent universe and rejects any per-parent m/x/i/d or reference-exposure mismatch. Native pairer masks and sibling-overlap exclusions enter through its exact parent-specific domain. Event counts mean eligible CIGAR operations; eligible bases are counted separately. A partially exposed deletion remains one event. Annotations overlap and do not partition errors. SAM SEQ/Q remain in alignment orientation, including reverse records.
+
+`indel-feedback propose REQUEST EXPECTED_REQUEST_SHA256 NEW_OUTPUT` consumes an `indel-proposal-request/1` with an external raw `batch_pin`, independent `expected_batch_sha256` and `expected_binding`, DGM FilePin, initial CRF context, and native query begin/end. The candidate batch uses the Root-approved F2 feedback-next/1 semantics, frozen at `58fc6058e9c3852bcc5abe5d82210026188a2151`. The input identity file is JSON with read_id, chunk_index, sequence, quality, query_begin and query_end. DGS/DGM parent/chunk/token/slot/shape, MOVES and segment endpoints must match. The score interval is at most256 rows; nomination sees at most32 native bases and no truth or mapped-error positions.
+
+The output is an `indel-proposals/1` extension sidecar bound to the exact original batch and binding. Original candidates and the independent reference-free ID are preserved. It contains unique new sequences, exact marginalized CRF log likelihoods, segment-relative edits and nomination mechanism. F1 owns merging the sidecar, computing context costs from frozen location panels and recomputing union_nn_candidate_id before emitting a complete feedback-next/1 batch. The two free/union roles must not be collapsed. No F2 policy or F1 persistent decoder is duplicated here.
+
+`indel-feedback controls` runs named classifier, numerical census, run-length, nonrepeat and full-edit controls. The fixed UV suite in `tests/test_indel_feedback.py` requires the C++ binary and fails if it is absent; no skips qualify a consumed fixture.
+
+The launcher in `scripts/indel-feedback.py` requires an already admitted Root/F4 process unit. It is not a resource supervisor or admission controller. Never run it as an implied host grant.
+
+At the first source cut, no tests or native commands have run. Exact commands and unresolved gaps are in `research/indel-decoder-qualification.md`. Initial chunk annotations are available through the pure classifier API; CLI classification currently reports geometry unknown. Genuine whole-reference classification, original-Rust scalar comparison, source-root corruption controls, final F1/F2 integration and the three-arm development pilot remain unqualified.
