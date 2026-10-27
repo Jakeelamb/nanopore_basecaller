@@ -277,9 +277,12 @@ void validate(const Json& resources, const Json& evidence, const Trust& trust) {
     };
     role("resource-spec", evidence.at("spec"));
     const std::map<std::string, std::string> resource_roles{
-            {"compressed", "resource-compressed"}, {"reference", "resource-reference"},
-            {"mmi", "resource-mmi"}, {"fai", "resource-fai"},
-            {"publisher_fai", "resource-publisher-fai"}, {"registered_fai", "resource-registered-fai"}};
+            {"compressed", "resource-compressed"},
+            {"reference", "resource-reference"},
+            {"mmi", "resource-mmi"},
+            {"fai", "resource-fai"},
+            {"publisher_fai", "resource-publisher-fai"},
+            {"registered_fai", "resource-registered-fai"}};
     for (const auto& [key, name] : resource_roles) {
         role(name, current.at(key));
     }
