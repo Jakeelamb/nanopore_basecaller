@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""Run exactly 34 test-only metadata contracts against checkout source.
-
-Preload the real local stdlib transport modules before discovery. Scope only
-the imported drivers' F1 and PREFIX_SCRIPT constants to this checkout while
-running the unchanged assertions. This bootstrap is not a production source
-override and establishes neither compiled source parity nor native acceptance.
-"""
 from contextlib import ExitStack
 import importlib.util
 import json
