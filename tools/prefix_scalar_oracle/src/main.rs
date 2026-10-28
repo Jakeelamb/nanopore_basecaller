@@ -39,7 +39,9 @@ fn main() -> Result<()> {
         canonical_parent == parent,
         "absolute canonical output parent required"
     );
-    let output_name = output.file_name().context("output directory name required")?;
+    let output_name = output
+        .file_name()
+        .context("output directory name required")?;
     let output_path = canonical_parent.join(output_name);
     let output = output_path.as_path();
     let request_pin = FilePin {

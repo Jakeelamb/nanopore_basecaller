@@ -185,7 +185,12 @@ pub fn load(request: &Request) -> Result<Consumed> {
             && original_payload.len() == parsed.t * 2048,
         "original payload size differs"
     );
-    for (bytes, &value) in original_payload.as_chunks::<2>().0.iter().zip(&decoded.values) {
+    for (bytes, &value) in original_payload
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .zip(&decoded.values)
+    {
         let expected = scores::half(u16::from_le_bytes([bytes[0], bytes[1]]));
         let expected = if parsed.clamp == 0.0 {
             expected
