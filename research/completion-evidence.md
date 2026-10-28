@@ -12,10 +12,14 @@ This record separates executed contracts from the biological objective. It is no
 | Independent artifact audit | 573 passive assertions passed on the retained handoff. Two resealed negative batches fail the independent expected binding before a decision sidecar exists. |
 | Independent scalar controls | Five Rust controls passed with no ignored tests, including analytic/impossible boundaries, state-dependent uniform mixtures, byte custody, and the real CLI output-parent rejection. |
 | Final compiler checks | Ordinary nightly all-target check, tests, strict all-target Clippy, formatting, and release build passed at oracle source `e97e0cc`. |
+| Metadata contracts and hosted CI | All 42 Python contracts passed locally with zero skips. Hosted `cpu-contracts` also passed the Python contracts and five Rust controls at `1497375ac45755c2b3e664dc9a9cae55f4b5720c` ([run](https://github.com/Jakeelamb/nanopore_basecaller/actions/runs/40783884928)). |
 | Genuine scalar comparison | Two frozen finite queries over the same genuine 497 rows matched C++ bit for bit; no tolerance was changed. |
-| First reference feedback | The 221-base free prefix mapped to chr4. One bound 1024-base continuation was consumed by a successful native advance to 994 rows. Its first Python observer failed; that outer attempt remains failed. |
+| Genuine reference feedback | Four distinct advances consumed 1988 owned rows with three prefix-derived mapper updates, each carrying one usable 1024-base continuation. Final next-block is 4, candidates 239, and abstention false. The original block1 observer/outer failure remains failed; a fresh observer recovered its successful native outputs without replay. |
+| Independent loop audit | Bounded PASS for all four native state identities, the three update chains and nine distinct mapper/parser/faidx completions. Conditioning changed retained branch masses, but provisional and signal-only winners remained equal. |
 
 The genuine parent is `025d40d8-9380-4590-a82f-8291ba16acd9`, selected lexically from eligible metadata before mapping or truth. The frozen first-chunk releases end at 497, 994, 1491, and 1988 rows. Saved scores expose whole-chunk lookahead of 12222 samples; this is not raw-acquisition causality or complete-parent processing.
+
+The native result flags for overall mechanism and scientific qualification remain false. The completed chain is one observed engineering instance, with three usable updates; it does not promote a complete caller.
 
 The two oracle queries were H and the lexical-first distinct candidate by sequence then ID, frozen before Rust scoring. Their lengths are 221 and 219 bases.
 
@@ -39,6 +43,7 @@ The local controller record is `nanopore_basecaller-retrieval/logs/completion-he
 | Genuine oracle request | `9f94ba376c4d9fa6f10a57c43137bf0e69d3fa4d6f5bf2ce53d393240187a22b` |
 | Independent Rust executable | `62f8d95839977b1c6919ffe9554e384d16cda773ce93d9aab175140b2fd26334` |
 | Nightly compiler | `63401685beebe2ab01e9099533f18beaa879e1721936e6a21fb5dbd8443a8b4f` |
+| Final native state identity | `4585a2529f5780cbf9623ccc94a9572d9716771aefedc2c8887b05f9a07cbb77` |
 
 Exact compiler commands, run separately through frozen F4 grants, were:
 
@@ -52,7 +57,7 @@ RUSTC_WORKSPACE_WRAPPER= cargo build --release --offline --locked -j 1
 
 The environment selects `nightly-2026-10-25` and an absolute RUSTC path, disables incremental compilation and debug information, and retains Mr Boxington. Source, lock, toolchain, executable, and raw receipt pins are recorded by the grants and native outputs.
 
-Important local records are `oracle-final-sequence-05.status.json`, `oracle-genuine-comparison-02.json`, the exact linked grants/launches, and the original F1 result roots `genuine-first-advance-20261028-02`, `genuine-handoff-20261028-01`, and `genuine-loop-advance-1-01`. Native scalar output is in the separate oracle worktree at `results/prefix-scalar-oracle/genuine-02`.
+Important local records are `oracle-final-sequence-05.status.json`, `oracle-genuine-comparison-02.json`, `genuine-loop-summary-01.json`, `genuine-loop-audit-attestation-01.json`, and their exact linked grants/launches. F1 results retain `genuine-first-advance-20261028-02`, `genuine-handoff-20261028-01`, all three `genuine-loop-advance-N-01` attempts, the recovery locate, and each completed `genuine-loop-location-N-resume-03` observer. Native scalar output is in the separate oracle worktree at `results/prefix-scalar-oracle/genuine-02`.
 
 ## Failed attempts and limits
 
@@ -61,6 +66,10 @@ The record preserves the first host-lock refusal, long Unix-socket path failure,
 Five Blaze controls passed at their named historical source cut, but the outer unit timed out after the worker completed. That outer unit remains failed. Ordinary compiler validation supplies the final Rust evidence. The original preparation checked samtools through its config rather than a direct outer-grant tool entry; that narrower custody limit remains recorded.
 
 The first contextual native advance exposed a real observer bug: C++ emitted `3096.4421839222982` while Python reserialized the same binary64 as `3096.442183922298`. State identities must hash the authenticated native scalar tokens, not Python's float spelling. The native stage exited zero; the original observer and outer scope remain failed. Recovery must consume those retained native outputs rather than advance the same rows again.
+
+The corrected observer passed that recovery with strict current/predecessor and producer bindings intact, then completed the remaining two advances. A later decoder command was refused by the canonical lock before worker launch. Its sole `outer-command.json` was preserved by a reversible directory archive with unchanged hash and an explicit relocation manifest; a fresh grant ran the previously unexecuted command after the lock was free. No accepted native advance or mapper was replayed.
+
+The first hosted CI attempt stopped before testing because setup-uv had not installed the pinned interpreter. An explicit `uv python install 3.12.8` step fixed that bootstrap. The test command still forbids interpreter downloads and retains the exact version. The subsequent hosted job passed both test suites.
 
 Reviews use separate Sol processes. They do not provide model diversity. The comment inspection's required first-output procedure was missed; its useful source findings do not establish complete named-workflow compliance.
 
