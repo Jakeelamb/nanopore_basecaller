@@ -1,0 +1,38 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
+        with:
+          version: "0.13.0"
+          python-version: "3.12.8"
+      - name: Verify 34 test-only Python metadata contracts
+        run: timeout 60s uv run --no-project --python 3.12.8 --no-python-downloads python -B tests/run_cpu_contracts.py
+      - name: Install pinned nightly compiler
+        run: rustup toolchain install nightly-2026-10-25 --profile minimal
+      - name: Verify independent synthetic scalar and custody controls
+        env:
+          RUSTC_WRAPPER: ""
+          RUSTC_WORKSPACE_WRAPPER: ""
+          CARGO_BUILD_JOBS: "1"
+          CARGO_INCREMENTAL: "0"
+          CARGO_PROFILE_DEV_DEBUG: "0"
+          CARGO_PROFILE_TEST_DEBUG: "0"
+        run: |
+          export RUSTC="$(rustup which --toolchain nightly-2026-10-25 rustc)"
+          test "${RUSTC#/}" != "$RUSTC"
+          cargo +nightly-2026-10-25 test --locked --jobs 1 --manifest-path tools/prefix_scalar_oracle/Cargo.toml -- --test-threads=1
