@@ -15,8 +15,8 @@ export CARGO_TARGET_DIR="$out/target"
 export CARGO_NET_OFFLINE=true
 export CARGO_BUILD_JOBS=1
 export RUST_TEST_THREADS=1
-export TMPDIR="$out/tmp"
-mkdir -- "$TMPDIR"
+export TMPDIR="${TMPDIR:-$out/tmp}"
+mkdir -p -- "$TMPDIR"
 run() {
     local name=$1
     shift
