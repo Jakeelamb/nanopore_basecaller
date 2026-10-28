@@ -20,6 +20,8 @@ jobs:
         with:
           version: "0.13.0"
           python-version: "3.12.8"
+      - name: Install pinned Python interpreter
+        run: uv python install 3.12.8
       - name: Verify test-only Python metadata contracts
         run: timeout 60s uv run --no-project --python 3.12.8 --no-python-downloads python -B tests/run_cpu_contracts.py
       - name: Install pinned nightly compiler
