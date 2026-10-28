@@ -1,4 +1,3 @@
-"""Hermetic metadata/rejection tests. No native producer or acceptance is simulated."""
 import copy
 import importlib.util
 from pathlib import Path

@@ -25,7 +25,7 @@ Every FilePin is exactly `{"path": "ABS", "size": INTEGER, "sha256": "HEX64"}`. 
 | Field | Value |
 | --- | --- |
 | `schema` | `genuine-prefix-handoff-spec/1` |
-| `advance_spec` | FilePin of the controller's frozen `advance-spec-01.json` |
+| `advance_spec` | FilePin of the controller's frozen `advance-spec-02.json` |
 | `advance_complete` | FilePin of the completed helper's `complete.json` |
 | `expected_producer` | Independently supplied FilePin of that advance's `stage-0/receipt.json` |
 | `f1`, `f2`, `f3` | Unchanged qualified executable FilePins |
@@ -50,7 +50,7 @@ Every FilePin is exactly `{"path": "ABS", "size": INTEGER, "sha256": "HEX64"}`. 
 
 The four mode-specific requests use this policy. Only fixed keeps margin 0.5. Adaptive, prior-none, and disabled use predeclared margin 0.0, matching the existing native joint consumer.
 
-Wait for the controller to certify that the first advance task finished before inspecting its artifacts. The expected retained root is `F1/results/prefix-feedback/genuine-first-advance-20261028-01`. Pin its `complete.json` and `stage-0/receipt.json`. Obtain the plan from `advance-spec-01.json`; match its selected parent and first block against the actual snapshot and state. Supply the actual previous-state hash independently in `expected`. Never substitute another parent on abstention, cap exclusion, or failure.
+Wait for the controller to certify that the first advance task finished before inspecting its artifacts. The expected retained root is `F1/results/prefix-feedback/genuine-first-advance-20261028-02`. Pin its `complete.json` and `stage-0/receipt.json`. Obtain the plan from `advance-spec-02.json`; match its selected parent and first block against the actual snapshot and state. Supply the actual previous-state hash independently in `expected`. Never substitute another parent on abstention, cap exclusion, or failure.
 
 The intake reconstructs only the original fixed `advance` request and exact producer argv, cwd, environment, source/input/output pins, known exit, cleanup, and clocks. It checks k4, the first-block endpoints, retained empty context, snapshot identity, and the compiled source witness. It does not invent an F4-to-native projection. The native bridge independently restores the original state and checks the producer again. Extra spec/plan fields, holdout labels, changed policy, foreign parent, stale state, and changed endpoints refuse admission.
 
