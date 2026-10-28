@@ -1,4 +1,6 @@
 import importlib.util
+import hashlib
+import json
 from pathlib import Path
 import sys
 import tempfile
@@ -25,6 +27,12 @@ class VerifierTests(unittest.TestCase):
     def metadata(self, name, value):
         path = self.root / name
         io.fresh(path, value)
+        return io.pin(path)
+
+    def native_pin(self, state, raw=None):
+        path = self.root / 'native-state.json'
+        path.write_bytes(raw if raw is not None else json.dumps(
+            state, sort_keys=True, indent=2, ensure_ascii=False, allow_nan=False).encode() + b'\n')
         return io.pin(path)
 
     def spec(self, operation='locate'):
@@ -58,11 +66,12 @@ class VerifierTests(unittest.TestCase):
                      block_index=0, row_begin=0, row_end=497, available_score_end=497,
                      available_signal_end=12222, orientation='signal-forward')
         session = dict(read_id='metadata-parent', plan_sha256=verifier.CONFIG_SHA, state_length=4,
-                       policy=verifier.POLICY, resource_manifest={})
+                       stay_score=2.0, policy=verifier.POLICY, resource_manifest={})
         plan = dict(spec=session, blocks=[block])
         state = dict(schema='prefix-session/1', source_sha256=verifier.SOURCE, spec=session,
                      consumed=[block], last_binding=block, consumed_rows=497, next_block=1,
-                     updates=[], locations=[], first_locations=[])
+                     updates=[], locations=[], first_locations=[], signal=[], conditioned=[],
+                     signal_pruned=False, conditioned_pruned=False, context_bound=False, symbol_bound=False)
         expected['state_sha256'] = verifier.digest(state)
         batch = dict(schema='prefix-snapshot/1', source_sha256=verifier.SOURCE,
                      read_id='metadata-parent', parent_id='metadata-parent', plan_sha256=verifier.CONFIG_SHA,
@@ -72,6 +81,143 @@ class VerifierTests(unittest.TestCase):
                          plan_sha256=verifier.CONFIG_SHA, previous_state_sha256=expected['previous_state_sha256'],
                          resource_manifest={}))
         return state, batch, plan, expected
+
+    def test_native_float_token_binds_snapshot_without_python_reserialization(self):
+        state, batch, plan, expected = self.snapshot()
+        state['conditioned'] = [['ACGT', 0, 0, 3096.4421839222982]]
+        compact = json.dumps(state, sort_keys=True, separators=(',', ':')).encode().replace(
+            b'3096.442183922298', b'3096.4421839222982')
+        raw = json.dumps(state, sort_keys=True, indent=2).encode().replace(
+            b'3096.442183922298', b'3096.4421839222982') + b'\n'
+        pin = self.native_pin(state, raw)
+        expected['state_sha256'] = batch['state_sha256'] = hashlib.sha256(compact).hexdigest()
+        self.assertNotEqual(expected['state_sha256'], verifier.digest(state))
+        self.assertEqual(verifier.native_state(pin), (state, expected['state_sha256']))
+        self.assertEqual(verifier.check_snapshot(pin, batch, plan, expected), state)
+
+    def test_native_string_whitespace_and_escape_tokens_preserved(self):
+        state, _, _, _ = self.snapshot()
+        state['spec']['read_id'] = '  parent\twith\nspaces "quoted" \\ and \\\\ '
+        compact = json.dumps(state, sort_keys=True, separators=(',', ':')).encode()
+        compact = compact.replace(b'parent', b'par\\u0065nt')
+        raw = json.dumps(state, sort_keys=True, indent=2).encode().replace(b'parent', b'par\\u0065nt')
+        pin = self.native_pin(state, b' \r\n\t' + raw + b'\n')
+        self.assertEqual(verifier.native_state(pin), (state, hashlib.sha256(compact).hexdigest()))
+
+    def test_native_state_mutated_pin_refused_before_and_after_read(self):
+        state, _, _, _ = self.snapshot()
+        pin = self.native_pin(state)
+        path = Path(pin['path'])
+        raw = path.read_bytes()
+        path.write_bytes(raw + b' ')
+        with self.assertRaisesRegex(ValueError, 'pin differs'):
+            verifier.native_state(pin)
+        path.write_bytes(raw)
+        check = io.check
+        calls = []
+
+        def mutate_on_recheck(value):
+            calls.append(value)
+            if len(calls) == 2:
+                path.write_bytes(raw + b' ')
+            return check(value)
+
+        with patch.object(io, 'check', side_effect=mutate_on_recheck):
+            with self.assertRaisesRegex(ValueError, 'pin differs'):
+                verifier.native_state(pin)
+        self.assertEqual(len(calls), 2)
+
+    def test_native_duplicate_nonfinite_and_invalid_json_refused(self):
+        state, _, _, _ = self.snapshot()
+        raw = json.dumps(state, sort_keys=True).encode()
+        for invalid, message in (
+            (raw.replace(b'"conditioned": []', b'"conditioned": [], "conditioned": []'), 'duplicate'),
+            (raw.replace(b'"conditioned": []', b'"conditioned": [NaN]'), 'nonfinite'),
+            (raw.replace(b'"conditioned": []', b'"conditioned": [Infinity]'), 'nonfinite'),
+            (raw.replace(b'"conditioned": []', b'"conditioned": [-Infinity]'), 'nonfinite'),
+            (raw.replace(b'"conditioned": []', b'"conditioned": [1e999]'), 'nonfinite'),
+            (raw + b' true', 'Extra data'),
+            (raw[:-1] + b',}', 'property name'),
+        ):
+            with self.subTest(message=message):
+                pin = self.native_pin(state, invalid)
+                with self.assertRaisesRegex(ValueError, message):
+                    verifier.native_state(pin)
+        pin = self.native_pin(state, raw.replace(b'metadata-parent', b'\xff'))
+        with self.assertRaises(UnicodeDecodeError):
+            verifier.native_state(pin)
+
+    def test_native_layout_order_size_and_depth_refused(self):
+        state, _, _, _ = self.snapshot()
+        raw = json.dumps(state, sort_keys=True).encode()
+        for invalid, message in (
+            (b'{"z":0,' + raw[1:], 'key order'),
+            (raw.replace(b'"conditioned": []', b'"unexpected": []'), 'key order|fields'),
+            (raw.replace(b'"conditioned": []', b'"conditioned": {}'), 'layout'),
+            (b'[' * 65 + b'0' + b']' * 65, 'nesting bound'),
+        ):
+            with self.subTest(message=message):
+                pin = self.native_pin(state, invalid)
+                with self.assertRaisesRegex(ValueError, message):
+                    verifier.native_state(pin)
+        pin = self.native_pin(state)
+        with patch.object(verifier, 'NATIVE_STATE_MAX_BYTES', pin['size'] - 1):
+            with self.assertRaisesRegex(ValueError, 'size bound'):
+                verifier.native_state(pin)
+
+    def test_independent_current_and_previous_ids_reject_matching_snapshot(self):
+        for key in ('state_sha256', 'previous_state_sha256'):
+            state, batch, plan, expected = self.snapshot()
+            expected[key] = 'd' * 64
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'snapshot independent binding'):
+                verifier.check_snapshot(self.native_pin(state), batch, plan, expected)
+
+    def test_resealed_changed_state_rejects_snapshot_identity(self):
+        state, batch, plan, expected = self.snapshot()
+        state['conditioned'] = [['ACGT', 0, 0, 1.0]]
+        with self.assertRaisesRegex(ValueError, 'snapshot independent binding'):
+            verifier.check_snapshot(self.native_pin(state), batch, plan, expected)
+
+    def test_predecessor_native_identity_rejects_resealed_changed_state(self):
+        prior, _, plan, expected = self.snapshot()
+        prior['signal'] = [['ACGT', 0, 0, 3096.4421839222982]]
+        native = json.dumps(prior, sort_keys=True).encode().replace(
+            b'3096.442183922298', b'3096.4421839222982')
+        prior_pin = self.native_pin(prior, native)
+        prior_path = self.root / 'prior-state.json'
+        prior_path.write_bytes(Path(prior_pin['path']).read_bytes())
+        prior_pin = io.pin(prior_path)
+        current = dict(prior, next_block=2, consumed_rows=994, signal=[],
+                       consumed=[*prior['consumed'], dict(plan['blocks'][0], block_index=1,
+                           row_begin=497, row_end=994, available_score_end=994)], updates=[{'update': 1}])
+        current['last_binding'] = current['consumed'][1]
+        plan['blocks'] = current['consumed']
+        expected.update(block_index=1, row_begin=497, row_end=994, available_score_end=994,
+                        previous_state_sha256=verifier.native_state(prior_pin)[1],
+                        state_sha256=verifier.digest(current))
+        batch = dict(schema='prefix-snapshot/1', source_sha256=verifier.SOURCE,
+                     **{key: expected[key] for key in ('read_id', 'parent_id', 'plan_sha256',
+                                                     'state_sha256', 'previous_state_sha256')},
+                     policy=verifier.POLICY, initial_prior='uniform-all-CRF-states',
+                     location_updates=current['updates'], binding=dict(current['last_binding'],
+                         source_sha256=verifier.SOURCE, plan_sha256=verifier.CONFIG_SHA,
+                         previous_state_sha256=expected['previous_state_sha256'], resource_manifest={}))
+        request = self.metadata('request.json', dict(state=prior_pin, update=current['updates'][0]))
+        value = dict(expected=expected, binary={}, predecessor_sources=[], retained=dict(state=self.native_pin(current),
+            snapshot=self.metadata('snapshot.json', batch), complete=self.metadata('complete.json', dict(request=request))))
+        with patch.object(verifier, 'check_producer', side_effect=ValueError('producer check reached')) as producer:
+            with self.assertRaisesRegex(ValueError, 'producer check reached'):
+                verifier.retained_inputs(value, plan)
+        producer.assert_called_once()
+        prior['signal'] = [['ACGT', 0, 0, 1.0]]
+        prior_path.write_text(json.dumps(prior, sort_keys=True))
+        prior_pin = io.pin(prior_path)
+        request = self.metadata('changed-request.json', dict(state=prior_pin, update=current['updates'][0]))
+        value['retained']['complete'] = self.metadata('changed-complete.json', dict(request=request))
+        with patch.object(verifier, 'check_producer') as producer:
+            with self.assertRaisesRegex(ValueError, 'predecessor state/update differs'):
+                verifier.retained_inputs(value, plan)
+        producer.assert_not_called()
 
     def test_closed_spec_accepts_metadata_shape_without_native_acceptance(self):
         self.assertEqual(self.load(self.spec()).value['operation'], 'locate')
@@ -125,18 +271,18 @@ class VerifierTests(unittest.TestCase):
             state, batch, plan, expected = self.snapshot()
             batch[key] = replacement
             with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'snapshot independent binding'):
-                verifier.check_snapshot(state, batch, plan, expected)
+                verifier.check_snapshot(self.native_pin(state), batch, plan, expected)
         state, batch, plan, expected = self.snapshot()
         batch['binding']['row_end'] += 1
         with self.assertRaisesRegex(ValueError, 'snapshot block binding'):
-            verifier.check_snapshot(state, batch, plan, expected)
+            verifier.check_snapshot(self.native_pin(state), batch, plan, expected)
         self.assertEqual(list(self.results.iterdir()), [])
 
     def test_state_row_ownership_refused(self):
         state, batch, plan, expected = self.snapshot()
         state['consumed_rows'] += 1
         with self.assertRaisesRegex(ValueError, 'state ownership'):
-            verifier.check_snapshot(state, batch, plan, expected)
+            verifier.check_snapshot(self.native_pin(state), batch, plan, expected)
 
     def test_changed_plan_pin_refused(self):
         pin = self.metadata('plan.json', {})

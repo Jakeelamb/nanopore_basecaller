@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import hashlib
 import importlib.util
 import json
+import math
 from pathlib import Path
 import sys
 
@@ -26,6 +27,11 @@ EXPECTED = {'read_id', 'parent_id', 'chunk_index', 'block_index', 'row_begin', '
             'available_score_end', 'available_signal_end', 'plan_sha256',
             'previous_state_sha256', 'state_sha256'}
 RETAINED = ('state', 'snapshot', 'complete', 'producer')
+NATIVE_STATE_MAX_BYTES = 8388608
+NATIVE_STATE_FIELDS = ('conditioned', 'conditioned_pruned', 'consumed', 'consumed_rows',
+                       'context_bound', 'first_locations', 'last_binding', 'locations',
+                       'next_block', 'schema', 'signal', 'signal_pruned', 'source_sha256',
+                       'spec', 'symbol_bound', 'updates')
 
 
 def exact(value, fields, label):
@@ -54,6 +60,81 @@ def consumed(value):
     result = io.read(value['path'])
     io.check(value)
     return result
+
+
+def native_state(pin):
+    """Read a pinned native state without changing its serialized scalar tokens."""
+    file_pin(pin)
+    io.require(pin['size'] <= NATIVE_STATE_MAX_BYTES, 'native state size bound differs')
+    io.check(pin)
+    with Path(pin['path']).open('rb') as stream:
+        raw = stream.read(NATIVE_STATE_MAX_BYTES + 1)
+    io.require(len(raw) == pin['size'] and hashlib.sha256(raw).hexdigest() == pin['sha256'],
+               'native state consumed pin differs')
+    text = raw.decode('utf-8', errors='strict')
+    compact = bytearray()
+    quoted = escaped = False
+    depth = 0
+    for byte in raw:
+        if quoted:
+            compact.append(byte)
+            if escaped:
+                escaped = False
+            elif byte == 92:
+                escaped = True
+            elif byte == 34:
+                quoted = False
+        elif byte not in b' \t\r\n':
+            compact.append(byte)
+            if byte == 34:
+                quoted = True
+            elif byte in b'[{':
+                depth += 1
+                io.require(depth <= 64, 'native state nesting bound differs')
+            elif byte in b']}':
+                depth -= 1
+
+    def object_pairs(pairs):
+        keys = [key for key, _ in pairs]
+        io.require(len(set(keys)) == len(keys), 'native state duplicate object key')
+        io.require(keys == sorted(keys), 'native state object key order differs')
+        return dict(pairs)
+
+    def finite_float(token):
+        number = float(token)
+        io.require(math.isfinite(number), 'native state nonfinite number')
+        return number
+
+    def nonfinite(token):
+        raise ValueError('native state nonfinite number: ' + token)
+
+    state = json.loads(text, object_pairs_hook=object_pairs, parse_float=finite_float,
+                       parse_constant=nonfinite)
+    exact(state, NATIVE_STATE_FIELDS, 'native state')
+    io.require(state['schema'] == 'prefix-session/1' and state['source_sha256'] == SOURCE,
+               'native state schema/source differs')
+    exact(state['spec'], ('read_id', 'plan_sha256', 'state_length', 'stay_score', 'policy',
+                         'resource_manifest'), 'native state spec')
+    exact(state['spec']['policy'], POLICY, 'native state policy')
+    io.require(all(type(state[key]) is int and state[key] >= 0 for key in ('consumed_rows', 'next_block'))
+               and all(type(state[key]) is bool for key in ('conditioned_pruned', 'signal_pruned',
+                                                           'context_bound', 'symbol_bound'))
+               and isinstance(state['last_binding'], dict)
+               and all(isinstance(state[key], list) for key in ('signal', 'conditioned', 'consumed',
+                                                               'locations', 'first_locations', 'updates')),
+               'native state layout differs')
+    pending = [state]
+    while pending:
+        item = pending.pop()
+        if isinstance(item, dict):
+            pending.extend(item.keys())
+            pending.extend(item.values())
+        elif isinstance(item, list):
+            pending.extend(item)
+        elif isinstance(item, str):
+            item.encode('utf-8', errors='strict')
+    io.check(pin)
+    return state, hashlib.sha256(compact).hexdigest()
 
 
 def result_path(path):
@@ -163,7 +244,8 @@ def check_plan(value):
     return plan
 
 
-def check_snapshot(state, batch, plan, expected):
+def check_snapshot(state_pin, batch, plan, expected):
+    state, state_sha256 = native_state(state_pin)
     n = expected['block_index']
     block = plan['blocks'][n]
     io.require(state['schema'] == 'prefix-session/1' and state['source_sha256'] == SOURCE
@@ -173,7 +255,7 @@ def check_snapshot(state, batch, plan, expected):
     io.require(batch['schema'] == 'prefix-snapshot/1' and batch['source_sha256'] == SOURCE
                and all(batch[key] == expected[key] for key in ('read_id', 'parent_id', 'plan_sha256',
                        'state_sha256', 'previous_state_sha256'))
-               and batch['state_sha256'] == digest(state) and batch['policy'] == POLICY
+               and batch['state_sha256'] == state_sha256 and batch['policy'] == POLICY
                and batch['initial_prior'] == 'uniform-all-CRF-states'
                and batch['location_updates'] == state['updates'] and len(state['updates']) == n,
                'snapshot independent binding differs')
@@ -186,6 +268,7 @@ def check_snapshot(state, batch, plan, expected):
     if n == 0:
         io.require(state['updates'] == state['locations'] == state['first_locations'] == batch['locations'] == [],
                    'block0 context differs')
+    return state
 
 
 def check_producer(retained, binary, request, sources):
@@ -230,16 +313,16 @@ def check_producer(retained, binary, request, sources):
 
 def retained_inputs(value, plan):
     retained = value['retained']
-    state, batch = consumed(retained['state']), consumed(retained['snapshot'])
-    check_snapshot(state, batch, plan, value['expected'])
+    batch = consumed(retained['snapshot'])
+    state = check_snapshot(retained['state'], batch, plan, value['expected'])
     complete = consumed(retained['complete'])
     request = consumed(complete['request'])
     n = value['expected']['block_index']
     prior_pin = request.get('state')
-    prior = consumed(prior_pin) if n else None
+    prior, prior_sha256 = native_state(prior_pin) if n else (None, None)
     io.require((n == 0 and prior_pin is None and request.get('update') is None)
                or (n > 0 and prior['spec'] == plan['spec'] and prior['consumed'] == plan['blocks'][:n]
-                   and prior['next_block'] == n and digest(prior) == batch['previous_state_sha256']
+                   and prior['next_block'] == n and prior_sha256 == batch['previous_state_sha256']
                    and state['updates'] == prior['updates'] + [request.get('update')]), 'predecessor state/update differs')
     wanted = dict(schema='prefix-advance/1', source_sha256=SOURCE, spec=plan['spec'], state=prior_pin,
                   update=None if n == 0 else state['updates'][-1], block=plan['blocks'][n],
@@ -365,12 +448,13 @@ def run(spec_path, expected_sha256, output):
             retained = {key: io.pin(output / 'advance' / name) for key, name in (
                 ('state', 'state.json'), ('snapshot', 'snapshot.json'), ('complete', 'complete.json'))}
             retained['producer'] = producer
-            state, snapshot = consumed(retained['state']), consumed(retained['snapshot'])
+            _, state_sha256 = native_state(retained['state'])
+            snapshot = consumed(retained['snapshot'])
             expected = dict(value['expected'], **value['next_block'],
                             available_score_end=value['next_block']['row_end'],
-                            previous_state_sha256=batch['state_sha256'], state_sha256=digest(state))
+                            previous_state_sha256=batch['state_sha256'], state_sha256=state_sha256)
             check_producer(retained, value['binary'], request, value['source_pins'])
-            check_snapshot(state, snapshot, plan, expected)
+            state = check_snapshot(retained['state'], snapshot, plan, expected)
             io.require(state['updates'] == batch['location_updates'] + [request['update']], 'advance update census differs')
             result.update(status='completed-advance', produced=retained, produced_expected=expected,
                           update=value['update'], candidates=len(snapshot['candidates']),

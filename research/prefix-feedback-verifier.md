@@ -12,7 +12,7 @@ F1 is `/home/jake/Projects/nanopore_basecaller-next-prefix-loop`. The payload cw
 UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 \
   /home/jake/.local/bin/uv run \
   --project /home/jake/Projects/nanopore_basecaller-retrieval --no-sync python \
-  /home/jake/Projects/nanopore_basecaller-completion-20261028/scripts/verify-prefix-feedback.py \
+  /home/jake/Projects/nanopore_basecaller-framework-20261028/scripts/verify-prefix-feedback.py \
   --spec ABS_SPEC --spec-sha256 SPEC_SHA256 --output FRESH_F1_RESULT_DIRECTORY
 ```
 
@@ -36,13 +36,23 @@ The common spec fields are exactly these.
 | `predecessor_sources` | Exact ordered `source_pins` from that producer's actual command, independently supplied |
 | `expected` | Independent binding fields below |
 
-`expected` has exactly `read_id`, `parent_id`, `chunk_index`, `block_index`, `row_begin`, `row_end`, `available_score_end`, `available_signal_end`, `plan_sha256`, `previous_state_sha256`, and `state_sha256`. Parent and read IDs match the frozen selected parent. Chunk index is 0. For retained block n in 0..2, rows are `[497*n,497*(n+1))`, available score end is the row end, and available signal end is 12222. State IDs are native canonical JSON hashes, distinct from FilePin hashes. `previous_state_sha256` comes from the retained snapshot. `plan_sha256` is the config/session identity below, distinct from the plan file hash.
+`expected` has exactly `read_id`, `parent_id`, `chunk_index`, `block_index`, `row_begin`, `row_end`, `available_score_end`, `available_signal_end`, `plan_sha256`, `previous_state_sha256`, and `state_sha256`. Parent and read IDs match the frozen selected parent. Chunk index is 0. For retained block n in 0..2, rows are `[497*n,497*(n+1))`, available score end is the row end, and available signal end is 12222. State IDs hash the native compact JSON bytes, distinct from FilePin hashes. Root independently supplies both state IDs, which must match the retained snapshot. `plan_sha256` is the config/session identity below, distinct from the plan file hash.
 
 Locate adds exactly `work_directory`, an absolute fixed directory, and `execution_index`, a FilePin of `prefix-command-index/1`. That index has exactly `schema`, `source_pins`, and `commands`. Each command entry has exactly `proposal` and `complete`, both FilePins. Root owns it. Its immutable source closure includes F4, the decoder, mapper, samtools, and every plan `producer_sources` pin. Start with an empty command list. Appending accepted receipt pairs changes the index pin and spec hash, but leaves the source closure and work identity unchanged.
 
 Advance-next adds exactly `location_result`, `update`, and `next_block`. The first two are FilePins of the completed locate result and its exact `prefix-location/1` JSON. `next_block` is exactly `{"block_index":n+1,"row_begin":497*(n+1),"row_end":497*(n+2)}`. It cannot change the frozen next plan block. The native request carries the actual retained state Pin, returned update object, and `expected_previous_state_sha256` from the retained snapshot's `state_sha256`.
 
 Before query creation or proposals, admission checks the actual plan/config pins, config role `development-HG002`, `hg005_selection:false`, `truth_input:null`, and `promotion:false`. It checks the selected parent, k4 session and fixed policy, all four release ownership ranges, consumed state, snapshot bindings, compiled witness, and exact original producer command, environment, inputs, outputs, source closure, clocks, exit, cleanup, and raw pins. UUID text is never used to infer a sample role. No truth or completed native SEQ operand is accepted. No parent refill or parameter change exists.
+
+## Native state identity and retained observer recovery
+
+Native `state_id` hashes `state_json(session).dump()` from nlohmann JSON. The native pretty state file uses `dump(2)` with the same scalar tokens. Python reserialization can change those tokens even when the parsed binary64 value is identical. The retained block1 state contains `3096.4421839222982`, which Python serializes as `3096.442183922298`.
+
+The observer's `native_state` boundary authenticates the state FilePin before and after a bounded read, and checks the consumed bytes against that pin. It allows at most 8 MiB and 64 nested containers. It parses strict UTF-8 JSON, rejects duplicate keys, nonfinite numbers, invalid Unicode strings, and unsorted object keys, and requires the native state and session layouts. A string-aware scanner removes only JSON whitespace outside strings. The SHA256 covers the remaining original bytes, including exact number, key, string, and escape tokens. Current-state checks, predecessor checks, and `produced_expected` use that identity. The separate Python `digest()` contract for compiled source witnesses is unchanged.
+
+The controller can use a fresh `locate` invocation with the already successful strict block1 producer and its original state, snapshot, completion, and predecessor operands. Its independently supplied current identity is `27aa01c6bb85237ba35857409b012d556e158d0efe205153e787b5700a0ec49b`. Its predecessor identity is `027df2ac7b1e0652d31875d4c54e245f72170b7dc454692adab9998584a6a25a`. All producer, ownership, update, source, and independent binding checks still apply. Locate creates or reuses proposals and executes no native command.
+
+The original failed observer result and outer exit 1 remain immutable. The controller separately pins them and writes a fresh recovery attestation. It pins this observer at its final absolute framework path without modifying the original completion-worktree script, native source, binary, compiled witness, or prior receipts. This repair adds no operation, replay, or scientific claim. Actual retained recovery remains a separate controller check.
 
 ## Instantiate the first locate
 
@@ -93,4 +103,6 @@ The endpoint still requires three real prefix mapper updates consumed by later b
 
 The source tests use pure metadata and rejection controls. They exercise closed parsing, pin mismatches, foreign/stale bindings, block/endpoints, explicit pending proposals, augmented-index reuse, held unknown output, no native call in locate, admission, and fresh-attempt refusal. They do not fabricate successful native acceptance from mocked receipts.
 
-The implementation task's sole test attempt stopped before discovery on 2026-10-28. Fixed retrieval UV exited 2 because its cache at `/home/jake/.cache/uv` was read-only. No tests ran. The task brief required stopping tests on refusal. The controller retains this verification gap and must run the tests separately before acceptance.
+The native identity regression controls cover the exact float token, preserved string whitespace and escapes, mutations before and after consumption, strict JSON rejection, native object layout and bounds, independently wrong current and previous IDs, and resealed state substitutions. A predecessor fixture with the native float spelling must reach the unchanged producer check. Changing that predecessor must fail before the producer check. The source-only repair task does not run tests or recovery. The controller must run `timeout 60s uv run --no-project --python 3.12.8 --no-python-downloads python -B tests/run_cpu_contracts.py` and the separately authorized retained observer check before acceptance.
+
+The original implementation task's sole test attempt stopped before discovery on 2026-10-28. Fixed retrieval UV exited 2 because its cache at `/home/jake/.cache/uv` was read-only. No tests ran. That task brief required stopping tests on refusal. The controller retains this verification gap and must run the tests separately before acceptance.

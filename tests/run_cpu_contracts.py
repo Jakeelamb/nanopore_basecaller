@@ -11,12 +11,13 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 SUITES = (
     ('test_genuine_prefix_handoff.py', 16),
-    ('test_prefix_feedback_verifier.py', 18),
+    ('test_prefix_feedback_verifier.py', 26),
 )
 
 
 def main():
-    summary = dict(scope='test-only-checkout-metadata', expected=34, discovered=0,
+    expected_total = sum(expected for _, expected in SUITES)
+    summary = dict(scope='test-only-checkout-metadata', expected=expected_total, discovered=0,
                    run=0, failures=0, errors=0, skips=0, status='failed',
                    compiled_source_parity=False, native_acceptance=False)
     try:
@@ -35,8 +36,8 @@ def main():
             if count != expected:
                 raise RuntimeError(f'{pattern} discovered {count} methods, expected {expected}')
             suite.addTests(tests)
-        if summary['discovered'] != 34:
-            raise RuntimeError('expected exactly 34 methods')
+        if summary['discovered'] != expected_total:
+            raise RuntimeError(f'expected exactly {expected_total} methods')
 
         handoff = sys.modules['genuine_prefix_handoff']
         verifier = sys.modules['prefix_feedback_verifier']
@@ -47,7 +48,7 @@ def main():
             result = unittest.TextTestRunner(verbosity=2).run(suite)
         summary.update(run=result.testsRun, failures=len(result.failures),
                        errors=len(result.errors), skips=len(result.skipped))
-        if result.wasSuccessful() and result.testsRun == 34 and not result.skipped:
+        if result.wasSuccessful() and result.testsRun == expected_total and not result.skipped:
             summary['status'] = 'passed'
     except Exception as error:
         summary['bootstrap_error'] = str(error)
