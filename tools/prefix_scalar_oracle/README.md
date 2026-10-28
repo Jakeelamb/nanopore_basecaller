@@ -13,7 +13,7 @@ The exact invocation is:
 ABS_BINARY score --request ABS_REQUEST.json --request-sha256 LOWERCASE_SHA256 --output ABS_FRESH_DIR
 ```
 
-The request must be an absolute canonical file. Its externally supplied hash freezes the full request bytes. The output directory must not exist. The parent must exist. Failures return a nonzero exit status. Failed output directories are retained and cannot be reused.
+The request must be an absolute canonical file. Its externally supplied hash freezes the full request bytes. The output directory must be absolute and must not exist. Its parent must exist and be canonical. A symlinked or otherwise noncanonical parent is rejected before request reading, source verification, scoring, or output creation. Every output file and output FilePin uses the same canonical destination. Failures return a nonzero exit status. Failed output directories are retained and cannot be reused.
 
 `src/contract.rs` is the authoritative request shape. JSON structs reject unknown fields, including nested fields and receipt fields. Duplicate fields also reject. Required top-level fields are:
 
@@ -49,7 +49,7 @@ tools/prefix_scalar_oracle/scripts/verify.sh final /tmp/prefix-oracle-final-ATTE
 
 The edit loop uses explicit Blaze build and test commands through the Mr Boxington Cargo shim. Final check, test, clippy, and release commands set `RUSTC_WORKSPACE_WRAPPER=` and keep Mr Boxington active. Both modes select `nightly-2026-10-25`, offline locked Cargo, one job, and one test thread. Target and synthetic fixtures live outside tracked source. Each command records argv, UTC start/end, raw combined output, exit status, and log hash. Output is capped at 1 MiB per command; reaching the cap fails the script. Root's maintained execution wrapper supplies host limits and custody. The script is not a resource supervisor.
 
-The prepared synthetic controls check analytic empty and impossible boundaries, zero-score binomial path counts, and a state-dependent k4 mixture that separates a deliberately fixed-state control using the frozen tolerance. CLI fixtures check query identity, completion pins, overwrite refusal, request-hash corruption, unknown truth/genotype fields, a resealed prior mismatch, unsupported geometry, release corruption, resealed payload/header/interval mismatches, and gaps or reordered releases. These tests have not run. The upstream conditional API and tests remain unchanged.
+The prepared synthetic controls check analytic empty and impossible boundaries, zero-score binomial path counts, and a state-dependent k4 mixture that separates a deliberately fixed-state control using the frozen tolerance. CLI fixtures check query identity, completion pins, rejection of a symlinked output parent before target output creation, overwrite refusal, request-hash corruption, unknown truth/genotype fields, a resealed prior mismatch, unsupported geometry, release corruption, resealed payload/header/interval mismatches, and gaps or reordered releases. These tests have not run. The upstream conditional API and tests remain unchanged.
 
 The eventual C++ comparison must use `abs_error <= 1e-8 + 1e-10*max(abs(L_cpp),abs(L_rust))`. Impossible statuses must agree. Different reduction order does not require bit equality. Do not widen this tolerance after observing values. The planned genuine interval is original rows 0 through 1988, split into four releases of 497. This task has not opened those scientific bodies, produced genuine values, or claimed parity.
 

@@ -1,4 +1,4 @@
-use anyhow::{ensure, Result};
+use anyhow::{ensure, Context, Result};
 use prefix_scalar_oracle::{
     contract::{
         ComparisonTolerance, CompilerIdentity, Completion, FilePin, Request, Response, SourcePin,
@@ -33,6 +33,15 @@ fn main() -> Result<()> {
         request_path.is_absolute() && output.is_absolute() && !output.exists(),
         "absolute request/fresh output required"
     );
+    let parent = output.parent().context("output parent required")?;
+    let canonical_parent = fs::canonicalize(parent)?;
+    ensure!(
+        canonical_parent == parent,
+        "absolute canonical output parent required"
+    );
+    let output_name = output.file_name().context("output directory name required")?;
+    let output_path = canonical_parent.join(output_name);
+    let output = output_path.as_path();
     let request_pin = FilePin {
         path: request_path.to_owned(),
         size: fs::metadata(request_path)?.len(),

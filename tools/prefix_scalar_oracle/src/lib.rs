@@ -4,6 +4,10 @@ pub mod contract;
 pub mod crf;
 pub mod input;
 #[allow(dead_code)]
+#[allow(
+    clippy::chunks_exact_to_as_chunks,
+    reason = "Preserve unchanged original vendor source fidelity."
+)]
 #[path = "../vendor/scores.rs"]
 pub mod scores;
 pub mod identity {

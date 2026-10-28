@@ -2,6 +2,7 @@ use prefix_scalar_oracle::{contract::*, crf, digest, input, uniform};
 use serde_json::{json, Value};
 use std::{
     fs,
+    os::unix::fs::symlink,
     path::{Path, PathBuf},
     process::Command,
     sync::atomic::{AtomicUsize, Ordering},
@@ -232,8 +233,24 @@ fn cli_outputs_exact_query_identity_impossible_status_and_refuses_overwrite() {
     assert!((decimal - 6f64.ln()).abs() < 1e-12);
     assert_eq!(scores["scores"][2]["score"], json!({"status":"impossible"}));
     let complete = read_json(&f.root.join("accepted/complete.json"));
-    let pin: FilePin = serde_json::from_value(complete["scores"].clone()).expect("score pin");
-    input::read_pinned(&pin, 1_048_576).expect("completion output pin");
+    for key in ["request_copy", "scores"] {
+        let pin: FilePin = serde_json::from_value(complete[key].clone()).expect("output pin");
+        input::read_pinned(&pin, 1_048_576).expect("completion output pin");
+    }
+    symlink(&f.root, f.root.join("aliased-parent")).expect("symlinked output parent");
+    let aliased = run_to(
+        &f,
+        &request,
+        "aliased-output",
+        "aliased-parent/rejected",
+        None,
+    );
+    let stderr = String::from_utf8_lossy(&aliased.stderr);
+    assert!(
+        !aliased.status.success() && stderr.contains("absolute canonical output parent required"),
+        "{stderr}"
+    );
+    assert!(!f.root.join("rejected").exists());
     assert!(!run_to(&f, &request, "overwrite", "accepted", None)
         .status
         .success());
