@@ -54,3 +54,5 @@ The prepared synthetic controls check analytic empty and impossible boundaries, 
 The eventual C++ comparison must use `abs_error <= 1e-8 + 1e-10*max(abs(L_cpp),abs(L_rust))`. Impossible statuses must agree. Different reduction order does not require bit equality. Do not widen this tolerance after observing values. The planned genuine interval is original rows 0 through 1988, split into four releases of 497. This task has not opened those scientific bodies, produced genuine values, or claimed parity.
 
 The verification script honors the admitted `TMPDIR`. Use a short monitored path so Mr Boxington can create its Unix socket. The first edit attempt stopped before compilation because its output-derived temporary path exceeded that limit. Its failed records remain unchanged.
+
+Blaze runs the three filesystem-fixture controls through its supported per-test sandbox exceptions. The two analytic controls remain sandboxed. All controls still run within the admitted F4 worker and its kernel limits. Ordinary nightly Cargo validation remains required.
