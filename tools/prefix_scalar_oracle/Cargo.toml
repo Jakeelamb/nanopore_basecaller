@@ -1,0 +1,26 @@
+[package]
+name = "prefix-scalar-oracle"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "=1.0.104"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.154"
+sha2 = "=0.10.9"
+
+[build-dependencies]
+sha2 = "=0.10.9"
+
+[profile.release]
+codegen-units = 1
+panic = "abort"
+
+[workspace]
+
+[package.metadata.blaze.sandbox]
+unsandboxed-tests = [
+    "cli_outputs_exact_query_identity_impossible_status_and_refuses_overwrite",
+    "rejects_corrupt_release_and_resealed_interval_header_and_payload",
+    "rejects_unknown_truth_prior_and_unsupported_geometry_without_refill",
+]

@@ -1,0 +1,22 @@
+{
+  "schema": "prefix-feedback-config/1",
+  "role": "development-HG002",
+  "hypothesis": "Prefix-derived competing locations can alter the next forward beam while an independent signal-only branch remains available.",
+  "endpoint": "At least three real prefix mapper updates bound to subsequent released score blocks; report localization failures and no improvement honestly.",
+  "selection": "lexically-first-metadata-eligible-parent-before-mapping-or-truth",
+  "manifest": {"path": "/home/jake/Projects/nanopore_basecaller-context-feedback-uncertainty-v2/results/context-feedback/uncertainty-v2-inputs-1/inputs.tsv", "size": 1138379, "sha256": "bee4f1640c2691e6bd1490d558274d8d547c12c1e7719a30fea55d17ca290be2"},
+  "policy": {"beam_width": 128, "maximum_symbols": 1024, "minimum_symbols": 1, "maximum_locations": 32, "context_weight": 0.5},
+  "releases": {"count": 4, "recipe": "floor(i*T/4),i=0..4,first-retained-chunk-only", "minimum_rows": 1024, "maximum_rows": 2048, "maximum_rows_per_release": 512},
+  "causality": "decoder-prefix-feedback-mechanism-with-whole-chunk-score-lookahead",
+  "reference": {"path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout", "size": 3144230986, "sha256": "9cce8b926416dd96b152deea85188495b75f7ac8d634cc723a017067be8702b7"},
+  "reference_index": {"path": "/home/jake/Projects/nanopore_basecaller/references/GRCh38-lr-hq.mmi", "size": 5756270073, "sha256": "611b2a45bc41e8bbd3048ef96efebcfae4cf611360d81c3553285932de4a63aa"},
+  "reference_fai_path": "/home/jake/Projects/nanopore_basecaller/logs/20261022T232044Z-accuracy-reference-decompress-2BpPCr/stdout.fai",
+  "mapper_path": "/home/jake/Projects/nanopore_basecaller/software/bin/minimap2",
+  "index_provenance": null,
+  "producer_sources": [],
+  "samtools": {"path": "/usr/bin/samtools", "size": 779616, "sha256": "e839773cc27090fa109588cae8b8240b0d48de816a25b962045867a4c3b7e1ff"},
+  "execution": {"cpu": 2, "wall_seconds": 300, "ram_bytes": 4294967296, "address_space_bytes": 8589934592, "mapping_ram_bytes": 17179869184, "mapping_address_space_bytes": 25769803776, "swap_bytes": 0, "growth_bytes": 104857600, "cumulative_bytes": 4294967296, "free_reserve_bytes": 32212254720, "root_fresh_unit_required": true},
+  "hg005_selection": false,
+  "truth_input": null,
+  "promotion": false
+}
